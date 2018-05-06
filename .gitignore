@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/src/ttc-ocaml/node_modules
 
 # testing
 /coverage
@@ -46,3 +47,4 @@ lib/bs
 .vscode
 .merlin
 .bsb.lock
+
