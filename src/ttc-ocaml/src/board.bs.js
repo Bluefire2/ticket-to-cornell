@@ -3,35 +3,39 @@
 
 var Pervasives = require("bs-platform/lib/js/pervasives.js");
 
+function get_length(param) {
+  return param[2];
+}
+
+function get_color(param) {
+  return param[3];
+}
+
 function route_score(r) {
-  if (r) {
-    var switcher = r[2] - 1 | 0;
-    if (switcher > 5 || switcher < 0) {
-      return Pervasives.failwith("Not possible; deal with later");
-    } else {
-      switch (switcher) {
-        case 0 : 
-            return 1;
-        case 1 : 
-            return 2;
-        case 2 : 
-            return 4;
-        case 3 : 
-            return 7;
-        case 4 : 
-            return 10;
-        case 5 : 
-            return 15;
-        
-      }
-    }
+  var switcher = r[2] - 1 | 0;
+  if (switcher > 5 || switcher < 0) {
+    return Pervasives.failwith("Not possible; deal with later");
   } else {
-    return 0;
+    switch (switcher) {
+      case 0 : 
+          return 1;
+      case 1 : 
+          return 2;
+      case 2 : 
+          return 4;
+      case 3 : 
+          return 7;
+      case 4 : 
+          return 10;
+      case 5 : 
+          return 15;
+      
+    }
   }
 }
 
 function is_taken(r) {
-  if (r) {
+  if (r[4]) {
     return true;
   } else {
     return false;
@@ -40,4 +44,6 @@ function is_taken(r) {
 
 exports.route_score = route_score;
 exports.is_taken = is_taken;
+exports.get_length = get_length;
+exports.get_color = get_color;
 /* No side effect */

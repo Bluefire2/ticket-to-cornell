@@ -4,111 +4,17 @@
 var List = require("bs-platform/lib/js/list.js");
 var Js_exn = require("bs-platform/lib/js/js_exn.js");
 var Random = require("bs-platform/lib/js/random.js");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
+var Pervasives = require("bs-platform/lib/js/pervasives.js");
 var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
 
-function remove_n(n, lst) {
-  if (n > List.length(lst)) {
-    return lst;
-  } else if (lst) {
-    var t = lst[1];
-    if (n === 0) {
-      return t;
-    } else {
-      return /* :: */[
-              lst[0],
-              remove_n(n - 1 | 0, t)
-            ];
-    }
-  } else {
-    return /* [] */0;
-  }
-}
-
-function random_int(n) {
-  try {
-    return Random.$$int(n);
-  }
-  catch (raw_exn){
-    var exn = Js_exn.internalToOCamlException(raw_exn);
-    if (exn[0] === Caml_builtin_exceptions.invalid_argument) {
-      return 0;
-    } else {
-      throw exn;
-    }
-  }
-}
-
-function shuffler(_from, _to_list, _len) {
-  while(true) {
-    var len = _len;
-    var to_list = _to_list;
-    var from = _from;
-    if (len !== 0) {
-      var i = random_int(len);
-      _len = len - 1 | 0;
-      _to_list = /* :: */[
-        List.nth(from, i),
-        to_list
-      ];
-      _from = remove_n(i, from);
-      continue ;
-    } else {
-      return to_list;
-    }
-  };
-}
-
-function drop(_n, _lst) {
-  while(true) {
-    var lst = _lst;
-    var n = _n;
-    if (n === 0) {
-      return lst;
-    } else if (lst) {
-      _lst = lst[1];
-      _n = n - 1 | 0;
-      continue ;
-    } else {
-      return /* [] */0;
-    }
-  };
-}
-
-function shuffle(tr, _) {
-  var shuf = shuffler(tr, /* [] */0, List.length(tr));
-  return /* tuple */[
-          shuf,
-          /* [] */0
-        ];
-}
-
-function draw_card(_t, tr) {
-  while(true) {
-    var t = _t;
-    if (t !== /* [] */0) {
-      return /* tuple */[
-              /* :: */[
-                List.hd(t),
-                /* [] */0
-              ],
-              List.tl(t)
-            ];
-    } else {
-      var shuff = shuffle(tr, t);
-      _t = shuff[0];
-      continue ;
-    }
-  };
-}
-
-function discard(c, tr) {
-  return /* :: */[
-          c,
-          tr
-        ];
-}
-
-var init_deck = shuffle(/* :: */[
+var train_deck = /* :: */[
+  /* Red */0,
+  /* :: */[
+    /* Red */0,
+    /* :: */[
+      /* Red */0,
+      /* :: */[
         /* Red */0,
         /* :: */[
           /* Red */0,
@@ -127,11 +33,11 @@ var init_deck = shuffle(/* :: */[
                       /* :: */[
                         /* Red */0,
                         /* :: */[
-                          /* Red */0,
+                          /* Green */1,
                           /* :: */[
-                            /* Red */0,
+                            /* Green */1,
                             /* :: */[
-                              /* Red */0,
+                              /* Green */1,
                               /* :: */[
                                 /* Green */1,
                                 /* :: */[
@@ -151,11 +57,11 @@ var init_deck = shuffle(/* :: */[
                                               /* :: */[
                                                 /* Green */1,
                                                 /* :: */[
-                                                  /* Green */1,
+                                                  /* Blue */2,
                                                   /* :: */[
-                                                    /* Green */1,
+                                                    /* Blue */2,
                                                     /* :: */[
-                                                      /* Green */1,
+                                                      /* Blue */2,
                                                       /* :: */[
                                                         /* Blue */2,
                                                         /* :: */[
@@ -175,11 +81,11 @@ var init_deck = shuffle(/* :: */[
                                                                       /* :: */[
                                                                         /* Blue */2,
                                                                         /* :: */[
-                                                                          /* Blue */2,
+                                                                          /* Yellow */3,
                                                                           /* :: */[
-                                                                            /* Blue */2,
+                                                                            /* Yellow */3,
                                                                             /* :: */[
-                                                                              /* Blue */2,
+                                                                              /* Yellow */3,
                                                                               /* :: */[
                                                                                 /* Yellow */3,
                                                                                 /* :: */[
@@ -199,11 +105,11 @@ var init_deck = shuffle(/* :: */[
                                                                                               /* :: */[
                                                                                                 /* Yellow */3,
                                                                                                 /* :: */[
-                                                                                                  /* Yellow */3,
+                                                                                                  /* Pink */4,
                                                                                                   /* :: */[
-                                                                                                    /* Yellow */3,
+                                                                                                    /* Pink */4,
                                                                                                     /* :: */[
-                                                                                                      /* Yellow */3,
+                                                                                                      /* Pink */4,
                                                                                                       /* :: */[
                                                                                                         /* Pink */4,
                                                                                                         /* :: */[
@@ -223,11 +129,11 @@ var init_deck = shuffle(/* :: */[
                                                                                                                       /* :: */[
                                                                                                                         /* Pink */4,
                                                                                                                         /* :: */[
-                                                                                                                          /* Pink */4,
+                                                                                                                          /* Orange */5,
                                                                                                                           /* :: */[
-                                                                                                                            /* Pink */4,
+                                                                                                                            /* Orange */5,
                                                                                                                             /* :: */[
-                                                                                                                              /* Pink */4,
+                                                                                                                              /* Orange */5,
                                                                                                                               /* :: */[
                                                                                                                                 /* Orange */5,
                                                                                                                                 /* :: */[
@@ -247,11 +153,11 @@ var init_deck = shuffle(/* :: */[
                                                                                                                                               /* :: */[
                                                                                                                                                 /* Orange */5,
                                                                                                                                                 /* :: */[
-                                                                                                                                                  /* Orange */5,
+                                                                                                                                                  /* White */6,
                                                                                                                                                   /* :: */[
-                                                                                                                                                    /* Orange */5,
+                                                                                                                                                    /* White */6,
                                                                                                                                                     /* :: */[
-                                                                                                                                                      /* Orange */5,
+                                                                                                                                                      /* White */6,
                                                                                                                                                       /* :: */[
                                                                                                                                                         /* White */6,
                                                                                                                                                         /* :: */[
@@ -271,11 +177,11 @@ var init_deck = shuffle(/* :: */[
                                                                                                                                                                       /* :: */[
                                                                                                                                                                         /* White */6,
                                                                                                                                                                         /* :: */[
-                                                                                                                                                                          /* White */6,
+                                                                                                                                                                          /* Black */7,
                                                                                                                                                                           /* :: */[
-                                                                                                                                                                            /* White */6,
+                                                                                                                                                                            /* Black */7,
                                                                                                                                                                             /* :: */[
-                                                                                                                                                                              /* White */6,
+                                                                                                                                                                              /* Black */7,
                                                                                                                                                                               /* :: */[
                                                                                                                                                                                 /* Black */7,
                                                                                                                                                                                 /* :: */[
@@ -295,11 +201,11 @@ var init_deck = shuffle(/* :: */[
                                                                                                                                                                                               /* :: */[
                                                                                                                                                                                                 /* Black */7,
                                                                                                                                                                                                 /* :: */[
-                                                                                                                                                                                                  /* Black */7,
+                                                                                                                                                                                                  /* Wild */8,
                                                                                                                                                                                                   /* :: */[
-                                                                                                                                                                                                    /* Black */7,
+                                                                                                                                                                                                    /* Wild */8,
                                                                                                                                                                                                     /* :: */[
-                                                                                                                                                                                                      /* Black */7,
+                                                                                                                                                                                                      /* Wild */8,
                                                                                                                                                                                                       /* :: */[
                                                                                                                                                                                                         /* Wild */8,
                                                                                                                                                                                                         /* :: */[
@@ -322,16 +228,7 @@ var init_deck = shuffle(/* :: */[
                                                                                                                                                                                                                           /* Wild */8,
                                                                                                                                                                                                                           /* :: */[
                                                                                                                                                                                                                             /* Wild */8,
-                                                                                                                                                                                                                            /* :: */[
-                                                                                                                                                                                                                              /* Wild */8,
-                                                                                                                                                                                                                              /* :: */[
-                                                                                                                                                                                                                                /* Wild */8,
-                                                                                                                                                                                                                                /* :: */[
-                                                                                                                                                                                                                                  /* Wild */8,
-                                                                                                                                                                                                                                  /* [] */0
-                                                                                                                                                                                                                                ]
-                                                                                                                                                                                                                              ]
-                                                                                                                                                                                                                            ]
+                                                                                                                                                                                                                            /* [] */0
                                                                                                                                                                                                                           ]
                                                                                                                                                                                                                         ]
                                                                                                                                                                                                                       ]
@@ -438,15 +335,269 @@ var init_deck = shuffle(/* :: */[
             ]
           ]
         ]
-      ], /* [] */0)[0];
-
-var TrainDeck = /* module */[
-  /* draw_card */draw_card,
-  /* shuffle */shuffle,
-  /* discard */discard,
-  /* init_deck */init_deck,
-  /* init_trash : [] */0
+      ]
+    ]
+  ]
 ];
+
+function tfst(param) {
+  return param[0];
+}
+
+function tsnd(param) {
+  return param[1];
+}
+
+function tthd(param) {
+  return param[2];
+}
+
+function remove_n(n, lst) {
+  if (n > List.length(lst)) {
+    return lst;
+  } else if (lst) {
+    var t = lst[1];
+    if (n === 0) {
+      return t;
+    } else {
+      return /* :: */[
+              lst[0],
+              remove_n(n - 1 | 0, t)
+            ];
+    }
+  } else {
+    return /* [] */0;
+  }
+}
+
+function remove(item, param) {
+  if (param) {
+    var t = param[1];
+    var h = param[0];
+    if (Caml_obj.caml_equal(h, item)) {
+      return t;
+    } else {
+      return /* :: */[
+              h,
+              remove(item, t)
+            ];
+    }
+  } else {
+    return /* [] */0;
+  }
+}
+
+function random_int(n) {
+  try {
+    return Random.$$int(n);
+  }
+  catch (raw_exn){
+    var exn = Js_exn.internalToOCamlException(raw_exn);
+    if (exn[0] === Caml_builtin_exceptions.invalid_argument) {
+      return 0;
+    } else {
+      throw exn;
+    }
+  }
+}
+
+function shuffler(_from, _to_list, _len) {
+  while(true) {
+    var len = _len;
+    var to_list = _to_list;
+    var from = _from;
+    if (len !== 0) {
+      var i = random_int(len);
+      _len = len - 1 | 0;
+      _to_list = /* :: */[
+        List.nth(from, i),
+        to_list
+      ];
+      _from = remove_n(i, from);
+      continue ;
+    } else {
+      return to_list;
+    }
+  };
+}
+
+function drop(_n, _lst) {
+  while(true) {
+    var lst = _lst;
+    var n = _n;
+    if (n === 0) {
+      return lst;
+    } else if (lst) {
+      _lst = lst[1];
+      _n = n - 1 | 0;
+      continue ;
+    } else {
+      return /* [] */0;
+    }
+  };
+}
+
+function count(item, _param) {
+  while(true) {
+    var param = _param;
+    if (param) {
+      var t = param[1];
+      if (Caml_obj.caml_equal(param[0], item)) {
+        return 1 + count(item, t) | 0;
+      } else {
+        _param = t;
+        continue ;
+      }
+    } else {
+      return 0;
+    }
+  };
+}
+
+function checkify(_lst) {
+  while(true) {
+    var lst = _lst;
+    if (lst) {
+      if (count(lst[0], lst) > 2) {
+        return false;
+      } else {
+        _lst = lst[1];
+        continue ;
+      }
+    } else {
+      return true;
+    }
+  };
+}
+
+function shuffle(tr, _) {
+  var shuf = shuffler(tr, /* [] */0, List.length(tr));
+  return /* tuple */[
+          shuf,
+          /* [] */0
+        ];
+}
+
+function draw_card(_t, _tr) {
+  while(true) {
+    var tr = _tr;
+    var t = _t;
+    if (t !== /* [] */0) {
+      return /* tuple */[
+              List.hd(t),
+              List.tl(t),
+              tr
+            ];
+    } else {
+      var shuff = shuffle(tr, t);
+      _tr = /* [] */0;
+      _t = shuff[0];
+      continue ;
+    }
+  };
+}
+
+function init_deck() {
+  return shuffle(train_deck, /* [] */0)[0];
+}
+
+function five_faceup(_t, _tr) {
+  while(true) {
+    var tr = _tr;
+    var t = _t;
+    var d1 = draw_card(t, tr);
+    var d2 = draw_card(tsnd(d1), tthd(d1));
+    var d3 = draw_card(tsnd(d2), tthd(d2));
+    var d4 = draw_card(tsnd(d3), tthd(d3));
+    var d5 = draw_card(tsnd(d4), tthd(d4));
+    var start_000 = tfst(d1);
+    var start_001 = /* :: */[
+      tfst(d2),
+      /* :: */[
+        tfst(d3),
+        /* :: */[
+          tfst(d4),
+          /* :: */[
+            tfst(d5),
+            /* [] */0
+          ]
+        ]
+      ]
+    ];
+    var start = /* :: */[
+      start_000,
+      start_001
+    ];
+    var trash = tthd(d5);
+    if (checkify(start)) {
+      return /* tuple */[
+              start,
+              tsnd(d5),
+              trash
+            ];
+    } else {
+      _tr = Pervasives.$at(start, trash);
+      _t = tsnd(d5);
+      continue ;
+    }
+  };
+}
+
+function add_faceup(t, tr, f) {
+  var drawn = draw_card(t, tr);
+  var faceup_000 = /* :: */[
+    tfst(drawn),
+    f
+  ];
+  var faceup_001 = tsnd(drawn);
+  var faceup_002 = tthd(drawn);
+  var faceup = /* tuple */[
+    faceup_000,
+    faceup_001,
+    faceup_002
+  ];
+  if (checkify(tfst(faceup))) {
+    return faceup;
+  } else {
+    return five_faceup(tsnd(faceup), Pervasives.$at(tfst(faceup), tr));
+  }
+}
+
+function draw_faceup(t, c, f, tr) {
+  var removed = remove(c, f);
+  return add_faceup(t, tr, removed);
+}
+
+function init_faceup() {
+  var d1 = draw_card(shuffle(train_deck, /* [] */0)[0], /* [] */0);
+  var d2 = draw_card(tsnd(d1), /* [] */0);
+  var d3 = draw_card(tsnd(d2), /* [] */0);
+  var d4 = draw_card(tsnd(d3), /* [] */0);
+  var d5 = draw_card(tsnd(d4), /* [] */0);
+  var start_000 = tfst(d1);
+  var start_001 = /* :: */[
+    tfst(d2),
+    /* :: */[
+      tfst(d3),
+      /* :: */[
+        tfst(d4),
+        /* :: */[
+          tfst(d5),
+          /* [] */0
+        ]
+      ]
+    ]
+  ];
+  var start = /* :: */[
+    start_000,
+    start_001
+  ];
+  if (checkify(start)) {
+    return start;
+  } else {
+    return tfst(five_faceup(tsnd(d5), start));
+  }
+}
 
 function shuffle$1(tr, _) {
   var shuf = shuffler(tr, /* [] */0, List.length(tr));
@@ -459,7 +610,7 @@ function shuffle$1(tr, _) {
 function draw_card$1(_t, tr) {
   while(true) {
     var t = _t;
-    if (t !== /* [] */0) {
+    if (List.length(t) >= 3) {
       return /* tuple */[
               /* :: */[
                 List.hd(t),
@@ -481,194 +632,194 @@ function draw_card$1(_t, tr) {
   };
 }
 
-function discard$1(c, tr) {
-  return /* :: */[
-          c,
-          tr
-        ];
-}
+var discard = Pervasives.$at;
 
-var init_deck$1 = shuffle$1(/* :: */[
-        /* record */[
-          /* loc1 */"Bailey Hall",
-          /* loc2 */"Dairy Bar",
-          /* points */12
-        ],
-        /* :: */[
-          /* record */[
-            /* loc1 */"McGraw Tower",
-            /* loc2 */"Eddy Gate",
-            /* points */8
-          ],
-          /* :: */[
-            /* record */[
-              /* loc1 */"Appel Commons",
-              /* loc2 */"Schoellkopf Field",
-              /* points */13
-            ],
-            /* :: */[
-              /* record */[
-                /* loc1 */"RPCC",
-                /* loc2 */"Duffield Hall",
-                /* points */12
-              ],
-              /* :: */[
+function init_deck$1() {
+  return shuffle$1(/* :: */[
                 /* record */[
-                  /* loc1 */"House Becker",
-                  /* loc2 */"Appel Commons",
-                  /* points */20
+                  /* loc1 */"Bailey Hall",
+                  /* loc2 */"Dairy Bar",
+                  /* points */12
                 ],
                 /* :: */[
                   /* record */[
-                    /* loc1 */"Kennedy Hall",
-                    /* loc2 */"Olin Hall",
-                    /* points */9
+                    /* loc1 */"McGraw Tower",
+                    /* loc2 */"Eddy Gate",
+                    /* points */8
                   ],
                   /* :: */[
                     /* record */[
-                      /* loc1 */"Martha Van Rensselaer Hall",
-                      /* loc2 */"Teagle Hall",
-                      /* points */6
+                      /* loc1 */"Appel Commons",
+                      /* loc2 */"Schoellkopf Field",
+                      /* points */13
                     ],
                     /* :: */[
                       /* record */[
-                        /* loc1 */"House Bethe",
-                        /* loc2 */"Eddy Gate",
-                        /* points */9
+                        /* loc1 */"RPCC",
+                        /* loc2 */"Duffield Hall",
+                        /* points */12
                       ],
                       /* :: */[
                         /* record */[
-                          /* loc1 */"Eddy Gate",
-                          /* loc2 */"Kennedy Hall",
-                          /* points */16
+                          /* loc1 */"House Becker",
+                          /* loc2 */"Appel Commons",
+                          /* points */20
                         ],
                         /* :: */[
                           /* record */[
-                            /* loc1 */"Noyes Community Center",
-                            /* loc2 */"Eddy Gate",
-                            /* points */11
+                            /* loc1 */"Kennedy Hall",
+                            /* loc2 */"Olin Hall",
+                            /* points */9
                           ],
                           /* :: */[
                             /* record */[
-                              /* loc1 */"Risley",
-                              /* loc2 */"Cornell Health",
-                              /* points */7
+                              /* loc1 */"Martha Van Rensselaer Hall",
+                              /* loc2 */"Teagle Hall",
+                              /* points */6
                             ],
                             /* :: */[
                               /* record */[
-                                /* loc1 */"Appel Commons",
-                                /* loc2 */"Teagle Hall",
+                                /* loc1 */"House Bethe",
+                                /* loc2 */"Eddy Gate",
                                 /* points */9
                               ],
                               /* :: */[
                                 /* record */[
-                                  /* loc1 */"Risley",
-                                  /* loc2 */"Eddy Gate",
-                                  /* points */13
+                                  /* loc1 */"Eddy Gate",
+                                  /* loc2 */"Kennedy Hall",
+                                  /* points */16
                                 ],
                                 /* :: */[
                                   /* record */[
-                                    /* loc1 */"RPCC",
-                                    /* loc2 */"Gates Hall",
+                                    /* loc1 */"Noyes Community Center",
+                                    /* loc2 */"Eddy Gate",
                                     /* points */11
                                   ],
                                   /* :: */[
                                     /* record */[
-                                      /* loc1 */"Physical Sciences Building",
-                                      /* loc2 */"Duffield Hall",
-                                      /* points */8
+                                      /* loc1 */"Risley",
+                                      /* loc2 */"Cornell Health",
+                                      /* points */7
                                     ],
                                     /* :: */[
                                       /* record */[
-                                        /* loc1 */"Uris Hall",
-                                        /* loc2 */"Duffield Hall",
-                                        /* points */5
+                                        /* loc1 */"Appel Commons",
+                                        /* loc2 */"Teagle Hall",
+                                        /* points */9
                                       ],
                                       /* :: */[
                                         /* record */[
-                                          /* loc1 */"Eddy Gate",
-                                          /* loc2 */"Martha Van Rensselaer Hall",
-                                          /* points */21
+                                          /* loc1 */"Risley",
+                                          /* loc2 */"Eddy Gate",
+                                          /* points */13
                                         ],
                                         /* :: */[
                                           /* record */[
-                                            /* loc1 */"Schwartz Center",
-                                            /* loc2 */"Teagle Hall",
-                                            /* points */17
+                                            /* loc1 */"RPCC",
+                                            /* loc2 */"Gates Hall",
+                                            /* points */11
                                           ],
                                           /* :: */[
                                             /* record */[
-                                              /* loc1 */"Willard Straight Hall",
-                                              /* loc2 */"Mann Library",
-                                              /* points */11
+                                              /* loc1 */"Physical Sciences Building",
+                                              /* loc2 */"Duffield Hall",
+                                              /* points */8
                                             ],
                                             /* :: */[
                                               /* record */[
-                                                /* loc1 */"Noyes Community Center",
-                                                /* loc2 */"Ives Hall",
-                                                /* points */17
+                                                /* loc1 */"Uris Hall",
+                                                /* loc2 */"Duffield Hall",
+                                                /* points */5
                                               ],
                                               /* :: */[
                                                 /* record */[
-                                                  /* loc1 */"House Becker",
-                                                  /* loc2 */"Olin Hall",
-                                                  /* points */13
+                                                  /* loc1 */"Eddy Gate",
+                                                  /* loc2 */"Martha Van Rensselaer Hall",
+                                                  /* points */21
                                                 ],
                                                 /* :: */[
                                                   /* record */[
-                                                    /* loc1 */"Kennedy Hall",
-                                                    /* loc2 */"Schoellkopf Field",
-                                                    /* points */12
+                                                    /* loc1 */"Schwartz Center",
+                                                    /* loc2 */"Teagle Hall",
+                                                    /* points */17
                                                   ],
                                                   /* :: */[
                                                     /* record */[
                                                       /* loc1 */"Willard Straight Hall",
-                                                      /* loc2 */"Carpenter Hall",
-                                                      /* points */4
+                                                      /* loc2 */"Mann Library",
+                                                      /* points */11
                                                     ],
                                                     /* :: */[
                                                       /* record */[
-                                                        /* loc1 */"Physical Sciences Building",
-                                                        /* loc2 */"Carpetner Hall",
-                                                        /* points */10
+                                                        /* loc1 */"Noyes Community Center",
+                                                        /* loc2 */"Ives Hall",
+                                                        /* points */17
                                                       ],
                                                       /* :: */[
                                                         /* record */[
-                                                          /* loc1 */"Helen Newman Hall",
-                                                          /* loc2 */"Ives Hall",
-                                                          /* points */12
+                                                          /* loc1 */"House Becker",
+                                                          /* loc2 */"Olin Hall",
+                                                          /* points */13
                                                         ],
                                                         /* :: */[
                                                           /* record */[
-                                                            /* loc1 */"Eddy Gate",
-                                                            /* loc2 */"Dairy Bar",
-                                                            /* points */20
+                                                            /* loc1 */"Kennedy Hall",
+                                                            /* loc2 */"Schoellkopf Field",
+                                                            /* points */12
                                                           ],
                                                           /* :: */[
                                                             /* record */[
-                                                              /* loc1 */"Warren Hall",
-                                                              /* loc2 */"Dairy Bar",
-                                                              /* points */10
+                                                              /* loc1 */"Willard Straight Hall",
+                                                              /* loc2 */"Carpenter Hall",
+                                                              /* points */4
                                                             ],
                                                             /* :: */[
                                                               /* record */[
-                                                                /* loc1 */"Rhodes Hall",
-                                                                /* loc2 */"Martha Van Rensselaer Hall",
-                                                                /* points */11
+                                                                /* loc1 */"Physical Sciences Building",
+                                                                /* loc2 */"Carpetner Hall",
+                                                                /* points */10
                                                               ],
                                                               /* :: */[
                                                                 /* record */[
-                                                                  /* loc1 */"House Bethe",
-                                                                  /* loc2 */"Martha Van Rensselaer Hall",
-                                                                  /* points */22
+                                                                  /* loc1 */"Helen Newman Hall",
+                                                                  /* loc2 */"Ives Hall",
+                                                                  /* points */12
                                                                 ],
                                                                 /* :: */[
                                                                   /* record */[
-                                                                    /* loc1 */"Helen Newman Hall",
-                                                                    /* loc2 */"Statler Hall",
-                                                                    /* points */9
+                                                                    /* loc1 */"Eddy Gate",
+                                                                    /* loc2 */"Dairy Bar",
+                                                                    /* points */20
                                                                   ],
-                                                                  /* [] */0
+                                                                  /* :: */[
+                                                                    /* record */[
+                                                                      /* loc1 */"Warren Hall",
+                                                                      /* loc2 */"Dairy Bar",
+                                                                      /* points */10
+                                                                    ],
+                                                                    /* :: */[
+                                                                      /* record */[
+                                                                        /* loc1 */"Rhodes Hall",
+                                                                        /* loc2 */"Martha Van Rensselaer Hall",
+                                                                        /* points */11
+                                                                      ],
+                                                                      /* :: */[
+                                                                        /* record */[
+                                                                          /* loc1 */"House Bethe",
+                                                                          /* loc2 */"Martha Van Rensselaer Hall",
+                                                                          /* points */22
+                                                                        ],
+                                                                        /* :: */[
+                                                                          /* record */[
+                                                                            /* loc1 */"Helen Newman Hall",
+                                                                            /* loc2 */"Statler Hall",
+                                                                            /* points */9
+                                                                          ],
+                                                                          /* [] */0
+                                                                        ]
+                                                                      ]
+                                                                    ]
+                                                                  ]
                                                                 ]
                                                               ]
                                                             ]
@@ -694,20 +845,28 @@ var init_deck$1 = shuffle$1(/* :: */[
                     ]
                   ]
                 ]
-              ]
-            ]
-          ]
-        ]
-      ], /* [] */0)[0];
+              ], /* [] */0)[0];
+}
 
-var DestinationDeck = /* module */[
-  /* draw_card */draw_card$1,
-  /* shuffle */shuffle$1,
-  /* discard */discard$1,
-  /* init_deck */init_deck$1,
-  /* init_trash : [] */0
+var TrainDeck = [
+  shuffle,
+  init_deck,
+  /* [] */0,
+  draw_card,
+  five_faceup,
+  add_faceup,
+  init_faceup,
+  draw_faceup
+];
+
+var DestinationDeck = [
+  shuffle$1,
+  discard,
+  init_deck$1,
+  /* [] */0,
+  draw_card$1
 ];
 
 exports.TrainDeck = TrainDeck;
 exports.DestinationDeck = DestinationDeck;
-/* init_deck Not a pure module */
+/* No side effect */
