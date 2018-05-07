@@ -28,6 +28,10 @@ val train_items : state -> (TrainDeck.t * TrainDeck.t * TrainDeck.tr)
 (* [message st] returns a message for the GUI to display for the current [st]. *)
 val message : state -> string
 
+(* [turn_ended st] returns true if the turn has ended for the current [st],
+ * false otherwise. *)
+val turn_ended : state -> bool
+
 (* [score] returns the total score of a particular player. *)
 val score : state -> player -> int
 

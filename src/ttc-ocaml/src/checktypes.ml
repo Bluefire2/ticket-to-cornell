@@ -10,6 +10,7 @@ module type STATE = sig
                                     * Components.TrainDeck.tr)
 
   val message : State.state -> string
+  val turn_ended : State.state -> bool
   val score : State.state -> Player.player -> int
   val next_player : State.state -> State.state
   val draw_card_pile : State.state -> State.state
