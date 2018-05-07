@@ -1,5 +1,7 @@
 open Components
 
+let name (x,_,_) = x
+
 let stringify_clr = function
   | PBlue -> "blue"
   | PRed -> "red"
@@ -37,9 +39,9 @@ let print_routes st =
   let r = State.routes st in
   let rec loop = function
     | [] -> ""
-    | (s1, s2, _, _, x)::t -> match x with
+    | (l1, l2, _, _, x)::t -> match x with
       | None -> loop t
-      | Some p -> ("Route from " ^ s1 ^ " to " ^ s2 ^ " belongs to " ^ (stringify_clr p) ^ "\n") ^ (loop t) in
+      | Some p -> ("Route from " ^ (name l1) ^ " to " ^ (name l2) ^ " belongs to " ^ (stringify_clr p) ^ "\n") ^ (loop t) in
   loop r
 
 let play num =
@@ -71,11 +73,11 @@ let play num =
         | "white" -> White
         | "black" -> Black
         | _ -> Grey ) in
-     ANSITerminal.(print_string [red] ("select\n"));
-     let r = ("Bailey Hall", "Dairy Bar", 1, clr, None) in
+     ANSITerminal.(print_string [red] ("select\n")))
+     (*let r = ("Bailey Hall", "Dairy Bar", 1, clr, None) in
      let st' = State.select_route st r in
      ANSITerminal.(print_string [red] ((State.message st') ^ "\n"));
-     ANSITerminal.(print_string [blue] (print_routes st')))
+     ANSITerminal.(print_string [blue] (print_routes st')))*)
   | _ -> ()
 
 let main () =

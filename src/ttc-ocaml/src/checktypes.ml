@@ -39,9 +39,7 @@ module type COMPONENTS = sig
     | PYellow
     | PGreen
     | PBlack
-  type location =
-    | Empty
-    | Node of string * float * float * location list
+  type location = string * float * float
   type destination_ticket = {
     loc1 : string;
     loc2 : string;
@@ -94,7 +92,7 @@ module type PLAYER = sig
 end
 
 module type BOARD = sig
-  type route = string * string * int * Components.train_color * Components.player_color option
+  type route = Components.location * Components.location * int * Components.train_color * Components.player_color option
   val route_score : route -> int
   val is_taken : route -> bool
   val get_length : route -> int

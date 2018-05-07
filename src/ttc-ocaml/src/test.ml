@@ -48,11 +48,23 @@ let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Rhodes Hall"; loc2 = "Martha Van Rensselaer Hall"; points = 11};
   {loc1 = "House Bethe"; loc2 = "Martha Van Rensselaer Hall"; points = 22};
   {loc1 = "Helen Newman Hall"; loc2 = "Statler Hall"; points = 9};
-
 ]
 
 let test_list1 =
 [ Red; Red; Red]
+
+let test_list2 =
+[  {loc1 = "Rhodes Hall"; loc2 = "Martha Van Rensselaer Hall"; points = 11};
+  {loc1 = "House Bethe"; loc2 = "Martha Van Rensselaer Hall"; points = 22};
+  {loc1 = "Helen Newman Hall"; loc2 = "Statler Hall"; points = 9}
+]
+
+let test_list3 =
+[
+{loc1 = "Gates Hall"; loc2 = "Gates Hall"; points = 0};
+{loc1 = "Gates Hall"; loc2 = "Gates Hall"; points = 0};
+{loc1 = "Gates Hall"; loc2 = "Gates Hall"; points = 0}
+]
 
 let get_top_3 = function
 | h1::h2::h3::t -> h1::h2::h3::[]
@@ -137,20 +149,17 @@ let tests =
   "draw faceup deck empty" >:: (fun _ -> assert_equal ([Red],[Red;Red],[]) (Components.TrainDeck.draw_faceup [] Red [Red] [Red;Red;Red] ));
   "draw faceup causing redo" >:: (fun _ -> assert_equal ([Pink;Blue;Green;Yellow;Orange], [], [Red;Red;Blue;Red;Yellow])
     (Components.TrainDeck.draw_faceup [Red;Pink;Blue;Green;Yellow;Orange] Green [Red;Blue;Green;Red;Yellow] []));
-
-
-
-
   (* checked [init_faceup] in utop. It shuffles every time, with no more than two of the
    * same card showing at a given time. *)
 
-
-
-
-
   (* DestinationDeck Tests *)
+  "shuffle1" >:: (fun _ -> assert_equal (test_list3,[]) (Components.DestinationDeck.shuffle test_list3 []));
+  "shuffle2" >:: (fun _ -> assert_equal true (same_lst (dest_ticket_deck) (fst (Components.DestinationDeck.shuffle dest_ticket_deck []))));
   "draw card" >:: (fun _ -> assert_equal (get_top_3 dest_ticket_deck,
                                           drop 3 dest_ticket_deck) (Components.DestinationDeck.draw_card dest_ticket_deck []));
+  "draw card empty deck" >:: (fun _ -> assert_equal (get_top_3 test_list3, []) (Components.DestinationDeck.draw_card [] test_list3));
+
+
 
   (* State Tests *)
   "state1" >:: (fun _ -> assert_equal 45 State.(init_state 5 |> current_player |> Player.trains_remaining));

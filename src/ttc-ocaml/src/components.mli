@@ -21,9 +21,7 @@ type player_color =
 (* [location] represents a location on the board. It consists of the name
  * of the location, its coordinates for the GUI, and a list of locations that
  * are adjacent. *)
-type location =
-| Empty
-| Node of string * float * float * location list
+type location = string * float * float
 
 (* [destination_ticket] represents two location that the player should try to
  * get a route through. If they take a route through the two locations, they
