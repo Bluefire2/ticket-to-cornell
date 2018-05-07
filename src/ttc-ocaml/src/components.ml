@@ -38,8 +38,6 @@ let train_deck : train_color list =
   Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild
   ]
 
-let gates = ("Gates", 0., 0.)
-
 let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Bailey Hall"; loc2 = "Dairy Bar"; points = 12};
   {loc1 = "McGraw Tower"; loc2 = "Eddy Gate"; points = 8};
@@ -50,10 +48,10 @@ let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Martha Van Rensselaer Hall"; loc2 = "Teagle Hall"; points = 6};
   {loc1 = "House Bethe"; loc2 = "Eddy Gate"; points = 9};
   {loc1 = "Eddy Gate"; loc2 = "Kennedy Hall"; points = 16};
-  {loc1 = "Noyes Community Center"; loc2 = "Eddy Gate"; points = 11};
+  {loc1 = "Noyes Community Center"; loc2 = "Collegetown Bagels"; points = 11};
   {loc1 = "Risley"; loc2 = "Cornell Health"; points = 7};
   {loc1 = "Appel Commons"; loc2 = "Teagle Hall"; points = 9};
-  {loc1 = "Risley"; loc2 = "Eddy Gate"; points = 13};
+  {loc1 = "Risley"; loc2 = "Collegetown Bagels"; points = 13};
   {loc1 = "RPCC"; loc2 = "Gates Hall"; points = 11};
   {loc1 = "Physical Sciences Building"; loc2 = "Duffield Hall"; points = 8};
   {loc1 = "Uris Hall"; loc2 = "Duffield Hall"; points = 5};
@@ -70,9 +68,10 @@ let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Warren Hall"; loc2 = "Dairy Bar"; points = 10};
   {loc1 = "Rhodes Hall"; loc2 = "Martha Van Rensselaer Hall"; points = 11};
   {loc1 = "House Bethe"; loc2 = "Martha Van Rensselaer Hall"; points = 22};
-  {loc1 = "Helen Newman Hall"; loc2 = "Statler Hall"; points = 9};
-
+  {loc1 = "Helen Newman Hall"; loc2 = "Statler Hotel"; points = 9};
 ]
+
+
 
 let tfst (x,_,_) = x
 let tsnd (_,y,_) = y
