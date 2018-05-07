@@ -1,6 +1,6 @@
 open Components
 
-type route = string * string * int * train_color * player_color option
+type route = location * location * int * train_color * player_color option
 
 let get_length (_,_,x,_,_) = x
 

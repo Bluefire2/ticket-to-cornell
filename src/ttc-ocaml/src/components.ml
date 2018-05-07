@@ -18,9 +18,7 @@ type player_color =
 | PBlack
 
 
-type location =
-| Empty
-| Node of string * float * float * location list
+type location = string * float * float
 
 type destination_ticket = {
   loc1 : string;
@@ -39,6 +37,8 @@ let train_deck : train_color list =
   Black; Black; Black; Black; Black; Black; Black; Black; Black; Black; Black; Black;
   Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild
   ]
+
+let gates = ("Gates", 0., 0.)
 
 let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Bailey Hall"; loc2 = "Dairy Bar"; points = 12};
