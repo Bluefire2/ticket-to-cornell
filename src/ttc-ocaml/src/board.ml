@@ -24,11 +24,11 @@ let is_taken r =
   | _ -> true
 
 
-let becker = ("House Becker", 0.,0.)
-let bethe = ("House Bethe", 0.,0.)
-let noyes = ("Noyes Community Center", 0.,0.)
-let risley = ("Risley", 0.,0.)
-let rpcc = ("RPCC", 0.,0.)
+let becker = ("House Becker", 100.,100.)
+let bethe = ("House Bethe", 200.,3.14)
+let noyes = ("Noyes Community Center", 50.,75.)
+let risley = ("Risley", 225.,90.)
+let rpcc = ("RPCC", 30.,100.)
 let helen_newman = ("Helen Newman", 0.,0.)
 let appel = ("Appel Commons", 0.,0.)
 let mcgraw = ("McGraw Tower", 0.,0.)
