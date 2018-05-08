@@ -1,7 +1,8 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
+import dimensionsReducer from './dimensions';
 
 const rootReducer = combineReducers({
-    state: (state = {}) => state
+    dimensions: dimensionsReducer
 });
 
 export default rootReducer;
