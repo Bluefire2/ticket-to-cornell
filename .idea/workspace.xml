@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35bd7f64-a57c-4a61-820a-1fe40a446d60" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/checktypes.ml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/command.ml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/main.ml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/test.ml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/reducers/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/board.bs.js" afterPath="$PROJECT_DIR$/src/ttc-ocaml/src/board.bs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/components.bs.js" afterPath="$PROJECT_DIR$/src/ttc-ocaml/src/components.bs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/player.bs.js" afterPath="$PROJECT_DIR$/src/ttc-ocaml/src/player.bs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js" afterPath="$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -48,23 +44,74 @@
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="294">
-              <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-              <folding />
+              <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+              <folding>
+                <marker date="1525815402287" expanded="true" signature="92:250" ph="{&quot;react&quot;: &quot;^16.3.2&quot;...}" />
+                <marker date="1525815402287" expanded="true" signature="266:290" ph="[...]" />
+                <marker date="1525815402287" expanded="true" signature="305:572" ph="{&quot;bs-clean&quot;: &quot;bsb -clean-world&quot;...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="state.bs.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="state.bs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-1701">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="board.bs.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/board.bs.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-27315">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
@@ -77,6 +124,9 @@
         <option value="$PROJECT_DIR$/.bsconfig" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/ttc-ocaml/src/command.ml" />
+        <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/reducers/index.js" />
       </list>
     </option>
   </component>
@@ -131,13 +181,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ttc-ocaml" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ticket-to-cornell" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ticket-to-cornell" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ttc-ocaml" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -178,7 +221,7 @@
       <option name="presentableId" value="Default" />
       <updated>1525566358431</updated>
       <workItem from="1525566359647" duration="968000" />
-      <workItem from="1525567486626" duration="5352000" />
+      <workItem from="1525567486626" duration="6245000" />
     </task>
     <task id="LOCAL-00001" summary="Add bucklescript stuff">
       <created>1525566961408</created>
@@ -205,7 +248,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6320000" />
+    <option name="totallyTimeSpent" value="7213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -259,7 +302,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding />
+          <folding>
+            <marker date="1525815402287" expanded="true" signature="92:250" ph="{&quot;react&quot;: &quot;^16.3.2&quot;...}" />
+            <marker date="1525815402287" expanded="true" signature="266:290" ph="[...]" />
+            <marker date="1525815402287" expanded="true" signature="305:572" ph="{&quot;bs-clean&quot;: &quot;bsb -clean-world&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -311,14 +358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/board.bs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/checktypes.ml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -338,15 +377,51 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
-          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-          <folding />
+          <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
+          <folding>
+            <marker date="1525815402287" expanded="true" signature="92:250" ph="{&quot;react&quot;: &quot;^16.3.2&quot;...}" />
+            <marker date="1525815402287" expanded="true" signature="266:290" ph="[...]" />
+            <marker date="1525815402287" expanded="true" signature="305:572" ph="{&quot;bs-clean&quot;: &quot;bsb -clean-world&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-1701">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/board.bs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27315">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
