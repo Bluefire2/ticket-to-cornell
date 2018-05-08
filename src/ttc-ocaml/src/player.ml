@@ -43,7 +43,7 @@ let trains_remaining p = p.trains_remaining
 let rec add_train_cards tlist c acc=
   match tlist with
   | [] -> acc
-  | (a,b)::t -> if c=a then acc @ ((a,b+1)::t) else add_train_cards t c ((a,b)::acc)
+  | (a,b)::t -> if c=a then acc @ ((a,b+1)::t) else add_train_cards t c (acc@[(a,b)])
 
 let color p = p.color
 let rec init_players n =

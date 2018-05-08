@@ -22,6 +22,8 @@ val train_cards : player -> (Components.TrainDeck.card * int) list
 (* [score t] is the player's current score  *)
 val score : player -> int
 
+val color : player -> Components.player_color
+
 (* [trains_remaining t] is the number of trains the player has left  *)
 val trains_remaining : player -> int
 

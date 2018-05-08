@@ -179,8 +179,8 @@ module DestinationDeck = struct
   type t = card list
   type tr = card list
   let rec shuffle tr t  = let shuf = shuffler tr [] (List.length tr) in (shuf,[])
-  let rec draw_card t tr = if List.length t >= 3 then ([List.hd t; List.nth t 1; List.nth t 2], (drop 3 t)) else
-      let shuff = shuffle tr t in draw_card (fst shuff) tr
+  let rec draw_card t tr = if List.length t > 2 then ([List.hd t; List.nth t 1; List.nth t 2], (drop 3 t)) else
+        let shuff = shuffle tr [] in draw_card (t@(fst shuff)) []
   let discard c tr = c@tr
   let init_deck = fun () -> fst (shuffle dest_ticket_deck [])
   let init_trash = []
@@ -188,6 +188,3 @@ end
 
 
 
-(*Face Up cards:
-  -need to take one, then get new card from deck
-  -if there are three or more, add to trash *)
