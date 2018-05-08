@@ -20,3 +20,5 @@ val is_taken : route -> bool
 val get_length : route -> int
 
 val get_color : route -> train_color
+
+val routes : route list
