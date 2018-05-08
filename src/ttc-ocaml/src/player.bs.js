@@ -84,13 +84,13 @@ function add_train_cards(_tlist, c, _acc) {
                     t
                   ]);
       } else {
-        _acc = /* :: */[
-          /* tuple */[
-            a,
-            b
-          ],
-          acc
-        ];
+        _acc = Pervasives.$at(acc, /* :: */[
+              /* tuple */[
+                a,
+                b
+              ],
+              /* [] */0
+            ]);
         _tlist = t;
         continue ;
       }
@@ -98,6 +98,10 @@ function add_train_cards(_tlist, c, _acc) {
       return acc;
     }
   };
+}
+
+function color(p) {
+  return p[/* color */0];
 }
 
 function init_players(n) {
@@ -198,6 +202,7 @@ exports.destination_tickets = destination_tickets;
 exports.update_destination_tickets = update_destination_tickets;
 exports.train_cards = train_cards;
 exports.score = score;
+exports.color = color;
 exports.trains_remaining = trains_remaining;
 exports.init_players = init_players;
 exports.draw_train_card = draw_train_card;

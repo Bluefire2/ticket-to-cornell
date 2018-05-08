@@ -607,10 +607,11 @@ function shuffle$1(tr, _) {
         ];
 }
 
-function draw_card$1(_t, tr) {
+function draw_card$1(_t, _tr) {
   while(true) {
+    var tr = _tr;
     var t = _t;
-    if (List.length(t) >= 3) {
+    if (List.length(t) > 2) {
       return /* tuple */[
               /* :: */[
                 List.hd(t),
@@ -625,8 +626,9 @@ function draw_card$1(_t, tr) {
               drop(3, t)
             ];
     } else {
-      var shuff = shuffle$1(tr, t);
-      _t = shuff[0];
+      var shuff = shuffle$1(tr, /* [] */0);
+      _tr = /* [] */0;
+      _t = Pervasives.$at(t, shuff[0]);
       continue ;
     }
   };
@@ -692,7 +694,7 @@ function init_deck$1() {
                                 /* :: */[
                                   /* record */[
                                     /* loc1 */"Noyes Community Center",
-                                    /* loc2 */"Eddy Gate",
+                                    /* loc2 */"Collegetown Bagels",
                                     /* points */11
                                   ],
                                   /* :: */[
@@ -710,7 +712,7 @@ function init_deck$1() {
                                       /* :: */[
                                         /* record */[
                                           /* loc1 */"Risley",
-                                          /* loc2 */"Eddy Gate",
+                                          /* loc2 */"Collegetown Bagels",
                                           /* points */13
                                         ],
                                         /* :: */[
@@ -812,7 +814,7 @@ function init_deck$1() {
                                                                         /* :: */[
                                                                           /* record */[
                                                                             /* loc1 */"Helen Newman Hall",
-                                                                            /* loc2 */"Statler Hall",
+                                                                            /* loc2 */"Statler Hotel",
                                                                             /* points */9
                                                                           ],
                                                                           /* [] */0

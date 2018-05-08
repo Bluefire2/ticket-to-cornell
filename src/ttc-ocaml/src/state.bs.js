@@ -2,6 +2,7 @@
 'use strict';
 
 var List = require("bs-platform/lib/js/list.js");
+var Board = require("./board.bs.js");
 var Player = require("./player.bs.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Caml_int32 = require("bs-platform/lib/js/caml_int32.js");
@@ -13,7 +14,7 @@ function init_state(num) {
   return /* record */[
           /* player_index */0,
           /* players */players,
-          /* routes : [] */0,
+          /* routes */Board.routes,
           /* destination_deck */Components.DestinationDeck[/* init_deck */2](/* () */0),
           /* destination_trash */Components.DestinationDeck[/* init_trash */3],
           /* choose_destinations : [] */0,
@@ -21,7 +22,8 @@ function init_state(num) {
           /* facing_up_trains */Components.TrainDeck[/* init_faceup */6](/* () */0),
           /* train_trash */Components.TrainDeck[/* init_trash */2],
           /* taking_routes */false,
-          /* error */""
+          /* error */"",
+          /* turn_ended */false
         ];
 }
 
@@ -56,6 +58,10 @@ function message(st) {
   return st[/* error */10];
 }
 
+function turn_ended(st) {
+  return st[/* turn_ended */11];
+}
+
 function score(st, _) {
   return Player.score(current_player(st));
 }
@@ -72,7 +78,8 @@ function next_player(st) {
           /* facing_up_trains */st[/* facing_up_trains */7],
           /* train_trash */st[/* train_trash */8],
           /* taking_routes */st[/* taking_routes */9],
-          /* error */st[/* error */10]
+          /* error */st[/* error */10],
+          /* turn_ended */st[/* turn_ended */11]
         ];
 }
 
@@ -123,7 +130,8 @@ function draw_card_facing_up(st, c) {
           /* facing_up_trains */match[0],
           /* train_trash */match[2],
           /* taking_routes */st[/* taking_routes */9],
-          /* error */st[/* error */10]
+          /* error */st[/* error */10],
+          /* turn_ended */true
         ];
 }
 
@@ -145,7 +153,8 @@ function draw_card_pile(st) {
           /* facing_up_trains */st[/* facing_up_trains */7],
           /* train_trash */match$1[2],
           /* taking_routes */st[/* taking_routes */9],
-          /* error */st[/* error */10]
+          /* error */st[/* error */10],
+          /* turn_ended */true
         ];
 }
 
@@ -163,8 +172,9 @@ function take_route(st) {
           /* train_deck */st[/* train_deck */6],
           /* facing_up_trains */st[/* facing_up_trains */7],
           /* train_trash */st[/* train_trash */8],
-          /* taking_routes */true,
-          /* error */st[/* error */10]
+          /* taking_routes */false,
+          /* error */st[/* error */10],
+          /* turn_ended */st[/* turn_ended */11]
         ];
 }
 
@@ -184,7 +194,8 @@ function decided_routes(st, tickets) {
             /* facing_up_trains */st[/* facing_up_trains */7],
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */false,
-            /* error */""
+            /* error */"",
+            /* turn_ended */true
           ];
   } else {
     return /* record */[
@@ -198,7 +209,8 @@ function decided_routes(st, tickets) {
             /* facing_up_trains */st[/* facing_up_trains */7],
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */st[/* taking_routes */9],
-            /* error */"Must at least take 1 ticket"
+            /* error */"Must at least take 1 ticket",
+            /* turn_ended */false
           ];
   }
 }
@@ -264,7 +276,8 @@ function select_route(st, r) {
             /* facing_up_trains */st[/* facing_up_trains */7],
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */st[/* taking_routes */9],
-            /* error */"Route already taken"
+            /* error */"Route already taken",
+            /* turn_ended */false
           ];
   } else if (clr >= 9) {
     return /* record */[
@@ -278,7 +291,8 @@ function select_route(st, r) {
             /* facing_up_trains */st[/* facing_up_trains */7],
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */st[/* taking_routes */9],
-            /* error */"Choose a train card color"
+            /* error */"Choose a train card color",
+            /* turn_ended */false
           ];
   } else {
     var st$1 = st;
@@ -312,7 +326,8 @@ function select_route(st, r) {
               /* facing_up_trains */st$1[/* facing_up_trains */7],
               /* train_trash */st$1[/* train_trash */8],
               /* taking_routes */st$1[/* taking_routes */9],
-              /* error */""
+              /* error */"",
+              /* turn_ended */true
             ];
     } else {
       return /* record */[
@@ -326,7 +341,8 @@ function select_route(st, r) {
               /* facing_up_trains */st$1[/* facing_up_trains */7],
               /* train_trash */st$1[/* train_trash */8],
               /* taking_routes */st$1[/* taking_routes */9],
-              /* error */"Not enough train cards"
+              /* error */"Not enough train cards",
+              /* turn_ended */false
             ];
     }
   }
@@ -363,6 +379,7 @@ exports.routes = routes;
 exports.destination_items = destination_items;
 exports.train_items = train_items;
 exports.message = message;
+exports.turn_ended = turn_ended;
 exports.score = score;
 exports.next_player = next_player;
 exports.draw_card_pile = draw_card_pile;

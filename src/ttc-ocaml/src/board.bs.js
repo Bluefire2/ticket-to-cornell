@@ -42,8 +42,1135 @@ function is_taken(r) {
   }
 }
 
+var becker = /* tuple */[
+  "House Becker",
+  100,
+  100
+];
+
+var bethe = /* tuple */[
+  "House Bethe",
+  200,
+  3.14
+];
+
+var noyes = /* tuple */[
+  "Noyes Community Center",
+  50,
+  75
+];
+
+var risley = /* tuple */[
+  "Risley",
+  225,
+  90
+];
+
+var rpcc = /* tuple */[
+  "RPCC",
+  30,
+  100
+];
+
+var helen_newman = /* tuple */[
+  "Helen Newman",
+  0,
+  0
+];
+
+var appel = /* tuple */[
+  "Appel Commons",
+  0,
+  0
+];
+
+var mcgraw = /* tuple */[
+  "McGraw Tower",
+  0,
+  0
+];
+
+var wsh = /* tuple */[
+  "Willard Straight Hall",
+  0,
+  0
+];
+
+var psb = /* tuple */[
+  "Physical Sciences Building",
+  0,
+  0
+];
+
+var gannett = /* tuple */[
+  "Cornell Health",
+  0,
+  0
+];
+
+var schwartz = /* tuple */[
+  "Schwartz Center",
+  0,
+  0
+];
+
+var eddy = /* tuple */[
+  "Eddy Gate",
+  0,
+  0
+];
+
+var casc = /* tuple */[
+  "Cascadilla Gorge",
+  0,
+  0
+];
+
+var ctb = /* tuple */[
+  "Collegetown Bagels",
+  0,
+  0
+];
+
+var olin = /* tuple */[
+  "Olin Hall",
+  0,
+  0
+];
+
+var carpenter = /* tuple */[
+  "Carpenter Hall",
+  0,
+  0
+];
+
+var rhodes = /* tuple */[
+  "Rhodes Hall",
+  0,
+  0
+];
+
+var duffield = /* tuple */[
+  "Duffield Hall",
+  0,
+  0
+];
+
+var statler = /* tuple */[
+  "Statler Hotel",
+  0,
+  0
+];
+
+var uris = /* tuple */[
+  "Uris Hall",
+  0,
+  0
+];
+
+var gates = /* tuple */[
+  "Gates Hall",
+  0,
+  0
+];
+
+var klarman = /* tuple */[
+  "Klarman Hall",
+  0,
+  0
+];
+
+var trillium = /* tuple */[
+  "Trillium",
+  0,
+  0
+];
+
+var kennedy = /* tuple */[
+  "Kennedy Hall",
+  0,
+  0
+];
+
+var warren = /* tuple */[
+  "Warren Hall",
+  0,
+  0
+];
+
+var mann = /* tuple */[
+  "Mann Library",
+  0,
+  0
+];
+
+var ives = /* tuple */[
+  "Ives Hall",
+  0,
+  0
+];
+
+var barton = /* tuple */[
+  "Barton Hall",
+  0,
+  0
+];
+
+var teagle = /* tuple */[
+  "Teagle Hall",
+  0,
+  0
+];
+
+var schoellkopf = /* tuple */[
+  "Schoellkopf Field",
+  0,
+  0
+];
+
+var dairy_bar = /* tuple */[
+  "Dairy Bar",
+  0,
+  0
+];
+
+var mvr = /* tuple */[
+  "Martha Van Rensselaer Hall",
+  0,
+  0
+];
+
+var barn = /* tuple */[
+  "Big Red Barn",
+  0,
+  0
+];
+
+var bailey = /* tuple */[
+  "Bailey Hall",
+  0,
+  0
+];
+
+var bartels = /* tuple */[
+  "Bartels Hall",
+  0,
+  0
+];
+
+var routes_000 = /* tuple */[
+  becker,
+  bethe,
+  1,
+  /* Grey */9,
+  /* None */0
+];
+
+var routes_001 = /* :: */[
+  /* tuple */[
+    becker,
+    bethe,
+    1,
+    /* Grey */9,
+    /* None */0
+  ],
+  /* :: */[
+    /* tuple */[
+      becker,
+      risley,
+      3,
+      /* Grey */9,
+      /* None */0
+    ],
+    /* :: */[
+      /* tuple */[
+        bethe,
+        noyes,
+        1,
+        /* Grey */9,
+        /* None */0
+      ],
+      /* :: */[
+        /* tuple */[
+          bethe,
+          noyes,
+          1,
+          /* Grey */9,
+          /* None */0
+        ],
+        /* :: */[
+          /* tuple */[
+            bethe,
+            risley,
+            4,
+            /* Grey */9,
+            /* None */0
+          ],
+          /* :: */[
+            /* tuple */[
+              bethe,
+              mcgraw,
+              6,
+              /* Yellow */3,
+              /* None */0
+            ],
+            /* :: */[
+              /* tuple */[
+                noyes,
+                schwartz,
+                5,
+                /* Green */1,
+                /* None */0
+              ],
+              /* :: */[
+                /* tuple */[
+                  noyes,
+                  schwartz,
+                  5,
+                  /* Pink */4,
+                  /* None */0
+                ],
+                /* :: */[
+                  /* tuple */[
+                    noyes,
+                    gannett,
+                    6,
+                    /* Blue */2,
+                    /* None */0
+                  ],
+                  /* :: */[
+                    /* tuple */[
+                      schwartz,
+                      eddy,
+                      3,
+                      /* Yellow */3,
+                      /* None */0
+                    ],
+                    /* :: */[
+                      /* tuple */[
+                        schwartz,
+                        eddy,
+                        3,
+                        /* Pink */4,
+                        /* None */0
+                      ],
+                      /* :: */[
+                        /* tuple */[
+                          schwartz,
+                          gannett,
+                          5,
+                          /* Orange */5,
+                          /* None */0
+                        ],
+                        /* :: */[
+                          /* tuple */[
+                            schwartz,
+                            gannett,
+                            5,
+                            /* White */6,
+                            /* None */0
+                          ],
+                          /* :: */[
+                            /* tuple */[
+                              eddy,
+                              casc,
+                              2,
+                              /* Grey */9,
+                              /* None */0
+                            ],
+                            /* :: */[
+                              /* tuple */[
+                                eddy,
+                                ctb,
+                                3,
+                                /* Grey */9,
+                                /* None */0
+                              ],
+                              /* :: */[
+                                /* tuple */[
+                                  eddy,
+                                  carpenter,
+                                  6,
+                                  /* Black */7,
+                                  /* None */0
+                                ],
+                                /* :: */[
+                                  /* tuple */[
+                                    casc,
+                                    gannett,
+                                    3,
+                                    /* Orange */5,
+                                    /* None */0
+                                  ],
+                                  /* :: */[
+                                    /* tuple */[
+                                      gannett,
+                                      mcgraw,
+                                      3,
+                                      /* Pink */4,
+                                      /* None */0
+                                    ],
+                                    /* :: */[
+                                      /* tuple */[
+                                        gannett,
+                                        wsh,
+                                        3,
+                                        /* Red */0,
+                                        /* None */0
+                                      ],
+                                      /* :: */[
+                                        /* tuple */[
+                                          gannett,
+                                          wsh,
+                                          3,
+                                          /* Yellow */3,
+                                          /* None */0
+                                        ],
+                                        /* :: */[
+                                          /* tuple */[
+                                            risley,
+                                            mcgraw,
+                                            4,
+                                            /* Grey */9,
+                                            /* None */0
+                                          ],
+                                          /* :: */[
+                                            /* tuple */[
+                                              risley,
+                                              rpcc,
+                                              6,
+                                              /* White */6,
+                                              /* None */0
+                                            ],
+                                            /* :: */[
+                                              /* tuple */[
+                                                mcgraw,
+                                                wsh,
+                                                4,
+                                                /* Green */1,
+                                                /* None */0
+                                              ],
+                                              /* :: */[
+                                                /* tuple */[
+                                                  mcgraw,
+                                                  klarman,
+                                                  5,
+                                                  /* Red */0,
+                                                  /* None */0
+                                                ],
+                                                /* :: */[
+                                                  /* tuple */[
+                                                    mcgraw,
+                                                    psb,
+                                                    6,
+                                                    /* Orange */5,
+                                                    /* None */0
+                                                  ],
+                                                  /* :: */[
+                                                    /* tuple */[
+                                                      mcgraw,
+                                                      rpcc,
+                                                      4,
+                                                      /* Blue */2,
+                                                      /* None */0
+                                                    ],
+                                                    /* :: */[
+                                                      /* tuple */[
+                                                        wsh,
+                                                        /* tuple */[
+                                                          "Cornell Store",
+                                                          0,
+                                                          0
+                                                        ],
+                                                        4,
+                                                        /* Pink */4,
+                                                        /* None */0
+                                                      ],
+                                                      /* :: */[
+                                                        /* tuple */[
+                                                          wsh,
+                                                          uris,
+                                                          4,
+                                                          /* Black */7,
+                                                          /* None */0
+                                                        ],
+                                                        /* :: */[
+                                                          /* tuple */[
+                                                            wsh,
+                                                            uris,
+                                                            4,
+                                                            /* Orange */5,
+                                                            /* None */0
+                                                          ],
+                                                          /* :: */[
+                                                            /* tuple */[
+                                                              wsh,
+                                                              statler,
+                                                              4,
+                                                              /* Red */0,
+                                                              /* None */0
+                                                            ],
+                                                            /* :: */[
+                                                              /* tuple */[
+                                                                wsh,
+                                                                olin,
+                                                                2,
+                                                                /* Grey */9,
+                                                                /* None */0
+                                                              ],
+                                                              /* :: */[
+                                                                /* tuple */[
+                                                                  wsh,
+                                                                  ctb,
+                                                                  5,
+                                                                  /* White */6,
+                                                                  /* None */0
+                                                                ],
+                                                                /* :: */[
+                                                                  /* tuple */[
+                                                                    ctb,
+                                                                    olin,
+                                                                    3,
+                                                                    /* Grey */9,
+                                                                    /* None */0
+                                                                  ],
+                                                                  /* :: */[
+                                                                    /* tuple */[
+                                                                      ctb,
+                                                                      carpenter,
+                                                                      3,
+                                                                      /* Grey */9,
+                                                                      /* None */0
+                                                                    ],
+                                                                    /* :: */[
+                                                                      /* tuple */[
+                                                                        olin,
+                                                                        carpenter,
+                                                                        2,
+                                                                        /* Grey */9,
+                                                                        /* None */0
+                                                                      ],
+                                                                      /* :: */[
+                                                                        /* tuple */[
+                                                                          olin,
+                                                                          statler,
+                                                                          3,
+                                                                          /* Blue */2,
+                                                                          /* None */0
+                                                                        ],
+                                                                        /* :: */[
+                                                                          /* tuple */[
+                                                                            carpenter,
+                                                                            statler,
+                                                                            5,
+                                                                            /* Yellow */3,
+                                                                            /* None */0
+                                                                          ],
+                                                                          /* :: */[
+                                                                            /* tuple */[
+                                                                              carpenter,
+                                                                              rhodes,
+                                                                              4,
+                                                                              /* Red */0,
+                                                                              /* None */0
+                                                                            ],
+                                                                            /* :: */[
+                                                                              /* tuple */[
+                                                                                carpenter,
+                                                                                duffield,
+                                                                                6,
+                                                                                /* Green */1,
+                                                                                /* None */0
+                                                                              ],
+                                                                              /* :: */[
+                                                                                /* tuple */[
+                                                                                  rpcc,
+                                                                                  psb,
+                                                                                  4,
+                                                                                  /* Black */7,
+                                                                                  /* None */0
+                                                                                ],
+                                                                                /* :: */[
+                                                                                  /* tuple */[
+                                                                                    rpcc,
+                                                                                    helen_newman,
+                                                                                    6,
+                                                                                    /* Grey */9,
+                                                                                    /* None */0
+                                                                                  ],
+                                                                                  /* :: */[
+                                                                                    /* tuple */[
+                                                                                      psb,
+                                                                                      klarman,
+                                                                                      2,
+                                                                                      /* Grey */9,
+                                                                                      /* None */0
+                                                                                    ],
+                                                                                    /* :: */[
+                                                                                      /* tuple */[
+                                                                                        psb,
+                                                                                        klarman,
+                                                                                        2,
+                                                                                        /* Grey */9,
+                                                                                        /* None */0
+                                                                                      ],
+                                                                                      /* :: */[
+                                                                                        /* tuple */[
+                                                                                          psb,
+                                                                                          kennedy,
+                                                                                          3,
+                                                                                          /* Red */0,
+                                                                                          /* None */0
+                                                                                        ],
+                                                                                        /* :: */[
+                                                                                          /* tuple */[
+                                                                                            psb,
+                                                                                            warren,
+                                                                                            6,
+                                                                                            /* Pink */4,
+                                                                                            /* None */0
+                                                                                          ],
+                                                                                          /* :: */[
+                                                                                            /* tuple */[
+                                                                                              psb,
+                                                                                              helen_newman,
+                                                                                              3,
+                                                                                              /* Grey */9,
+                                                                                              /* None */0
+                                                                                            ],
+                                                                                            /* :: */[
+                                                                                              /* tuple */[
+                                                                                                klarman,
+                                                                                                uris,
+                                                                                                1,
+                                                                                                /* Grey */9,
+                                                                                                /* None */0
+                                                                                              ],
+                                                                                              /* :: */[
+                                                                                                /* tuple */[
+                                                                                                  klarman,
+                                                                                                  uris,
+                                                                                                  1,
+                                                                                                  /* Grey */9,
+                                                                                                  /* None */0
+                                                                                                ],
+                                                                                                /* :: */[
+                                                                                                  /* tuple */[
+                                                                                                    klarman,
+                                                                                                    kennedy,
+                                                                                                    4,
+                                                                                                    /* Blue */2,
+                                                                                                    /* None */0
+                                                                                                  ],
+                                                                                                  /* :: */[
+                                                                                                    /* tuple */[
+                                                                                                      uris,
+                                                                                                      statler,
+                                                                                                      2,
+                                                                                                      /* Grey */9,
+                                                                                                      /* None */0
+                                                                                                    ],
+                                                                                                    /* :: */[
+                                                                                                      /* tuple */[
+                                                                                                        uris,
+                                                                                                        statler,
+                                                                                                        2,
+                                                                                                        /* Grey */9,
+                                                                                                        /* None */0
+                                                                                                      ],
+                                                                                                      /* :: */[
+                                                                                                        /* tuple */[
+                                                                                                          uris,
+                                                                                                          trillium,
+                                                                                                          2,
+                                                                                                          /* Blue */2,
+                                                                                                          /* None */0
+                                                                                                        ],
+                                                                                                        /* :: */[
+                                                                                                          /* tuple */[
+                                                                                                            uris,
+                                                                                                            trillium,
+                                                                                                            2,
+                                                                                                            /* Pink */4,
+                                                                                                            /* None */0
+                                                                                                          ],
+                                                                                                          /* :: */[
+                                                                                                            /* tuple */[
+                                                                                                              statler,
+                                                                                                              rhodes,
+                                                                                                              2,
+                                                                                                              /* Grey */9,
+                                                                                                              /* None */0
+                                                                                                            ],
+                                                                                                            /* :: */[
+                                                                                                              /* tuple */[
+                                                                                                                statler,
+                                                                                                                rhodes,
+                                                                                                                2,
+                                                                                                                /* Grey */9,
+                                                                                                                /* None */0
+                                                                                                              ],
+                                                                                                              /* :: */[
+                                                                                                                /* tuple */[
+                                                                                                                  statler,
+                                                                                                                  gates,
+                                                                                                                  2,
+                                                                                                                  /* Grey */9,
+                                                                                                                  /* None */0
+                                                                                                                ],
+                                                                                                                /* :: */[
+                                                                                                                  /* tuple */[
+                                                                                                                    rhodes,
+                                                                                                                    duffield,
+                                                                                                                    1,
+                                                                                                                    /* Grey */9,
+                                                                                                                    /* None */0
+                                                                                                                  ],
+                                                                                                                  /* :: */[
+                                                                                                                    /* tuple */[
+                                                                                                                      rhodes,
+                                                                                                                      duffield,
+                                                                                                                      1,
+                                                                                                                      /* Grey */9,
+                                                                                                                      /* None */0
+                                                                                                                    ],
+                                                                                                                    /* :: */[
+                                                                                                                      /* tuple */[
+                                                                                                                        rhodes,
+                                                                                                                        gates,
+                                                                                                                        2,
+                                                                                                                        /* Grey */9,
+                                                                                                                        /* None */0
+                                                                                                                      ],
+                                                                                                                      /* :: */[
+                                                                                                                        /* tuple */[
+                                                                                                                          duffield,
+                                                                                                                          schoellkopf,
+                                                                                                                          2,
+                                                                                                                          /* Grey */9,
+                                                                                                                          /* None */0
+                                                                                                                        ],
+                                                                                                                        /* :: */[
+                                                                                                                          /* tuple */[
+                                                                                                                            helen_newman,
+                                                                                                                            appel,
+                                                                                                                            5,
+                                                                                                                            /* Black */7,
+                                                                                                                            /* None */0
+                                                                                                                          ],
+                                                                                                                          /* :: */[
+                                                                                                                            /* tuple */[
+                                                                                                                              helen_newman,
+                                                                                                                              warren,
+                                                                                                                              2,
+                                                                                                                              /* Grey */9,
+                                                                                                                              /* None */0
+                                                                                                                            ],
+                                                                                                                            /* :: */[
+                                                                                                                              /* tuple */[
+                                                                                                                                warren,
+                                                                                                                                kennedy,
+                                                                                                                                4,
+                                                                                                                                /* White */6,
+                                                                                                                                /* None */0
+                                                                                                                              ],
+                                                                                                                              /* :: */[
+                                                                                                                                /* tuple */[
+                                                                                                                                  warren,
+                                                                                                                                  mann,
+                                                                                                                                  2,
+                                                                                                                                  /* Grey */9,
+                                                                                                                                  /* None */0
+                                                                                                                                ],
+                                                                                                                                /* :: */[
+                                                                                                                                  /* tuple */[
+                                                                                                                                    warren,
+                                                                                                                                    appel,
+                                                                                                                                    3,
+                                                                                                                                    /* Grey */9,
+                                                                                                                                    /* None */0
+                                                                                                                                  ],
+                                                                                                                                  /* :: */[
+                                                                                                                                    /* tuple */[
+                                                                                                                                      kennedy,
+                                                                                                                                      trillium,
+                                                                                                                                      2,
+                                                                                                                                      /* Green */1,
+                                                                                                                                      /* None */0
+                                                                                                                                    ],
+                                                                                                                                    /* :: */[
+                                                                                                                                      /* tuple */[
+                                                                                                                                        kennedy,
+                                                                                                                                        trillium,
+                                                                                                                                        2,
+                                                                                                                                        /* White */6,
+                                                                                                                                        /* None */0
+                                                                                                                                      ],
+                                                                                                                                      /* :: */[
+                                                                                                                                        /* tuple */[
+                                                                                                                                          kennedy,
+                                                                                                                                          mann,
+                                                                                                                                          3,
+                                                                                                                                          /* Orange */5,
+                                                                                                                                          /* None */0
+                                                                                                                                        ],
+                                                                                                                                        /* :: */[
+                                                                                                                                          /* tuple */[
+                                                                                                                                            kennedy,
+                                                                                                                                            mann,
+                                                                                                                                            3,
+                                                                                                                                            /* Black */7,
+                                                                                                                                            /* None */0
+                                                                                                                                          ],
+                                                                                                                                          /* :: */[
+                                                                                                                                            /* tuple */[
+                                                                                                                                              trillium,
+                                                                                                                                              gates,
+                                                                                                                                              2,
+                                                                                                                                              /* Grey */9,
+                                                                                                                                              /* None */0
+                                                                                                                                            ],
+                                                                                                                                            /* :: */[
+                                                                                                                                              /* tuple */[
+                                                                                                                                                trillium,
+                                                                                                                                                ives,
+                                                                                                                                                2,
+                                                                                                                                                /* Grey */9,
+                                                                                                                                                /* None */0
+                                                                                                                                              ],
+                                                                                                                                              /* :: */[
+                                                                                                                                                /* tuple */[
+                                                                                                                                                  trillium,
+                                                                                                                                                  mann,
+                                                                                                                                                  5,
+                                                                                                                                                  /* Green */1,
+                                                                                                                                                  /* None */0
+                                                                                                                                                ],
+                                                                                                                                                /* :: */[
+                                                                                                                                                  /* tuple */[
+                                                                                                                                                    gates,
+                                                                                                                                                    schoellkopf,
+                                                                                                                                                    3,
+                                                                                                                                                    /* Green */1,
+                                                                                                                                                    /* None */0
+                                                                                                                                                  ],
+                                                                                                                                                  /* :: */[
+                                                                                                                                                    /* tuple */[
+                                                                                                                                                      gates,
+                                                                                                                                                      ives,
+                                                                                                                                                      3,
+                                                                                                                                                      /* White */6,
+                                                                                                                                                      /* None */0
+                                                                                                                                                    ],
+                                                                                                                                                    /* :: */[
+                                                                                                                                                      /* tuple */[
+                                                                                                                                                        schoellkopf,
+                                                                                                                                                        teagle,
+                                                                                                                                                        4,
+                                                                                                                                                        /* Yellow */3,
+                                                                                                                                                        /* None */0
+                                                                                                                                                      ],
+                                                                                                                                                      /* :: */[
+                                                                                                                                                        /* tuple */[
+                                                                                                                                                          schoellkopf,
+                                                                                                                                                          teagle,
+                                                                                                                                                          4,
+                                                                                                                                                          /* Orange */5,
+                                                                                                                                                          /* None */0
+                                                                                                                                                        ],
+                                                                                                                                                        /* :: */[
+                                                                                                                                                          /* tuple */[
+                                                                                                                                                            schoellkopf,
+                                                                                                                                                            dairy_bar,
+                                                                                                                                                            6,
+                                                                                                                                                            /* Red */0,
+                                                                                                                                                            /* None */0
+                                                                                                                                                          ],
+                                                                                                                                                          /* :: */[
+                                                                                                                                                            /* tuple */[
+                                                                                                                                                              appel,
+                                                                                                                                                              mvr,
+                                                                                                                                                              3,
+                                                                                                                                                              /* Blue */2,
+                                                                                                                                                              /* None */0
+                                                                                                                                                            ],
+                                                                                                                                                            /* :: */[
+                                                                                                                                                              /* tuple */[
+                                                                                                                                                                appel,
+                                                                                                                                                                bailey,
+                                                                                                                                                                2,
+                                                                                                                                                                /* Grey */9,
+                                                                                                                                                                /* None */0
+                                                                                                                                                              ],
+                                                                                                                                                              /* :: */[
+                                                                                                                                                                /* tuple */[
+                                                                                                                                                                  appel,
+                                                                                                                                                                  bailey,
+                                                                                                                                                                  2,
+                                                                                                                                                                  /* Grey */9,
+                                                                                                                                                                  /* None */0
+                                                                                                                                                                ],
+                                                                                                                                                                /* :: */[
+                                                                                                                                                                  /* tuple */[
+                                                                                                                                                                    bailey,
+                                                                                                                                                                    mvr,
+                                                                                                                                                                    2,
+                                                                                                                                                                    /* Yellow */3,
+                                                                                                                                                                    /* None */0
+                                                                                                                                                                  ],
+                                                                                                                                                                  /* :: */[
+                                                                                                                                                                    /* tuple */[
+                                                                                                                                                                      bailey,
+                                                                                                                                                                      mvr,
+                                                                                                                                                                      2,
+                                                                                                                                                                      /* Red */0,
+                                                                                                                                                                      /* None */0
+                                                                                                                                                                    ],
+                                                                                                                                                                    /* :: */[
+                                                                                                                                                                      /* tuple */[
+                                                                                                                                                                        mann,
+                                                                                                                                                                        ives,
+                                                                                                                                                                        4,
+                                                                                                                                                                        /* Yellow */3,
+                                                                                                                                                                        /* None */0
+                                                                                                                                                                      ],
+                                                                                                                                                                      /* :: */[
+                                                                                                                                                                        /* tuple */[
+                                                                                                                                                                          mann,
+                                                                                                                                                                          barton,
+                                                                                                                                                                          2,
+                                                                                                                                                                          /* Grey */9,
+                                                                                                                                                                          /* None */0
+                                                                                                                                                                        ],
+                                                                                                                                                                        /* :: */[
+                                                                                                                                                                          /* tuple */[
+                                                                                                                                                                            mann,
+                                                                                                                                                                            barn,
+                                                                                                                                                                            2,
+                                                                                                                                                                            /* Grey */9,
+                                                                                                                                                                            /* None */0
+                                                                                                                                                                          ],
+                                                                                                                                                                          /* :: */[
+                                                                                                                                                                            /* tuple */[
+                                                                                                                                                                              mann,
+                                                                                                                                                                              mvr,
+                                                                                                                                                                              2,
+                                                                                                                                                                              /* White */6,
+                                                                                                                                                                              /* None */0
+                                                                                                                                                                            ],
+                                                                                                                                                                            /* :: */[
+                                                                                                                                                                              /* tuple */[
+                                                                                                                                                                                mann,
+                                                                                                                                                                                mvr,
+                                                                                                                                                                                2,
+                                                                                                                                                                                /* Green */1,
+                                                                                                                                                                                /* None */0
+                                                                                                                                                                              ],
+                                                                                                                                                                              /* :: */[
+                                                                                                                                                                                /* tuple */[
+                                                                                                                                                                                  ives,
+                                                                                                                                                                                  teagle,
+                                                                                                                                                                                  1,
+                                                                                                                                                                                  /* Grey */9,
+                                                                                                                                                                                  /* None */0
+                                                                                                                                                                                ],
+                                                                                                                                                                                /* :: */[
+                                                                                                                                                                                  /* tuple */[
+                                                                                                                                                                                    ives,
+                                                                                                                                                                                    barton,
+                                                                                                                                                                                    3,
+                                                                                                                                                                                    /* Black */7,
+                                                                                                                                                                                    /* None */0
+                                                                                                                                                                                  ],
+                                                                                                                                                                                  /* :: */[
+                                                                                                                                                                                    /* tuple */[
+                                                                                                                                                                                      teagle,
+                                                                                                                                                                                      dairy_bar,
+                                                                                                                                                                                      5,
+                                                                                                                                                                                      /* Blue */2,
+                                                                                                                                                                                      /* None */0
+                                                                                                                                                                                    ],
+                                                                                                                                                                                    /* :: */[
+                                                                                                                                                                                      /* tuple */[
+                                                                                                                                                                                        teagle,
+                                                                                                                                                                                        bartels,
+                                                                                                                                                                                        2,
+                                                                                                                                                                                        /* Grey */9,
+                                                                                                                                                                                        /* None */0
+                                                                                                                                                                                      ],
+                                                                                                                                                                                      /* :: */[
+                                                                                                                                                                                        /* tuple */[
+                                                                                                                                                                                          teagle,
+                                                                                                                                                                                          barton,
+                                                                                                                                                                                          2,
+                                                                                                                                                                                          /* Grey */9,
+                                                                                                                                                                                          /* None */0
+                                                                                                                                                                                        ],
+                                                                                                                                                                                        /* :: */[
+                                                                                                                                                                                          /* tuple */[
+                                                                                                                                                                                            teagle,
+                                                                                                                                                                                            barton,
+                                                                                                                                                                                            2,
+                                                                                                                                                                                            /* Grey */9,
+                                                                                                                                                                                            /* None */0
+                                                                                                                                                                                          ],
+                                                                                                                                                                                          /* :: */[
+                                                                                                                                                                                            /* tuple */[
+                                                                                                                                                                                              mvr,
+                                                                                                                                                                                              barn,
+                                                                                                                                                                                              2,
+                                                                                                                                                                                              /* Black */7,
+                                                                                                                                                                                              /* None */0
+                                                                                                                                                                                            ],
+                                                                                                                                                                                            /* :: */[
+                                                                                                                                                                                              /* tuple */[
+                                                                                                                                                                                                mvr,
+                                                                                                                                                                                                barn,
+                                                                                                                                                                                                2,
+                                                                                                                                                                                                /* Orange */5,
+                                                                                                                                                                                                /* None */0
+                                                                                                                                                                                              ],
+                                                                                                                                                                                              /* :: */[
+                                                                                                                                                                                                /* tuple */[
+                                                                                                                                                                                                  barn,
+                                                                                                                                                                                                  barton,
+                                                                                                                                                                                                  2,
+                                                                                                                                                                                                  /* Grey */9,
+                                                                                                                                                                                                  /* None */0
+                                                                                                                                                                                                ],
+                                                                                                                                                                                                /* :: */[
+                                                                                                                                                                                                  /* tuple */[
+                                                                                                                                                                                                    barn,
+                                                                                                                                                                                                    barton,
+                                                                                                                                                                                                    2,
+                                                                                                                                                                                                    /* Grey */9,
+                                                                                                                                                                                                    /* None */0
+                                                                                                                                                                                                  ],
+                                                                                                                                                                                                  /* :: */[
+                                                                                                                                                                                                    /* tuple */[
+                                                                                                                                                                                                      barton,
+                                                                                                                                                                                                      bartels,
+                                                                                                                                                                                                      2,
+                                                                                                                                                                                                      /* Grey */9,
+                                                                                                                                                                                                      /* None */0
+                                                                                                                                                                                                    ],
+                                                                                                                                                                                                    /* :: */[
+                                                                                                                                                                                                      /* tuple */[
+                                                                                                                                                                                                        bartels,
+                                                                                                                                                                                                        dairy_bar,
+                                                                                                                                                                                                        4,
+                                                                                                                                                                                                        /* Pink */4,
+                                                                                                                                                                                                        /* None */0
+                                                                                                                                                                                                      ],
+                                                                                                                                                                                                      /* [] */0
+                                                                                                                                                                                                    ]
+                                                                                                                                                                                                  ]
+                                                                                                                                                                                                ]
+                                                                                                                                                                                              ]
+                                                                                                                                                                                            ]
+                                                                                                                                                                                          ]
+                                                                                                                                                                                        ]
+                                                                                                                                                                                      ]
+                                                                                                                                                                                    ]
+                                                                                                                                                                                  ]
+                                                                                                                                                                                ]
+                                                                                                                                                                              ]
+                                                                                                                                                                            ]
+                                                                                                                                                                          ]
+                                                                                                                                                                        ]
+                                                                                                                                                                      ]
+                                                                                                                                                                    ]
+                                                                                                                                                                  ]
+                                                                                                                                                                ]
+                                                                                                                                                              ]
+                                                                                                                                                            ]
+                                                                                                                                                          ]
+                                                                                                                                                        ]
+                                                                                                                                                      ]
+                                                                                                                                                    ]
+                                                                                                                                                  ]
+                                                                                                                                                ]
+                                                                                                                                              ]
+                                                                                                                                            ]
+                                                                                                                                          ]
+                                                                                                                                        ]
+                                                                                                                                      ]
+                                                                                                                                    ]
+                                                                                                                                  ]
+                                                                                                                                ]
+                                                                                                                              ]
+                                                                                                                            ]
+                                                                                                                          ]
+                                                                                                                        ]
+                                                                                                                      ]
+                                                                                                                    ]
+                                                                                                                  ]
+                                                                                                                ]
+                                                                                                              ]
+                                                                                                            ]
+                                                                                                          ]
+                                                                                                        ]
+                                                                                                      ]
+                                                                                                    ]
+                                                                                                  ]
+                                                                                                ]
+                                                                                              ]
+                                                                                            ]
+                                                                                          ]
+                                                                                        ]
+                                                                                      ]
+                                                                                    ]
+                                                                                  ]
+                                                                                ]
+                                                                              ]
+                                                                            ]
+                                                                          ]
+                                                                        ]
+                                                                      ]
+                                                                    ]
+                                                                  ]
+                                                                ]
+                                                              ]
+                                                            ]
+                                                          ]
+                                                        ]
+                                                      ]
+                                                    ]
+                                                  ]
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+];
+
+var routes = /* :: */[
+  routes_000,
+  routes_001
+];
+
 exports.route_score = route_score;
 exports.is_taken = is_taken;
 exports.get_length = get_length;
 exports.get_color = get_color;
+exports.routes = routes;
 /* No side effect */
