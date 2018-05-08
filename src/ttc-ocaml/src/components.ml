@@ -17,9 +17,6 @@ type player_color =
 | PGreen
 | PBlack
 
-
-type location = string * float * float
-
 type destination_ticket = {
   loc1 : string;
   loc2 : string;

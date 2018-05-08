@@ -18,11 +18,6 @@ type player_color =
 | PGreen
 | PBlack
 
-(* [location] represents a location on the board. It consists of the name
- * of the location, its coordinates for the GUI, and a list of locations that
- * are adjacent. *)
-type location = string * float * float
-
 (* [destination_ticket] represents two location that the player should try to
  * get a route through. If they take a route through the two locations, they
  * earn the points at the end of the game. If not, they lose the points. *)
