@@ -3,6 +3,10 @@ import {withFauxDOM} from 'react-faux-dom';
 import {connect} from 'react-redux';
 import * as d3 from 'd3';
 
+import config from '../config.json';
+
+const SCALE = config.scale;
+
 class Map extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +19,14 @@ class Map extends Component {
             .attr("height", this.props.height);
 
         this.svg = svg;
+
+        const locations = d3.select(this.faux).select('#map').selectAll('.location')
+            .data(this.props.locations)
+            .enter()
+            .append('circle')
+                .attr('cx', d => d[1] / SCALE)
+                .attr('cy', d => d[2] / SCALE)
+                .attr('r', 5);
     }
 
     render() {
