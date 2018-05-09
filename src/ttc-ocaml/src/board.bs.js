@@ -44,218 +44,336 @@ function is_taken(r) {
 
 var becker = /* tuple */[
   "House Becker",
-  100,
-  100
+  198,
+  994
 ];
 
 var bethe = /* tuple */[
   "House Bethe",
-  200,
-  3.14
+  284,
+  1121
 ];
 
 var noyes = /* tuple */[
   "Noyes Community Center",
-  50,
-  75
+  338,
+  1189
 ];
 
 var risley = /* tuple */[
   "Risley",
-  225,
-  90
+  718,
+  579
 ];
 
 var rpcc = /* tuple */[
   "RPCC",
-  30,
-  100
+  1015,
+  322
 ];
 
 var helen_newman = /* tuple */[
   "Helen Newman",
-  0,
-  0
+  1023,
+  593
 ];
 
 var appel = /* tuple */[
   "Appel Commons",
-  0,
-  0
+  1107,
+  539
 ];
 
 var mcgraw = /* tuple */[
   "McGraw Tower",
-  0,
-  0
+  501,
+  1097
 ];
 
 var wsh = /* tuple */[
   "Willard Straight Hall",
-  0,
-  0
+  466,
+  1178
 ];
 
 var psb = /* tuple */[
   "Physical Sciences Building",
-  0,
-  0
+  726,
+  875
 ];
 
 var gannett = /* tuple */[
   "Cornell Health",
-  0,
-  0
+  468,
+  1254
+];
+
+var store = /* tuple */[
+  "Cornell Store",
+  563,
+  1159
 ];
 
 var schwartz = /* tuple */[
   "Schwartz Center",
-  0,
-  0
+  460,
+  1543
 ];
 
 var eddy = /* tuple */[
   "Eddy Gate",
-  0,
-  0
+  341,
+  1549
 ];
 
 var casc = /* tuple */[
   "Cascadilla Gorge",
-  0,
-  0
+  477,
+  1489
 ];
 
 var ctb = /* tuple */[
   "Collegetown Bagels",
-  0,
-  0
+  501,
+  1554
 ];
 
 var olin = /* tuple */[
   "Olin Hall",
-  0,
-  0
+  539,
+  1278
 ];
 
 var carpenter = /* tuple */[
   "Carpenter Hall",
-  0,
-  0
+  558,
+  1332
 ];
 
 var rhodes = /* tuple */[
   "Rhodes Hall",
-  0,
-  0
+  764,
+  1467
 ];
 
 var duffield = /* tuple */[
   "Duffield Hall",
-  0,
-  0
+  674,
+  1338
 ];
 
 var statler = /* tuple */[
   "Statler Hotel",
-  0,
-  0
+  699,
+  1191
 ];
 
 var uris = /* tuple */[
   "Uris Hall",
-  0,
-  0
+  699,
+  1116
 ];
 
 var gates = /* tuple */[
   "Gates Hall",
-  0,
-  0
+  764,
+  1335
 ];
 
 var klarman = /* tuple */[
   "Klarman Hall",
-  0,
-  0
+  647,
+  948
 ];
 
 var trillium = /* tuple */[
   "Trillium",
-  0,
-  0
+  899,
+  1061
 ];
 
 var kennedy = /* tuple */[
   "Kennedy Hall",
-  0,
-  0
+  893,
+  1021
 ];
 
 var warren = /* tuple */[
   "Warren Hall",
-  0,
-  0
+  1048,
+  937
 ];
 
 var mann = /* tuple */[
   "Mann Library",
-  0,
-  0
+  1086,
+  972
 ];
 
 var ives = /* tuple */[
   "Ives Hall",
-  0,
-  0
+  766,
+  1097
 ];
 
 var barton = /* tuple */[
   "Barton Hall",
-  0,
-  0
+  801,
+  1235
 ];
 
 var teagle = /* tuple */[
   "Teagle Hall",
-  0,
-  0
+  910,
+  1248
 ];
 
 var schoellkopf = /* tuple */[
   "Schoellkopf Field",
-  0,
-  0
+  940,
+  1400
 ];
 
 var dairy_bar = /* tuple */[
   "Dairy Bar",
-  0,
-  0
+  1486,
+  1078
 ];
 
 var mvr = /* tuple */[
   "Martha Van Rensselaer Hall",
-  0,
-  0
+  934,
+  875
 ];
 
 var barn = /* tuple */[
   "Big Red Barn",
-  0,
-  0
+  774,
+  1015
 ];
 
 var bailey = /* tuple */[
   "Bailey Hall",
-  0,
-  0
+  839,
+  929
 ];
 
 var bartels = /* tuple */[
   "Bartels Hall",
-  0,
-  0
+  1094,
+  1256
+];
+
+var locations_001 = /* :: */[
+  bethe,
+  /* :: */[
+    noyes,
+    /* :: */[
+      risley,
+      /* :: */[
+        rpcc,
+        /* :: */[
+          helen_newman,
+          /* :: */[
+            appel,
+            /* :: */[
+              mcgraw,
+              /* :: */[
+                wsh,
+                /* :: */[
+                  psb,
+                  /* :: */[
+                    gannett,
+                    /* :: */[
+                      store,
+                      /* :: */[
+                        schwartz,
+                        /* :: */[
+                          eddy,
+                          /* :: */[
+                            casc,
+                            /* :: */[
+                              olin,
+                              /* :: */[
+                                carpenter,
+                                /* :: */[
+                                  rhodes,
+                                  /* :: */[
+                                    duffield,
+                                    /* :: */[
+                                      statler,
+                                      /* :: */[
+                                        uris,
+                                        /* :: */[
+                                          gates,
+                                          /* :: */[
+                                            klarman,
+                                            /* :: */[
+                                              trillium,
+                                              /* :: */[
+                                                kennedy,
+                                                /* :: */[
+                                                  warren,
+                                                  /* :: */[
+                                                    mann,
+                                                    /* :: */[
+                                                      ives,
+                                                      /* :: */[
+                                                        barton,
+                                                        /* :: */[
+                                                          teagle,
+                                                          /* :: */[
+                                                            schoellkopf,
+                                                            /* :: */[
+                                                              dairy_bar,
+                                                              /* :: */[
+                                                                mvr,
+                                                                /* :: */[
+                                                                  barn,
+                                                                  /* :: */[
+                                                                    bailey,
+                                                                    /* :: */[
+                                                                      bartels,
+                                                                      /* [] */0
+                                                                    ]
+                                                                  ]
+                                                                ]
+                                                              ]
+                                                            ]
+                                                          ]
+                                                        ]
+                                                      ]
+                                                    ]
+                                                  ]
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+];
+
+var locations = /* :: */[
+  becker,
+  locations_001
 ];
 
 var routes_000 = /* tuple */[
@@ -477,11 +595,7 @@ var routes_001 = /* :: */[
                                                     /* :: */[
                                                       /* tuple */[
                                                         wsh,
-                                                        /* tuple */[
-                                                          "Cornell Store",
-                                                          0,
-                                                          0
-                                                        ],
+                                                        store,
                                                         4,
                                                         /* Pink */4,
                                                         /* None */0
@@ -1173,4 +1287,5 @@ exports.is_taken = is_taken;
 exports.get_length = get_length;
 exports.get_color = get_color;
 exports.routes = routes;
+exports.locations = locations;
 /* No side effect */
