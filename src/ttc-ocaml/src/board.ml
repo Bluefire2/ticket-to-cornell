@@ -62,6 +62,12 @@ let barn = ("Big Red Barn", 0.,0.)
 let bailey = ("Bailey Hall", 0.,0.)
 let bartels = ("Bartels Hall",0.,0.)
 
+let locations = [ becker; bethe; noyes; risley; rpcc; helen_newman; appel;
+                  mcgraw; wsh; psb; gannett; store; schwartz; eddy; casc;
+                  olin; carpenter; rhodes; duffield; statler; uris; gates;
+                  klarman; trillium; kennedy; warren; mann; ives; barton;
+                  teagle; schoellkopf; dairy_bar; mvr; barn; bailey; bartels]
+
 
 let routes =
 [

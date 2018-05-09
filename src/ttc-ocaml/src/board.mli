@@ -22,3 +22,5 @@ val get_length : route -> int
 val get_color : route -> train_color
 
 val routes : route list
+
+val locations: location list
