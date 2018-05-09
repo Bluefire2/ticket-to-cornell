@@ -37,12 +37,12 @@ let print_cards st =
 
 let print_routes st =
   let r = State.routes st in
-  let rec loop = function
-    | [] -> ""
+  let rec loop acc = function
+    | [] -> acc
     | (l1, l2, _, _, x)::t -> match x with
-      | None -> loop t
-      | Some p -> ("Route from " ^ (name l1) ^ " to " ^ (name l2) ^ " belongs to " ^ (stringify_clr p) ^ "\n") ^ (loop t) in
-  loop r
+      | None -> loop acc t
+      | Some p -> loop (("Route from " ^ (name l1) ^ " to " ^ (name l2) ^ " belongs to " ^ (stringify_clr p) ^ "\n") ^ acc) t in
+  loop "" r
 
 let play num =
   let rec game_loop st i =
@@ -62,8 +62,8 @@ let play num =
   | "draw", "pile" -> ANSITerminal.(print_string [red] ("pile\n"));
   | "draw", "facing up" -> ANSITerminal.(print_string [red] ("facing up\n"));
   | "take", "" -> ANSITerminal.(print_string [red] ("take\n"));
-  | "select", x ->
-    (let clr = ( match x with
+  | "select", x -> (
+    (* (let clr = ( match x with
          | "red" -> Red
         | "green" -> Green
         | "blue" -> Blue
@@ -72,12 +72,12 @@ let play num =
         | "orange" -> Orange
         | "white" -> White
         | "black" -> Black
-        | _ -> Grey ) in
-     ANSITerminal.(print_string [red] ("select\n")))
-     (*let r = ("Bailey Hall", "Dairy Bar", 1, clr, None) in
+        | _ -> Grey ) in *)
+     ANSITerminal.(print_string [red] ("select\n"));
+     let r = (("Olin Hall", 539.,1278.),("Statler Hotel", 699.,1191.),3,Blue,None) in
      let st' = State.select_route st r in
      ANSITerminal.(print_string [red] ((State.message st') ^ "\n"));
-     ANSITerminal.(print_string [blue] (print_routes st')))*)
+     ANSITerminal.(print_string [yellow] ((print_routes st') ^ "\n")))
   | _ -> ()
 
 let main () =
