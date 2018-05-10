@@ -74,3 +74,9 @@ let place_train p r =
     routes = r::p.routes;
     trains_remaining = p.trains_remaining - Board.get_length r
   }
+
+let rec path = function
+  | [] -> []
+  | (x,y,_,_,_)::t -> ( match (x,y) with
+                        | ( (x',_,_), (y',_,_) ) -> (x',y')::path t )
+
