@@ -39,11 +39,12 @@ class Map extends Component {
     }
 }
 
-const mapStateToProps = ({dimensions, locations}) => {
+const mapStateToProps = ({dimensions, locations, gameState}) => {
     return {
         width: dimensions.width,
         height: dimensions.height,
-        locations: locations
+        locations: locations,
+        game: gameState
     };
 };
 
