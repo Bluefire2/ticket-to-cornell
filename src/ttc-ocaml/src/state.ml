@@ -58,6 +58,19 @@ let update_players i new_p lst =
     else update_loop (i+1) new_i new_p (acc @ [h]) t in
   update_loop 0 i new_p [] lst
 
+let decided_routes st tickets =
+  if List.length tickets > 2 then
+    (  let p = current_player st in
+       let p' = update_destination_tickets p tickets in
+       let i = st.player_index in
+       { st with players = update_players i p' st.players;
+                 choose_destinations = [];
+                 taking_routes = false;
+                 error = "";
+                 turn_ended = true } )
+  else {st with error = "Must at least take 2 tickets";
+                turn_ended = false }
+
 let draw_card_facing_up st c =
   let (cards, deck,trash) = TrainDeck.draw_faceup (st.train_deck) c (st.facing_up_trains) (st.train_trash) in
   let p' = draw_train_card (current_player st) c in
@@ -79,6 +92,13 @@ let draw_card_pile st =
             train_trash = tr'';
             players = update_players i p'' st.players;
             turn_ended = true }
+
+(* grab 4 train cards, grabs 3 destination tickets and choose 2-3. *)
+let state_setup st =
+  let st' = draw_card_pile st in
+  let st'' = draw_card_pile st' in
+  failwith "Unimplemented"
+  (* { st'' with } *)
 
 let take_route st =
   let deck = st.destination_deck in
@@ -104,7 +124,7 @@ let decided_routes st tickets =
 let update_routes (routes: Board.route list) old_r new_r : Board.route list =
   let rec loop acc = function
     | [] -> acc
-    | h::t -> if h = old_r then acc @ (new_r::t) else loop (new_r::acc) t in
+    | h::t -> if h = old_r then acc @ (new_r::t) else loop (h::acc) t in
   loop [] routes
 
 let check_cards cards n clr =
