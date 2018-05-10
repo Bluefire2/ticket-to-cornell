@@ -1,4 +1,23 @@
 #map {
     background-image: url('./images/map.jpg');
     background-size: cover; /* scale image to fit */
+    border: 3px dashed darkgrey;
+}
+
+#map-container {
+    /*width: 90%;*/
+    height: auto;
+    padding: 5%;
+    margin: 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed brown;
+}
+
+#mapContainer {
+    /*margin: 0;*/
+
 }
