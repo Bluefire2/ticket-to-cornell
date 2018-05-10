@@ -28,6 +28,16 @@ class Map extends Component {
                 .attr('cy', d => d[2] / SCALE)
                 .attr('r', 5)
                 .attr('fill', 'red');
+
+        const routes = d3.select(this.faux).select('#map').selectAll('.route')
+            .data(this.props.game.routes)
+            .enter()
+            .append('line')
+                .style('stroke', 'black')
+                .attr('x1', d => d[0][1] / SCALE)
+                .attr('y1', d => d[0][2] / SCALE)
+                .attr('x2', d => d[1][1] / SCALE)
+                .attr('y2', d => d[1][2] / SCALE);
     }
 
     render() {
