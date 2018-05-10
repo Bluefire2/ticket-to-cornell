@@ -32,35 +32,46 @@ class Map extends Component {
         // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
         const RECTANGLE_TO_SPACING_RATIO = 4,
             RECTANGLE_HEIGHT = 10;
-        const createRectangleDatum = (x, y, width, height, color, taken) => {
+        const createRectangleDatum = (x, y, theta, width, height, color, taken) => {
             return {
                 x,
                 y,
+                theta, // needs to be passed in for orientation
                 width,
                 height,
                 color,
                 taken
             }
         };
-        const routeToRectangleArray = route => {
+        const routeToRectangleArray = (route, index) => {
             const n = route[2], // number of rectangles to draw (route length)
                 A = {x: route[0][1] / SCALE, y: route[0][2] / SCALE},
                 B = {x: route[1][1] / SCALE, y: route[1][2] / SCALE},
-                dx = A.x - B.x,
-                dy = A.y - B.y,
+                dx = B.x - A.x,
+                dy = B.y - A.y,
                 norm = Math.sqrt(dx ** 2 + dy ** 2),
-                direction = Math.atan2(dy, dx),
+                theta = Math.atan2(dy, dx),
                 spacingDistance = norm / (n * (RECTANGLE_TO_SPACING_RATIO + 1) + 1),
                 rectangleLength = spacingDistance * 4;
 
+            console.log(A, B, norm, theta);
+            console.log(dy, dx);
+
             return (function addRect(acc, i) {
                 if(i === n) return acc;
-                // TODO: rotate the x and y co-ordinates based on the direction of the gradient
+                // These are the raw X and Y values for the rectangle
                 const x = A.x + spacingDistance + i * (rectangleLength + spacingDistance),
-                    y = A.y; // no rotation
+                    y = A.y - RECTANGLE_HEIGHT / 2;
+
+                // Rotate (x, y) about (A.x, A.y) by theta
+                // We still need to orient the rectangle after this! All this does is change the X and Y co-ordinates of
+                // its top left corner.
+                const xRotated = A.x + (x - A.x) * Math.cos(theta) - (y - A.y) * Math.sin(theta),
+                    yRotated = A.y + (x - A.x) * Math.sin(theta) + (y - A.y) * Math.cos(theta);
 
                 // color and taken are not implemented yet
-                const datum = createRectangleDatum(x, y, rectangleLength, RECTANGLE_HEIGHT, null, false);
+                const datum = createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, null, false);
+                //const datum = createRectangleDatum(x, y, theta, rectangleLength, RECTANGLE_HEIGHT, null, false);
                 acc.push(datum);
                 return addRect(acc, i + 1);
             })([], 0);
@@ -91,6 +102,8 @@ class Map extends Component {
                 .style('stroke-width', 3)
                 .attr('x', d => d.x)
                 .attr('y', d => d.y)
+                // orient the rectangle, by rotating about its top left corner:
+                .attr('transform', d => `rotate(${d.theta * 180 / Math.PI}, ${d.x}, ${d.y})`)
                 .attr('width', d => d.width)
                 .attr('height', d => d.height);
     }
