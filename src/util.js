@@ -84,3 +84,33 @@ export const objToState = obj => {
     }
     return state;
 };
+
+// Convert BuckleScript colour indices to actual colours
+export const trainColorFromIndex = i => {
+    switch(i) {
+        case 0:
+            return 'red';
+        case 1:
+            return 'green';
+        case 2:
+            return 'blue';
+        case 3:
+            return 'yellow';
+        case 4:
+            return 'pink';
+        case 5:
+            return 'orange';
+        case 6:
+            return 'white';
+        case 7:
+            return 'black';
+        case 8:
+            // TODO: figure out a colour to use for Wild
+            return 'black'; // Wild
+        case 9:
+        default:
+            return 'grey';
+    }
+};
+
+// TODO: do the same for player colours

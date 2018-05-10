@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as d3 from 'd3';
 
 import config from '../config.json';
+import {trainColorFromIndex} from "../util";
 
 const SCALE = config.scale;
 
@@ -32,14 +33,14 @@ class Map extends Component {
         // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
         const RECTANGLE_TO_SPACING_RATIO = 4,
             RECTANGLE_HEIGHT = 10;
-        const createRectangleDatum = (x, y, theta, width, height, color, taken) => {
+        const createRectangleDatum = (x, y, theta, width, height, trainColor, taken) => {
             return {
                 x,
                 y,
                 theta, // needs to be passed in for orientation
                 width,
                 height,
-                color,
+                trainColor,
                 taken
             }
         };
@@ -54,8 +55,7 @@ class Map extends Component {
                 spacingDistance = norm / (n * (RECTANGLE_TO_SPACING_RATIO + 1) + 1),
                 rectangleLength = spacingDistance * 4;
 
-            console.log(A, B, norm, theta);
-            console.log(dy, dx);
+            const trainColor = trainColorFromIndex(route[3]);
 
             return (function addRect(acc, i) {
                 if(i === n) return acc;
@@ -70,8 +70,8 @@ class Map extends Component {
                     yRotated = A.y + (x - A.x) * Math.sin(theta) + (y - A.y) * Math.cos(theta);
 
                 // color and taken are not implemented yet
-                const datum = createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, null, false);
-                //const datum = createRectangleDatum(x, y, theta, rectangleLength, RECTANGLE_HEIGHT, null, false);
+                const datum =
+                    createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, trainColor, false);
                 acc.push(datum);
                 return addRect(acc, i + 1);
             })([], 0);
@@ -99,6 +99,7 @@ class Map extends Component {
             .enter()
             .append('rect')
                 .style('stroke', 'black') // black for now
+                .style('fill', d => d.trainColor)
                 .style('stroke-width', 3)
                 .attr('x', d => d.x)
                 .attr('y', d => d.y)
