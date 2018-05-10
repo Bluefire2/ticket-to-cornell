@@ -58,7 +58,7 @@ let update_players i new_p lst =
     else update_loop (i+1) new_i new_p (acc @ [h]) t in
   update_loop 0 i new_p [] lst
 
-let decided_routes st tickets =
+let decided_routes_setup st tickets =
   if List.length tickets > 2 then
     (  let p = current_player st in
        let p' = update_destination_tickets p tickets in
@@ -93,20 +93,20 @@ let draw_card_pile st =
             players = update_players i p'' st.players;
             turn_ended = true }
 
-(* grab 4 train cards, grabs 3 destination tickets and choose 2-3. *)
-let state_setup st =
-  let st' = draw_card_pile st in
-  let st'' = draw_card_pile st' in
-  failwith "Unimplemented"
-  (* { st'' with } *)
-
 let take_route st =
   let deck = st.destination_deck in
   let tr = st.destination_trash in
   let (tickets, deck') = DestinationDeck.draw_card deck tr in
   { st with destination_deck = deck';
             choose_destinations = tickets;
-            taking_routes = false }
+            taking_routes = false;
+            turn_ended = false }
+
+(* grab 4 train cards, grabs 3 destination tickets and choose 2-3. *)
+let setup_state st =
+  let st1 = draw_card_pile st in
+  let st2 = draw_card_pile st1 in
+  take_route st2
 
 let decided_routes st tickets =
   if List.length tickets > 1 then
