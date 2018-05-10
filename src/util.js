@@ -1,5 +1,10 @@
+const applyToObjectField = (obj, field, fn) => {
+    obj[field] = fn(obj[field]);
+};
+
 // Convert OCaml List to JS Array
 export const listToArray = list => {
+    if(list === 0) return [];
     const listToArrayStep = (list, acc) => {
         acc.push(list[0]);
         if(list[1] !== 0) {
@@ -10,6 +15,19 @@ export const listToArray = list => {
     };
 
     return listToArrayStep(list, []);
+};
+
+// Convert JS Array to OCaml List
+export const arrayToList = array => {
+    const arrayToListStep = (array, i) => {
+        if(array.length === i) {
+            return 0;
+        } else {
+            return [array[i], arrayToListStep(array, i + 1)];
+        }
+    };
+
+    return arrayToListStep(array, 0);
 };
 
 const stateToObjMap = [
@@ -27,11 +45,26 @@ const stateToObjMap = [
     'turn_ended'
 ];
 
+const stateListFields = [
+    'players',
+    'routes',
+    'destination_deck',
+    'destination_trash',
+    'choose_destinations',
+    'train_deck',
+    'facing_up_trains',
+    'train_trash'
+];
+
 // Convert OCaml State to JS State Object
 export const stateToObj = state => {
     return stateToObjMap.reduce(
         (acc, elem, index) => {
-            acc[elem] = state[index];
+            if(stateListFields.includes(elem)) {
+                acc[elem] = listToArray(state[index]);
+            } else {
+                acc[elem] = state[index];
+            }
             return acc;
         },
         {}
@@ -43,7 +76,11 @@ export const objToState = obj => {
     const state = [];
     for(const [key, value] of Object.entries(obj)) {
         const i = stateToObjMap.indexOf(key);
-        state[i] = value;
+        if(stateListFields.includes(key)) {
+            state[i] = arrayToList(value);
+        } else {
+            state[i] = value;
+        }
     }
     return state;
 };
