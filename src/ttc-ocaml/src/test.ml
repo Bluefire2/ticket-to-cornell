@@ -103,6 +103,7 @@ color = PBlue;
 destination_tickets = [gates;toclass];
 train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)];
 score = 34;
+routes = [];
 trains_remaining = 45
 }
 
@@ -112,6 +113,7 @@ color = PYellow;
 destination_tickets = [];
 train_cards = [(Red,0);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)];
 score = 0;
+routes = [];
 trains_remaining = 45
 }
 
@@ -122,6 +124,7 @@ let default1 =
   train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
+  routes = [];
   trains_remaining = 45
 }
 
@@ -132,6 +135,7 @@ let default2 =
   train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
+  routes = [];
   trains_remaining = 45
 }
 
@@ -142,6 +146,7 @@ let default3 =
   train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
+  routes = [];
   trains_remaining = 45
 }
 
@@ -152,6 +157,7 @@ let default4 =
   train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
+  routes = [];
   trains_remaining = 45
 }
 
@@ -162,6 +168,7 @@ let default5 =
   train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
+  routes = [];
   trains_remaining = 45
 }
 
@@ -260,6 +267,7 @@ let tests =
     destination_tickets = [test1;gates;toclass];
     train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)];
     score = 34;
+    routes = [];
     trains_remaining = 45
     })
     (Player.update_destination_tickets p1 [test1]));
@@ -269,6 +277,7 @@ let tests =
     destination_tickets = [test1;gates;gates;toclass];
     train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)];
     score = 34;
+    routes = [];
     trains_remaining = 45
     })
     (Player.update_destination_tickets p1 [test1;gates]));
@@ -278,6 +287,7 @@ let tests =
     destination_tickets = [toclass];
     train_cards = [(Red,0);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)];
     score = 0;
+    routes = [];
     trains_remaining = 45
     })
     (Player.update_destination_tickets p2 [toclass]));
@@ -287,6 +297,7 @@ let tests =
     destination_tickets = [toclass;gates;test1];
     train_cards = [(Red,0);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)];
     score = 0;
+    routes = [];
     trains_remaining = 45
     })
     (Player.update_destination_tickets p2 [toclass;gates;test1]));
@@ -341,6 +352,7 @@ let tests =
   (Player.draw_train_card p1 White));
 
   (* test place_trains after some routes are written. *)
+
 ]
 
 let suite =

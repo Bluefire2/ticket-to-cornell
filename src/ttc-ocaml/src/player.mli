@@ -6,6 +6,7 @@ type player = { color : Components.player_color;
                 destination_tickets : Components.DestinationDeck.card list;
                 train_cards : (Components.TrainDeck.card * int) list;
                 score : int;
+                routes : Board.route list;
                 trains_remaining : int ;
               }
 
@@ -23,6 +24,8 @@ val train_cards : player -> (Components.TrainDeck.card * int) list
 val score : player -> int
 
 val color : player -> Components.player_color
+
+val routes : player -> Board.route list
 
 (* [trains_remaining t] is the number of trains the player has left  *)
 val trains_remaining : player -> int
