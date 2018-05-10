@@ -26,3 +26,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#map {
+    background-image: url('./images/map.jpg');
+    background-size: cover; /* scale image to fit */
+}

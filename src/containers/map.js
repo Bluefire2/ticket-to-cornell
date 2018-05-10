@@ -26,7 +26,8 @@ class Map extends Component {
             .append('circle')
                 .attr('cx', d => d[1] / SCALE)
                 .attr('cy', d => d[2] / SCALE)
-                .attr('r', 5);
+                .attr('r', 5)
+                .attr('fill', 'red');
     }
 
     render() {
