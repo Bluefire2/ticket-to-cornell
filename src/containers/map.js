@@ -33,7 +33,7 @@ class Map extends Component {
         // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
         const RECTANGLE_TO_SPACING_RATIO = 4,
             RECTANGLE_HEIGHT = 10;
-        const createRectangleDatum = (x, y, theta, width, height, trainColor, taken) => {
+        const createRectangleDatum = (x, y, theta, width, height, trainColor, taken, routeID) => {
             return {
                 x,
                 y,
@@ -41,10 +41,15 @@ class Map extends Component {
                 width,
                 height,
                 trainColor,
-                taken
+                taken,
+                routeID
             }
         };
         const routeToRectangleArray = (route, index) => {
+            const fromName = route[0][0],
+                toName = route[1][0],
+                uniqueRouteID = `${fromName}->${toName}`;
+
             const n = route[2], // number of rectangles to draw (route length)
                 A = {x: route[0][1] / SCALE, y: route[0][2] / SCALE},
                 B = {x: route[1][1] / SCALE, y: route[1][2] / SCALE},
@@ -71,7 +76,7 @@ class Map extends Component {
 
                 // color and taken are not implemented yet
                 const datum =
-                    createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, trainColor, false);
+                    createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, trainColor, false, uniqueRouteID);
                 acc.push(datum);
                 return addRect(acc, i + 1);
             })([], 0);
@@ -99,6 +104,7 @@ class Map extends Component {
             .enter()
             .append('rect')
                 .attr('class', 'route-path-rect')
+                .attr('route', d => `${d.routeID}`)
                 .style('fill', d => d.trainColor)
                 .attr('x', d => d.x)
                 .attr('y', d => d.y)
