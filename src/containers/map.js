@@ -100,7 +100,8 @@ class Map extends Component {
             .append('rect')
                 .style('stroke', 'black') // black for now
                 .style('fill', d => d.trainColor)
-                .style('stroke-width', 3)
+                .style('stroke-width', 2)
+                .style('stroke-dasharray', '5, 2')
                 .attr('x', d => d.x)
                 .attr('y', d => d.y)
                 // orient the rectangle, by rotating about its top left corner:
