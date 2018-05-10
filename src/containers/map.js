@@ -83,16 +83,16 @@ class Map extends Component {
 
         console.log(routeRectangles);
 
-        // This is temporary, for my own convenience:
-        const routes = d3.select(this.faux).select('#map').selectAll('.route')
-            .data(this.props.game.routes)
-            .enter()
-            .append('line') // route line (temporary)
-                .style('stroke', 'black')
-                .attr('x1', d => d[0][1] / SCALE)
-                .attr('y1', d => d[0][2] / SCALE)
-                .attr('x2', d => d[1][1] / SCALE)
-                .attr('y2', d => d[1][2] / SCALE);
+        // // This is temporary, for my own convenience:
+        // const routes = d3.select(this.faux).select('#map').selectAll('.route')
+        //     .data(this.props.game.routes)
+        //     .enter()
+        //     .append('line') // route line (temporary)
+        //         .style('stroke', 'black')
+        //         .attr('x1', d => d[0][1] / SCALE)
+        //         .attr('y1', d => d[0][2] / SCALE)
+        //         .attr('x2', d => d[1][1] / SCALE)
+        //         .attr('y2', d => d[1][2] / SCALE);
 
         const routePaths = d3.select(this.faux).select('#map').selectAll('.route-path')
             .data(routeRectangles)
