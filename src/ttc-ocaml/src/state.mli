@@ -53,21 +53,22 @@ val next_player : state -> state
  * 2 new train cards from the card pile. *)
 val draw_card_pile : state -> state
 
-(* [draw_card_facing_up st c] returns a new state for which the player decides
- * to take a new train card from the cards facing up. *)
-val draw_card_facing_up : state -> TrainDeck.card -> state
+(* [draw_card_facing_up st i] returns a new state for which the player decides
+ * to take a new train card from the cards facing up, [i] being the index which
+ * from the list of cards facing ups the player wants to grab. *)
+val draw_card_facing_up : state -> int -> state
 
 (* [take_route st] returns a new state for which the player decides to take
  * additional destination cards.
 * After this state: call `decided_routes` with the chosen tickets. *)
 val take_route : state -> state
 
-(* [decided_routes st lst] returns a new state depending on the routes that the player
- * decided to keep from the deck. *)
+(* [decided_routes st lst] returns a new state depending on the indexes from
+ * choose_destinations that the player decided to keep.  *)
 val decided_routes : state -> int list -> state
 
-(* [decided_routes_setup st lst] returns a new state depending on the routes that
- * the player decided to keep from the deck for setting up. *)
+(* [decided_routes_setup st lst] returns a new state depending on the indexes from
+ * choose_destinations that the player decided to keep for setting up. *)
 val decided_routes_setup : state -> int list -> state
 
 (* [select_route st r] returns a new state for which the player decides to

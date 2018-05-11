@@ -28,9 +28,6 @@ type destination_ticket = {
   points : int
 }
 
-
-(* end *)
-
 (* A [TrainDeck] represents the collection of train cards that are either on display
  * for the players, hidden in the stack with the option to choose from them, or
  * in the discard pile. If they want to discard a card, it goes to a discard
@@ -64,7 +61,9 @@ module type TrainDeck = sig
   val five_faceup : t -> tr -> (card list * card list * card list)
   val add_faceup : card list -> card list -> card list -> (card list * card list * card list)
   val init_faceup : unit -> card list
-  val draw_faceup : card list -> card -> card list -> card list -> (card list * card list * card list)
+  (* [draw_faceup t i f tr] returns the card that the index [i] represents in
+   * [f], with the updated [t], [f], and [tr]. *)
+  val draw_faceup : card list -> int -> card list -> card list -> card * (card list * card list * card list)
 end
 
 module TrainDeck : TrainDeck

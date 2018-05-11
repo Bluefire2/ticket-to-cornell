@@ -118,7 +118,7 @@ module type TrainDeck = sig
   val five_faceup : t -> tr -> (card list * card list * card list)
   val add_faceup : card list -> card list -> card list -> (card list * card list * card list)
   val init_faceup : unit -> card list
-  val draw_faceup : card list -> card -> card list -> card list -> (card list * card list * card list)
+  val draw_faceup : card list ->int -> card list -> card list -> card * (card list * card list * card list)
 end
 
 module type DestinationDeck = sig
@@ -156,9 +156,10 @@ module TrainDeck = struct
     let drawn = draw_card t tr in
     let faceup = ((tfst drawn)::f, (tsnd drawn), (tthd drawn)) in
     if checkify (tfst faceup) then faceup else five_faceup (tsnd faceup) ((tfst faceup)@tr)
-  let draw_faceup t c f tr =
+  let draw_faceup t i f tr =
+    let c = List.nth f i in
     let removed = remove c f in
-    add_faceup t tr removed
+    (c, add_faceup t tr removed)
   let init_faceup = fun () ->
     let d1 = draw_card (init_deck ()) init_trash in
     let d2 = draw_card (tsnd d1) init_trash in

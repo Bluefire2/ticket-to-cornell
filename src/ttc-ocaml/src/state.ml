@@ -50,8 +50,14 @@ let choose_destinations st = st.choose_destinations
 let score st player =
   (Player.score (current_player st))
 
+let turn_ended_error st =
+  { st with error = "Turn has already ended for the current player." }
+
 let next_player st =
-  { st with player_index = ((st.player_index + 1) mod (List.length st.players))}
+  if (turn_ended st) then
+    { st with player_index = ((st.player_index + 1) mod (List.length st.players))}
+  else
+    { st with error = "Turn has not ended yet for the current player." }
 
 let update_players i new_p lst =
   let rec update_loop i new_i new_p acc = function
@@ -61,6 +67,8 @@ let update_players i new_p lst =
   update_loop 0 i new_p [] lst
 
 let decided_routes_setup st indexes =
+  if (turn_ended st) then turn_ended_error st
+  else (
   if List.length indexes >= 2 then
     (  let choose = choose_destinations st in
       let rec loop acc = function
@@ -76,19 +84,23 @@ let decided_routes_setup st indexes =
                  error = "";
                  turn_ended = true } )
   else {st with error = "Must at least take 2 tickets";
-                turn_ended = false }
+                turn_ended = false } )
 
-let draw_card_facing_up st c =
-  let (cards, deck,trash) = TrainDeck.draw_faceup (st.train_deck) c (st.facing_up_trains) (st.train_trash) in
+let draw_card_facing_up st i =
+  if (turn_ended st) then turn_ended_error st
+  else (
+  let (c, (cards, deck,trash)) = TrainDeck.draw_faceup (st.train_deck) i (st.facing_up_trains) (st.train_trash) in
   let p' = draw_train_card (current_player st) c in
   let i = st.player_index in
   { st with facing_up_trains = cards;
             train_deck = deck;
             players = update_players i p' st.players;
             train_trash = trash;
-            turn_ended = true }
+            turn_ended = true } )
 
 let draw_card_pile st =
+  if (turn_ended st) then turn_ended_error st
+  else (
   let tr = st.train_trash in
   let (c1, deck',tr') = TrainDeck.draw_card (st.train_deck) tr in
   let (c2, deck'',tr'') = TrainDeck.draw_card deck' tr in
@@ -98,24 +110,30 @@ let draw_card_pile st =
   { st with train_deck = deck'';
             train_trash = tr'';
             players = update_players i p'' st.players;
-            turn_ended = true }
+            turn_ended = true } )
 
 let take_route st =
+  if (turn_ended st) then turn_ended_error st
+  else (
   let deck = st.destination_deck in
   let tr = st.destination_trash in
   let (tickets, deck') = DestinationDeck.draw_card deck tr in
   { st with destination_deck = deck';
             choose_destinations = tickets;
             taking_routes = false;
-            turn_ended = false }
+            turn_ended = false } )
 
 (* grab 4 train cards, grabs 3 destination tickets and choose 2-3. *)
 let setup_state st =
+  if (turn_ended st) then turn_ended_error st
+  else (
   let st1 = draw_card_pile st in
   let st2 = draw_card_pile st1 in
-  take_route st2
+  take_route st2 )
 
 let decided_routes st indexes =
+  if (turn_ended st) then turn_ended_error st
+  else (
   if List.length indexes >= 1 then
     ( let choose = choose_destinations st in
       let rec loop acc = function
@@ -131,7 +149,7 @@ let decided_routes st indexes =
                  error = "";
                  turn_ended = true } )
   else {st with error = "Must at least take 1 ticket";
-                turn_ended = false }
+                turn_ended = false } )
 
 let update_routes (routes: Board.route list) old_r new_r : Board.route list =
   let rec loop acc = function
@@ -146,6 +164,8 @@ let check_cards cards n clr =
   (loop cards) >= n
 
 let place_on_board st r clr =
+  if (turn_ended st) then turn_ended_error st
+  else (
   (* Checking player has train cards for selected route *)
   let cards = train_cards (current_player st) in
   let num = match r with | (_, _, n, _, _) -> n in
@@ -164,15 +184,17 @@ let place_on_board st r clr =
                   turn_ended = false}
   )
   else {st with error = "Not enough train cards";
-                turn_ended = false}
+                turn_ended = false} )
 
 let select_route st r =
+  if (turn_ended st) then turn_ended_error st
+  else (
   match r with
   | (_, _, _, _, Some _) -> {st with error = "Route already taken";
                                      turn_ended = false }
   | (_, _, _, Grey, _) -> {st with error = "Choose a train card color";
                                    turn_ended = false }
-  | (_, _, _, clr, _) -> place_on_board st r clr
+  | (_, _, _, clr, _) -> place_on_board st r clr )
 
 let longest_route st =
   let rec players_loop plyrs best =

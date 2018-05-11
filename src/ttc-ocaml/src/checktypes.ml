@@ -13,7 +13,7 @@ val score : State.state -> Player.player -> int
 val setup_state : State.state -> State.state
 val next_player : State.state -> State.state
 val draw_card_pile : State.state -> State.state
-val draw_card_facing_up : State.state -> Components.TrainDeck.card -> State.state
+val draw_card_facing_up : State.state -> int -> State.state
 val take_route : State.state -> State.state
 val decided_routes : State.state -> int list -> State.state
 val decided_routes_setup : State.state -> int list -> State.state
@@ -57,7 +57,7 @@ module type COMPONENTS = sig
     val five_faceup : t -> tr -> (card list * card list * card list)
     val add_faceup : card list -> card list -> card list -> (card list * card list * card list)
     val init_faceup : unit -> card list
-    val draw_faceup : card list -> card -> card list -> card list -> (card list * card list  * card list)
+    val draw_faceup : card list -> int -> card list -> card list -> card *(card list * card list  * card list)
   end
 
   module TrainDeck : TrainDeck
