@@ -120,7 +120,7 @@ function update_players(i, new_p, lst) {
 }
 
 function decided_routes_setup(st, tickets) {
-  if (List.length(tickets) > 2) {
+  if (List.length(tickets) >= 2) {
     var p = current_player(st);
     var p$prime = Player.update_destination_tickets(p, tickets);
     var i = st[/* player_index */0];
@@ -225,7 +225,7 @@ function setup_state(st) {
 }
 
 function decided_routes(st, tickets) {
-  if (List.length(tickets) > 1) {
+  if (List.length(tickets) >= 1) {
     var p = current_player(st);
     var p$prime = Player.update_destination_tickets(p, tickets);
     var i = st[/* player_index */0];
