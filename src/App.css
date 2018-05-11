@@ -74,3 +74,45 @@
     /*flex-direction: row;*/
     width: 50%;
 }
+
+.destination-ticket {
+    position: relative;
+    background-image: url('./images/cu.png');
+    background-size: cover;
+    /* TODO: make these relative to the image size and some scaling factor */
+    width: 112px;
+    height: 143px;
+    border-radius: 10px;
+    border: 5px solid #81a990; /* colour is specified inline */
+    margin: 5px;
+    float: left;
+}
+
+.destination-ticket-top, .destination-ticket-bottom {
+    height: 20%;
+    margin: 20% 5% 5%;
+    text-align: center;
+    color: beige;
+}
+
+.destination-ticket-points {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    background-color: red;
+    transform: rotate(20deg);
+    border-radius: 50%; /* make it circular */
+    border: 3px solid darkred;
+    /* centre text horizontally and vertically: */
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.destination-ticket-points.completed {
+    background-color: green;
+    border: 3px solid darkgreen;
+}
