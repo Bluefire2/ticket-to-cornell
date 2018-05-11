@@ -42,7 +42,6 @@ class App extends Component {
                     <Map/>
                 </div>
                 <div id="bottom-pane">
-                    <DestinationTicket from="Becker House" to="Comstock Hall" points={15} />
                     <Hands/>
                 </div>
             </div>
