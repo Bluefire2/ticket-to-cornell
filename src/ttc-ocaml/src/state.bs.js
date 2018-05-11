@@ -235,28 +235,46 @@ function draw_card_facing_up(st, i) {
   }
 }
 
+function draw_card_pile_no_error(st) {
+  var tr = st[/* train_trash */8];
+  var match = Components.TrainDeck[/* draw_card */3](st[/* train_deck */6], tr);
+  var match$1 = Components.TrainDeck[/* draw_card */3](match[1], tr);
+  var p$prime = Player.draw_train_card(current_player(st), match[0]);
+  var p$prime$prime = Player.draw_train_card(p$prime, match$1[0]);
+  var i = st[/* player_index */0];
+  return /* record */[
+          /* player_index */st[/* player_index */0],
+          /* players */update_players(i, p$prime$prime, st[/* players */1]),
+          /* routes */st[/* routes */2],
+          /* destination_deck */st[/* destination_deck */3],
+          /* destination_trash */st[/* destination_trash */4],
+          /* choose_destinations */st[/* choose_destinations */5],
+          /* train_deck */match$1[1],
+          /* facing_up_trains */st[/* facing_up_trains */7],
+          /* train_trash */match$1[2],
+          /* taking_routes */st[/* taking_routes */9],
+          /* error */st[/* error */10],
+          /* turn_ended */st[/* turn_ended */11]
+        ];
+}
+
 function draw_card_pile(st) {
   if (st[/* turn_ended */11]) {
     return turn_ended_error(st);
   } else {
-    var tr = st[/* train_trash */8];
-    var match = Components.TrainDeck[/* draw_card */3](st[/* train_deck */6], tr);
-    var match$1 = Components.TrainDeck[/* draw_card */3](match[1], tr);
-    var p$prime = Player.draw_train_card(current_player(st), match[0]);
-    var p$prime$prime = Player.draw_train_card(p$prime, match$1[0]);
-    var i = st[/* player_index */0];
+    var st$prime = draw_card_pile_no_error(st);
     return /* record */[
-            /* player_index */st[/* player_index */0],
-            /* players */update_players(i, p$prime$prime, st[/* players */1]),
-            /* routes */st[/* routes */2],
-            /* destination_deck */st[/* destination_deck */3],
-            /* destination_trash */st[/* destination_trash */4],
-            /* choose_destinations */st[/* choose_destinations */5],
-            /* train_deck */match$1[1],
-            /* facing_up_trains */st[/* facing_up_trains */7],
-            /* train_trash */match$1[2],
-            /* taking_routes */st[/* taking_routes */9],
-            /* error */st[/* error */10],
+            /* player_index */st$prime[/* player_index */0],
+            /* players */st$prime[/* players */1],
+            /* routes */st$prime[/* routes */2],
+            /* destination_deck */st$prime[/* destination_deck */3],
+            /* destination_trash */st$prime[/* destination_trash */4],
+            /* choose_destinations */st$prime[/* choose_destinations */5],
+            /* train_deck */st$prime[/* train_deck */6],
+            /* facing_up_trains */st$prime[/* facing_up_trains */7],
+            /* train_trash */st$prime[/* train_trash */8],
+            /* taking_routes */st$prime[/* taking_routes */9],
+            /* error */st$prime[/* error */10],
             /* turn_ended */true
           ];
   }
@@ -290,8 +308,8 @@ function setup_state(st) {
   if (st[/* turn_ended */11]) {
     return turn_ended_error(st);
   } else {
-    var st1 = draw_card_pile(st);
-    return take_route(draw_card_pile(st1));
+    var st1 = draw_card_pile_no_error(st);
+    return take_route(draw_card_pile_no_error(st1));
   }
 }
 
