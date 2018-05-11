@@ -15,8 +15,8 @@ val next_player : State.state -> State.state
 val draw_card_pile : State.state -> State.state
 val draw_card_facing_up : State.state -> Components.TrainDeck.card -> State.state
 val take_route : State.state -> State.state
-val decided_routes : State.state -> Components.DestinationDeck.card list -> State.state
-val decided_routes_setup : State.state -> Components.DestinationDeck.card list -> State.state
+val decided_routes : State.state -> int list -> State.state
+val decided_routes_setup : State.state -> int list -> State.state
 val select_route : State.state -> Board.route -> State.state
 val longest_route : State.state -> Player.player
 end
