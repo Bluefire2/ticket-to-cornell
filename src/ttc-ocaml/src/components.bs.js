@@ -563,9 +563,13 @@ function add_faceup(t, tr, f) {
   }
 }
 
-function draw_faceup(t, c, f, tr) {
+function draw_faceup(t, i, f, tr) {
+  var c = List.nth(f, i);
   var removed = remove(c, f);
-  return add_faceup(t, tr, removed);
+  return /* tuple */[
+          c,
+          add_faceup(t, tr, removed)
+        ];
 }
 
 function init_faceup() {
