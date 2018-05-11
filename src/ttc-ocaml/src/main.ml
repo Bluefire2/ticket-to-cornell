@@ -1,6 +1,7 @@
 open Components
 
-let name (x,_,_) = x
+let name = function
+  | Board.Location (x, _, _, _) -> x
 
 let stringify_clr = function
   | PBlue -> "blue"
@@ -74,7 +75,7 @@ let play num =
         | "black" -> Black
         | _ -> Grey ) in *)
      ANSITerminal.(print_string [red] ("select\n"));
-     let r = (("Olin Hall", 539.,1278.),("Statler Hotel", 699.,1191.),3,Blue,None) in
+     let r = (Board.Location ("Olin Hall", 539.,1278., []),Board.Location ("Statler Hotel", 699.,1191., []),3,Blue,None) in
      let st' = State.select_route st r in
      ANSITerminal.(print_string [red] ((State.message st') ^ "\n"));
      ANSITerminal.(print_string [yellow] ((print_routes st') ^ "\n")))
