@@ -13,6 +13,9 @@ class Decks extends Component {
                 <Deck clickHandler={this.props.drawTrainCard}
                       backgroundImage={`url(${trainDeckImage})`}
                       text="Draw Train Card"/>
+                <Deck clickHandler={this.props.takeRoute}
+                      backgroundImage={`url(${trainDeckImage})`}
+                      text="Draw Route Tickets"/>
             </div>
         )
     }
