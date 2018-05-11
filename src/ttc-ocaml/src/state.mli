@@ -33,6 +33,10 @@ val message : state -> string
  * false otherwise. *)
 val turn_ended : state -> bool
 
+(* [choose_destinations st] returns a list of destination tickets from which the
+ * player can choose to keep some. *)
+val choose_destinations : state -> DestinationDeck.card list
+
 (* [score] returns the total score of a particular player. *)
 val score : state -> player -> int
 

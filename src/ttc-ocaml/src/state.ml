@@ -45,6 +45,8 @@ let message st = st.error
 
 let turn_ended st = st.turn_ended
 
+let choose_destinations st = st.choose_destinations
+
 let score st player =
   (Player.score (current_player st))
 
