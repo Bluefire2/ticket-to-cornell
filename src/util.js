@@ -114,3 +114,11 @@ export const trainColorFromIndex = i => {
 };
 
 // TODO: do the same for player colours
+
+export const destinationToObj = destination => {
+    return {
+        from: destination[0],
+        to: destination[1],
+        points: destination[2]
+    }
+};

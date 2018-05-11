@@ -117,6 +117,10 @@
     border: 3px solid darkgreen;
 }
 
+#deck-wrapper {
+    position: absolute;
+}
+
 #deck {
     width: 322px;
     height: 269px;
@@ -133,4 +137,9 @@
     font-size: 125%;
     font-family: Arial, sans-serif;
     color: black;
+}
+
+#choose-destinations {
+    position: relative;
+    width: auto;
 }
