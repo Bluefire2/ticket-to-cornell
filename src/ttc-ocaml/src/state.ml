@@ -133,21 +133,26 @@ let check_cards cards n clr =
   let rec loop = function
     | [] -> 0
     | (clr', i)::t -> ( if clr' = clr then i else loop t ) in
-  (loop cards) = n
+  (loop cards) >= n
 
 let place_on_board st r clr =
   (* Checking player has train cards for selected route *)
   let cards = train_cards (current_player st) in
   let num = match r with | (_, _, n, _, _) -> n in
   if (check_cards cards num clr) then (
-    let p' = place_train (current_player st) r in
-    let i = st.player_index in
-    let p_clr = p'.color in
-    let r' = match r with | (s1, s2, n, clr, _) -> (s1, s2, n, clr, Some p_clr) in
-    {st with players = update_players i p' st.players;
-             routes = update_routes (st.routes) r r';
-             error = "";
-             turn_ended = true })
+    let num_trains = trains_remaining (current_player st) in
+    if (num_trains >= num) then (
+      let p' = place_train (current_player st) r in
+      let i = st.player_index in
+      let p_clr = p'.color in
+      let r' = match r with | (s1, s2, n, clr, _) -> (s1, s2, n, clr, Some p_clr) in
+      {st with players = update_players i p' st.players;
+               routes = update_routes (st.routes) r r';
+               error = "";
+               turn_ended = true })
+    else {st with error = "Not enough trains";
+                  turn_ended = false}
+  )
   else {st with error = "Not enough train cards";
                 turn_ended = false}
 
