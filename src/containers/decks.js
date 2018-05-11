@@ -10,6 +10,25 @@ import {objToState, listToArray, destinationToObj} from "../util";
 const trainDeckImage = require('../images/tcat_deck.png');
 
 class Decks extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedTickets: []
+        };
+    }
+
+    ticketClickHandler(index) {
+        const newSelectedTickets = this.state.selectedTickets.map(elem => elem); // need to explicitly copy the array
+        if(!newSelectedTickets.includes(index)) {
+            newSelectedTickets.push(index);
+        }
+        return () => {
+            this.setState({
+                selectedTickets: newSelectedTickets
+            })
+        }
+    };
+
     render() {
         return (
             <div id="decks-wrapper">
@@ -25,7 +44,12 @@ class Decks extends Component {
                     <fieldset>
                         <legend>Choose destination tickets:</legend>
                         {this.props.destinations.map((destination, index) => {
-                            return <DestinationTicket {...destination} key={index}/>
+                            return (
+                                <div className="choose-destinations-ticket clickable"
+                                    onClick={this.ticketClickHandler(index).bind(this)} key={index}>
+                                    <DestinationTicket {...destination}/>
+                                </div>
+                            );
                         })}
                     </fieldset>
                 </div>
