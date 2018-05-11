@@ -42,40 +42,34 @@ function is_taken(r) {
   }
 }
 
-var becker = /* tuple */[
-  "House Becker",
-  198,
-  994
+var eco_house = /* tuple */[
+  "Ecology House",
+  574,
+  141
 ];
 
-var bethe = /* tuple */[
-  "House Bethe",
-  284,
-  1121
+var a_lot = /* tuple */[
+  "A LOT",
+  1051,
+  106
 ];
 
-var noyes = /* tuple */[
-  "Noyes Community Center",
-  338,
-  1189
+var golf = /* tuple */[
+  "Golf Center",
+  1676,
+  187
 ];
 
-var risley = /* tuple */[
-  "Risley",
-  718,
-  579
+var hasbrouck = /* tuple */[
+  "Hasbrouck Community Center",
+  1408,
+  290
 ];
 
 var rpcc = /* tuple */[
   "RPCC",
   1015,
   322
-];
-
-var helen_newman = /* tuple */[
-  "Helen Newman",
-  1023,
-  593
 ];
 
 var appel = /* tuple */[
@@ -90,34 +84,10 @@ var mcgraw = /* tuple */[
   1097
 ];
 
-var wsh = /* tuple */[
-  "Willard Straight Hall",
-  466,
-  1178
-];
-
-var psb = /* tuple */[
-  "Physical Sciences Building",
-  726,
-  875
-];
-
-var gannett = /* tuple */[
-  "Cornell Health",
-  468,
-  1254
-];
-
-var store = /* tuple */[
-  "Cornell Store",
-  563,
-  1159
-];
-
-var schwartz = /* tuple */[
-  "Schwartz Center",
-  460,
-  1543
+var risley = /* tuple */[
+  "Risley",
+  718,
+  579
 ];
 
 var eddy = /* tuple */[
@@ -126,106 +96,16 @@ var eddy = /* tuple */[
   1549
 ];
 
-var casc = /* tuple */[
-  "Cascadilla Gorge",
-  477,
-  1489
+var noyes = /* tuple */[
+  "Noyes Community Center",
+  338,
+  1189
 ];
 
-var ctb = /* tuple */[
-  "Collegetown Bagels",
-  501,
-  1554
-];
-
-var olin = /* tuple */[
-  "Olin Hall",
-  539,
-  1278
-];
-
-var carpenter = /* tuple */[
-  "Carpenter Hall",
-  558,
-  1332
-];
-
-var rhodes = /* tuple */[
-  "Rhodes Hall",
-  764,
-  1467
-];
-
-var duffield = /* tuple */[
-  "Duffield Hall",
-  674,
-  1338
-];
-
-var statler = /* tuple */[
-  "Statler Hotel",
-  699,
-  1191
-];
-
-var uris = /* tuple */[
-  "Uris Hall",
-  699,
-  1116
-];
-
-var gates = /* tuple */[
-  "Gates Hall",
-  764,
-  1335
-];
-
-var klarman = /* tuple */[
-  "Klarman Hall",
-  647,
-  948
-];
-
-var trillium = /* tuple */[
-  "Trillium",
-  899,
-  1061
-];
-
-var kennedy = /* tuple */[
-  "Kennedy Hall",
-  893,
-  1021
-];
-
-var warren = /* tuple */[
-  "Warren Hall",
-  1048,
-  937
-];
-
-var mann = /* tuple */[
-  "Mann Library",
-  1086,
-  972
-];
-
-var ives = /* tuple */[
-  "Ives Hall",
-  766,
-  1097
-];
-
-var barton = /* tuple */[
-  "Barton Hall",
-  801,
-  1235
-];
-
-var teagle = /* tuple */[
-  "Teagle Hall",
-  910,
-  1248
+var bartels = /* tuple */[
+  "Bartels Hall",
+  1094,
+  1256
 ];
 
 var schoellkopf = /* tuple */[
@@ -240,100 +120,214 @@ var dairy_bar = /* tuple */[
   1078
 ];
 
-var mvr = /* tuple */[
-  "Martha Van Rensselaer Hall",
+var kennedy = /* tuple */[
+  "Kennedy Hall",
+  893,
+  1021
+];
+
+var bridge = /* tuple */[
+  "Stewart Ave Bridge",
+  184,
+  644
+];
+
+var museum = /* tuple */[
+  "Johnson Museum",
+  428,
+  785
+];
+
+var sigma_chi = /* tuple */[
+  "Sigma Chi",
+  95,
+  257
+];
+
+var undergrad = /* tuple */[
+  "Undergraduate Admissions",
+  498,
+  498
+];
+
+var ckb = /* tuple */[
+  "CKB Quad",
   934,
+  468
+];
+
+var forest_home = /* tuple */[
+  "Forest Home",
+  1673,
+  677
+];
+
+var beebe = /* tuple */[
+  "Beebe Lake",
+  967,
+  699
+];
+
+var island = /* tuple */[
+  "Werly Island",
+  1208,
+  780
+];
+
+var psb = /* tuple */[
+  "Physical Sciences Building",
+  726,
   875
 ];
 
-var barn = /* tuple */[
-  "Big Red Barn",
-  774,
-  1015
+var mann = /* tuple */[
+  "Mann Library",
+  1086,
+  972
 ];
 
-var bailey = /* tuple */[
-  "Bailey Hall",
-  839,
-  929
+var engineering = /* tuple */[
+  "Engineering Quad",
+  615,
+  1362
 ];
 
-var bartels = /* tuple */[
-  "Bartels Hall",
-  1094,
-  1256
+var commons = /* tuple */[
+  "The Commons",
+  65,
+  1673
+];
+
+var maplewood = /* tuple */[
+  "Maplewood Park",
+  1156,
+  1671
+];
+
+var vet = /* tuple */[
+  "Veterinary School",
+  1863,
+  1107
+];
+
+var riley_robb = /* tuple */[
+  "Riley-Robb Hall",
+  1430,
+  1245
+];
+
+var barton = /* tuple */[
+  "Barton Hall",
+  801,
+  1235
+];
+
+var farm_barn = /* tuple */[
+  "Blair Farm Barn",
+  1562,
+  1492
+];
+
+var plantations = /* tuple */[
+  "Plantations",
+  1359,
+  845
+];
+
+var arboretum = /* tuple */[
+  "Newman Arboretum",
+  2028,
+  712
+];
+
+var filtration = /* tuple */[
+  "Filtration Plant",
+  1787,
+  858
+];
+
+var creek = /* tuple */[
+  "Cascadilla Creek",
+  842,
+  1579
+];
+
+var becker = /* tuple */[
+  "House Becker",
+  198,
+  994
 ];
 
 var locations_001 = /* :: */[
-  bethe,
+  a_lot,
   /* :: */[
-    noyes,
+    golf,
     /* :: */[
-      risley,
+      hasbrouck,
       /* :: */[
         rpcc,
         /* :: */[
-          helen_newman,
+          appel,
           /* :: */[
-            appel,
+            mcgraw,
             /* :: */[
-              mcgraw,
+              risley,
               /* :: */[
-                wsh,
+                eddy,
                 /* :: */[
-                  psb,
+                  noyes,
                   /* :: */[
-                    gannett,
+                    bartels,
                     /* :: */[
-                      store,
+                      schoellkopf,
                       /* :: */[
-                        schwartz,
+                        dairy_bar,
                         /* :: */[
-                          eddy,
+                          kennedy,
                           /* :: */[
-                            casc,
+                            bridge,
                             /* :: */[
-                              olin,
+                              museum,
                               /* :: */[
-                                carpenter,
+                                sigma_chi,
                                 /* :: */[
-                                  rhodes,
+                                  undergrad,
                                   /* :: */[
-                                    duffield,
+                                    ckb,
                                     /* :: */[
-                                      statler,
+                                      forest_home,
                                       /* :: */[
-                                        uris,
+                                        beebe,
                                         /* :: */[
-                                          gates,
+                                          island,
                                           /* :: */[
-                                            klarman,
+                                            psb,
                                             /* :: */[
-                                              trillium,
+                                              mann,
                                               /* :: */[
-                                                kennedy,
+                                                engineering,
                                                 /* :: */[
-                                                  warren,
+                                                  commons,
                                                   /* :: */[
-                                                    mann,
+                                                    maplewood,
                                                     /* :: */[
-                                                      ives,
+                                                      vet,
                                                       /* :: */[
-                                                        barton,
+                                                        riley_robb,
                                                         /* :: */[
-                                                          teagle,
+                                                          barton,
                                                           /* :: */[
-                                                            schoellkopf,
+                                                            farm_barn,
                                                             /* :: */[
-                                                              dairy_bar,
+                                                              plantations,
                                                               /* :: */[
-                                                                mvr,
+                                                                arboretum,
                                                                 /* :: */[
-                                                                  barn,
+                                                                  filtration,
                                                                   /* :: */[
-                                                                    bailey,
+                                                                    creek,
                                                                     /* :: */[
-                                                                      bartels,
+                                                                      becker,
                                                                       /* [] */0
                                                                     ]
                                                                   ]
@@ -372,13 +366,13 @@ var locations_001 = /* :: */[
 ];
 
 var locations = /* :: */[
-  becker,
+  eco_house,
   locations_001
 ];
 
 var routes_000 = /* tuple */[
-  becker,
-  bethe,
+  ckb,
+  appel,
   1,
   /* Grey */9,
   /* None */0
@@ -386,794 +380,794 @@ var routes_000 = /* tuple */[
 
 var routes_001 = /* :: */[
   /* tuple */[
-    becker,
-    bethe,
+    ckb,
+    appel,
     1,
     /* Grey */9,
     /* None */0
   ],
   /* :: */[
     /* tuple */[
-      becker,
-      risley,
-      3,
+      dairy_bar,
+      riley_robb,
+      1,
       /* Grey */9,
       /* None */0
     ],
     /* :: */[
       /* tuple */[
-        bethe,
-        noyes,
+        dairy_bar,
+        riley_robb,
         1,
         /* Grey */9,
         /* None */0
       ],
       /* :: */[
         /* tuple */[
-          bethe,
-          noyes,
+          rpcc,
+          ckb,
           1,
           /* Grey */9,
           /* None */0
         ],
         /* :: */[
           /* tuple */[
-            bethe,
-            risley,
-            4,
+            rpcc,
+            ckb,
+            1,
             /* Grey */9,
             /* None */0
           ],
           /* :: */[
             /* tuple */[
-              bethe,
-              mcgraw,
-              6,
-              /* Yellow */3,
+              rpcc,
+              appel,
+              1,
+              /* Grey */9,
               /* None */0
             ],
             /* :: */[
               /* tuple */[
-                noyes,
-                schwartz,
-                5,
-                /* Green */1,
+                island,
+                plantations,
+                1,
+                /* Grey */9,
                 /* None */0
               ],
               /* :: */[
                 /* tuple */[
-                  noyes,
-                  schwartz,
-                  5,
-                  /* Pink */4,
+                  island,
+                  plantations,
+                  1,
+                  /* Grey */9,
                   /* None */0
                 ],
                 /* :: */[
                   /* tuple */[
-                    noyes,
-                    gannett,
-                    6,
+                    ckb,
+                    risley,
+                    2,
                     /* Blue */2,
                     /* None */0
                   ],
                   /* :: */[
                     /* tuple */[
-                      schwartz,
-                      eddy,
-                      3,
-                      /* Yellow */3,
+                      noyes,
+                      mcgraw,
+                      2,
+                      /* Grey */9,
                       /* None */0
                     ],
                     /* :: */[
                       /* tuple */[
-                        schwartz,
-                        eddy,
-                        3,
-                        /* Pink */4,
+                        noyes,
+                        mcgraw,
+                        2,
+                        /* Grey */9,
                         /* None */0
                       ],
                       /* :: */[
                         /* tuple */[
-                          schwartz,
-                          gannett,
-                          5,
-                          /* Orange */5,
+                          creek,
+                          schoellkopf,
+                          2,
+                          /* Grey */9,
                           /* None */0
                         ],
                         /* :: */[
                           /* tuple */[
-                            schwartz,
-                            gannett,
-                            5,
-                            /* White */6,
+                            creek,
+                            schoellkopf,
+                            2,
+                            /* Grey */9,
                             /* None */0
                           ],
                           /* :: */[
                             /* tuple */[
-                              eddy,
-                              casc,
+                              beebe,
+                              appel,
                               2,
-                              /* Grey */9,
+                              /* Pink */4,
                               /* None */0
                             ],
                             /* :: */[
                               /* tuple */[
-                                eddy,
-                                ctb,
-                                3,
+                                engineering,
+                                barton,
+                                2,
                                 /* Grey */9,
                                 /* None */0
                               ],
                               /* :: */[
                                 /* tuple */[
-                                  eddy,
-                                  carpenter,
-                                  6,
-                                  /* Black */7,
+                                  engineering,
+                                  barton,
+                                  2,
+                                  /* Grey */9,
                                   /* None */0
                                 ],
                                 /* :: */[
                                   /* tuple */[
-                                    casc,
-                                    gannett,
-                                    3,
-                                    /* Orange */5,
+                                    beebe,
+                                    island,
+                                    2,
+                                    /* Black */7,
                                     /* None */0
                                   ],
                                   /* :: */[
                                     /* tuple */[
-                                      gannett,
-                                      mcgraw,
-                                      3,
-                                      /* Pink */4,
+                                      beebe,
+                                      island,
+                                      2,
+                                      /* Orange */5,
                                       /* None */0
                                     ],
                                     /* :: */[
                                       /* tuple */[
-                                        gannett,
-                                        wsh,
-                                        3,
-                                        /* Red */0,
+                                        kennedy,
+                                        mann,
+                                        2,
+                                        /* Grey */9,
                                         /* None */0
                                       ],
                                       /* :: */[
                                         /* tuple */[
-                                          gannett,
-                                          wsh,
-                                          3,
-                                          /* Yellow */3,
+                                          kennedy,
+                                          mann,
+                                          2,
+                                          /* Grey */9,
                                           /* None */0
                                         ],
                                         /* :: */[
                                           /* tuple */[
+                                            undergrad,
                                             risley,
-                                            mcgraw,
-                                            4,
-                                            /* Grey */9,
+                                            2,
+                                            /* Green */1,
                                             /* None */0
                                           ],
                                           /* :: */[
                                             /* tuple */[
+                                              undergrad,
                                               risley,
-                                              rpcc,
-                                              6,
+                                              2,
                                               /* White */6,
                                               /* None */0
                                             ],
                                             /* :: */[
                                               /* tuple */[
-                                                mcgraw,
-                                                wsh,
-                                                4,
-                                                /* Green */1,
+                                                dairy_bar,
+                                                plantations,
+                                                2,
+                                                /* White */6,
                                                 /* None */0
                                               ],
                                               /* :: */[
                                                 /* tuple */[
-                                                  mcgraw,
-                                                  klarman,
-                                                  5,
-                                                  /* Red */0,
+                                                  dairy_bar,
+                                                  plantations,
+                                                  2,
+                                                  /* Green */1,
                                                   /* None */0
                                                 ],
                                                 /* :: */[
                                                   /* tuple */[
-                                                    mcgraw,
-                                                    psb,
-                                                    6,
-                                                    /* Orange */5,
+                                                    mann,
+                                                    plantations,
+                                                    2,
+                                                    /* Grey */9,
                                                     /* None */0
                                                   ],
                                                   /* :: */[
                                                     /* tuple */[
-                                                      mcgraw,
-                                                      rpcc,
-                                                      4,
-                                                      /* Blue */2,
+                                                      barton,
+                                                      schoellkopf,
+                                                      2,
+                                                      /* Yellow */3,
                                                       /* None */0
                                                     ],
                                                     /* :: */[
                                                       /* tuple */[
-                                                        wsh,
-                                                        store,
-                                                        4,
-                                                        /* Pink */4,
+                                                        barton,
+                                                        schoellkopf,
+                                                        2,
+                                                        /* Red */0,
                                                         /* None */0
                                                       ],
                                                       /* :: */[
                                                         /* tuple */[
-                                                          wsh,
-                                                          uris,
-                                                          4,
-                                                          /* Black */7,
+                                                          undergrad,
+                                                          museum,
+                                                          2,
+                                                          /* Grey */9,
                                                           /* None */0
                                                         ],
                                                         /* :: */[
                                                           /* tuple */[
-                                                            wsh,
-                                                            uris,
-                                                            4,
-                                                            /* Orange */5,
+                                                            psb,
+                                                            kennedy,
+                                                            2,
+                                                            /* Grey */9,
                                                             /* None */0
                                                           ],
                                                           /* :: */[
                                                             /* tuple */[
-                                                              wsh,
-                                                              statler,
-                                                              4,
-                                                              /* Red */0,
+                                                              psb,
+                                                              kennedy,
+                                                              2,
+                                                              /* Grey */9,
                                                               /* None */0
                                                             ],
                                                             /* :: */[
                                                               /* tuple */[
-                                                                wsh,
-                                                                olin,
+                                                                schoellkopf,
+                                                                bartels,
                                                                 2,
                                                                 /* Grey */9,
                                                                 /* None */0
                                                               ],
                                                               /* :: */[
                                                                 /* tuple */[
-                                                                  wsh,
-                                                                  ctb,
-                                                                  5,
-                                                                  /* White */6,
+                                                                  schoellkopf,
+                                                                  bartels,
+                                                                  2,
+                                                                  /* Grey */9,
                                                                   /* None */0
                                                                 ],
                                                                 /* :: */[
                                                                   /* tuple */[
-                                                                    ctb,
-                                                                    olin,
-                                                                    3,
+                                                                    engineering,
+                                                                    schoellkopf,
+                                                                    2,
                                                                     /* Grey */9,
                                                                     /* None */0
                                                                   ],
                                                                   /* :: */[
                                                                     /* tuple */[
-                                                                      ctb,
-                                                                      carpenter,
-                                                                      3,
+                                                                      a_lot,
+                                                                      rpcc,
+                                                                      2,
                                                                       /* Grey */9,
                                                                       /* None */0
                                                                     ],
                                                                     /* :: */[
                                                                       /* tuple */[
-                                                                        olin,
-                                                                        carpenter,
+                                                                        forest_home,
+                                                                        filtration,
                                                                         2,
                                                                         /* Grey */9,
                                                                         /* None */0
                                                                       ],
                                                                       /* :: */[
                                                                         /* tuple */[
-                                                                          olin,
-                                                                          statler,
-                                                                          3,
-                                                                          /* Blue */2,
+                                                                          museum,
+                                                                          bridge,
+                                                                          2,
+                                                                          /* Grey */9,
                                                                           /* None */0
                                                                         ],
                                                                         /* :: */[
                                                                           /* tuple */[
-                                                                            carpenter,
-                                                                            statler,
-                                                                            5,
-                                                                            /* Yellow */3,
+                                                                            filtration,
+                                                                            vet,
+                                                                            2,
+                                                                            /* Grey */9,
                                                                             /* None */0
                                                                           ],
                                                                           /* :: */[
                                                                             /* tuple */[
-                                                                              carpenter,
-                                                                              rhodes,
-                                                                              4,
-                                                                              /* Red */0,
+                                                                              becker,
+                                                                              noyes,
+                                                                              2,
+                                                                              /* Grey */9,
                                                                               /* None */0
                                                                             ],
                                                                             /* :: */[
                                                                               /* tuple */[
-                                                                                carpenter,
-                                                                                duffield,
-                                                                                6,
-                                                                                /* Green */1,
+                                                                                risley,
+                                                                                beebe,
+                                                                                2,
+                                                                                /* Grey */9,
                                                                                 /* None */0
                                                                               ],
                                                                               /* :: */[
                                                                                 /* tuple */[
-                                                                                  rpcc,
-                                                                                  psb,
-                                                                                  4,
-                                                                                  /* Black */7,
+                                                                                  kennedy,
+                                                                                  barton,
+                                                                                  2,
+                                                                                  /* Grey */9,
                                                                                   /* None */0
                                                                                 ],
                                                                                 /* :: */[
                                                                                   /* tuple */[
-                                                                                    rpcc,
-                                                                                    helen_newman,
-                                                                                    6,
+                                                                                    mcgraw,
+                                                                                    engineering,
+                                                                                    2,
                                                                                     /* Grey */9,
                                                                                     /* None */0
                                                                                   ],
                                                                                   /* :: */[
                                                                                     /* tuple */[
-                                                                                      psb,
-                                                                                      klarman,
+                                                                                      becker,
+                                                                                      mcgraw,
                                                                                       2,
                                                                                       /* Grey */9,
                                                                                       /* None */0
                                                                                     ],
                                                                                     /* :: */[
                                                                                       /* tuple */[
-                                                                                        psb,
-                                                                                        klarman,
+                                                                                        appel,
+                                                                                        island,
                                                                                         2,
                                                                                         /* Grey */9,
                                                                                         /* None */0
                                                                                       ],
                                                                                       /* :: */[
                                                                                         /* tuple */[
-                                                                                          psb,
                                                                                           kennedy,
-                                                                                          3,
-                                                                                          /* Red */0,
+                                                                                          bartels,
+                                                                                          2,
+                                                                                          /* Grey */9,
                                                                                           /* None */0
                                                                                         ],
                                                                                         /* :: */[
                                                                                           /* tuple */[
-                                                                                            psb,
-                                                                                            warren,
-                                                                                            6,
-                                                                                            /* Pink */4,
+                                                                                            becker,
+                                                                                            museum,
+                                                                                            3,
+                                                                                            /* Yellow */3,
                                                                                             /* None */0
                                                                                           ],
                                                                                           /* :: */[
                                                                                             /* tuple */[
-                                                                                              psb,
-                                                                                              helen_newman,
+                                                                                              becker,
+                                                                                              museum,
                                                                                               3,
-                                                                                              /* Grey */9,
+                                                                                              /* Pink */4,
                                                                                               /* None */0
                                                                                             ],
                                                                                             /* :: */[
                                                                                               /* tuple */[
-                                                                                                klarman,
-                                                                                                uris,
-                                                                                                1,
+                                                                                                eddy,
+                                                                                                engineering,
+                                                                                                3,
                                                                                                 /* Grey */9,
                                                                                                 /* None */0
                                                                                               ],
                                                                                               /* :: */[
                                                                                                 /* tuple */[
-                                                                                                  klarman,
-                                                                                                  uris,
-                                                                                                  1,
-                                                                                                  /* Grey */9,
+                                                                                                  hasbrouck,
+                                                                                                  golf,
+                                                                                                  3,
+                                                                                                  /* Green */1,
                                                                                                   /* None */0
                                                                                                 ],
                                                                                                 /* :: */[
                                                                                                   /* tuple */[
-                                                                                                    klarman,
-                                                                                                    kennedy,
-                                                                                                    4,
-                                                                                                    /* Blue */2,
+                                                                                                    museum,
+                                                                                                    psb,
+                                                                                                    3,
+                                                                                                    /* Red */0,
                                                                                                     /* None */0
                                                                                                   ],
                                                                                                   /* :: */[
                                                                                                     /* tuple */[
-                                                                                                      uris,
-                                                                                                      statler,
-                                                                                                      2,
-                                                                                                      /* Grey */9,
+                                                                                                      museum,
+                                                                                                      psb,
+                                                                                                      3,
+                                                                                                      /* Yellow */3,
                                                                                                       /* None */0
                                                                                                     ],
                                                                                                     /* :: */[
                                                                                                       /* tuple */[
-                                                                                                        uris,
-                                                                                                        statler,
-                                                                                                        2,
-                                                                                                        /* Grey */9,
+                                                                                                        risley,
+                                                                                                        psb,
+                                                                                                        3,
+                                                                                                        /* White */6,
                                                                                                         /* None */0
                                                                                                       ],
                                                                                                       /* :: */[
                                                                                                         /* tuple */[
-                                                                                                          uris,
-                                                                                                          trillium,
-                                                                                                          2,
+                                                                                                          becker,
+                                                                                                          bridge,
+                                                                                                          3,
                                                                                                           /* Blue */2,
                                                                                                           /* None */0
                                                                                                         ],
                                                                                                         /* :: */[
                                                                                                           /* tuple */[
-                                                                                                            uris,
-                                                                                                            trillium,
-                                                                                                            2,
-                                                                                                            /* Pink */4,
+                                                                                                            commons,
+                                                                                                            eddy,
+                                                                                                            3,
+                                                                                                            /* Black */7,
                                                                                                             /* None */0
                                                                                                           ],
                                                                                                           /* :: */[
                                                                                                             /* tuple */[
-                                                                                                              statler,
-                                                                                                              rhodes,
-                                                                                                              2,
-                                                                                                              /* Grey */9,
+                                                                                                              creek,
+                                                                                                              maplewood,
+                                                                                                              3,
+                                                                                                              /* Orange */5,
                                                                                                               /* None */0
                                                                                                             ],
                                                                                                             /* :: */[
                                                                                                               /* tuple */[
-                                                                                                                statler,
-                                                                                                                rhodes,
-                                                                                                                2,
-                                                                                                                /* Grey */9,
+                                                                                                                creek,
+                                                                                                                maplewood,
+                                                                                                                3,
+                                                                                                                /* Black */7,
                                                                                                                 /* None */0
                                                                                                               ],
                                                                                                               /* :: */[
                                                                                                                 /* tuple */[
-                                                                                                                  statler,
-                                                                                                                  gates,
-                                                                                                                  2,
+                                                                                                                  riley_robb,
+                                                                                                                  farm_barn,
+                                                                                                                  3,
                                                                                                                   /* Grey */9,
                                                                                                                   /* None */0
                                                                                                                 ],
                                                                                                                 /* :: */[
                                                                                                                   /* tuple */[
-                                                                                                                    rhodes,
-                                                                                                                    duffield,
-                                                                                                                    1,
-                                                                                                                    /* Grey */9,
+                                                                                                                    bartels,
+                                                                                                                    dairy_bar,
+                                                                                                                    3,
+                                                                                                                    /* Orange */5,
                                                                                                                     /* None */0
                                                                                                                   ],
                                                                                                                   /* :: */[
                                                                                                                     /* tuple */[
-                                                                                                                      rhodes,
-                                                                                                                      duffield,
-                                                                                                                      1,
-                                                                                                                      /* Grey */9,
+                                                                                                                      bridge,
+                                                                                                                      undergrad,
+                                                                                                                      3,
+                                                                                                                      /* Pink */4,
                                                                                                                       /* None */0
                                                                                                                     ],
                                                                                                                     /* :: */[
                                                                                                                       /* tuple */[
-                                                                                                                        rhodes,
-                                                                                                                        gates,
-                                                                                                                        2,
+                                                                                                                        mcgraw,
+                                                                                                                        psb,
+                                                                                                                        3,
                                                                                                                         /* Grey */9,
                                                                                                                         /* None */0
                                                                                                                       ],
                                                                                                                       /* :: */[
                                                                                                                         /* tuple */[
-                                                                                                                          duffield,
-                                                                                                                          schoellkopf,
-                                                                                                                          2,
+                                                                                                                          dairy_bar,
+                                                                                                                          vet,
+                                                                                                                          3,
                                                                                                                           /* Grey */9,
                                                                                                                           /* None */0
                                                                                                                         ],
                                                                                                                         /* :: */[
                                                                                                                           /* tuple */[
-                                                                                                                            helen_newman,
-                                                                                                                            appel,
-                                                                                                                            5,
-                                                                                                                            /* Black */7,
+                                                                                                                            plantations,
+                                                                                                                            filtration,
+                                                                                                                            3,
+                                                                                                                            /* Blue */2,
                                                                                                                             /* None */0
                                                                                                                           ],
                                                                                                                           /* :: */[
                                                                                                                             /* tuple */[
-                                                                                                                              helen_newman,
-                                                                                                                              warren,
-                                                                                                                              2,
-                                                                                                                              /* Grey */9,
+                                                                                                                              becker,
+                                                                                                                              psb,
+                                                                                                                              3,
+                                                                                                                              /* Red */0,
                                                                                                                               /* None */0
                                                                                                                             ],
                                                                                                                             /* :: */[
                                                                                                                               /* tuple */[
-                                                                                                                                warren,
-                                                                                                                                kennedy,
-                                                                                                                                4,
-                                                                                                                                /* White */6,
+                                                                                                                                filtration,
+                                                                                                                                arboretum,
+                                                                                                                                3,
+                                                                                                                                /* Grey */9,
                                                                                                                                 /* None */0
                                                                                                                               ],
                                                                                                                               /* :: */[
                                                                                                                                 /* tuple */[
-                                                                                                                                  warren,
-                                                                                                                                  mann,
-                                                                                                                                  2,
+                                                                                                                                  museum,
+                                                                                                                                  risley,
+                                                                                                                                  3,
                                                                                                                                   /* Grey */9,
                                                                                                                                   /* None */0
                                                                                                                                 ],
                                                                                                                                 /* :: */[
                                                                                                                                   /* tuple */[
-                                                                                                                                    warren,
-                                                                                                                                    appel,
-                                                                                                                                    3,
-                                                                                                                                    /* Grey */9,
+                                                                                                                                    schoellkopf,
+                                                                                                                                    farm_barn,
+                                                                                                                                    4,
+                                                                                                                                    /* Yellow */3,
                                                                                                                                     /* None */0
                                                                                                                                   ],
                                                                                                                                   /* :: */[
                                                                                                                                     /* tuple */[
-                                                                                                                                      kennedy,
-                                                                                                                                      trillium,
-                                                                                                                                      2,
-                                                                                                                                      /* Green */1,
+                                                                                                                                      a_lot,
+                                                                                                                                      hasbrouck,
+                                                                                                                                      4,
+                                                                                                                                      /* Grey */9,
                                                                                                                                       /* None */0
                                                                                                                                     ],
                                                                                                                                     /* :: */[
                                                                                                                                       /* tuple */[
-                                                                                                                                        kennedy,
-                                                                                                                                        trillium,
-                                                                                                                                        2,
-                                                                                                                                        /* White */6,
+                                                                                                                                        arboretum,
+                                                                                                                                        forest_home,
+                                                                                                                                        4,
+                                                                                                                                        /* Grey */9,
                                                                                                                                         /* None */0
                                                                                                                                       ],
                                                                                                                                       /* :: */[
                                                                                                                                         /* tuple */[
-                                                                                                                                          kennedy,
-                                                                                                                                          mann,
-                                                                                                                                          3,
-                                                                                                                                          /* Orange */5,
+                                                                                                                                          appel,
+                                                                                                                                          hasbrouck,
+                                                                                                                                          4,
+                                                                                                                                          /* Green */1,
                                                                                                                                           /* None */0
                                                                                                                                         ],
                                                                                                                                         /* :: */[
                                                                                                                                           /* tuple */[
-                                                                                                                                            kennedy,
-                                                                                                                                            mann,
-                                                                                                                                            3,
-                                                                                                                                            /* Black */7,
+                                                                                                                                            eddy,
+                                                                                                                                            noyes,
+                                                                                                                                            4,
+                                                                                                                                            /* Blue */2,
                                                                                                                                             /* None */0
                                                                                                                                           ],
                                                                                                                                           /* :: */[
                                                                                                                                             /* tuple */[
-                                                                                                                                              trillium,
-                                                                                                                                              gates,
-                                                                                                                                              2,
-                                                                                                                                              /* Grey */9,
+                                                                                                                                              mcgraw,
+                                                                                                                                              kennedy,
+                                                                                                                                              4,
+                                                                                                                                              /* Pink */4,
                                                                                                                                               /* None */0
                                                                                                                                             ],
                                                                                                                                             /* :: */[
                                                                                                                                               /* tuple */[
-                                                                                                                                                trillium,
-                                                                                                                                                ives,
-                                                                                                                                                2,
-                                                                                                                                                /* Grey */9,
+                                                                                                                                                psb,
+                                                                                                                                                island,
+                                                                                                                                                4,
+                                                                                                                                                /* Red */0,
                                                                                                                                                 /* None */0
                                                                                                                                               ],
                                                                                                                                               /* :: */[
                                                                                                                                                 /* tuple */[
-                                                                                                                                                  trillium,
-                                                                                                                                                  mann,
-                                                                                                                                                  5,
-                                                                                                                                                  /* Green */1,
+                                                                                                                                                  island,
+                                                                                                                                                  forest_home,
+                                                                                                                                                  4,
+                                                                                                                                                  /* Yellow */3,
                                                                                                                                                   /* None */0
                                                                                                                                                 ],
                                                                                                                                                 /* :: */[
                                                                                                                                                   /* tuple */[
-                                                                                                                                                    gates,
-                                                                                                                                                    schoellkopf,
-                                                                                                                                                    3,
-                                                                                                                                                    /* Green */1,
+                                                                                                                                                    island,
+                                                                                                                                                    forest_home,
+                                                                                                                                                    4,
+                                                                                                                                                    /* Orange */5,
                                                                                                                                                     /* None */0
                                                                                                                                                   ],
                                                                                                                                                   /* :: */[
                                                                                                                                                     /* tuple */[
-                                                                                                                                                      gates,
-                                                                                                                                                      ives,
-                                                                                                                                                      3,
-                                                                                                                                                      /* White */6,
+                                                                                                                                                      eco_house,
+                                                                                                                                                      rpcc,
+                                                                                                                                                      4,
+                                                                                                                                                      /* Red */0,
                                                                                                                                                       /* None */0
                                                                                                                                                     ],
                                                                                                                                                     /* :: */[
                                                                                                                                                       /* tuple */[
-                                                                                                                                                        schoellkopf,
-                                                                                                                                                        teagle,
+                                                                                                                                                        rpcc,
+                                                                                                                                                        hasbrouck,
                                                                                                                                                         4,
-                                                                                                                                                        /* Yellow */3,
+                                                                                                                                                        /* Black */7,
                                                                                                                                                         /* None */0
                                                                                                                                                       ],
                                                                                                                                                       /* :: */[
                                                                                                                                                         /* tuple */[
-                                                                                                                                                          schoellkopf,
-                                                                                                                                                          teagle,
+                                                                                                                                                          undergrad,
+                                                                                                                                                          rpcc,
                                                                                                                                                           4,
-                                                                                                                                                          /* Orange */5,
+                                                                                                                                                          /* Blue */2,
                                                                                                                                                           /* None */0
                                                                                                                                                         ],
                                                                                                                                                         /* :: */[
                                                                                                                                                           /* tuple */[
-                                                                                                                                                            schoellkopf,
-                                                                                                                                                            dairy_bar,
-                                                                                                                                                            6,
-                                                                                                                                                            /* Red */0,
+                                                                                                                                                            sigma_chi,
+                                                                                                                                                            undergrad,
+                                                                                                                                                            4,
+                                                                                                                                                            /* Pink */4,
                                                                                                                                                             /* None */0
                                                                                                                                                           ],
                                                                                                                                                           /* :: */[
                                                                                                                                                             /* tuple */[
-                                                                                                                                                              appel,
-                                                                                                                                                              mvr,
-                                                                                                                                                              3,
-                                                                                                                                                              /* Blue */2,
+                                                                                                                                                              hasbrouck,
+                                                                                                                                                              forest_home,
+                                                                                                                                                              4,
+                                                                                                                                                              /* White */6,
                                                                                                                                                               /* None */0
                                                                                                                                                             ],
                                                                                                                                                             /* :: */[
                                                                                                                                                               /* tuple */[
-                                                                                                                                                                appel,
-                                                                                                                                                                bailey,
-                                                                                                                                                                2,
-                                                                                                                                                                /* Grey */9,
+                                                                                                                                                                maplewood,
+                                                                                                                                                                farm_barn,
+                                                                                                                                                                4,
+                                                                                                                                                                /* Black */7,
                                                                                                                                                                 /* None */0
                                                                                                                                                               ],
                                                                                                                                                               /* :: */[
                                                                                                                                                                 /* tuple */[
-                                                                                                                                                                  appel,
-                                                                                                                                                                  bailey,
-                                                                                                                                                                  2,
-                                                                                                                                                                  /* Grey */9,
+                                                                                                                                                                  maplewood,
+                                                                                                                                                                  farm_barn,
+                                                                                                                                                                  4,
+                                                                                                                                                                  /* Orange */5,
                                                                                                                                                                   /* None */0
                                                                                                                                                                 ],
                                                                                                                                                                 /* :: */[
                                                                                                                                                                   /* tuple */[
-                                                                                                                                                                    bailey,
-                                                                                                                                                                    mvr,
-                                                                                                                                                                    2,
-                                                                                                                                                                    /* Yellow */3,
+                                                                                                                                                                    arboretum,
+                                                                                                                                                                    vet,
+                                                                                                                                                                    5,
+                                                                                                                                                                    /* Red */0,
                                                                                                                                                                     /* None */0
                                                                                                                                                                   ],
                                                                                                                                                                   /* :: */[
                                                                                                                                                                     /* tuple */[
-                                                                                                                                                                      bailey,
-                                                                                                                                                                      mvr,
-                                                                                                                                                                      2,
-                                                                                                                                                                      /* Red */0,
+                                                                                                                                                                      vet,
+                                                                                                                                                                      plantations,
+                                                                                                                                                                      5,
+                                                                                                                                                                      /* White */6,
                                                                                                                                                                       /* None */0
                                                                                                                                                                     ],
                                                                                                                                                                     /* :: */[
                                                                                                                                                                       /* tuple */[
-                                                                                                                                                                        mann,
-                                                                                                                                                                        ives,
-                                                                                                                                                                        4,
+                                                                                                                                                                        eddy,
+                                                                                                                                                                        creek,
+                                                                                                                                                                        5,
                                                                                                                                                                         /* Yellow */3,
                                                                                                                                                                         /* None */0
                                                                                                                                                                       ],
                                                                                                                                                                       /* :: */[
                                                                                                                                                                         /* tuple */[
-                                                                                                                                                                          mann,
-                                                                                                                                                                          barton,
-                                                                                                                                                                          2,
-                                                                                                                                                                          /* Grey */9,
+                                                                                                                                                                          undergrad,
+                                                                                                                                                                          eco_house,
+                                                                                                                                                                          5,
+                                                                                                                                                                          /* Green */1,
                                                                                                                                                                           /* None */0
                                                                                                                                                                         ],
                                                                                                                                                                         /* :: */[
                                                                                                                                                                           /* tuple */[
-                                                                                                                                                                            mann,
-                                                                                                                                                                            barn,
-                                                                                                                                                                            2,
-                                                                                                                                                                            /* Grey */9,
+                                                                                                                                                                            schoellkopf,
+                                                                                                                                                                            riley_robb,
+                                                                                                                                                                            5,
+                                                                                                                                                                            /* Orange */5,
                                                                                                                                                                             /* None */0
                                                                                                                                                                           ],
                                                                                                                                                                           /* :: */[
                                                                                                                                                                             /* tuple */[
-                                                                                                                                                                              mann,
-                                                                                                                                                                              mvr,
-                                                                                                                                                                              2,
+                                                                                                                                                                              schoellkopf,
+                                                                                                                                                                              riley_robb,
+                                                                                                                                                                              5,
                                                                                                                                                                               /* White */6,
                                                                                                                                                                               /* None */0
                                                                                                                                                                             ],
                                                                                                                                                                             /* :: */[
                                                                                                                                                                               /* tuple */[
-                                                                                                                                                                                mann,
-                                                                                                                                                                                mvr,
-                                                                                                                                                                                2,
-                                                                                                                                                                                /* Green */1,
+                                                                                                                                                                                bridge,
+                                                                                                                                                                                sigma_chi,
+                                                                                                                                                                                5,
+                                                                                                                                                                                /* Black */7,
                                                                                                                                                                                 /* None */0
                                                                                                                                                                               ],
                                                                                                                                                                               /* :: */[
                                                                                                                                                                                 /* tuple */[
-                                                                                                                                                                                  ives,
-                                                                                                                                                                                  teagle,
-                                                                                                                                                                                  1,
-                                                                                                                                                                                  /* Grey */9,
+                                                                                                                                                                                  sigma_chi,
+                                                                                                                                                                                  eco_house,
+                                                                                                                                                                                  5,
+                                                                                                                                                                                  /* Green */1,
                                                                                                                                                                                   /* None */0
                                                                                                                                                                                 ],
                                                                                                                                                                                 /* :: */[
                                                                                                                                                                                   /* tuple */[
-                                                                                                                                                                                    ives,
-                                                                                                                                                                                    barton,
-                                                                                                                                                                                    3,
-                                                                                                                                                                                    /* Black */7,
+                                                                                                                                                                                    sigma_chi,
+                                                                                                                                                                                    eco_house,
+                                                                                                                                                                                    5,
+                                                                                                                                                                                    /* Pink */4,
                                                                                                                                                                                     /* None */0
                                                                                                                                                                                   ],
                                                                                                                                                                                   /* :: */[
                                                                                                                                                                                     /* tuple */[
-                                                                                                                                                                                      teagle,
-                                                                                                                                                                                      dairy_bar,
+                                                                                                                                                                                      riley_robb,
+                                                                                                                                                                                      vet,
                                                                                                                                                                                       5,
                                                                                                                                                                                       /* Blue */2,
                                                                                                                                                                                       /* None */0
                                                                                                                                                                                     ],
                                                                                                                                                                                     /* :: */[
                                                                                                                                                                                       /* tuple */[
-                                                                                                                                                                                        teagle,
-                                                                                                                                                                                        bartels,
-                                                                                                                                                                                        2,
-                                                                                                                                                                                        /* Grey */9,
+                                                                                                                                                                                        commons,
+                                                                                                                                                                                        becker,
+                                                                                                                                                                                        6,
+                                                                                                                                                                                        /* Blue */2,
                                                                                                                                                                                         /* None */0
                                                                                                                                                                                       ],
                                                                                                                                                                                       /* :: */[
                                                                                                                                                                                         /* tuple */[
-                                                                                                                                                                                          teagle,
-                                                                                                                                                                                          barton,
-                                                                                                                                                                                          2,
-                                                                                                                                                                                          /* Grey */9,
+                                                                                                                                                                                          a_lot,
+                                                                                                                                                                                          golf,
+                                                                                                                                                                                          6,
+                                                                                                                                                                                          /* Yellow */3,
                                                                                                                                                                                           /* None */0
                                                                                                                                                                                         ],
                                                                                                                                                                                         /* :: */[
                                                                                                                                                                                           /* tuple */[
-                                                                                                                                                                                            teagle,
-                                                                                                                                                                                            barton,
-                                                                                                                                                                                            2,
-                                                                                                                                                                                            /* Grey */9,
+                                                                                                                                                                                            golf,
+                                                                                                                                                                                            forest_home,
+                                                                                                                                                                                            6,
+                                                                                                                                                                                            /* Black */7,
                                                                                                                                                                                             /* None */0
                                                                                                                                                                                           ],
                                                                                                                                                                                           /* :: */[
                                                                                                                                                                                             /* tuple */[
-                                                                                                                                                                                              mvr,
-                                                                                                                                                                                              barn,
-                                                                                                                                                                                              2,
-                                                                                                                                                                                              /* Black */7,
+                                                                                                                                                                                              appel,
+                                                                                                                                                                                              forest_home,
+                                                                                                                                                                                              6,
+                                                                                                                                                                                              /* White */6,
                                                                                                                                                                                               /* None */0
                                                                                                                                                                                             ],
                                                                                                                                                                                             /* :: */[
                                                                                                                                                                                               /* tuple */[
-                                                                                                                                                                                                mvr,
-                                                                                                                                                                                                barn,
-                                                                                                                                                                                                2,
-                                                                                                                                                                                                /* Orange */5,
+                                                                                                                                                                                                eco_house,
+                                                                                                                                                                                                a_lot,
+                                                                                                                                                                                                6,
+                                                                                                                                                                                                /* Green */1,
                                                                                                                                                                                                 /* None */0
                                                                                                                                                                                               ],
                                                                                                                                                                                               /* :: */[
                                                                                                                                                                                                 /* tuple */[
-                                                                                                                                                                                                  barn,
-                                                                                                                                                                                                  barton,
-                                                                                                                                                                                                  2,
-                                                                                                                                                                                                  /* Grey */9,
+                                                                                                                                                                                                  eddy,
+                                                                                                                                                                                                  creek,
+                                                                                                                                                                                                  6,
+                                                                                                                                                                                                  /* Orange */5,
                                                                                                                                                                                                   /* None */0
                                                                                                                                                                                                 ],
                                                                                                                                                                                                 /* :: */[
                                                                                                                                                                                                   /* tuple */[
-                                                                                                                                                                                                    barn,
-                                                                                                                                                                                                    barton,
-                                                                                                                                                                                                    2,
+                                                                                                                                                                                                    golf,
+                                                                                                                                                                                                    arboretum,
+                                                                                                                                                                                                    6,
                                                                                                                                                                                                     /* Grey */9,
                                                                                                                                                                                                     /* None */0
                                                                                                                                                                                                   ],
                                                                                                                                                                                                   /* :: */[
                                                                                                                                                                                                     /* tuple */[
-                                                                                                                                                                                                      barton,
-                                                                                                                                                                                                      bartels,
-                                                                                                                                                                                                      2,
-                                                                                                                                                                                                      /* Grey */9,
+                                                                                                                                                                                                      farm_barn,
+                                                                                                                                                                                                      vet,
+                                                                                                                                                                                                      6,
+                                                                                                                                                                                                      /* Pink */4,
                                                                                                                                                                                                       /* None */0
                                                                                                                                                                                                     ],
                                                                                                                                                                                                     /* :: */[
                                                                                                                                                                                                       /* tuple */[
-                                                                                                                                                                                                        bartels,
+                                                                                                                                                                                                        kennedy,
                                                                                                                                                                                                         dairy_bar,
-                                                                                                                                                                                                        4,
-                                                                                                                                                                                                        /* Pink */4,
+                                                                                                                                                                                                        6,
+                                                                                                                                                                                                        /* Red */0,
                                                                                                                                                                                                         /* None */0
                                                                                                                                                                                                       ],
                                                                                                                                                                                                       /* [] */0
