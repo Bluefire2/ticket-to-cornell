@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Hands from './containers/hands';
 
 import Map from './containers/map';
 
@@ -10,6 +11,9 @@ class App extends Component {
             <div className="App">
                 <div id="map-container">
                     <Map/>
+                </div>
+                <div id="bottom-pane">
+                    <Hands/>
                 </div>
             </div>
         );
