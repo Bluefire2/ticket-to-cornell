@@ -165,7 +165,7 @@ let routes =
 (golf,forest_home,6,Black,None);
 (appel,forest_home,6,White,None);
 (eco_house,a_lot,6,Green,None);
-(eddy,creek,6,Orange,None);
+(commons,noyes,6,Orange,None);
 (golf,arboretum,6,Grey,None);
 (farm_barn,vet,6,Pink,None);
 (kennedy,dairy_bar,6,Red,None);

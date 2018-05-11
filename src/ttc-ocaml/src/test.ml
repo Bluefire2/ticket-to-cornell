@@ -226,10 +226,10 @@ let tests =
   "add faceup causing redo 3" >:: (fun _ -> assert_equal (true) (same_lst ([Red;Red;Red])  (tthd (Components.TrainDeck.add_faceup
   [Red;Blue;Red;Red;Green;Green;Red] [] [Red;Red]) ) ) );
 
-  "draw faceup" >:: (fun _ -> assert_equal ([Red],[Blue;Green;Red;Pink],[]) (Components.TrainDeck.draw_faceup [Red;Blue;Green;Red;Pink] Red [Red] [] ));
-  "draw faceup deck empty" >:: (fun _ -> assert_equal ([Red],[Red;Red],[]) (Components.TrainDeck.draw_faceup [] Red [Red] [Red;Red;Red] ));
-  "draw faceup causing redo" >:: (fun _ -> assert_equal ([Pink;Blue;Green;Yellow;Orange], [], [Red;Red;Blue;Red;Yellow])
-    (Components.TrainDeck.draw_faceup [Red;Pink;Blue;Green;Yellow;Orange] Green [Red;Blue;Green;Red;Yellow] []));
+  "draw faceup" >:: (fun _ -> assert_equal (Red, ([Red],[Blue;Green;Red;Pink],[])) (Components.TrainDeck.draw_faceup [Red;Blue;Green;Red;Pink] 0 [Red] [] ));
+  "draw faceup deck empty" >:: (fun _ -> assert_equal (Red, ([Red],[Red;Red],[])) (Components.TrainDeck.draw_faceup [] 0 [Red] [Red;Red;Red] ));
+  "draw faceup causing redo" >:: (fun _ -> assert_equal (Green, ([Pink;Blue;Green;Yellow;Orange], [], [Red;Red;Blue;Red;Yellow]))
+    (Components.TrainDeck.draw_faceup [Red;Pink;Blue;Green;Yellow;Orange] 2 [Red;Blue;Green;Red;Yellow] []));
   (* checked [init_faceup] in utop. It shuffles every time, with no more than two of the
    * same card showing at a given time. *)
 
