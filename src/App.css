@@ -117,8 +117,7 @@
     border: 3px solid darkgreen;
 }
 
-#train-deck {
-    background-image: url('./images/tcat_deck.png');
+#deck {
     width: 322px;
     height: 269px;
     background-size: cover;
@@ -127,7 +126,7 @@
     cursor: pointer;
 }
 
-#train-deck-text {
+#deck-text {
     line-height: 269px;
     text-align: center;
     font-weight: bold;

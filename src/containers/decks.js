@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import TrainDeck from '../components/train_deck';
-import {drawTrainCard} from "../actions/index";
+import Deck from '../components/deck';
+import {drawTrainCard, takeRoute} from "../actions/index";
+
+const trainDeckImage = require('../images/tcat_deck.png');
 
 class Decks extends Component {
     render () {
         return (
             <div id="decks-container">
-                <TrainDeck clickHandler={this.props.drawTrainCard}/>
+                <Deck clickHandler={this.props.drawTrainCard}
+                      backgroundImage={`url(${trainDeckImage})`}
+                      text="Draw Train Card"/>
             </div>
         )
     }
@@ -16,7 +20,8 @@ class Decks extends Component {
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
-        drawTrainCard
+        drawTrainCard,
+        takeRoute
     }, dispatch);
 };
 
