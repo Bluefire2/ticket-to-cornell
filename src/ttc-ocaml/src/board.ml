@@ -23,150 +23,150 @@ let is_taken r =
   | (_,_,_,_,None) -> false
   | _ -> true
 
-let becker = ("House Becker", 198.,994.)
-let bethe = ("House Bethe", 284.,1121.)
-let noyes = ("Noyes Community Center", 338.,1189.)
-let risley = ("Risley", 718.,579.)
+let eco_house = ("Ecology House", 574., 141.)
+let a_lot = ("A LOT", 1051., 106.)
+let golf = ("Golf Center", 1676., 187.)
+let hasbrouck = ("Hasbrouck Community Center", 1408., 290.)
 let rpcc = ("RPCC", 1015.,322.)
-let helen_newman = ("Helen Newman", 1023.,593.)
 let appel = ("Appel Commons", 1107.,539.)
 let mcgraw = ("McGraw Tower", 501.,1097.)
-let wsh = ("Willard Straight Hall", 466.,1178.)
-let psb = ("Physical Sciences Building", 726.,875.)
-let gannett = ("Cornell Health", 468.,1254.)
-let store = ("Cornell Store", 563., 1159.)
-let schwartz = ("Schwartz Center", 460.,1543.)
+let risley = ("Risley", 718.,579.)
 let eddy = ("Eddy Gate", 341.,1549.)
-let casc = ("Cascadilla Gorge", 477.,1489.)
-let ctb = ("Collegetown Bagels", 501.,1554.)
-let olin = ("Olin Hall", 539.,1278.)
-let carpenter = ("Carpenter Hall", 558.,1332.)
-let rhodes = ("Rhodes Hall", 764.,1467.)
-let duffield = ("Duffield Hall", 674.,1338.)
-let statler = ("Statler Hotel", 699.,1191.)
-let uris = ("Uris Hall", 699.,1116.)
-let gates = ("Gates Hall", 764.,1335.)
-let klarman = ("Klarman Hall", 647.,948.)
-let trillium = ("Trillium", 899.,1061.)
-let kennedy = ("Kennedy Hall", 893.,1021.)
-let warren = ("Warren Hall", 1048.,937.)
-let mann = ("Mann Library", 1086.,972.)
-let ives = ("Ives Hall", 766.,1097.)
-let barton = ("Barton Hall", 801.,1235.)
-let teagle = ("Teagle Hall", 910.,1248.)
+let noyes = ("Noyes Community Center", 338.,1189.)
+let bartels = ("Bartels Hall",1094.,1256.)
 let schoellkopf = ("Schoellkopf Field", 940.,1400.)
 let dairy_bar = ("Dairy Bar", 1486.,1078.)
-let mvr = ("Martha Van Rensselaer Hall", 934.,875.)
-let barn = ("Big Red Barn", 774.,1015.)
-let bailey = ("Bailey Hall", 839.,929.)
-let bartels = ("Bartels Hall",1094.,1256.)
+let kennedy = ("Kennedy Hall", 893.,1021.)
+let bridge = ("Stewart Ave Bridge", 184., 644.)
+let museum = ("Johnson Museum", 428., 785.)
+let sigma_chi = ("Sigma Chi", 95., 257.)
+let undergrad = ("Undergraduate Admissions", 498., 498.)
+let ckb = ("CKB Quad", 934., 468.)
+let forest_home = ("Forest Home", 1673., 677.)
+let beebe = ("Beebe Lake", 967., 699.)
+let island = ("Werly Island", 1208., 780.)
+let psb = ("Physical Sciences Building", 726.,875.)
+let mann = ("Mann Library", 1086.,972.)
+let engineering = ("Engineering Quad", 615., 1362.)
+let commons = ("The Commons", 65., 1673.)
+let maplewood = ("Maplewood Park", 1156., 1671.)
+let vet = ("Veterinary School", 1863., 1107.)
+let riley_robb = ("Riley-Robb Hall", 1430., 1245.)
+let barton = ("Barton Hall", 801.,1235.)
+let farm_barn = ("Blair Farm Barn", 1562., 1492.)
+let plantations = ("Plantations", 1359., 845.)
+let arboretum = ("Newman Arboretum", 2028., 712.)
+let filtration = ("Filtration Plant", 1787., 858.)
+let creek = ("Cascadilla Creek", 842., 1579.)
+let becker = ("House Becker", 198.,994.)
 
-let locations = [ becker; bethe; noyes; risley; rpcc; helen_newman; appel;
-                  mcgraw; wsh; psb; gannett; store; schwartz; eddy; casc;
-                  olin; carpenter; rhodes; duffield; statler; uris; gates;
-                  klarman; trillium; kennedy; warren; mann; ives; barton;
-                  teagle; schoellkopf; dairy_bar; mvr; barn; bailey; bartels ]
+let locations = [ eco_house; a_lot; golf; hasbrouck; rpcc; appel; mcgraw; risley;
+                  eddy; noyes; bartels; schoellkopf; dairy_bar; kennedy; bridge;
+                  museum; sigma_chi; undergrad; ckb; forest_home; beebe; island;
+                  psb; mann; engineering; commons; maplewood; vet; riley_robb;
+                  barton; farm_barn; plantations; arboretum; filtration; creek;
+                  becker ]
 
 let routes =
 [
-(becker,bethe,1,Grey,None);
-(becker,bethe,1,Grey,None);
-(becker,risley,3,Grey,None);
-(bethe,noyes,1,Grey,None);
-(bethe,noyes,1,Grey,None);
-(bethe,risley,4,Grey,None);
-(bethe,mcgraw,6,Yellow,None);
-(noyes,schwartz,5,Green,None);
-(noyes,schwartz,5,Pink,None);
-(noyes,gannett,6,Blue,None);
-(schwartz,eddy,3,Yellow,None);
-(schwartz,eddy,3,Pink,None);
-(schwartz,gannett,5,Orange,None);
-(schwartz,gannett,5,White,None);
-(eddy,casc,2,Grey,None);
-(eddy,ctb,3,Grey,None);
-(eddy,carpenter,6,Black,None);
-(casc,gannett,3,Orange,None);
-(gannett,mcgraw,3,Pink,None);
-(gannett,wsh,3,Red,None);
-(gannett,wsh,3,Yellow,None);
-(risley,mcgraw,4,Grey,None);
-(risley,rpcc,6,White,None);
-(mcgraw,wsh,4,Green,None);
-(mcgraw,klarman,5,Red,None);
-(mcgraw,psb,6,Orange,None);
-(mcgraw,rpcc,4,Blue,None);
-(wsh,store,4,Pink,None);
-(wsh,uris,4,Black,None);
-(wsh,uris,4,Orange,None);
-(wsh,statler,4,Red,None);
-(wsh,olin,2,Grey,None);
-(wsh,ctb,5,White,None);
-(ctb,olin,3,Grey,None);
-(ctb,carpenter,3,Grey,None);
-(olin,carpenter,2,Grey,None);
-(olin,statler,3,Blue,None);
-(carpenter,statler,5,Yellow,None);
-(carpenter,rhodes,4,Red,None);
-(carpenter,duffield,6,Green,None);
-(rpcc,psb,4,Black,None);
-(rpcc,helen_newman,6,Grey,None);
-(psb,klarman,2,Grey,None);
-(psb,klarman,2,Grey,None);
-(psb,kennedy,3,Red,None);
-(psb,warren,6,Pink,None);
-(psb,helen_newman,3,Grey,None);
-(klarman,uris,1,Grey,None);
-(klarman,uris,1,Grey,None);
-(klarman,kennedy,4,Blue,None);
-(uris,statler,2,Grey,None);
-(uris,statler,2,Grey,None);
-(uris,trillium,2,Blue,None);
-(uris,trillium,2,Pink,None);
-(statler,rhodes,2,Grey,None);
-(statler,rhodes,2,Grey,None);
-(statler,gates,2,Grey,None);
-(rhodes,duffield,1,Grey,None);
-(rhodes,duffield,1,Grey,None);
-(rhodes,gates,2,Grey,None);
-(duffield,schoellkopf,2,Grey,None);
-(helen_newman,appel,5,Black,None);
-(helen_newman,warren,2,Grey,None);
-(warren,kennedy,4,White,None);
-(warren,mann,2,Grey,None);
-(warren,appel,3,Grey,None);
-(kennedy,trillium,2,Green,None);
-(kennedy,trillium,2,White,None);
-(kennedy,mann,3,Orange,None);
-(kennedy,mann,3,Black,None);
-(trillium,gates,2,Grey,None);
-(trillium,ives,2,Grey,None);
-(trillium,mann,5,Green,None);
-(gates,schoellkopf,3,Green,None);
-(gates,ives,3,White,None);
-(schoellkopf,teagle,4,Yellow,None);
-(schoellkopf,teagle,4,Orange,None);
-(schoellkopf,dairy_bar,6,Red,None);
-(appel,mvr,3,Blue,None);
-(appel,bailey,2,Grey,None);
-(appel,bailey,2,Grey,None);
-(bailey,mvr,2,Yellow,None);
-(bailey,mvr,2,Red,None);
-(mann,ives,4,Yellow,None);
-(mann,barton,2,Grey,None);
-(mann,barn,2,Grey,None);
-(mann,mvr,2,White,None);
-(mann,mvr,2,Green,None);
-(ives,teagle,1,Grey,None);
-(ives,barton,3,Black,None);
-(teagle,dairy_bar,5,Blue,None);
-(teagle,bartels,2,Grey,None);
-(teagle,barton,2,Grey,None);
-(teagle,barton,2,Grey,None);
-(mvr,barn,2,Black,None);
-(mvr,barn,2,Orange,None);
-(barn,barton,2,Grey,None);
-(barn,barton,2,Grey,None);
-(barton,bartels,2,Grey,None);
-(bartels,dairy_bar,4,Pink,None);
+(ckb,appel,1,Grey,None);
+(ckb,appel,1,Grey,None);
+(dairy_bar,riley_robb,1,Grey,None);
+(dairy_bar,riley_robb,1,Grey,None);
+(rpcc,ckb,1,Grey,None);
+(rpcc,ckb,1,Grey,None);
+(rpcc,appel,1,Grey,None);
+(island,plantations,1,Grey,None);
+(island,plantations,1,Grey,None);
+(ckb,risley,2,Blue,None);
+(noyes,mcgraw,2,Grey,None);
+(noyes,mcgraw,2,Grey,None);
+(creek,schoellkopf,2,Grey,None);
+(creek,schoellkopf,2,Grey,None);
+(beebe,appel,2,Pink,None);
+(engineering,barton,2,Grey,None);
+(engineering,barton,2,Grey,None);
+(beebe,island,2,Black,None);
+(beebe,island,2,Orange,None);
+(kennedy,mann,2,Grey,None);
+(kennedy,mann,2,Grey,None);
+(undergrad,risley,2,Green,None);
+(undergrad,risley,2,White,None);
+(dairy_bar,plantations,2,White,None);
+(dairy_bar,plantations,2,Green,None);
+(mann,plantations,2,Grey,None);
+(barton,schoellkopf,2,Yellow,None);
+(barton,schoellkopf,2,Red,None);
+(undergrad,museum,2,Grey,None);
+(psb,kennedy,2,Grey,None);
+(psb,kennedy,2,Grey,None);
+(schoellkopf,bartels,2,Grey,None);
+(schoellkopf,bartels,2,Grey,None);
+(engineering,schoellkopf,2,Grey,None);
+(a_lot,rpcc,2,Grey,None);
+(forest_home,filtration,2,Grey,None);
+(museum,bridge,2,Grey,None);
+(filtration,vet,2,Grey,None);
+(becker,noyes,2,Grey,None);
+(risley,beebe,2,Grey,None);
+(kennedy,barton,2,Grey,None);
+(mcgraw,engineering,2,Grey,None);
+(becker,mcgraw,2,Grey,None);
+(appel,island,2,Grey,None);
+(kennedy,bartels,2,Grey,None);
+(becker,museum,3,Yellow,None);
+(becker,museum,3,Pink,None);
+(eddy,engineering,3,Grey,None);
+(hasbrouck,golf,3,Green,None);
+(museum,psb,3,Red,None);
+(museum,psb,3,Yellow,None);
+(risley,psb,3,White,None);
+(becker,bridge,3,Blue,None);
+(commons,eddy,3,Black,None);
+(creek,maplewood,3,Orange,None);
+(creek,maplewood,3,Black,None);
+(riley_robb,farm_barn,3,Grey,None);
+(bartels,dairy_bar,3,Orange,None);
+(bridge,undergrad,3,Pink,None);
+(mcgraw,psb,3,Grey,None);
+(dairy_bar,vet,3,Grey,None);
+(plantations,filtration,3,Blue,None);
+(becker,psb,3,Red,None);
+(filtration,arboretum,3,Grey,None);
+(museum,risley,3,Grey,None);
+(schoellkopf,farm_barn,4,Yellow,None);
+(a_lot,hasbrouck,4,Grey,None);
+(arboretum,forest_home,4,Grey,None);
+(appel,hasbrouck,4,Green,None);
+(eddy,noyes,4,Blue,None);
+(mcgraw,kennedy,4,Pink,None);
+(psb,island,4,Red,None);
+(island,forest_home,4,Yellow,None);
+(island,forest_home,4,Orange,None);
+(eco_house,rpcc,4,Red,None);
+(rpcc,hasbrouck,4,Black,None);
+(undergrad,rpcc,4,Blue,None);
+(sigma_chi,undergrad,4,Pink,None);
+(hasbrouck,forest_home,4,White,None);
+(maplewood,farm_barn,4,Black,None);
+(maplewood,farm_barn,4,Orange,None);
+(arboretum,vet,5,Red,None);
+(vet,plantations,5,White,None);
+(eddy,creek,5,Yellow,None);
+(undergrad,eco_house,5,Green,None);
+(schoellkopf,riley_robb,5,Orange,None);
+(schoellkopf,riley_robb,5,White,None);
+(bridge,sigma_chi,5,Black,None);
+(sigma_chi,eco_house,5,Green,None);
+(sigma_chi,eco_house,5,Pink,None);
+(riley_robb,vet,5,Blue,None);
+(commons,becker,6,Blue,None);
+(a_lot,golf,6,Yellow,None);
+(golf,forest_home,6,Black,None);
+(appel,forest_home,6,White,None);
+(eco_house,a_lot,6,Green,None);
+(eddy,creek,6,Orange,None);
+(golf,arboretum,6,Grey,None);
+(farm_barn,vet,6,Pink,None);
+(kennedy,dairy_bar,6,Red,None);
 ]

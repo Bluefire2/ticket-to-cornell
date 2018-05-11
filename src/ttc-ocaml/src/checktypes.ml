@@ -1,24 +1,24 @@
 module type STATE = sig
-  type state
-  val init_state : int -> State.state
-  val current_player : State.state -> Player.player
-  val players : State. state -> Player.player list
-  val routes : State.state -> Board.route list
-  val destination_items : State.state -> (Components.DestinationDeck.t *
-                                          Components.DestinationDeck.tr)
-  val train_items : State.state -> (Components.TrainDeck.t * Components.TrainDeck.t
-                                    * Components.TrainDeck.tr)
-
-  val message : State.state -> string
-  val turn_ended : State.state -> bool
-  val score : State.state -> Player.player -> int
-  val next_player : State.state -> State.state
-  val draw_card_pile : State.state -> State.state
-  val draw_card_facing_up : State.state -> Components.TrainDeck.card -> State.state
-  val take_route : State.state -> State.state
-  val decided_routes : State.state -> Components.DestinationDeck.card list -> State.state
-  val select_route : State.state -> Board.route -> State.state
-  val longest_route : State.state -> Player.player
+type state
+val init_state : int -> State.state
+val current_player : State.state -> Player.player
+val players : State.state -> Player.player list
+val routes : State.state -> Board.route list
+val destination_items : State.state -> (Components.DestinationDeck.t * Components.DestinationDeck.tr)
+val train_items : State.state -> (Components.TrainDeck.t * Components.TrainDeck.t * Components.TrainDeck.tr)
+val message : State.state -> string
+val turn_ended : State.state -> bool
+val choose_destinations : State.state -> Components.DestinationDeck.card list
+val score : State.state -> Player.player -> int
+val setup_state : State.state -> State.state
+val next_player : State.state -> State.state
+val draw_card_pile : State.state -> State.state
+val draw_card_facing_up : State.state -> Components.TrainDeck.card -> State.state
+val take_route : State.state -> State.state
+val decided_routes : State.state -> Components.DestinationDeck.card list -> State.state
+val decided_routes_setup : State.state -> Components.DestinationDeck.card list -> State.state
+val select_route : State.state -> Board.route -> State.state
+val longest_route : State.state -> Player.player
 end
 
 module type COMPONENTS = sig

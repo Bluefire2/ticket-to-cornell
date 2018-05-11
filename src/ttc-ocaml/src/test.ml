@@ -18,36 +18,36 @@ let train_deck : train_color list =
   ]
 
 let dest_ticket_deck : destination_ticket list = [
-  {loc1 = "Bailey Hall"; loc2 = "Dairy Bar"; points = 12};
-  {loc1 = "McGraw Tower"; loc2 = "Eddy Gate"; points = 8};
-  {loc1 = "Appel Commons"; loc2 = "Schoellkopf Field"; points = 13};
-  {loc1 = "RPCC"; loc2 = "Duffield Hall"; points = 12};
-  {loc1 = "House Becker"; loc2 = "Appel Commons"; points = 20};
-  {loc1 = "Kennedy Hall"; loc2 = "Olin Hall"; points = 9};
-  {loc1 = "Martha Van Rensselaer Hall"; loc2 = "Teagle Hall"; points = 6};
-  {loc1 = "House Bethe"; loc2 = "Eddy Gate"; points = 9};
-  {loc1 = "Eddy Gate"; loc2 = "Kennedy Hall"; points = 16};
-  {loc1 = "Noyes Community Center"; loc2 = "Collegetown Bagels"; points = 11};
-  {loc1 = "Risley"; loc2 = "Cornell Health"; points = 7};
-  {loc1 = "Appel Commons"; loc2 = "Teagle Hall"; points = 9};
-  {loc1 = "Risley"; loc2 = "Collegetown Bagels"; points = 13};
-  {loc1 = "RPCC"; loc2 = "Gates Hall"; points = 11};
-  {loc1 = "Physical Sciences Building"; loc2 = "Duffield Hall"; points = 8};
-  {loc1 = "Uris Hall"; loc2 = "Duffield Hall"; points = 5};
-  {loc1 = "Eddy Gate"; loc2 = "Martha Van Rensselaer Hall"; points = 21};
+  {loc1 = "Eddy Gate"; loc2 = "Golf Center"; points = 22};
+  {loc1 = "Sigma Chi"; loc2 = "Veterinary School"; points = 21};
+  {loc1 = "A LOT"; loc2 = "Blair Farm Barn"; points = 20};
+  {loc1 = "Ecology House"; loc2 = "Newman Arboretum"; points = 20};
   {loc1 = "Schwartz Center"; loc2 = "Teagle Hall"; points = 17};
-  {loc1 = "Willard Straight Hall"; loc2 = "Mann Library"; points = 11};
   {loc1 = "Noyes Community Center"; loc2 = "Ives Hall"; points = 17};
+  {loc1 = "Eddy Gate"; loc2 = "Kennedy Hall"; points = 16};
+  {loc1 = "Appel Commons"; loc2 = "Schoellkopf Field"; points = 13};
+  {loc1 = "Risley"; loc2 = "Collegetown Bagels"; points = 13};
   {loc1 = "House Becker"; loc2 = "Olin Hall"; points = 13};
-  {loc1 = "Kennedy Hall"; loc2 = "Schoellkopf Field"; points = 12};
-  {loc1 = "Willard Straight Hall"; loc2 = "Carpenter Hall"; points = 4};
-  {loc1 = "Physical Sciences Building"; loc2 = "Carpetner Hall"; points = 10};
+  {loc1 = "Bailey Hall"; loc2 = "Dairy Bar"; points = 12};
+  {loc1 = "RPCC"; loc2 = "Duffield Hall"; points = 12};
   {loc1 = "Helen Newman Hall"; loc2 = "Ives Hall"; points = 12};
-  {loc1 = "Eddy Gate"; loc2 = "Dairy Bar"; points = 20};
-  {loc1 = "Warren Hall"; loc2 = "Dairy Bar"; points = 10};
+  {loc1 = "Kennedy Hall"; loc2 = "Schoellkopf Field"; points = 12};
+  {loc1 = "RPCC"; loc2 = "Gates Hall"; points = 11};
   {loc1 = "Rhodes Hall"; loc2 = "Martha Van Rensselaer Hall"; points = 11};
-  {loc1 = "House Bethe"; loc2 = "Martha Van Rensselaer Hall"; points = 22};
+  {loc1 = "Willard Straight Hall"; loc2 = "Mann Library"; points = 11};
+  {loc1 = "Noyes Community Center"; loc2 = "Collegetown Bagels"; points = 11};
+  {loc1 = "Physical Sciences Building"; loc2 = "Carpetner Hall"; points = 10};
+  {loc1 = "Warren Hall"; loc2 = "Dairy Bar"; points = 10};
   {loc1 = "Helen Newman Hall"; loc2 = "Statler Hotel"; points = 9};
+  {loc1 = "House Bethe"; loc2 = "Eddy Gate"; points = 9};
+  {loc1 = "Kennedy Hall"; loc2 = "Olin Hall"; points = 9};
+  {loc1 = "Appel Commons"; loc2 = "Teagle Hall"; points = 9};
+  {loc1 = "Physical Sciences Building"; loc2 = "Duffield Hall"; points = 8};
+  {loc1 = "McGraw Tower"; loc2 = "Eddy Gate"; points = 8};
+  {loc1 = "Risley"; loc2 = "Cornell Health"; points = 7};
+  {loc1 = "Martha Van Rensselaer Hall"; loc2 = "Teagle Hall"; points = 6};
+  {loc1 = "Uris Hall"; loc2 = "Duffield Hall"; points = 5};
+  {loc1 = "Willard Straight Hall"; loc2 = "Carpenter Hall"; points = 4};
 ]
 
 let test_list1 =
