@@ -16,12 +16,12 @@ let ai_setup st =
   let st' = setup_state st in
   let keep_tickets = match choose_destinations st' with
     | {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] ->
-      if a = c || a = d || b = c || b = d then {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::[] else
-      if a = e || a = f || b = e || b = f then {loc1 = a; loc2 = b; points = x}::{loc1 = e; loc2 = f; points = z}::[] else
-      if c = e || c = f || d = e || d = f then {loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] else
-      if max x y z = x && min x y z = y then {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::[] else
-      if max x y z = x && min x y z = z then {loc1 = a; loc2 = b; points = x}::{loc1 = e; loc2 = f; points = z}::[] else
-      {loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[]
+      if a = c || a = d || b = c || b = d then [0; 1] else
+      if a = e || a = f || b = e || b = f then [0; 2] else
+      if c = e || c = f || d = e || d = f then [1; 2] else
+      if max x y z = x && min x y z = y then [0; 1] else
+      if max x y z = x && min x y z = z then [0; 2] else
+      [1; 2]
     | _ -> failwith "not possible"
   in decided_routes_setup st' keep_tickets
 

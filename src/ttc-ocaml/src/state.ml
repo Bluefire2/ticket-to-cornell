@@ -60,9 +60,14 @@ let update_players i new_p lst =
     else update_loop (i+1) new_i new_p (acc @ [h]) t in
   update_loop 0 i new_p [] lst
 
-let decided_routes_setup st tickets =
-  if List.length tickets >= 2 then
-    (  let p = current_player st in
+let decided_routes_setup st indexes =
+  if List.length indexes >= 2 then
+    (  let choose = choose_destinations st in
+      let rec loop acc = function
+          | [] -> acc
+          | i::t -> loop ((List.nth choose i)::acc) t in
+      let tickets = loop [] indexes in
+      let p = current_player st in
        let p' = update_destination_tickets p tickets in
        let i = st.player_index in
        { st with players = update_players i p' st.players;
@@ -110,11 +115,16 @@ let setup_state st =
   let st2 = draw_card_pile st1 in
   take_route st2
 
-let decided_routes st tickets =
-  if List.length tickets >= 1 then
-    (  let p = current_player st in
-       let p' = update_destination_tickets p tickets in
-       let i = st.player_index in
+let decided_routes st indexes =
+  if List.length indexes >= 1 then
+    ( let choose = choose_destinations st in
+      let rec loop acc = function
+          | [] -> acc
+          | i::t -> loop ((List.nth choose i)::acc) t in
+      let tickets = loop [] indexes in
+      let p = current_player st in
+      let p' = update_destination_tickets p tickets in
+      let i = st.player_index in
        { st with players = update_players i p' st.players;
                  choose_destinations = [];
                  taking_routes = false;
