@@ -17,10 +17,14 @@ val route_score : route -> int
  * by a player. *)
 val is_taken : route -> bool
 
+(* [get_length] returns the route length. *)
 val get_length : route -> int
 
+(* [get_color] returns the color of the route on the board. *)
 val get_color : route -> train_color
 
+(* [routes] is the total list of the routes on the map. *)
 val routes : route list
 
+(* [locations] is a list of all of the locations on the board. *)
 val locations: location list

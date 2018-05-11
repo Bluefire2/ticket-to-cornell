@@ -3,9 +3,28 @@ open Player
 open Board
 open State
 
-(*let ai_setup st
- * will call [state_setup], and be able to choose 2-3 destination tickets, and then call
- * decided routes*)
+let max a b c =
+  max c (max a b)
+
+let min a b c =
+  min c (min a b)
+
+(* will call [state_setup], and be able to choose 2-3 destination tickets, and then call
+ * decided routes *)
+ (* CURRENTLY WILL ONLY EVER TAKE TWO ROUTES, FOR BASICNESS. WILL BE IMPROVED IF TIME RIP*)
+let ai_setup st =
+  let st' = setup_state st in
+  let keep_tickets = match choose_destinations st' with
+    | {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] ->
+      if a = c || a = d || b = c || b = d then {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::[] else
+      if a = e || a = f || b = e || b = f then {loc1 = a; loc2 = b; points = x}::{loc1 = e; loc2 = f; points = z}::[] else
+      if c = e || c = f || d = e || d = f then {loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] else
+      if max x y z = x && min x y z = y then {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::[] else
+      if max x y z = x && min x y z = z then {loc1 = a; loc2 = b; points = x}::{loc1 = e; loc2 = f; points = z}::[] else
+      {loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[]
+    | _ -> failwith "not possible"
+  in decided_routes_setup st' keep_tickets
+
 
 let dest_ticket_action clist st =
   (* draw destination tickets -> contained in clist *)

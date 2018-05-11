@@ -61,7 +61,7 @@ let update_players i new_p lst =
   update_loop 0 i new_p [] lst
 
 let decided_routes_setup st tickets =
-  if List.length tickets > 2 then
+  if List.length tickets >= 2 then
     (  let p = current_player st in
        let p' = update_destination_tickets p tickets in
        let i = st.player_index in
@@ -111,7 +111,7 @@ let setup_state st =
   take_route st2
 
 let decided_routes st tickets =
-  if List.length tickets > 1 then
+  if List.length tickets >= 1 then
     (  let p = current_player st in
        let p' = update_destination_tickets p tickets in
        let i = st.player_index in
