@@ -98,9 +98,7 @@ let draw_card_facing_up st i =
             train_trash = trash;
             turn_ended = true } )
 
-let draw_card_pile st =
-  if (turn_ended st) then turn_ended_error st
-  else (
+let draw_card_pile_no_error st =
   let tr = st.train_trash in
   let (c1, deck',tr') = TrainDeck.draw_card (st.train_deck) tr in
   let (c2, deck'',tr'') = TrainDeck.draw_card deck' tr in
@@ -109,8 +107,13 @@ let draw_card_pile st =
   let i = st.player_index in
   { st with train_deck = deck'';
             train_trash = tr'';
-            players = update_players i p'' st.players;
-            turn_ended = true } )
+            players = update_players i p'' st.players }
+
+let draw_card_pile st =
+  if (turn_ended st) then turn_ended_error st
+  else (
+  let st' = draw_card_pile_no_error st in
+  { st' with turn_ended = true } )
 
 let take_route st =
   if (turn_ended st) then turn_ended_error st
@@ -127,8 +130,8 @@ let take_route st =
 let setup_state st =
   if (turn_ended st) then turn_ended_error st
   else (
-  let st1 = draw_card_pile st in
-  let st2 = draw_card_pile st1 in
+  let st1 = draw_card_pile_no_error st in
+  let st2 = draw_card_pile_no_error st1 in
   take_route st2 )
 
 let decided_routes st indexes =
