@@ -83,8 +83,7 @@ let decided_routes_setup st indexes =
                  taking_routes = false;
                  error = "";
                  turn_ended = true } )
-  else {st with error = "Must at least take 2 tickets";
-                turn_ended = false } )
+  else {st with error = "Must at least take 2 tickets"} )
 
 let draw_card_facing_up st i =
   if (turn_ended st) then turn_ended_error st
@@ -123,8 +122,7 @@ let take_route st =
   let (tickets, deck') = DestinationDeck.draw_card deck tr in
   { st with destination_deck = deck';
             choose_destinations = tickets;
-            taking_routes = false;
-            turn_ended = false } )
+            taking_routes = false } )
 
 (* grab 4 train cards, grabs 3 destination tickets and choose 2-3. *)
 let setup_state st =
@@ -151,8 +149,7 @@ let decided_routes st indexes =
                  taking_routes = false;
                  error = "";
                  turn_ended = true } )
-  else {st with error = "Must at least take 1 ticket";
-                turn_ended = false } )
+  else {st with error = "Must at least take 1 ticket"} )
 
 let update_routes (routes: Board.route list) old_r new_r : Board.route list =
   let rec loop acc = function
@@ -183,20 +180,15 @@ let place_on_board st r clr =
                routes = update_routes (st.routes) r r';
                error = "";
                turn_ended = true })
-    else {st with error = "Not enough trains";
-                  turn_ended = false}
-  )
-  else {st with error = "Not enough train cards";
-                turn_ended = false} )
+    else {st with error = "Not enough trains"} )
+  else {st with error = "Not enough train cards"} )
 
 let select_route st r =
   if (turn_ended st) then turn_ended_error st
   else (
   match r with
-  | (_, _, _, _, Some _) -> {st with error = "Route already taken";
-                                     turn_ended = false }
-  | (_, _, _, Grey, _) -> {st with error = "Choose a train card color";
-                                   turn_ended = false }
+  | (_, _, _, _, Some _) -> {st with error = "Route already taken"}
+  | (_, _, _, Grey, _) -> {st with error = "Choose a train card color"}
   | (_, _, _, clr, _) -> place_on_board st r clr )
 
 let longest_route st =
