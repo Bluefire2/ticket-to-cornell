@@ -86,8 +86,6 @@ class Map extends Component {
             // flatten:
             routeRectangles = routeRectanglesNested.reduce((acc, elem) => acc.concat(elem), []);
 
-        console.log(routeRectangles);
-
         // // This is temporary, for my own convenience:
         // const routes = d3.select(this.faux).select('#map').selectAll('.route')
         //     .data(this.props.game.routes)
