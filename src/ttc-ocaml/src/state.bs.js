@@ -62,6 +62,10 @@ function turn_ended(st) {
   return st[/* turn_ended */11];
 }
 
+function choose_destinations(st) {
+  return st[/* choose_destinations */5];
+}
+
 function score(st, _) {
   return Player.score(current_player(st));
 }
@@ -113,6 +117,43 @@ function update_players(i, new_p, lst) {
       return acc;
     }
   };
+}
+
+function decided_routes_setup(st, tickets) {
+  if (List.length(tickets) >= 2) {
+    var p = current_player(st);
+    var p$prime = Player.update_destination_tickets(p, tickets);
+    var i = st[/* player_index */0];
+    return /* record */[
+            /* player_index */st[/* player_index */0],
+            /* players */update_players(i, p$prime, st[/* players */1]),
+            /* routes */st[/* routes */2],
+            /* destination_deck */st[/* destination_deck */3],
+            /* destination_trash */st[/* destination_trash */4],
+            /* choose_destinations : [] */0,
+            /* train_deck */st[/* train_deck */6],
+            /* facing_up_trains */st[/* facing_up_trains */7],
+            /* train_trash */st[/* train_trash */8],
+            /* taking_routes */false,
+            /* error */"",
+            /* turn_ended */true
+          ];
+  } else {
+    return /* record */[
+            /* player_index */st[/* player_index */0],
+            /* players */st[/* players */1],
+            /* routes */st[/* routes */2],
+            /* destination_deck */st[/* destination_deck */3],
+            /* destination_trash */st[/* destination_trash */4],
+            /* choose_destinations */st[/* choose_destinations */5],
+            /* train_deck */st[/* train_deck */6],
+            /* facing_up_trains */st[/* facing_up_trains */7],
+            /* train_trash */st[/* train_trash */8],
+            /* taking_routes */st[/* taking_routes */9],
+            /* error */"Must at least take 2 tickets",
+            /* turn_ended */false
+          ];
+  }
 }
 
 function draw_card_facing_up(st, c) {
@@ -174,12 +215,17 @@ function take_route(st) {
           /* train_trash */st[/* train_trash */8],
           /* taking_routes */false,
           /* error */st[/* error */10],
-          /* turn_ended */st[/* turn_ended */11]
+          /* turn_ended */false
         ];
 }
 
+function setup_state(st) {
+  var st1 = draw_card_pile(st);
+  return take_route(draw_card_pile(st1));
+}
+
 function decided_routes(st, tickets) {
-  if (List.length(tickets) > 1) {
+  if (List.length(tickets) >= 1) {
     var p = current_player(st);
     var p$prime = Player.update_destination_tickets(p, tickets);
     var i = st[/* player_index */0];
@@ -223,7 +269,8 @@ function update_routes(routes, old_r, new_r) {
     var acc = _acc;
     if (param) {
       var t = param[1];
-      if (Caml_obj.caml_equal(param[0], old_r)) {
+      var h = param[0];
+      if (Caml_obj.caml_equal(h, old_r)) {
         return Pervasives.$at(acc, /* :: */[
                     new_r,
                     t
@@ -231,7 +278,7 @@ function update_routes(routes, old_r, new_r) {
       } else {
         _param = t;
         _acc = /* :: */[
-          new_r,
+          h,
           acc
         ];
         continue ;
@@ -380,12 +427,15 @@ exports.destination_items = destination_items;
 exports.train_items = train_items;
 exports.message = message;
 exports.turn_ended = turn_ended;
+exports.choose_destinations = choose_destinations;
 exports.score = score;
+exports.setup_state = setup_state;
 exports.next_player = next_player;
 exports.draw_card_pile = draw_card_pile;
 exports.draw_card_facing_up = draw_card_facing_up;
 exports.take_route = take_route;
 exports.decided_routes = decided_routes;
+exports.decided_routes_setup = decided_routes_setup;
 exports.select_route = select_route;
 exports.longest_route = longest_route;
 /* No side effect */

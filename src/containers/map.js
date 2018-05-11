@@ -33,7 +33,7 @@ class Map extends Component {
         // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
         const RECTANGLE_TO_SPACING_RATIO = 4,
             RECTANGLE_HEIGHT = 10;
-        const createRectangleDatum = (x, y, theta, width, height, trainColor, taken) => {
+        const createRectangleDatum = (x, y, theta, width, height, trainColor, taken, routeID) => {
             return {
                 x,
                 y,
@@ -41,10 +41,15 @@ class Map extends Component {
                 width,
                 height,
                 trainColor,
-                taken
+                taken,
+                routeID
             }
         };
         const routeToRectangleArray = (route, index) => {
+            const fromName = route[0][0],
+                toName = route[1][0],
+                uniqueRouteID = `${fromName}->${toName}`;
+
             const n = route[2], // number of rectangles to draw (route length)
                 A = {x: route[0][1] / SCALE, y: route[0][2] / SCALE},
                 B = {x: route[1][1] / SCALE, y: route[1][2] / SCALE},
@@ -71,7 +76,7 @@ class Map extends Component {
 
                 // color and taken are not implemented yet
                 const datum =
-                    createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, trainColor, false);
+                    createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, trainColor, false, uniqueRouteID);
                 acc.push(datum);
                 return addRect(acc, i + 1);
             })([], 0);
@@ -81,24 +86,23 @@ class Map extends Component {
             // flatten:
             routeRectangles = routeRectanglesNested.reduce((acc, elem) => acc.concat(elem), []);
 
-        console.log(routeRectangles);
-
-        // This is temporary, for my own convenience:
-        const routes = d3.select(this.faux).select('#map').selectAll('.route')
-            .data(this.props.game.routes)
-            .enter()
-            .append('line') // route line (temporary)
-                .style('stroke', 'black')
-                .attr('x1', d => d[0][1] / SCALE)
-                .attr('y1', d => d[0][2] / SCALE)
-                .attr('x2', d => d[1][1] / SCALE)
-                .attr('y2', d => d[1][2] / SCALE);
+        // // This is temporary, for my own convenience:
+        // const routes = d3.select(this.faux).select('#map').selectAll('.route')
+        //     .data(this.props.game.routes)
+        //     .enter()
+        //     .append('line') // route line (temporary)
+        //         .style('stroke', 'black')
+        //         .attr('x1', d => d[0][1] / SCALE)
+        //         .attr('y1', d => d[0][2] / SCALE)
+        //         .attr('x2', d => d[1][1] / SCALE)
+        //         .attr('y2', d => d[1][2] / SCALE);
 
         const routePaths = d3.select(this.faux).select('#map').selectAll('.route-path')
             .data(routeRectangles)
             .enter()
             .append('rect')
                 .attr('class', 'route-path-rect')
+                .attr('route', d => `${d.routeID}`)
                 .style('fill', d => d.trainColor)
                 .attr('x', d => d.x)
                 .attr('y', d => d.y)

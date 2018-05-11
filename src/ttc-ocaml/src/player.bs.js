@@ -44,13 +44,18 @@ function destination_tickets(p) {
   return p[/* destination_tickets */1];
 }
 
+function routes(p) {
+  return p[/* routes */4];
+}
+
 function update_destination_tickets(p, tickets) {
   return /* record */[
           /* color */p[/* color */0],
           /* destination_tickets */Pervasives.$at(tickets, p[/* destination_tickets */1]),
           /* train_cards */p[/* train_cards */2],
           /* score */p[/* score */3],
-          /* trains_remaining */p[/* trains_remaining */4]
+          /* routes */p[/* routes */4],
+          /* trains_remaining */p[/* trains_remaining */5]
         ];
 }
 
@@ -63,7 +68,7 @@ function score(p) {
 }
 
 function trains_remaining(p) {
-  return p[/* trains_remaining */4];
+  return p[/* trains_remaining */5];
 }
 
 function add_train_cards(_tlist, c, _acc) {
@@ -167,6 +172,7 @@ function init_players(n) {
       /* destination_tickets : [] */0,
       p_002,
       /* score */0,
+      /* routes : [] */0,
       /* trains_remaining */45
     ];
     return /* :: */[
@@ -184,7 +190,8 @@ function draw_train_card(p, c) {
           /* destination_tickets */p[/* destination_tickets */1],
           /* train_cards */add_train_cards(p[/* train_cards */2], c, /* [] */0),
           /* score */p[/* score */3],
-          /* trains_remaining */p[/* trains_remaining */4]
+          /* routes */p[/* routes */4],
+          /* trains_remaining */p[/* trains_remaining */5]
         ];
 }
 
@@ -194,7 +201,11 @@ function place_train(p, r) {
           /* destination_tickets */p[/* destination_tickets */1],
           /* train_cards */remove_color(Board.get_length(r), Board.get_color(r), p[/* train_cards */2]),
           /* score */Board.route_score(r),
-          /* trains_remaining */p[/* trains_remaining */4] - Board.get_length(r) | 0
+          /* routes : :: */[
+            r,
+            p[/* routes */4]
+          ],
+          /* trains_remaining */p[/* trains_remaining */5] - Board.get_length(r) | 0
         ];
 }
 
@@ -203,6 +214,7 @@ exports.update_destination_tickets = update_destination_tickets;
 exports.train_cards = train_cards;
 exports.score = score;
 exports.color = color;
+exports.routes = routes;
 exports.trains_remaining = trains_remaining;
 exports.init_players = init_players;
 exports.draw_train_card = draw_train_card;

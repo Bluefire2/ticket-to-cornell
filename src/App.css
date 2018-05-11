@@ -1,3 +1,17 @@
+#top-pane {
+    height: auto;
+    margin: 2%;
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#top-pane div {
+    /* TODO: make this not disgusting */
+    float: left;
+}
+
 #map {
     background-image: url('./images/map.jpg');
     background-size: cover; /* scale image to fit */
@@ -25,4 +39,38 @@
     stroke: black; /* for now */
     stroke-width: 2;
     stroke-dasharray: 5, 2;
+}
+
+.train-card {
+    background-image: url('./images/tcat_card.png');
+    background-size: cover;
+    /* TODO: make these relative to the image size and some scaling factor */
+    width: 112px;
+    height: 143px;
+    border-radius: 10px;
+    border: 5px solid; /* colour is specified inline */
+    margin: 5px;
+    float: left;
+}
+
+.train-card-amount {
+    position: relative;
+    float: right;
+    width: 25px;
+    height: 25px;
+    background-color: #ff8b67;
+    color: white;
+    transform: rotate(20deg);
+    border-radius: 2px;
+    /* centre text horizontally and vertically: */
+    text-align: center;
+    vertical-align: middle;
+    line-height: 25px;
+}
+
+#train-hand {
+    /* float: left; the child divs instead of this: */
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    width: 50%;
 }
