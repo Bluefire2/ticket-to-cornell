@@ -1,5 +1,6 @@
 .clickable {
     cursor: pointer;
+    z-index: 9001; /* without this, the cursor thing doesn't work! */
 }
 
 #top-pane {
@@ -131,7 +132,6 @@
     background-size: cover;
     position: relative;
     float: left;
-    cursor: pointer;
 }
 
 #deck-text {
