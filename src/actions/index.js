@@ -1,6 +1,6 @@
 import * as constants from '../constants';
 
-export function drawCard() {
+export function drawTrainCard() {
     return {
         type: constants.DRAW_CARD_PILE
     };

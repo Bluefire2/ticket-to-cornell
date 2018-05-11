@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Hands from './containers/hands';
+import Decks from './containers/decks';
 import PlayerDetails from './containers/player_details';
 import DestinationTicket from './components/destination_ticket';
 import Modal from 'react-modal';
@@ -34,7 +35,7 @@ class App extends Component {
                     onRequestClose={() => {
                         this.setState({isPaneOpen: false});
                     }}>
-                    <TrainDeck/>
+                    <Decks/>
                 </SlidingPane>
                 <div id="top-pane">
                     <PlayerDetails/>
