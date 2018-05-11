@@ -5,7 +5,8 @@ open Player
 (* [state] represents the state of a game. *)
 type state
 
-(* [init_state i] initializes the game with [i] players. *)
+(* [init_state i] initializes the game with [i] players.
+ * After this state, call setup_state for each player. *)
 val init_state : int -> state
 
 (* [current_player st] returns the current player whose turn it is in [st]. *)
@@ -32,14 +33,24 @@ val message : state -> string
  * false otherwise. *)
 val turn_ended : state -> bool
 
+(* [choose_destinations st] returns a list of destination tickets from which the
+ * player can choose to keep some. *)
+val choose_destinations : state -> DestinationDeck.card list
+
 (* [score] returns the total score of a particular player. *)
 val score : state -> player -> int
 
-(* [next_player st] returns a new state when we transition to the next player. *)
+(* [setup_state st] returns a new state with the initial setup for the current
+ * player in [st]: 4 new train cards and 3 destination tickets to choose from.
+ * After this state: call `decided_routes_setup` with the chosen tickets. *)
+val setup_state : state -> state
+
+(* [next_player st] returns a new state when we transition to the next player.
+ * Call this function every time turn_ended is true for the current player. *)
 val next_player : state -> state
 
 (* [draw_card_pile st] returns a new state for which the player decides to take
- * new train cards from the card pile.*)
+ * 2 new train cards from the card pile. *)
 val draw_card_pile : state -> state
 
 (* [draw_card_facing_up st c] returns a new state for which the player decides
@@ -47,12 +58,17 @@ val draw_card_pile : state -> state
 val draw_card_facing_up : state -> TrainDeck.card -> state
 
 (* [take_route st] returns a new state for which the player decides to take
- * additional destination cards. *)
+ * additional destination cards.
+* After this state: call `decided_routes` with the chosen tickets. *)
 val take_route : state -> state
 
 (* [decided_routes st lst] returns a new state depending on the routes that the player
  * decided to keep from the deck. *)
 val decided_routes : state -> DestinationDeck.card list -> state
+
+(* [decided_routes_estup st lst] returns a new state depending on the routes that
+ * the player decided to keep from the deck for setting up. *)
+val decided_routes_setup : state -> DestinationDeck.card list -> state
 
 (* [select_route st r] returns a new state for which the player decides to
  * build a train route [r]. *)
