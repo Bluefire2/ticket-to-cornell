@@ -10,6 +10,8 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 
 import Map from './containers/map';
 
+import TrainDeck from './components/train_deck';
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -32,8 +34,7 @@ class App extends Component {
                     onRequestClose={() => {
                         this.setState({isPaneOpen: false});
                     }}>
-                    <div>Test</div>
-                    <br />
+                    <TrainDeck/>
                 </SlidingPane>
                 <div id="top-pane">
                     <PlayerDetails/>

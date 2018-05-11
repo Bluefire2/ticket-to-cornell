@@ -116,3 +116,22 @@
     background-color: green;
     border: 3px solid darkgreen;
 }
+
+#train-deck {
+    background-image: url('./images/tcat_deck.png');
+    width: 322px;
+    height: 269px;
+    background-size: cover;
+    position: relative;
+    float: left;
+    cursor: pointer;
+}
+
+#train-deck-text {
+    line-height: 269px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 125%;
+    font-family: Arial, sans-serif;
+    color: black;
+}
