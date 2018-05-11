@@ -132,6 +132,11 @@
     background-size: cover;
     position: relative;
     float: left;
+    opacity: 0.7;
+}
+
+#deck:hover {
+    opacity: 1;
 }
 
 #deck-text {
