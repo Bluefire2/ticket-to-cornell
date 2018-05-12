@@ -181,3 +181,18 @@
     background-image: url('./images/tick.svg');
     background-size: cover;
 }
+
+#player-details {
+    border: 1px solid blue;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-detail {
+    border: 1px solid blue;
+    height: 30px;
+    line-height: 30px;
+    padding: 5px;
+    margin: 5px 30px;
+}
