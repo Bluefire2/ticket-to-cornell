@@ -8,6 +8,8 @@ type player = { color : Components.player_color;
                 score : int;
                 routes : Board.route list;
                 trains_remaining : int ;
+                first_turn : bool;
+                last_turn : bool;
               }
 
 (* [destination_tickets p] is a list of the destination tickets [p] has *)
@@ -26,6 +28,10 @@ val score : player -> int
 val color : player -> Components.player_color
 
 val routes : player -> Board.route list
+
+val first_turn : player -> bool
+
+val last_turn : player -> bool
 
 (* [trains_remaining t] is the number of trains the player has left  *)
 val trains_remaining : player -> int

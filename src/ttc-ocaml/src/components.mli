@@ -28,6 +28,10 @@ type destination_ticket = {
   points : int
 }
 
+val train_deck : train_color list 
+
+val dest_ticket_deck : destination_ticket list
+
 (* A [TrainDeck] represents the collection of train cards that are either on display
  * for the players, hidden in the stack with the option to choose from them, or
  * in the discard pile. If they want to discard a card, it goes to a discard
