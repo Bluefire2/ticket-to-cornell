@@ -160,6 +160,12 @@
     padding: 10px;
 }
 
-#choose-destinations-button {
-
+.destination-ticket-selected-marker {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background-image: url('./images/tick.svg');
+    background-size: cover;
 }

@@ -45,10 +45,11 @@ class Decks extends Component {
                         <fieldset>
                             <legend>Choose destination tickets:</legend>
                             {this.props.destinations.map((destination, index) => {
+                                const ticketSelected = this.state.selectedTickets[index];
                                 return (
                                     <div className="choose-destinations-ticket clickable"
                                          onClick={this.ticketClickHandler(index).bind(this)} key={index}>
-                                        <DestinationTicket {...destination}/>
+                                        <DestinationTicket {...destination} selected={ticketSelected}/>
                                     </div>
                                 );
                             })}
