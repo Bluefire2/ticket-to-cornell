@@ -13,15 +13,13 @@ class Decks extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTickets: []
+            selectedTickets: props.destinations.map(elem => false)
         };
     }
 
     ticketClickHandler(index) {
         const newSelectedTickets = this.state.selectedTickets.map(elem => elem); // need to explicitly copy the array
-        if (!newSelectedTickets.includes(index)) {
-            newSelectedTickets.push(index);
-        }
+        newSelectedTickets[index] = !newSelectedTickets[index]; // invert value
         return () => {
             this.setState({
                 selectedTickets: newSelectedTickets
