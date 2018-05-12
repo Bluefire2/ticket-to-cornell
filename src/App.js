@@ -27,7 +27,8 @@ class App extends Component {
                 <button onClick={() => this.setState({ isPaneOpen: true })}>Click me to open right pane!</button>
                 <SlidingPane
                     isOpen={this.state.isPaneOpen}
-                    title='Train and ticket decks'
+                    title="Train and ticket decks"
+                    width="800px"
                     onRequestClose={() => {
                         this.setState({isPaneOpen: false});
                     }}>
