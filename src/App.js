@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Hands from './containers/hands';
 import Decks from './containers/decks';
 import PlayerDetails from './containers/player_details';
-import DestinationTicket from './components/destination_ticket';
 import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
@@ -42,7 +40,6 @@ class App extends Component {
                     <Map/>
                 </div>
                 <div id="bottom-pane">
-                    <DestinationTicket from="Becker House" to="Comstock Hall" points={15} />
                     <Hands/>
                 </div>
             </div>

@@ -44,7 +44,8 @@ module type COMPONENTS = sig
     loc2 : string;
     points : int
   }
-
+  val train_deck : train_color list
+  val dest_ticket_deck : destination_ticket list
   module type TrainDeck = sig
     type card = train_color
     type t = card list
@@ -99,6 +100,7 @@ module type BOARD = sig
   val is_taken : route -> bool
   val get_length : route -> int
   val get_color : route -> Components.train_color
+  val completed : string -> string -> route list -> bool
 end
 
 module type AI = sig
@@ -106,8 +108,6 @@ module type AI = sig
 end
 
 module type TEST = sig
-  val train_deck : Components.train_color list
-  val dest_ticket_deck : Components.destination_ticket list
   val tests : OUnit2.test list
 end
 

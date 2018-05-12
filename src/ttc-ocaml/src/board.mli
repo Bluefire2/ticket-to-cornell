@@ -28,3 +28,5 @@ val routes : route list
 
 (* [locations] is a list of all of the locations on the board. *)
 val locations: location list
+
+val completed : string -> string -> route list -> bool

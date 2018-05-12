@@ -41,17 +41,20 @@ class Decks extends Component {
                           text="Draw Route Tickets"/>
                 </div>
                 <div id="choose-destinations">
-                    <fieldset>
-                        <legend>Choose destination tickets:</legend>
-                        {this.props.destinations.map((destination, index) => {
-                            return (
-                                <div className="choose-destinations-ticket clickable"
-                                    onClick={this.ticketClickHandler(index).bind(this)} key={index}>
-                                    <DestinationTicket {...destination}/>
-                                </div>
-                            );
-                        })}
-                    </fieldset>
+                    {
+
+                        <fieldset>
+                            <legend>Choose destination tickets:</legend>
+                            {this.props.destinations.map((destination, index) => {
+                                return (
+                                    <div className="choose-destinations-ticket clickable"
+                                         onClick={this.ticketClickHandler(index).bind(this)} key={index}>
+                                        <DestinationTicket {...destination}/>
+                                    </div>
+                                );
+                            })}
+                        </fieldset>
+                    }
                 </div>
             </div>
         )

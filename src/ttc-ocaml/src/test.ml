@@ -4,52 +4,6 @@ open State
 open Board
 open Player
 
-
-let train_deck : train_color list =
-  [Red; Red;Red;Red;Red;Red;Red;Red;Red;Red;Red;Red;
-  Green; Green; Green; Green; Green; Green; Green; Green; Green; Green; Green; Green;
-  Blue; Blue; Blue; Blue; Blue; Blue; Blue; Blue; Blue; Blue; Blue; Blue;
-  Yellow; Yellow; Yellow; Yellow; Yellow; Yellow; Yellow; Yellow; Yellow; Yellow; Yellow; Yellow;
-  Pink; Pink; Pink; Pink; Pink; Pink; Pink; Pink; Pink; Pink; Pink; Pink;
-  Orange; Orange; Orange; Orange; Orange; Orange; Orange; Orange; Orange; Orange; Orange; Orange;
-  White; White; White; White; White; White; White; White; White; White; White; White;
-  Black; Black; Black; Black; Black; Black; Black; Black; Black; Black; Black; Black;
-  Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild
-  ]
-
-let dest_ticket_deck : destination_ticket list = [
-  {loc1 = "Eddy Gate"; loc2 = "Golf Center"; points = 22};
-  {loc1 = "Sigma Chi"; loc2 = "Veterinary School"; points = 21};
-  {loc1 = "A LOT"; loc2 = "Blair Farm Barn"; points = 20};
-  {loc1 = "Ecology House"; loc2 = "Newman Arboretum"; points = 20};
-  {loc1 = "House Becker"; loc2 = "Filtration Plant"; points = 17};
-  {loc1 = "Noyes Community Center"; loc2 = "Forest Home"; points = 17};
-  {loc1 = "Hasbrouck Community Center"; loc2 = "Engineering Quad"; points = 16};
-  {loc1 = "Appel Commons"; loc2 = "Schoellkopf Field"; points = 13};
-  {loc1 = "Risley"; loc2 = "The Commons"; points = 13};
-  {loc1 = "Dairy Bar"; loc2 = "Johnson Museum"; points = 13};
-  {loc1 = "Stewart Ave Bridge"; loc2 = "Riley-Robb Hall"; points = 12};
-  {loc1 = "RPCC"; loc2 = "Barton Hall"; points = 12};
-  {loc1 = "Physical Sciences Building"; loc2 = "Newman Arboretum"; points = 12};
-  {loc1 = "Bartels Hall"; loc2 = "Undergraduate Admissions"; points = 12};
-  {loc1 = "Beebe Lake"; loc2 = "Cascadilla Creek"; points = 11};
-  {loc1 = "Werly Island"; loc2 = "Engineering Quad"; points = 11};
-  {loc1 = "Maplewood Park"; loc2 = "Mann Library"; points = 11};
-  {loc1 = "McGraw Tower"; loc2 = "Plantations"; points = 11};
-  {loc1 = "CKB Quad"; loc2 = "Bartels Hall"; points = 10};
-  {loc1 = "Eddy Gate"; loc2 = "Blair Farm Barn"; points = 10};
-  {loc1 = "House Becker"; loc2 = "Werly Island"; points = 9};
-  {loc1 = "Maplewood Park"; loc2 = "Dairy Bar"; points = 9};
-  {loc1 = "Kennedy Hall"; loc2 = "Appel Commons"; points = 9};
-  {loc1 = "Mann Library"; loc2 = "RPCC"; points = 9};
-  {loc1 = "Ecology House"; loc2 = "Forest Home"; points = 8};
-  {loc1 = "McGraw Tower"; loc2 = "Undergraduate Admissions"; points = 8};
-  {loc1 = "Risley"; loc2 = "Noyes Community Center"; points = 7};
-  {loc1 = "Sigma Chi"; loc2 = "CKB Quad"; points = 6};
-  {loc1 = "Veterinary School"; loc2 = "Mann Library"; points = 5};
-  {loc1 = "Plantations"; loc2 = "Bartels Hall"; points = 4};
-]
-
 let lst l = match l with | Location (_, _, _, x) -> x
 
 let test_list1 =
@@ -182,6 +136,19 @@ let find_location s locations =
         else loop t ) in
   loop locations
 
+let dairy_bar = Location ("Dairy Bar", 1486.,1078., [])
+let plantations = Location ("Plantations", 1359., 845., [])
+let bartels = Location ("Bartels Hall",1094.,1256., [])
+
+let ppd =
+{
+color = PBlue;
+destination_tickets = [{loc1 = "Plantations"; loc2 = "Bartels Hall"; points = 4}];
+train_cards = [];
+score = 90;
+routes = [(dairy_bar,plantations,2,White,None); (bartels,dairy_bar,3,Orange,None)];
+trains_remaining = 19
+}
 
 let tests =
 [
@@ -364,7 +331,10 @@ let tests =
   (* Board tests *)
   "loc1" >:: (fun _ -> assert_equal true (same_lst ["Appel Commons"; "Risley"; "RPCC"] (lst (find_location "CKB Quad" Board.locations))));
   "loc2" >:: (fun _ -> assert_equal true (same_lst ["Bartels Hall"; "Cascadilla Creek"; "Barton Hall"; "Engineering Quad"; "Blair Farm Barn"; "Riley-Robb Hall"] (lst (find_location "Schoellkopf Field" Board.locations))));
-
+  "checking completed1" >:: (fun _ -> assert_equal (true)
+    (Board.completed (List.hd ppd.destination_tickets).loc1 (List.hd ppd.destination_tickets).loc2 ppd.routes ));
+  "checking completed2" >:: (fun _ -> assert_equal (false)
+    (Board.completed "Plantations" "Bartels" default5.routes));
 ]
 
 let suite =
