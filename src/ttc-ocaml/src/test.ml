@@ -50,6 +50,8 @@ let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Plantations"; loc2 = "Bartels Hall"; points = 4};
 ]
 
+let lst l = match l with | Location (_, _, _, x) -> x
+
 let test_list1 =
 [ Red; Red; Red]
 
@@ -172,7 +174,13 @@ let default5 =
   trains_remaining = 45
 }
 
-
+let find_location s locations =
+  let rec loop = ( function
+      | [] -> failwith "not found"
+      | (Board.Location (s', x, y, lst))::t ->
+        if s' = s then (Board.Location (s', x, y, lst))
+        else loop t ) in
+  loop locations
 
 
 let tests =
@@ -352,6 +360,10 @@ let tests =
   (Player.draw_train_card p1 White));
 
   (* test place_trains after some routes are written. *)
+
+  (* Board tests *)
+  "loc1" >:: (fun _ -> assert_equal true (same_lst ["Appel Commons"; "Risley"; "RPCC"] (lst (find_location "CKB Quad" Board.locations))));
+  "loc2" >:: (fun _ -> assert_equal true (same_lst ["Bartels Hall"; "Cascadilla Creek"; "Barton Hall"; "Engineering Quad"; "Blair Farm Barn"; "Riley-Robb Hall"] (lst (find_location "Schoellkopf Field" Board.locations))));
 
 ]
 

@@ -3,7 +3,7 @@ open Components
 (* [location] represents a location on the board. It consists of the name
  * of the location, its coordinates for the GUI, and a list of locations that
  * are adjacent. *)
-type location = Location of string * float * float * location list
+type location = Location of string * float * float * string list
 
 (* [route] represents a route between two locations on the map. It can be
  * any length between 1 and 6 and has any train_color, or none. *)
