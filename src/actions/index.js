@@ -11,3 +11,10 @@ export function takeRoute() {
         type: constants.TAKE_ROUTE
     };
 }
+
+export function chooseDestinations(destinationsIndices) {
+    return {
+        type: constants.CHOOSE_DESTINATIONS,
+        payload: destinationsIndices
+    };
+}
