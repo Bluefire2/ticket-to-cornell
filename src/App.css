@@ -183,16 +183,31 @@
 }
 
 #player-details {
-    border: 1px solid blue;
+    border: 3px dashed darkgrey;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.player-detail {
-    border: 1px solid blue;
+.player-detail, #player-details > div {
     height: 30px;
     line-height: 30px;
     padding: 5px;
     margin: 5px 30px;
+    color: #6b6b6b;
+}
+
+.player-detail {
+    transition: background-color 0.5s ease, color 0.5s ease;
+    background-color: lightgray;
+}
+
+.player-detail:hover {
+    background-color: #828283;
+    color: white;
+}
+
+#view-decks-button, #next-player-button {
+    margin-left: 5px;
+    margin-right: 5px;
 }

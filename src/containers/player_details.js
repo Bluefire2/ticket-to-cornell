@@ -15,6 +15,16 @@ class PlayerDetails extends Component {
                 <div id="player-details-trains" className="player-detail">
                     Trains remaining: {trains_remaining(this.props.player)}
                 </div>
+                <div>
+                    <button id="view-decks-button"
+                            className="pure-button pure-button-secondary">
+                        View decks
+                    </button>
+                    <button id="next-player-button"
+                            className="pure-button pure-button-success">
+                        Next player
+                    </button>
+                </div>
             </div>
         )
     }
