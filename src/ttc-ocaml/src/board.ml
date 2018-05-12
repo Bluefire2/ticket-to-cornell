@@ -235,3 +235,24 @@ let rec completed loc1 loc2 routes prev =
               completed loc1 l1 t (h::prev) || completed loc1 l1 prev [] || completed loc1 loc2 t (h::prev)
           else
               completed loc1 loc2 t (h::prev) )
+
+(* locations = total list of locations. *)
+let rec get_location s locations =
+  match locations with
+  | [] -> failwith "not possible"
+  | h::t -> ( match h with
+            | Location (x,_,_,_) -> if s=x then h else get_location s t )
+
+let get_neighbors (Location (_,_,_,x)) = x
+
+let get_paths s1 s2 acc1 =
+  let l1 = get_location s1 locations in
+  let rec path start_l end_s acc2 = function
+    | [] -> acc2::acc1
+    | h::t -> if h=s2 then ((h::acc2)::acc1) else
+    if List.mem h acc2 then path start_l end_s acc2 t else
+    let new_l = (get_location h locations) in
+    path new_l end_s (h::acc2) (get_neighbors new_l)
+  in path l1 s2 [s1] (get_neighbors l1)
+
+  (* CURRENT PROBLEM: NOT PROPERLY LINKING ON OTHER LISTS, ALSO IT'S STOPPING WITH THE REPEATS THING YAY LOVE DFS.*)

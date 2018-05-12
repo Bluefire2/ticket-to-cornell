@@ -101,6 +101,7 @@ module type BOARD = sig
   val get_length : route -> int
   val get_color : route -> Components.train_color
   val completed : string -> string -> route list -> route list -> bool
+  val get_location : string -> location list -> location
 end
 
 module type AI = sig
