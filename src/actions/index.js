@@ -11,3 +11,10 @@ export function takeRoute() {
         type: constants.TAKE_ROUTE
     };
 }
+
+export function decidedRoutes(destinations) {
+    return {
+        type: constants.DECIDED_ROUTES,
+        payload: destinations
+    };
+}

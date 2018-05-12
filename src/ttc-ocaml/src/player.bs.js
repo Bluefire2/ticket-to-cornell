@@ -55,7 +55,9 @@ function update_destination_tickets(p, tickets) {
           /* train_cards */p[/* train_cards */2],
           /* score */p[/* score */3],
           /* routes */p[/* routes */4],
-          /* trains_remaining */p[/* trains_remaining */5]
+          /* trains_remaining */p[/* trains_remaining */5],
+          /* first_turn */false,
+          /* last_turn */p[/* last_turn */7]
         ];
 }
 
@@ -65,6 +67,14 @@ function train_cards(p) {
 
 function score(p) {
   return p[/* score */3];
+}
+
+function first_turn(p) {
+  return p[/* first_turn */6];
+}
+
+function last_turn(p) {
+  return p[/* last_turn */7];
 }
 
 function trains_remaining(p) {
@@ -173,7 +183,9 @@ function init_players(n) {
       p_002,
       /* score */0,
       /* routes : [] */0,
-      /* trains_remaining */45
+      /* trains_remaining */45,
+      /* first_turn */true,
+      /* last_turn */false
     ];
     return /* :: */[
             p,
@@ -191,7 +203,9 @@ function draw_train_card(p, c) {
           /* train_cards */add_train_cards(p[/* train_cards */2], c, /* [] */0),
           /* score */p[/* score */3],
           /* routes */p[/* routes */4],
-          /* trains_remaining */p[/* trains_remaining */5]
+          /* trains_remaining */p[/* trains_remaining */5],
+          /* first_turn */p[/* first_turn */6],
+          /* last_turn */p[/* last_turn */7]
         ];
 }
 
@@ -205,7 +219,9 @@ function place_train(p, r) {
             r,
             p[/* routes */4]
           ],
-          /* trains_remaining */p[/* trains_remaining */5] - Board.get_length(r) | 0
+          /* trains_remaining */p[/* trains_remaining */5] - Board.get_length(r) | 0,
+          /* first_turn */p[/* first_turn */6],
+          /* last_turn */p[/* last_turn */7]
         ];
 }
 
@@ -215,8 +231,10 @@ exports.train_cards = train_cards;
 exports.score = score;
 exports.color = color;
 exports.routes = routes;
+exports.first_turn = first_turn;
+exports.last_turn = last_turn;
 exports.trains_remaining = trains_remaining;
 exports.init_players = init_players;
 exports.draw_train_card = draw_train_card;
 exports.place_train = place_train;
-/* No side effect */
+/* Board Not a pure module */

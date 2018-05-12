@@ -1,7 +1,7 @@
 import initialState from './INIT_STATE';
 import * as constants from '../constants';
-import {objToState, stateToObj} from "../util";
-import {draw_card_pile, take_route} from '../ttc-ocaml/src/state.bs';
+import {arrayToList, objToState, stateToObj} from "../util";
+import {draw_card_pile, take_route, decided_routes} from '../ttc-ocaml/src/state.bs';
 
 const modifyState = (state, fn) => {
     const camlState = objToState(state),
@@ -19,6 +19,12 @@ export default (state = initialState, action) => {
             // draw a route card
             // state.take_route
             return modifyState(state, take_route);
+        case constants.DECIDED_ROUTES:
+            // choose destination tickets
+            // state.decided_routes
+            const indices = action.payload.map((elem, index) => elem ? index : -1).filter(elem => elem >= 0),
+                ocamlIndices = arrayToList(indices);
+            return modifyState(state, (st) => decided_routes(st, ocamlIndices));
         default:
             return state;
     }

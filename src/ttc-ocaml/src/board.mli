@@ -30,3 +30,5 @@ val routes : route list
 val locations: location list
 
 val completed : string -> string -> route list -> route list -> bool
+
+val get_location : string -> location list -> location

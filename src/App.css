@@ -73,10 +73,20 @@
     line-height: 25px;
 }
 
+#hand-container {
+
+}
+
 #train-hand {
     /* float: left; the child divs instead of this: */
     /*display: flex;*/
     /*flex-direction: row;*/
+    float: left;
+    width: 50%;
+}
+
+#destination-hand {
+    float: right;
     width: 50%;
 }
 
@@ -132,6 +142,11 @@
     background-size: cover;
     position: relative;
     float: left;
+    opacity: 0.7;
+}
+
+#deck:hover {
+    opacity: 1;
 }
 
 #deck-text {
@@ -146,4 +161,21 @@
 #choose-destinations {
     position: relative;
     width: auto;
+}
+
+#choose-destinations-button-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+.destination-ticket-selected-marker {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background-image: url('./images/tick.svg');
+    background-size: cover;
 }

@@ -153,63 +153,6 @@ function update_players(i, new_p, lst) {
   };
 }
 
-function decided_routes_setup(st, indexes) {
-  if (st[/* turn_ended */11]) {
-    return turn_ended_error(st);
-  } else if (List.length(indexes) >= 2) {
-    var choose = st[/* choose_destinations */5];
-    var loop = function (_acc, _param) {
-      while(true) {
-        var param = _param;
-        var acc = _acc;
-        if (param) {
-          _param = param[1];
-          _acc = /* :: */[
-            List.nth(choose, param[0]),
-            acc
-          ];
-          continue ;
-        } else {
-          return acc;
-        }
-      };
-    };
-    var tickets = loop(/* [] */0, indexes);
-    var p = current_player(st);
-    var p$prime = Player.update_destination_tickets(p, tickets);
-    var i = st[/* player_index */0];
-    return /* record */[
-            /* player_index */st[/* player_index */0],
-            /* players */update_players(i, p$prime, st[/* players */1]),
-            /* routes */st[/* routes */2],
-            /* destination_deck */st[/* destination_deck */3],
-            /* destination_trash */st[/* destination_trash */4],
-            /* choose_destinations : [] */0,
-            /* train_deck */st[/* train_deck */6],
-            /* facing_up_trains */st[/* facing_up_trains */7],
-            /* train_trash */st[/* train_trash */8],
-            /* taking_routes */false,
-            /* error */"",
-            /* turn_ended */true
-          ];
-  } else {
-    return /* record */[
-            /* player_index */st[/* player_index */0],
-            /* players */st[/* players */1],
-            /* routes */st[/* routes */2],
-            /* destination_deck */st[/* destination_deck */3],
-            /* destination_trash */st[/* destination_trash */4],
-            /* choose_destinations */st[/* choose_destinations */5],
-            /* train_deck */st[/* train_deck */6],
-            /* facing_up_trains */st[/* facing_up_trains */7],
-            /* train_trash */st[/* train_trash */8],
-            /* taking_routes */st[/* taking_routes */9],
-            /* error */"Must at least take 2 tickets",
-            /* turn_ended */st[/* turn_ended */11]
-          ];
-  }
-}
-
 function draw_card_facing_up(st, i) {
   if (st[/* turn_ended */11]) {
     return turn_ended_error(st);
@@ -316,57 +259,61 @@ function setup_state(st) {
 function decided_routes(st, indexes) {
   if (st[/* turn_ended */11]) {
     return turn_ended_error(st);
-  } else if (List.length(indexes) >= 1) {
-    var choose = st[/* choose_destinations */5];
-    var loop = function (_acc, _param) {
-      while(true) {
-        var param = _param;
-        var acc = _acc;
-        if (param) {
-          _param = param[1];
-          _acc = /* :: */[
-            List.nth(choose, param[0]),
-            acc
-          ];
-          continue ;
-        } else {
-          return acc;
-        }
-      };
-    };
-    var tickets = loop(/* [] */0, indexes);
-    var p = current_player(st);
-    var p$prime = Player.update_destination_tickets(p, tickets);
-    var i = st[/* player_index */0];
-    return /* record */[
-            /* player_index */st[/* player_index */0],
-            /* players */update_players(i, p$prime, st[/* players */1]),
-            /* routes */st[/* routes */2],
-            /* destination_deck */st[/* destination_deck */3],
-            /* destination_trash */st[/* destination_trash */4],
-            /* choose_destinations : [] */0,
-            /* train_deck */st[/* train_deck */6],
-            /* facing_up_trains */st[/* facing_up_trains */7],
-            /* train_trash */st[/* train_trash */8],
-            /* taking_routes */false,
-            /* error */"",
-            /* turn_ended */true
-          ];
   } else {
-    return /* record */[
-            /* player_index */st[/* player_index */0],
-            /* players */st[/* players */1],
-            /* routes */st[/* routes */2],
-            /* destination_deck */st[/* destination_deck */3],
-            /* destination_trash */st[/* destination_trash */4],
-            /* choose_destinations */st[/* choose_destinations */5],
-            /* train_deck */st[/* train_deck */6],
-            /* facing_up_trains */st[/* facing_up_trains */7],
-            /* train_trash */st[/* train_trash */8],
-            /* taking_routes */st[/* taking_routes */9],
-            /* error */"Must at least take 1 ticket",
-            /* turn_ended */st[/* turn_ended */11]
-          ];
+    var p = current_player(st);
+    var required_tickets = Player.first_turn(p) ? 2 : 1;
+    var tickets_chosen = List.length(indexes);
+    if (tickets_chosen >= required_tickets) {
+      var choose = st[/* choose_destinations */5];
+      var loop = function (_acc, _param) {
+        while(true) {
+          var param = _param;
+          var acc = _acc;
+          if (param) {
+            _param = param[1];
+            _acc = /* :: */[
+              List.nth(choose, param[0]),
+              acc
+            ];
+            continue ;
+          } else {
+            return acc;
+          }
+        };
+      };
+      var tickets = loop(/* [] */0, indexes);
+      var p$prime = Player.update_destination_tickets(p, tickets);
+      var i = st[/* player_index */0];
+      return /* record */[
+              /* player_index */st[/* player_index */0],
+              /* players */update_players(i, p$prime, st[/* players */1]),
+              /* routes */st[/* routes */2],
+              /* destination_deck */st[/* destination_deck */3],
+              /* destination_trash */st[/* destination_trash */4],
+              /* choose_destinations : [] */0,
+              /* train_deck */st[/* train_deck */6],
+              /* facing_up_trains */st[/* facing_up_trains */7],
+              /* train_trash */st[/* train_trash */8],
+              /* taking_routes */false,
+              /* error */"",
+              /* turn_ended */true
+            ];
+    } else {
+      return /* record */[
+              /* player_index */st[/* player_index */0],
+              /* players */st[/* players */1],
+              /* routes */st[/* routes */2],
+              /* destination_deck */st[/* destination_deck */3],
+              /* destination_trash */st[/* destination_trash */4],
+              /* choose_destinations */st[/* choose_destinations */5],
+              /* train_deck */st[/* train_deck */6],
+              /* facing_up_trains */st[/* facing_up_trains */7],
+              /* train_trash */st[/* train_trash */8],
+              /* taking_routes */st[/* taking_routes */9],
+              /* error */"Player only " + (String(tickets_chosen) + (" tickets, must take at least " + (String(required_tickets) + "."))),
+              /* turn_ended */st[/* turn_ended */11]
+            ];
+    }
   }
 }
 
@@ -571,7 +518,6 @@ exports.draw_card_pile = draw_card_pile;
 exports.draw_card_facing_up = draw_card_facing_up;
 exports.take_route = take_route;
 exports.decided_routes = decided_routes;
-exports.decided_routes_setup = decided_routes_setup;
 exports.select_route = select_route;
 exports.longest_route = longest_route;
-/* No side effect */
+/* Board Not a pure module */
