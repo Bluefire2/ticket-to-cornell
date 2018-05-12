@@ -84,13 +84,14 @@ module type PLAYER = sig
   val destination_tickets : player -> Components.DestinationDeck.card list
   val train_cards : player -> (Components.TrainDeck.card * int) list
   val score : player -> int
+  val first_turn : player -> bool
+  val last_turn : player -> bool
   val color : player -> Components.player_color
   val routes : player -> Board.route list
   val trains_remaining : player -> int
   val init_players : int -> player list
   val draw_train_card : player -> Components.TrainDeck.card  -> player
   val place_train : player -> Board.route -> player
-
 end
 
 module type BOARD = sig

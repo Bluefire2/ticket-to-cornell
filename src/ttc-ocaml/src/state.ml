@@ -70,19 +70,19 @@ let decided_routes_setup st indexes =
   if (turn_ended st) then turn_ended_error st
   else (
   if List.length indexes >= 2 then
-    (  let choose = choose_destinations st in
+    ( let choose = choose_destinations st in
       let rec loop acc = function
           | [] -> acc
           | i::t -> loop ((List.nth choose i)::acc) t in
       let tickets = loop [] indexes in
       let p = current_player st in
-       let p' = update_destination_tickets p tickets in
-       let i = st.player_index in
-       { st with players = update_players i p' st.players;
-                 choose_destinations = [];
-                 taking_routes = false;
-                 error = "";
-                 turn_ended = true } )
+      let p' = update_destination_tickets p tickets in
+      let i = st.player_index in
+      { st with players = update_players i p' st.players;
+                choose_destinations = [];
+                taking_routes = false;
+                error = "";
+                turn_ended = true } )
   else {st with error = "Must at least take 2 tickets"} )
 
 let draw_card_facing_up st i =

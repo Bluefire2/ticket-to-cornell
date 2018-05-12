@@ -60,7 +60,9 @@ destination_tickets = [gates;toclass];
 train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)];
 score = 34;
 routes = [];
-trains_remaining = 45
+trains_remaining = 45;
+first_turn = false;
+last_turn = false;
 }
 
 let p2 =
@@ -70,8 +72,11 @@ destination_tickets = [];
 train_cards = [(Red,0);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)];
 score = 0;
 routes = [];
-trains_remaining = 45
+trains_remaining = 45;
+first_turn = false;
+last_turn = false;
 }
+
 
 let default1 =
 {
@@ -81,8 +86,11 @@ let default1 =
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
   routes = [];
-  trains_remaining = 45
+  trains_remaining = 45;
+  first_turn = true;
+  last_turn = false;
 }
+
 
 let default2 =
 {
@@ -92,8 +100,11 @@ let default2 =
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
   routes = [];
-  trains_remaining = 45
+  trains_remaining = 45;
+  first_turn = true;
+  last_turn = false;
 }
+
 
 let default3 =
 {
@@ -103,8 +114,11 @@ let default3 =
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
   routes = [];
-  trains_remaining = 45
+  trains_remaining = 45;
+  first_turn = true;
+  last_turn = false;
 }
+
 
 let default4 =
 {
@@ -114,8 +128,11 @@ let default4 =
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
   routes = [];
-  trains_remaining = 45
+  trains_remaining = 45;
+  first_turn = true;
+  last_turn = false;
 }
+
 
 let default5 =
 {
@@ -125,8 +142,11 @@ let default5 =
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
   score = 0;
   routes = [];
-  trains_remaining = 45
+  trains_remaining = 45;
+  first_turn = true;
+  last_turn = false;
 }
+
 
 let find_location s locations =
   let rec loop = ( function
@@ -147,8 +167,11 @@ destination_tickets = [{loc1 = "Plantations"; loc2 = "Bartels Hall"; points = 4}
 train_cards = [];
 score = 90;
 routes = [(dairy_bar,plantations,2,White,None); (bartels,dairy_bar,3,Orange,None)];
-trains_remaining = 19
+trains_remaining = 19;
+first_turn = false;
+last_turn = false;
 }
+
 
 let tests =
 [
@@ -243,7 +266,9 @@ let tests =
     train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)];
     score = 34;
     routes = [];
-    trains_remaining = 45
+    trains_remaining = 45;
+    first_turn = false;
+    last_turn = false;
     })
     (Player.update_destination_tickets p1 [test1]));
   "update destination_tickets2" >:: (fun _ -> assert_equal
@@ -253,7 +278,9 @@ let tests =
     train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)];
     score = 34;
     routes = [];
-    trains_remaining = 45
+    trains_remaining = 45;
+    first_turn = false;
+    last_turn = false;
     })
     (Player.update_destination_tickets p1 [test1;gates]));
   "update destination_tickets3" >:: (fun _ -> assert_equal
@@ -263,7 +290,9 @@ let tests =
     train_cards = [(Red,0);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)];
     score = 0;
     routes = [];
-    trains_remaining = 45
+    trains_remaining = 45;
+    first_turn = false;
+    last_turn = false;
     })
     (Player.update_destination_tickets p2 [toclass]));
   "update destination_tickets4" >:: (fun _ -> assert_equal
@@ -273,7 +302,9 @@ let tests =
     train_cards = [(Red,0);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)];
     score = 0;
     routes = [];
-    trains_remaining = 45
+    trains_remaining = 45;
+    first_turn = false;
+    last_turn = false;
     })
     (Player.update_destination_tickets p2 [toclass;gates;test1]));
   "train cards1" >:: (fun _ -> assert_equal [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)]

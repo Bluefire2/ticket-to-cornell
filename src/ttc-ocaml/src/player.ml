@@ -15,6 +15,8 @@ type player = { color : player_color;
                 score : int;
                 routes : Board.route list;
                 trains_remaining : int ;
+                first_turn : bool ;
+                last_turn : bool ;
               }
 
 let rec remove_color n c h =
@@ -28,11 +30,16 @@ let destination_tickets p = p.destination_tickets
 let routes p = p.routes
 
 let update_destination_tickets p tickets =
-  { p with destination_tickets = tickets @ p.destination_tickets }
+  { p with destination_tickets = tickets @ p.destination_tickets;
+           first_turn = false }
 
 let train_cards p = p.train_cards
 
 let score p = p.score
+
+let first_turn p = p.first_turn
+
+let last_turn p = p.last_turn
 
 let trains_remaining p = p.trains_remaining
 (* TODO: let players choose their colors. For now:
@@ -57,7 +64,9 @@ let rec init_players n =
                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
                   score = 0;
                   routes = [];
-                  trains_remaining = 45 } in
+                  trains_remaining = 45;
+                  first_turn = true;
+                  last_turn = false } in
             p::(init_players (n-1))
 
 let draw_train_card p c =
@@ -66,17 +75,13 @@ let draw_train_card p c =
 (*precondition: hplayer hand has correct number of trains, assume player selected color for route aka not none,
 assume state checked player color option if is already taken by person.  *)
 let place_train p r =
-  { color = p.color;
-    destination_tickets = p.destination_tickets;
-    train_cards =
-      remove_color (Board.get_length r) (Board.get_color r) p.train_cards;
-    score = Board.route_score r;
-    routes = r::p.routes;
-    trains_remaining = p.trains_remaining - Board.get_length r
-  }
+  { p with train_cards = remove_color (Board.get_length r) (Board.get_color r) p.train_cards;
+           score = Board.route_score r;
+           routes = r::p.routes;
+           trains_remaining = p.trains_remaining - Board.get_length r }
+
 
 let rec path = function
   | [] -> []
   | (x,y,_,_,_)::t -> ( match (x,y) with
                         | ( (x',_,_), (y',_,_) ) -> (x',y')::path t )
-
