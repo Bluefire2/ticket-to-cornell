@@ -33,6 +33,10 @@ val message : state -> string
  * false otherwise. *)
 val turn_ended : state -> bool
 
+(* [last_round st] returns true if it is the last round the current [st], false
+ * otherwise. *)
+val last_round : state -> bool
+
 (* [choose_destinations st] returns a list of destination tickets from which the
  * player can choose to keep some. *)
 val choose_destinations : state -> DestinationDeck.card list
