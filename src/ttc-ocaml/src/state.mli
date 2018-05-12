@@ -42,7 +42,7 @@ val score : state -> player -> int
 
 (* [setup_state st] returns a new state with the initial setup for the current
  * player in [st]: 4 new train cards and 3 destination tickets to choose from.
- * After this state: call `decided_routes_setup` with the chosen tickets. *)
+ * After this state: call `decided_routes` with the chosen tickets. *)
 val setup_state : state -> state
 
 (* [next_player st] returns a new state when we transition to the next player.
@@ -66,10 +66,6 @@ val take_route : state -> state
 (* [decided_routes st lst] returns a new state depending on the indexes from
  * choose_destinations that the player decided to keep.  *)
 val decided_routes : state -> int list -> state
-
-(* [decided_routes_setup st lst] returns a new state depending on the indexes from
- * choose_destinations that the player decided to keep for setting up. *)
-val decided_routes_setup : state -> int list -> state
 
 (* [select_route st r] returns a new state for which the player decides to
  * build a train route [r]. *)
