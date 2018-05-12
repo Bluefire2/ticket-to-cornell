@@ -205,7 +205,7 @@ function decided_routes_setup(st, indexes) {
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */st[/* taking_routes */9],
             /* error */"Must at least take 2 tickets",
-            /* turn_ended */false
+            /* turn_ended */st[/* turn_ended */11]
           ];
   }
 }
@@ -299,7 +299,7 @@ function take_route(st) {
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */false,
             /* error */st[/* error */10],
-            /* turn_ended */false
+            /* turn_ended */st[/* turn_ended */11]
           ];
   }
 }
@@ -365,7 +365,7 @@ function decided_routes(st, indexes) {
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */st[/* taking_routes */9],
             /* error */"Must at least take 1 ticket",
-            /* turn_ended */false
+            /* turn_ended */st[/* turn_ended */11]
           ];
   }
 }
@@ -436,7 +436,7 @@ function select_route(st, r) {
               /* train_trash */st[/* train_trash */8],
               /* taking_routes */st[/* taking_routes */9],
               /* error */"Route already taken",
-              /* turn_ended */false
+              /* turn_ended */st[/* turn_ended */11]
             ];
     } else if (clr >= 9) {
       return /* record */[
@@ -451,7 +451,7 @@ function select_route(st, r) {
               /* train_trash */st[/* train_trash */8],
               /* taking_routes */st[/* taking_routes */9],
               /* error */"Choose a train card color",
-              /* turn_ended */false
+              /* turn_ended */st[/* turn_ended */11]
             ];
     } else {
       var st$1 = st;
@@ -507,7 +507,7 @@ function select_route(st, r) {
                     /* train_trash */st$1[/* train_trash */8],
                     /* taking_routes */st$1[/* taking_routes */9],
                     /* error */"Not enough trains",
-                    /* turn_ended */false
+                    /* turn_ended */st$1[/* turn_ended */11]
                   ];
           }
         } else {
@@ -523,7 +523,7 @@ function select_route(st, r) {
                   /* train_trash */st$1[/* train_trash */8],
                   /* taking_routes */st$1[/* taking_routes */9],
                   /* error */"Not enough train cards",
-                  /* turn_ended */false
+                  /* turn_ended */st$1[/* turn_ended */11]
                 ];
         }
       }
