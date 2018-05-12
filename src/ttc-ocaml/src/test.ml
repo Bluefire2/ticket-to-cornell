@@ -4,7 +4,64 @@ open State
 open Board
 open Player
 
+let rec remove_n n lst =
+  if n > (List.length lst) then lst else
+    match lst with
+    | [] -> []
+    | h::t -> if n=0 then t else h::(remove_n (n-1) t)
+
+let rec remove item = function
+  | [] -> []
+  | h::t -> if h=item then t else h::remove item t
+
+let random_int n =
+  try Random.int (n) with
+  | Invalid_argument _ -> 0
+
+let rec shuffler from to_list len =
+  match len with
+  | 0 -> to_list
+  | _ -> let i = random_int (len) in shuffler (remove_n i from) ((List.nth from i)::to_list) (len-1)
+
 let lst l = match l with | Location (_, _, _, x) -> x
+
+let eco_house = Location ("Ecology House", 574., 141., [])
+let a_lot = Location ("A LOT", 1051., 106., [])
+let golf = Location ("Golf Center", 1676., 187., [])
+let hasbrouck = Location ("Hasbrouck Community Center", 1408., 290., [])
+let rpcc = Location ("RPCC", 1015.,322., [])
+let appel = Location ("Appel Commons", 1107.,539., [])
+let mcgraw = Location ("McGraw Tower", 501.,1097., [])
+let risley = Location ("Risley", 718.,579., [])
+let eddy = Location ("Eddy Gate", 341.,1549., [])
+let noyes = Location ("Noyes Community Center", 338.,1189., [])
+let bartels = Location ("Bartels Hall",1094.,1256., [])
+let schoellkopf = Location ("Schoellkopf Field", 940.,1400., [])
+let dairy_bar = Location ("Dairy Bar", 1486.,1078., [])
+let kennedy = Location ("Kennedy Hall", 893.,1021., [])
+let bridge = Location ("Stewart Ave Bridge", 184., 644., [])
+let museum = Location ("Johnson Museum", 428., 785., [])
+let sigma_chi = Location ("Sigma Chi", 95., 257., [])
+let undergrad = Location ("Undergraduate Admissions", 498., 498., [])
+let ckb = Location ("CKB Quad", 934., 468., [])
+let forest_home = Location ("Forest Home", 1673., 677., [])
+let beebe = Location ("Beebe Lake", 967., 699., [])
+let island = Location ("Werly Island", 1208., 780., [])
+let psb = Location ("Physical Sciences Building", 726.,875., [])
+let mann = Location ("Mann Library", 1086.,972., [])
+let engineering = Location ("Engineering Quad", 615., 1362., [])
+let commons = Location ("The Commons", 65., 1673., [])
+let maplewood = Location ("Maplewood Park", 1156., 1671., [])
+let vet = Location ("Veterinary School", 1863., 1107., [])
+let riley_robb = Location ("Riley-Robb Hall", 1430., 1245., [])
+let barton = Location ("Barton Hall", 801.,1235., [])
+let farm_barn = Location ("Blair Farm Barn", 1562., 1492., [])
+let plantations = Location ("Plantations", 1359., 845., [])
+let arboretum = Location ("Newman Arboretum", 2028., 712., [])
+let filtration = Location ("Filtration Plant", 1787., 858., [])
+let creek = Location ("Cascadilla Creek", 842., 1579., [])
+let becker = Location ("House Becker", 198.,994., [])
+
 
 let test_list1 =
 [ Red; Red; Red]
@@ -156,10 +213,6 @@ let find_location s locations =
         else loop t ) in
   loop locations
 
-let dairy_bar = Location ("Dairy Bar", 1486.,1078., [])
-let plantations = Location ("Plantations", 1359., 845., [])
-let bartels = Location ("Bartels Hall",1094.,1256., [])
-
 let ppd =
 {
 color = PBlue;
@@ -171,6 +224,53 @@ trains_remaining = 19;
 first_turn = false;
 last_turn = false;
 }
+
+let p3 =
+  {
+    color= PYellow;
+    destination_tickets = [{loc1 = "Risley"; loc2 = "The Commons"; points = 13};
+                           {loc1 = "Werly Island"; loc2 = "Engineering Quad"; points = 11}];
+    train_cards = [(Red,3);(Blue,1);(Green,2);(Yellow,2);
+                   (Black,0);(White,2);(Pink,0);(Wild,1);(Orange,0)];
+    score = 18;
+    routes = [
+      (beebe,island,2,Orange,None);
+      (psb,kennedy,2,Grey,None);
+      (risley,beebe,2,Grey,None);
+      (commons,eddy,3,Black,None);
+      (psb,island,4,Red,None);
+      (engineering,barton,2,Grey,None);
+      (kennedy,barton,2,Grey,None);
+      (eddy,engineering,3,Grey,None)];
+    trains_remaining = 18;
+    first_turn = false;
+    last_turn = false;
+  }
+
+let p4 = {p3 with
+          destination_tickets = [{loc1 = "A LOT"; loc2 = "Blair Farm Barn"; points = 20};
+                                 {loc1 = "Stewart Ave Bridge"; loc2 = "Riley-Robb Hall"; points = 12};
+                                 {loc1 = "Sigma Chi"; loc2 = "CKB Quad"; points = 6}];
+          routes =
+            [
+              (sigma_chi,undergrad,4,Pink,None);
+              (bridge,sigma_chi,5,Black,None);
+              (ckb,risley,2,Blue,None);
+              (undergrad,risley,2,White,None);
+              (dairy_bar,riley_robb,1,Grey,None);
+              (rpcc,appel,1,Grey,None);
+              (island,plantations,1,Grey,None);
+              (beebe,appel,2,Pink,None);
+              (beebe,island,2,Black,None);
+              (dairy_bar,plantations,2,Green,None);
+              (a_lot,rpcc,2,Grey,None);
+              (riley_robb,farm_barn,3,Grey,None);
+            ]
+         }
+
+let ppd' = {ppd with destination_tickets = [{loc1 = "Sigma Chi"; loc2 = "CKB Quad"; points = 6}]}
+
+let ppd'' = {ppd with routes = [(dairy_bar,plantations,2,White,None)]}
 
 
 let tests =
@@ -363,9 +463,37 @@ let tests =
   "loc1" >:: (fun _ -> assert_equal true (same_lst ["Appel Commons"; "Risley"; "RPCC"] (lst (find_location "CKB Quad" Board.locations))));
   "loc2" >:: (fun _ -> assert_equal true (same_lst ["Bartels Hall"; "Cascadilla Creek"; "Barton Hall"; "Engineering Quad"; "Blair Farm Barn"; "Riley-Robb Hall"] (lst (find_location "Schoellkopf Field" Board.locations))));
   "checking completed1" >:: (fun _ -> assert_equal (true)
-    (Board.completed (List.hd ppd.destination_tickets).loc1 (List.hd ppd.destination_tickets).loc2 ppd.routes ));
+                                (Board.completed (List.hd ppd.destination_tickets).loc1 (List.hd ppd.destination_tickets).loc2 ppd.routes [] ));
   "checking completed2" >:: (fun _ -> assert_equal (false)
-    (Board.completed "Plantations" "Bartels" default5.routes));
+                                (Board.completed "Plantations" "Bartels" default5.routes []));
+  "checking completed3" >:: (fun _ -> assert_equal (false)
+                                (Board.completed (List.hd ppd'.destination_tickets).loc1 (List.hd ppd'.destination_tickets).loc2 ppd'.routes [] ));
+  "checking completed4" >:: (fun _ -> assert_equal (false)
+                                (Board.completed (List.hd ppd''.destination_tickets).loc1 (List.hd ppd''.destination_tickets).loc2 ppd''.routes [] ));
+  "checking completed5" >:: (fun _ -> assert_equal (true)
+                                (Board.completed "Risley" "The Commons" p3.routes []));
+  "checking completed6" >:: (fun _ -> assert_equal (true)
+                                (Board.completed "Werly Island" "Engineering Quad" p3.routes []));
+  "checking completed7" >:: (fun _ -> assert_equal (false)
+                                (Board.completed "Risley" "Noyes Community Center" p3.routes []));
+  "checking completed8" >:: (fun _ -> assert_equal (false)
+                                (Board.completed "Werly Island" "House Becker" p3.routes []));
+  "checking completed9" >:: (fun _ -> assert_equal (true)
+                                (Board.completed "Engineering Quad" "Werly Island" p3.routes []));
+  "checking completed10" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "The Commons" "Risley" p3.routes []));
+  "checking completed11" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "Sigma Chi" "CKB Quad" p4.routes []));
+  "checking completed11" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "Sigma Chi" "CKB Quad" p4.routes []));
+  "checking completed12" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "A LOT" "Blair Farm Barn" p4.routes []));
+  "checking completed13" >:: (fun _ -> assert_equal (false)
+                                 (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" p4.routes []));
+  "checking completed14" >:: (fun _ -> assert_equal (false)
+                                 (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" (shuffler p4.routes [] (List.length p4.routes)) []));
+  (* "checking completed15" >:: (fun _ -> assert_equal (true)
+     (Board.completed  "A LOT" "Blair Farm Barn" (shuffler p4.routes [] (List.length p4.routes)) []));*)
 ]
 
 let suite =

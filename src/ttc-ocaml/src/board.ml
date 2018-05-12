@@ -213,24 +213,25 @@ let routes =
       loop (acc @ [new_r]) t in
   loop [] route_connections
 
-let rec completed loc1 loc2 routes =
-  match routes with
-  | [] -> false
-  | ((Location (l1,_,_,_)),(Location (l2,_,_,_)),_,_,_)::t ->
-      if loc1 = l1 then
-          if loc2 = l2 then true else
-          completed l2 loc2 t || completed loc1 loc2 t
+let rec completed loc1 loc2 routes prev =
+    match routes with
+    | [] -> false
+    | h::t -> ( match h with
+        | ((Location (l1,_,_,_)),(Location (l2,_,_,_)),_,_,_) ->
+          if loc1 = l1 then
+            if loc2 = l2 then true else
+              completed l2 loc2 t (h::prev) || completed l2 loc2 prev [] || completed loc1 loc2 t (h::prev)
           else
-      if loc1 = l2 then
-          if loc2 = l1 then true else
-          completed l1 loc2 t || completed loc1 loc2 t
+          if loc1 = l2 then
+            if loc2 = l1 then true else
+              completed l1 loc2 t (h::prev) || completed l1 loc2 prev [] || completed loc1 loc2 t (h::prev)
           else
-      if loc2 = l1 then
-          if loc1 = l2 then true else
-          completed loc1 l2 t || completed loc1 loc2 t
+          if loc2 = l1 then
+            if loc1 = l2 then true else
+              completed loc1 l2 t (h::prev) || completed loc1 l2 prev [] || completed loc1 loc2 t (h::prev)
           else
-      if loc2 = l2 then
-        if loc1 = l1 then true else
-        completed loc1 l1 t || completed loc1 loc2 t
-      else
-      completed loc1 loc2 t
+          if loc2 = l2 then
+            if loc1 = l1 then true else
+              completed loc1 l1 t (h::prev) || completed loc1 l1 prev [] || completed loc1 loc2 t (h::prev)
+          else
+              completed loc1 loc2 t (h::prev) )
