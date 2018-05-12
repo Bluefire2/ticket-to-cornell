@@ -152,3 +152,14 @@
     position: relative;
     width: auto;
 }
+
+#choose-destinations-button-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+#choose-destinations-button {
+
+}

@@ -19,13 +19,13 @@ class Decks extends Component {
 
     ticketClickHandler(index) {
         const newSelectedTickets = this.state.selectedTickets.map(elem => elem); // need to explicitly copy the array
-        if(!newSelectedTickets.includes(index)) {
+        if (!newSelectedTickets.includes(index)) {
             newSelectedTickets.push(index);
         }
         return () => {
             this.setState({
                 selectedTickets: newSelectedTickets
-            })
+            });
         }
     };
 
@@ -45,15 +45,18 @@ class Decks extends Component {
                         this.props.destinations.length !== 0 && // only render if we need to
 
                         <fieldset>
-                        <legend>Choose destination tickets:</legend>
-                        {this.props.destinations.map((destination, index) => {
-                            return (
-                                <div className="choose-destinations-ticket clickable"
-                                     onClick={this.ticketClickHandler(index).bind(this)} key={index}>
-                                    <DestinationTicket {...destination}/>
-                                </div>
-                            );
-                        })}
+                            <legend>Choose destination tickets:</legend>
+                            {this.props.destinations.map((destination, index) => {
+                                return (
+                                    <div className="choose-destinations-ticket clickable"
+                                         onClick={this.ticketClickHandler(index).bind(this)} key={index}>
+                                        <DestinationTicket {...destination}/>
+                                    </div>
+                                );
+                            })}
+                            <div id="choose-destinations-button-wrapper">
+                                <button id="choose-destinations-button" className="pure-button pure-button-primary">Select</button>
+                            </div>
                         </fieldset>
                     }
                 </div>
