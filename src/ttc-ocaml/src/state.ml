@@ -66,25 +66,6 @@ let update_players i new_p lst =
     else update_loop (i+1) new_i new_p (acc @ [h]) t in
   update_loop 0 i new_p [] lst
 
-let decided_routes_setup st indexes =
-  if (turn_ended st) then turn_ended_error st
-  else (
-  if List.length indexes >= 2 then
-    ( let choose = choose_destinations st in
-      let rec loop acc = function
-          | [] -> acc
-          | i::t -> loop ((List.nth choose i)::acc) t in
-      let tickets = loop [] indexes in
-      let p = current_player st in
-      let p' = update_destination_tickets p tickets in
-      let i = st.player_index in
-      { st with players = update_players i p' st.players;
-                choose_destinations = [];
-                taking_routes = false;
-                error = "";
-                turn_ended = true } )
-  else {st with error = "Must at least take 2 tickets"} )
-
 let draw_card_facing_up st i =
   if (turn_ended st) then turn_ended_error st
   else (
@@ -135,21 +116,26 @@ let setup_state st =
 let decided_routes st indexes =
   if (turn_ended st) then turn_ended_error st
   else (
-  if List.length indexes >= 1 then
-    ( let choose = choose_destinations st in
-      let rec loop acc = function
-          | [] -> acc
-          | i::t -> loop ((List.nth choose i)::acc) t in
-      let tickets = loop [] indexes in
-      let p = current_player st in
-      let p' = update_destination_tickets p tickets in
-      let i = st.player_index in
-       { st with players = update_players i p' st.players;
-                 choose_destinations = [];
-                 taking_routes = false;
-                 error = "";
-                 turn_ended = true } )
-  else {st with error = "Must at least take 1 ticket"} )
+    let p = current_player st in
+    let required_tickets = if first_turn p then 2 else 1 in
+    let tickets_chosen = List.length indexes in
+    if tickets_chosen >= required_tickets then
+      ( let choose = choose_destinations st in
+        let rec loop acc = function
+            | [] -> acc
+            | i::t -> loop ((List.nth choose i)::acc) t in
+        let tickets = loop [] indexes in
+        let p' = update_destination_tickets p tickets in
+        let i = st.player_index in
+         { st with players = update_players i p' st.players;
+                   choose_destinations = [];
+                   taking_routes = false;
+                   error = "";
+                   turn_ended = true } )
+    else {st with
+          error = "Player only " ^ (string_of_int tickets_chosen)
+                  ^ " tickets, must take at least "
+                  ^ (string_of_int required_tickets) ^ "."} )
 
 let update_routes (routes: Board.route list) old_r new_r : Board.route list =
   let rec loop acc = function

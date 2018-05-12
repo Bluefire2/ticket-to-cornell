@@ -492,8 +492,8 @@ let tests =
                                  (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" p4.routes []));
   "checking completed14" >:: (fun _ -> assert_equal (false)
                                  (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" (shuffler p4.routes [] (List.length p4.routes)) []));
-  (* "checking completed15" >:: (fun _ -> assert_equal (true)
-     (Board.completed  "A LOT" "Blair Farm Barn" (shuffler p4.routes [] (List.length p4.routes)) []));*)
+(*    "checking completed15" >:: (fun _ -> assert_equal (true)
+     (Board.completed  "A LOT" "Blair Farm Barn" (shuffler p4.routes [] (List.length p4.routes)) [])); *)
 ]
 
 let suite =

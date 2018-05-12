@@ -23,7 +23,7 @@ let ai_setup st =
       if max x y z = x && min x y z = z then [0; 2] else
       [1; 2]
     | _ -> failwith "not possible"
-  in decided_routes_setup st' keep_tickets
+  in decided_routes st' keep_tickets
 
 
 let dest_ticket_action clist st =
