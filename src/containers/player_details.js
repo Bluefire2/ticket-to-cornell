@@ -17,7 +17,8 @@ class PlayerDetails extends Component {
                 </div>
                 <div>
                     <button id="view-decks-button"
-                            className="pure-button pure-button-secondary">
+                            className="pure-button pure-button-secondary"
+                            onClick={this.props.openDeckPane}>
                         View decks
                     </button>
                     <button id="next-player-button"

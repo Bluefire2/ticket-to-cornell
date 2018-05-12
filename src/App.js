@@ -21,21 +21,30 @@ class App extends Component {
         Modal.setAppElement(this.el);
     }
 
+    openDeckPane() {
+        this.setState({
+            isPaneOpen: true
+        });
+    }
+
+    closeDeckPane() {
+        this.setState({
+            isPaneOpen: false
+        });
+    }
+
     render() {
         return (
             <div className="App" ref={ref => this.el = ref}>
-                <button onClick={() => this.setState({ isPaneOpen: true })}>Click me to open right pane!</button>
                 <SlidingPane
                     isOpen={this.state.isPaneOpen}
                     title="Train and ticket decks"
                     width="800px"
-                    onRequestClose={() => {
-                        this.setState({isPaneOpen: false});
-                    }}>
+                    onRequestClose={this.closeDeckPane.bind(this)}>
                     <Decks/>
                 </SlidingPane>
                 <div id="top-pane">
-                    <PlayerDetails/>
+                    <PlayerDetails openDeckPane={this.openDeckPane.bind(this)}/>
                 </div>
                 <div id="map-container">
                     <Map/>
