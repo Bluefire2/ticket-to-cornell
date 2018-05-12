@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {withFauxDOM} from 'react-faux-dom';
 import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
 import * as d3 from 'd3';
-
 import config from '../config.json';
 import {trainColorFromIndex} from "../util";
+import {selectRoute} from "../actions/index";
 
 const SCALE = config.scale;
 
@@ -33,7 +34,7 @@ class Map extends Component {
         // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
         const RECTANGLE_TO_SPACING_RATIO = 4,
             RECTANGLE_HEIGHT = 10;
-        const createRectangleDatum = (x, y, theta, width, height, trainColor, taken, routeID) => {
+        const createRectangleDatum = (x, y, theta, width, height, trainColor, taken, route, routeID) => {
             return {
                 x,
                 y,
@@ -42,6 +43,7 @@ class Map extends Component {
                 height,
                 trainColor,
                 taken,
+                route,
                 routeID
             }
         };
@@ -76,7 +78,7 @@ class Map extends Component {
 
                 // color and taken are not implemented yet
                 const datum =
-                    createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, trainColor, false, uniqueRouteID);
+                    createRectangleDatum(xRotated, yRotated, theta, rectangleLength, RECTANGLE_HEIGHT, trainColor, false, route, uniqueRouteID);
                 acc.push(datum);
                 return addRect(acc, i + 1);
             })([], 0);
@@ -101,7 +103,8 @@ class Map extends Component {
             .data(routeRectangles)
             .enter()
             .append('rect')
-                .attr('class', 'route-path-rect')
+                .on('click', d => this.props.selectRoute(d.route))
+                .attr('class', 'route-path-rect clickable')
                 .attr('route', d => `${d.routeID}`)
                 .style('fill', d => d.trainColor)
                 .attr('x', d => d.x)
@@ -130,4 +133,10 @@ const mapStateToProps = ({dimensions, locations, gameState}) => {
     };
 };
 
-export default connect(mapStateToProps)(withFauxDOM(Map));
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({
+        selectRoute
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withFauxDOM(Map));

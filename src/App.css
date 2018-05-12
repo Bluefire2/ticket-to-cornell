@@ -65,6 +65,8 @@
     height: 25px;
     background-color: #ff8b67;
     color: white;
+    font-size: 125%;
+    font-weight: bold;
     transform: rotate(20deg);
     border-radius: 2px;
     /* centre text horizontally and vertically: */
@@ -178,4 +180,34 @@
     height: 40px;
     background-image: url('./images/tick.svg');
     background-size: cover;
+}
+
+#player-details {
+    border: 3px dashed darkgrey;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-detail, #player-details > div {
+    height: 30px;
+    line-height: 30px;
+    padding: 5px;
+    margin: 5px 30px;
+    color: #6b6b6b;
+}
+
+.player-detail {
+    transition: background-color 0.5s ease, color 0.5s ease;
+    background-color: lightgray;
+}
+
+.player-detail:hover {
+    background-color: #828283;
+    color: white;
+}
+
+#view-decks-button, #next-player-button {
+    margin-left: 5px;
+    margin-right: 5px;
 }

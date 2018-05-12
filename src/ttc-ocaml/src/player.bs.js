@@ -225,6 +225,19 @@ function place_train(p, r) {
         ];
 }
 
+function set_last_turn(p) {
+  return /* record */[
+          /* color */p[/* color */0],
+          /* destination_tickets */p[/* destination_tickets */1],
+          /* train_cards */p[/* train_cards */2],
+          /* score */p[/* score */3],
+          /* routes */p[/* routes */4],
+          /* trains_remaining */p[/* trains_remaining */5],
+          /* first_turn */p[/* first_turn */6],
+          /* last_turn */true
+        ];
+}
+
 exports.destination_tickets = destination_tickets;
 exports.update_destination_tickets = update_destination_tickets;
 exports.train_cards = train_cards;
@@ -237,4 +250,5 @@ exports.trains_remaining = trains_remaining;
 exports.init_players = init_players;
 exports.draw_train_card = draw_train_card;
 exports.place_train = place_train;
+exports.set_last_turn = set_last_turn;
 /* Board Not a pure module */

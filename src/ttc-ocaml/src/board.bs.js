@@ -1521,6 +1521,23 @@ function completed(loc1, loc2, _routes, _prev) {
   };
 }
 
+function get_location(s, _locations) {
+  while(true) {
+    var locations = _locations;
+    if (locations) {
+      var h = locations[0];
+      if (s === h[0]) {
+        return h;
+      } else {
+        _locations = locations[1];
+        continue ;
+      }
+    } else {
+      return Pervasives.failwith("not possible");
+    }
+  };
+}
+
 exports.route_score = route_score;
 exports.is_taken = is_taken;
 exports.get_length = get_length;
@@ -1528,4 +1545,5 @@ exports.get_color = get_color;
 exports.routes = routes;
 exports.locations = locations$1;
 exports.completed = completed;
+exports.get_location = get_location;
 /* locations Not a pure module */

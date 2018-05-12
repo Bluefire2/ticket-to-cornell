@@ -6,14 +6,25 @@ class PlayerDetails extends Component {
     render () {
         return (
             <div id="player-details">
-                <div id="player-details-name">
+                <div id="player-details-name" className="player-detail">
                     Current player: {this.props.playerIndex}
                 </div>
-                <div id="player-details-score">
+                <div id="player-details-score" className="player-detail">
                     Score: {score(this.props.player)}
                 </div>
-                <div id="player-details-trains">
+                <div id="player-details-trains" className="player-detail">
                     Trains remaining: {trains_remaining(this.props.player)}
+                </div>
+                <div>
+                    <button id="view-decks-button"
+                            className="pure-button pure-button-secondary"
+                            onClick={this.props.openDeckPane}>
+                        View decks
+                    </button>
+                    <button id="next-player-button"
+                            className="pure-button pure-button-success">
+                        Next player
+                    </button>
                 </div>
             </div>
         )
