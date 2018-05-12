@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Deck from '../components/deck';
 import DestinationTicket from '../components/destination_ticket';
-import {drawTrainCard, takeRoute} from "../actions/index";
+import {drawTrainCard, takeRoute, decidedRoutes} from "../actions/index";
 import {choose_destinations} from '../ttc-ocaml/src/state.bs';
 import {objToState, listToArray, destinationToObj} from "../util";
 
@@ -54,7 +54,11 @@ class Decks extends Component {
                                 );
                             })}
                             <div id="choose-destinations-button-wrapper">
-                                <button id="choose-destinations-button" className="pure-button pure-button-primary">Select</button>
+                                <button id="choose-destinations-button"
+                                        className="pure-button pure-button-primary"
+                                        onClick={() => this.props.decidedRoutes(this.state.selectedTickets)}>
+                                    Select
+                                </button>
                             </div>
                         </fieldset>
                     }
@@ -73,7 +77,8 @@ const mapStateToProps = ({gameState}) => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
         drawTrainCard,
-        takeRoute
+        takeRoute,
+        decidedRoutes
     }, dispatch);
 };
 

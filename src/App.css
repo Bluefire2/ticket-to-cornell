@@ -73,10 +73,20 @@
     line-height: 25px;
 }
 
+#hand-container {
+
+}
+
 #train-hand {
     /* float: left; the child divs instead of this: */
     /*display: flex;*/
     /*flex-direction: row;*/
+    float: left;
+    width: 50%;
+}
+
+#destination-hand {
+    float: right;
     width: 50%;
 }
 
