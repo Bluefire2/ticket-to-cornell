@@ -12,9 +12,9 @@ export function takeRoute() {
     };
 }
 
-export function chooseDestinations(destinationsIndices) {
+export function chooseDestinations(destinations) {
     return {
-        type: constants.CHOOSE_DESTINATIONS,
-        payload: destinationsIndices
+        type: constants.DECIDED_ROUTES,
+        payload: destinations
     };
 }
