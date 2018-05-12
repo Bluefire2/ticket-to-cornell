@@ -13,7 +13,8 @@ type state = { player_index : int;
                train_trash : TrainDeck.tr;
                taking_routes : bool;
                error : string;
-               turn_ended : bool }
+               turn_ended : bool;
+               last_round : bool}
 
 let init_state num =
   let players = init_players num in
@@ -28,7 +29,8 @@ let init_state num =
     train_trash = TrainDeck.init_trash;
     taking_routes = false;
     error = "";
-    turn_ended = false }
+    turn_ended = false;
+    last_round = false }
 
 let current_player st =
   List.nth st.players st.player_index
@@ -45,26 +47,53 @@ let message st = st.error
 
 let turn_ended st = st.turn_ended
 
+let last_round st = st.last_round
+
 let choose_destinations st = st.choose_destinations
 
 let score st player =
   (Player.score (current_player st))
 
+(* If the current player has less than or equal to 2 remaining trains, then
+ * it is the last round. *)
+let check_last_round st =
+  let p = current_player st in
+  (trains_remaining p) <= 2
+
+(* If it was the last turn for all the players, then the game is over. *)
+let game_ended st =
+  let rec loop = function
+    | [] -> true
+    | p::t -> (last_turn p) && loop t in
+  loop (players st)
+
 let turn_ended_error st =
   { st with error = "Turn has already ended for the current player." }
 
-let next_player st =
-  if (turn_ended st) then
-    { st with player_index = ((st.player_index + 1) mod (List.length st.players))}
-  else
-    { st with error = "Turn has not ended yet for the current player." }
-
+(* [update_players i new_p lst] returns [lst] but with the player at index [i]
+ * changed to [new_p]. *)
 let update_players i new_p lst =
   let rec update_loop i new_i new_p acc = function
   | [] -> acc
   | h::t -> if i = new_i then acc @ [new_p] @ t
     else update_loop (i+1) new_i new_p (acc @ [h]) t in
   update_loop 0 i new_p [] lst
+
+let next_player st =
+  if (turn_ended st) then
+    if (game_ended st) then {st with error = "Game has ended."}
+    else
+      let next_player = ((st.player_index + 1) mod (List.length st.players)) in
+      let st' = {st with player_index = next_player} in
+      if ((check_last_round st) || (last_round st))
+      then
+        let p' = set_last_turn (current_player st') in
+        {st' with last_round = true;
+                  players = update_players (st'.player_index) p' st'.players;
+                  turn_ended = false }
+      else st'
+  else
+    { st with error = "Turn has not ended yet for the current player." }
 
 let draw_card_facing_up st i =
   if (turn_ended st) then turn_ended_error st
@@ -133,7 +162,7 @@ let decided_routes st indexes =
                    error = "";
                    turn_ended = true } )
     else {st with
-          error = "Player only " ^ (string_of_int tickets_chosen)
+          error = "Player only chose " ^ (string_of_int tickets_chosen)
                   ^ " tickets, must take at least "
                   ^ (string_of_int required_tickets) ^ "."} )
 
@@ -166,15 +195,15 @@ let place_on_board st r clr =
                routes = update_routes (st.routes) r r';
                error = "";
                turn_ended = true })
-    else {st with error = "Not enough trains"} )
-  else {st with error = "Not enough train cards"} )
+    else {st with error = "Not enough trains."} )
+  else {st with error = "Not enough train cards."} )
 
 let select_route st r =
   if (turn_ended st) then turn_ended_error st
   else (
   match r with
-  | (_, _, _, _, Some _) -> {st with error = "Route already taken"}
-  | (_, _, _, Grey, _) -> {st with error = "Choose a train card color"}
+  | (_, _, _, _, Some _) -> {st with error = "Route already taken."}
+  | (_, _, _, Grey, _) -> {st with error = "Choose a train card color."}
   | (_, _, _, clr, _) -> place_on_board st r clr )
 
 let longest_route st =

@@ -8,6 +8,7 @@ val destination_items : State.state -> (Components.DestinationDeck.t * Component
 val train_items : State.state -> (Components.TrainDeck.t * Components.TrainDeck.t * Components.TrainDeck.tr)
 val message : State.state -> string
 val turn_ended : State.state -> bool
+val last_round : State.state -> bool
 val choose_destinations : State.state -> Components.DestinationDeck.card list
 val score : State.state -> Player.player -> int
 val setup_state : State.state -> State.state
@@ -91,6 +92,7 @@ module type PLAYER = sig
   val init_players : int -> player list
   val draw_train_card : player -> Components.TrainDeck.card  -> player
   val place_train : player -> Board.route -> player
+  val set_last_turn : player -> player
 end
 
 module type BOARD = sig

@@ -16,8 +16,7 @@ type player = { color : player_color;
                 routes : Board.route list;
                 trains_remaining : int ;
                 first_turn : bool ;
-                last_turn : bool ;
-              }
+                last_turn : bool ; }
 
 let rec remove_color n c h =
   if n = 0 then h else
@@ -84,4 +83,7 @@ let place_train p r =
 let rec path = function
   | [] -> []
   | (x,y,_,_,_)::t -> ( match (x,y) with
-                        | ( (x',_,_), (y',_,_) ) -> (x',y')::path t )
+      | ( (x',_,_), (y',_,_) ) -> (x',y')::path t )
+
+let set_last_turn p =
+  { p with last_turn = true }

@@ -347,15 +347,6 @@ let tests =
   "init_deck" >:: (fun _ -> assert_equal true (same_lst (dest_ticket_deck) (Components.DestinationDeck.init_deck ())));
   "init_trash" >:: (fun _ -> assert_equal ([]) (Components.DestinationDeck.init_trash));
 
-
-
-  (* State Tests *)
-  "state1" >:: (fun _ -> assert_equal 45 State.(init_state 5 |> current_player |> Player.trains_remaining));
-  "state2" >:: (fun _ -> assert_equal 0 State.(init_state 5 |> State.current_player |> Player.score));
-  "state3" >:: (fun _ -> assert_equal [] State.(init_state 5 |> current_player |> Player.destination_tickets));
-  "state4" >:: (fun _ -> assert_equal [(Red,0);(Blue,0);(Green,0);(Yellow,0);
-                                       (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)] State.(init_state 5 |> current_player |> Player.train_cards));
-
   (* Player Tests *)
   "destination tickets" >:: (fun _ -> assert_equal ([gates;toclass]) (Player.destination_tickets p1 ));
   "destination tickets empty" >:: (fun _ -> assert_equal ([]) (Player.destination_tickets p2));
@@ -496,8 +487,31 @@ let tests =
      (Board.completed  "A LOT" "Blair Farm Barn" (shuffler p4.routes [] (List.length p4.routes)) [])); *)
 ]
 
+let error = "Player only chose 1 tickets, must take at least 2."
+
+let state_tests =
+[
+  (* init state *)
+  "state1" >:: (fun _ -> assert_equal 45 State.(init_state 5 |> current_player |> Player.trains_remaining));
+  "state2" >:: (fun _ -> assert_equal 0 State.(init_state 5 |> current_player |> Player.score));
+  "state3" >:: (fun _ -> assert_equal [] State.(init_state 5 |> current_player |> Player.destination_tickets));
+  "state4" >:: (fun _ -> assert_equal [(Red,0);(Blue,0);(Green,0);(Yellow,0);
+                                       (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)] State.(init_state 5 |> current_player |> Player.train_cards));
+  (* setup state *)
+  "state5" >:: (fun _ -> assert_equal 3 State.(init_state 2 |> setup_state |> choose_destinations |> List.length));
+  "state6" >:: (fun _ -> assert_equal false (same_lst [(Red,0);(Blue,0);(Green,0);(Yellow,0);
+                                                       (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)]
+                                               State.(init_state 2 |> setup_state |> current_player |> Player.train_cards)));
+  "state7" >:: (fun _ -> assert_equal false State.(init_state 2 |> setup_state |> turn_ended));
+  "state8" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> turn_ended));
+  "state9" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1]) |> turn_ended));
+  "state10" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0]) |> turn_ended));
+  "state10" >:: (fun _ -> assert_equal error State.((decided_routes (init_state 2 |> setup_state) [0]) |> message));
+  (* "state11" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> turn_ended)); *)
+]
+
 let suite =
   "Ticket to Cornell test suite"
-  >::: tests
+  >::: tests @ state_tests
 
 let _ = run_test_tt_main suite
