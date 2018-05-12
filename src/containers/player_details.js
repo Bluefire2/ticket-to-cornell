@@ -6,13 +6,13 @@ class PlayerDetails extends Component {
     render () {
         return (
             <div id="player-details">
-                <div id="player-details-name">
+                <div id="player-details-name" className="player-detail">
                     Current player: {this.props.playerIndex}
                 </div>
-                <div id="player-details-score">
+                <div id="player-details-score" className="player-detail">
                     Score: {score(this.props.player)}
                 </div>
-                <div id="player-details-trains">
+                <div id="player-details-trains" className="player-detail">
                     Trains remaining: {trains_remaining(this.props.player)}
                 </div>
             </div>

@@ -65,6 +65,8 @@
     height: 25px;
     background-color: #ff8b67;
     color: white;
+    font-size: 125%;
+    font-weight: bold;
     transform: rotate(20deg);
     border-radius: 2px;
     /* centre text horizontally and vertically: */
