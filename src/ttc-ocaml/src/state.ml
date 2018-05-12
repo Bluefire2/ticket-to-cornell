@@ -84,13 +84,13 @@ let next_player st =
     if (game_ended st) then {st with error = "Game has ended."}
     else
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
-      let st' = {st with player_index = next_player} in
+      let st' = {st with player_index = next_player;
+                         turn_ended = false } in
       if ((check_last_round st) || (last_round st))
       then
         let p' = set_last_turn (current_player st') in
         {st' with last_round = true;
-                  players = update_players (st'.player_index) p' st'.players;
-                  turn_ended = false }
+                  players = update_players (st'.player_index) p' st'.players}
       else st'
   else
     { st with error = "Turn has not ended yet for the current player." }

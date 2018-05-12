@@ -507,7 +507,7 @@ let state_tests =
   "state9" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1]) |> turn_ended));
   "state10" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0]) |> turn_ended));
   "state10" >:: (fun _ -> assert_equal error State.((decided_routes (init_state 2 |> setup_state) [0]) |> message));
-  (* "state11" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> turn_ended)); *)
+  "state11" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> turn_ended));
 ]
 
 let suite =
