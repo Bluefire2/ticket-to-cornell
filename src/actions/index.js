@@ -18,3 +18,10 @@ export function decidedRoutes(destinations) {
         payload: destinations
     };
 }
+
+export function selectRoute(route) {
+    return {
+        type: constants.SELECT_ROUTE,
+        payload: route
+    };
+}
