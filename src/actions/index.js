@@ -12,7 +12,7 @@ export function takeRoute() {
     };
 }
 
-export function chooseDestinations(destinations) {
+export function decidedRoutes(destinations) {
     return {
         type: constants.DECIDED_ROUTES,
         payload: destinations
