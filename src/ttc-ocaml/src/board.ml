@@ -171,3 +171,29 @@ let routes =
 (farm_barn,vet,6,Pink,None);
 (kennedy,dairy_bar,6,Red,None);
 ]
+
+
+
+
+let rec completed loc1 loc2 routes =
+  match routes with
+  | [] -> false
+  | ((Location (l1,_,_,_)),(Location (l2,_,_,_)),_,_,_)::t ->
+      if loc1 = l1 then
+          if loc2 = l2 then true else
+          completed l2 loc2 t || completed loc1 loc2 t
+          else
+      if loc1 = l2 then
+          if loc2 = l1 then true else
+          completed l1 loc2 t || completed loc1 loc2 t
+          else
+      if loc2 = l1 then
+          if loc1 = l2 then true else
+          completed loc1 l2 t || completed loc1 loc2 t
+          else
+      if loc2 = l2 then
+        if loc1 = l1 then true else
+        completed loc1 l1 t || completed loc1 loc2 t
+      else
+      completed loc1 loc2 t
+
