@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Modal from 'react-modal';
+import SlidingPane from 'react-sliding-pane';
+import 'react-sliding-pane/dist/react-sliding-pane.css';
 import './App.css';
 import Hands from './containers/hands';
 import Decks from './containers/decks';
 import PlayerDetails from './containers/player_details';
-import Modal from 'react-modal';
-import SlidingPane from 'react-sliding-pane';
-import 'react-sliding-pane/dist/react-sliding-pane.css';
+import ErrorMsg from './components/error_msg';
 
 import Map from './containers/map';
 
@@ -52,9 +54,18 @@ class App extends Component {
                 <div id="bottom-pane">
                     <Hands/>
                 </div>
+                {   this.props.error.length > 0 &&
+                    <ErrorMsg text={this.props.error}/>
+                }
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = ({gameState}) => {
+    return {
+        error: gameState.error
+    };
+};
+
+export default connect(mapStateToProps)(App);
