@@ -200,6 +200,7 @@
     transition: background-color 0.5s ease, color 0.5s ease;
     background-color: lightgray;
     color: #6b6b6b;
+    font-size: 125%;
 }
 
 .player-detail:hover {
