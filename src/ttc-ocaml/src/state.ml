@@ -201,10 +201,19 @@ let place_on_board st r clr =
 let select_route st r =
   if (turn_ended st) then turn_ended_error st
   else (
-  match r with
-  | (_, _, _, _, Some _) -> {st with error = "Route already taken."}
-  | (_, _, _, Grey, _) -> {st with error = "Choose a train card color."}
-  | (_, _, _, clr, _) -> place_on_board st r clr )
+    match r with
+    | (_, _, _, _, Some _) -> {st with error = "Route already taken."}
+    | (_, _, _, Grey, _) -> {st with error = "Choose a train card color."}
+    | (_, _, _, clr, _) -> place_on_board st r clr )
+
+let select_route_grey st r clr =
+  if (turn_ended st) then turn_ended_error st
+  else (
+    match r with
+    | (l1, l2, p, Grey, lst) ->
+      let r' = (l1, l2, p, clr, lst) in
+      select_route st r'
+    | (_, _, _, clr, _) -> {st with error = "Not grey route."})
 
 let longest_route st =
   let rec players_loop plyrs best =
