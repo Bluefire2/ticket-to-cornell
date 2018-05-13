@@ -1,7 +1,8 @@
 import initialState from './INIT_STATE';
 import * as constants from '../constants';
 import {arrayToList, objToState, stateToObj} from "../util";
-import {draw_card_pile, take_route, decided_routes, select_route} from '../ttc-ocaml/src/state.bs';
+import {setup_state, current_player, draw_card_pile, take_route, decided_routes, select_route, next_player} from '../ttc-ocaml/src/state.bs';
+import {first_turn} from '../ttc-ocaml/src/player.bs';
 
 const modifyState = (state, fn) => {
     const camlState = objToState(state),
@@ -29,6 +30,17 @@ export default (state = initialState, action) => {
             // try to fill a route
             // state.select_route
             return modifyState(state, (st) => select_route(st, action.payload));
+        case constants.NEXT_PLAYER:
+            // end the current player's turn, and move on to the next player
+            // state.next_player
+            const newState = modifyState(state, next_player),
+                newPlayer = current_player(objToState(newState));
+
+            if(first_turn(newPlayer)) {
+                return modifyState(newState, setup_state);
+            } else {
+                return newState;
+            }
         default:
             return state;
     }
