@@ -184,10 +184,10 @@ let decided_routes st indexes =
                   ^ " tickets, must take at least "
                   ^ (string_of_int required_tickets) ^ "."} )
 
-let update_routes (routes: Board.route list) old_r new_r : Board.route list =
+let update_routes routes old_r new_r =
   let rec loop acc = function
     | [] -> acc
-    | h::t -> if h = old_r then acc @ (new_r::t) else loop (h::acc) t in
+    | h::t -> if h = old_r then (acc @ [new_r] @ t) else loop (acc @ [h]) t in
   loop [] routes
 
 let check_cards cards n clr =
@@ -196,6 +196,8 @@ let check_cards cards n clr =
     | (clr', i)::t -> ( if clr' = clr then i else loop t ) in
   (loop cards) >= n
 
+let name l = match l with | Location (x, _, _, _) -> x
+
 let place_on_board st r clr =
   (* Checking player has train cards for selected route *)
   let cards = train_cards (current_player st) in
@@ -203,12 +205,12 @@ let place_on_board st r clr =
   if (check_cards cards num clr) then (
     let num_trains = trains_remaining (current_player st) in
     if (num_trains >= num) then (
-      let p' = place_train (current_player st) r in
-      let i = st.player_index in
-      let p_clr = p'.color in
+      let p_clr = (current_player st).color in
       let r' = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some p_clr) in
+      let p' = place_train (current_player st) r' in
+      let i = st.player_index in
       {st with players = update_players i p' st.players;
-               routes = update_routes (st.routes) r r';
+               routes = update_routes (routes st) r r';
                error = "";
                turn_ended = true })
     else {st with error = "Not enough trains."} )

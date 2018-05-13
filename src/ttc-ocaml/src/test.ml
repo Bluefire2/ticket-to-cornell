@@ -507,7 +507,7 @@ let st3' = (decided_routes (st3 |> next_player |> setup_state) [0;1;2])
 let st3'' = (st3' |> next_player)
 let st4 = { player_index = 0;
             players = [p3; p4];
-            routes = [];
+            routes = Board.routes;
             destination_deck = DestinationDeck.init_deck ();
             destination_trash = DestinationDeck.init_trash;
             choose_destinations = [];
@@ -518,6 +518,8 @@ let st4 = { player_index = 0;
             error = "";
             turn_ended = false;
             last_round = false }
+let r = List.nth (Board.routes) 21
+let r' = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some PYellow)
 
 let state_tests =
 [
@@ -550,9 +552,11 @@ let state_tests =
                 (st4 |> current_player |> train_cards)
                 (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> train_cards)));
   "state18" >:: (fun _ -> assert_equal true (same_lst
-               ((dairy_bar,plantations,2,Green,None)::(st4 |> current_player |> routes))
+               ((dairy_bar,plantations,2,Green,Some PYellow)::(st4 |> current_player |> routes))
                (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> routes)));
   "state19" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> score));
+  "state20" >:: (fun _ -> assert_equal r'
+                (List.nth (select_route st4 r None |> State.routes) 21));
 ]
 
 let suite =
