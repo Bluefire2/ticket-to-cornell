@@ -548,8 +548,11 @@ let state_tests =
                 (st3'' |> draw_card_pile |> current_player |> train_cards)));
   "state17" >:: (fun _ -> assert_equal ~-2 (diff_cards
                 (st4 |> current_player |> train_cards)
-                (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> train_cards)
-                ));
+                (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> train_cards)));
+  "state18" >:: (fun _ -> assert_equal true (same_lst
+               ((dairy_bar,plantations,2,Green,None)::(st4 |> current_player |> routes))
+               (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> routes)));
+  "state19" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> score));
 ]
 
 let suite =

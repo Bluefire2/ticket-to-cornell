@@ -25,10 +25,6 @@ let rec remove_color n c h =
     | (a1, a2)::t -> if a1 = c then acc @ [(a1, a2-n)] @ t
       else loop (acc @ [(a1, a2)]) t in
   loop [] h
-  (* if n = 0 then h else
-  match h with
-  | [] -> []
-  | (a1,a2)::b -> if a1=c then (a1,a2-n)::b else remove_color n c b *)
 
 let destination_tickets p = p.destination_tickets
 
@@ -84,7 +80,6 @@ let place_train p r =
            score = p.score + (Board.route_score r);
            routes = r::p.routes;
            trains_remaining = p.trains_remaining - Board.get_length r }
-
 
 let rec path = function
   | [] -> []
