@@ -13,31 +13,44 @@ function color_of_int(n) {
   }
 }
 
-function remove_color(n, c, _h) {
-  while(true) {
-    var h = _h;
-    if (n === 0) {
-      return h;
-    } else if (h) {
-      var b = h[1];
-      var match = h[0];
-      var a1 = match[0];
-      if (Caml_obj.caml_equal(a1, c)) {
-        return /* :: */[
+function remove_color(n, c, h) {
+  if (n === 0) {
+    return h;
+  } else {
+    var _acc = /* [] */0;
+    var _param = h;
+    while(true) {
+      var param = _param;
+      var acc = _acc;
+      if (param) {
+        var t = param[1];
+        var match = param[0];
+        var a2 = match[1];
+        var a1 = match[0];
+        if (Caml_obj.caml_equal(a1, c)) {
+          return Pervasives.$at(acc, Pervasives.$at(/* :: */[
+                          /* tuple */[
+                            a1,
+                            a2 - n | 0
+                          ],
+                          /* [] */0
+                        ], t));
+        } else {
+          _param = t;
+          _acc = Pervasives.$at(acc, /* :: */[
                 /* tuple */[
                   a1,
-                  match[1] - n | 0
+                  a2
                 ],
-                b
-              ];
+                /* [] */0
+              ]);
+          continue ;
+        }
       } else {
-        _h = b;
-        continue ;
+        return acc;
       }
-    } else {
-      return /* [] */0;
-    }
-  };
+    };
+  }
 }
 
 function destination_tickets(p) {
