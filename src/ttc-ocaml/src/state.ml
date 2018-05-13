@@ -85,12 +85,13 @@ let next_player st =
     else
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
       let st' = {st with player_index = next_player;
-                         turn_ended = false } in
+                         turn_ended = false;
+                         error = "" } in
       if ((check_last_round st) || (last_round st))
       then
         let p' = set_last_turn (current_player st') in
         {st' with last_round = true;
-                  players = update_players (st'.player_index) p' st'.players}
+                  players = update_players (st'.player_index) p' st'.players }
       else st'
   else
     { st with error = "Turn has not ended yet for the current player." }
@@ -105,7 +106,8 @@ let draw_card_facing_up st i =
             train_deck = deck;
             players = update_players i p' st.players;
             train_trash = trash;
-            turn_ended = true } )
+            turn_ended = true;
+            error = "" } )
 
 let draw_card_pile_no_error st =
   let tr = st.train_trash in
@@ -116,13 +118,15 @@ let draw_card_pile_no_error st =
   let i = st.player_index in
   { st with train_deck = deck'';
             train_trash = tr'';
-            players = update_players i p'' st.players }
+            players = update_players i p'' st.players;
+            error = "" }
 
 let draw_card_pile st =
   if (turn_ended st) then turn_ended_error st
   else (
   let st' = draw_card_pile_no_error st in
-  { st' with turn_ended = true } )
+  { st' with turn_ended = true;
+             error = "" } )
 
 let take_route st =
   if (turn_ended st) then turn_ended_error st
@@ -132,7 +136,8 @@ let take_route st =
   let (tickets, deck') = DestinationDeck.draw_card deck tr in
   { st with destination_deck = deck';
             choose_destinations = tickets;
-            taking_routes = false } )
+            taking_routes = false;
+            error = "" } )
 
 (* grab 4 train cards, grabs 3 destination tickets and choose 2-3. *)
 let setup_state st =
