@@ -20,9 +20,15 @@ type player = { color : player_color;
 
 let rec remove_color n c h =
   if n = 0 then h else
+  let rec loop acc = function
+    | [] -> acc
+    | (a1, a2)::t -> if a1 = c then acc @ [(a1, a2-n)] @ t
+      else loop (acc @ [(a1, a2)]) t in
+  loop [] h
+  (* if n = 0 then h else
   match h with
   | [] -> []
-  | (a1,a2)::b -> if a1=c then (a1,a2-n)::b else remove_color n c b
+  | (a1,a2)::b -> if a1=c then (a1,a2-n)::b else remove_color n c b *)
 
 let destination_tickets p = p.destination_tickets
 

@@ -3,7 +3,19 @@ open Board
 open Player
 
 (* [state] represents the state of a game. *)
-type state
+type state = { player_index : int;
+               players : player list;
+               routes : Board.route list;
+               destination_deck : DestinationDeck.t;
+               destination_trash : DestinationDeck.tr;
+               choose_destinations : DestinationDeck.card list;
+               train_deck : TrainDeck.t;
+               facing_up_trains : TrainDeck.t;
+               train_trash : TrainDeck.tr;
+               taking_routes : bool;
+               error : string;
+               turn_ended : bool;
+               last_round : bool}
 
 (* [init_state i] initializes the game with [i] players.
  * After this state, call setup_state for each player. *)
