@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
             const newState = modifyState(state, next_player),
                 newPlayer = current_player(objToState(newState));
 
-            if(first_turn(newPlayer)) {
+            if(first_turn(newPlayer) && newState.error.length === 0) {
                 return modifyState(newState, setup_state);
             } else {
                 return newState;
