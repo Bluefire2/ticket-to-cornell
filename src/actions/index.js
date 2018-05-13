@@ -25,3 +25,9 @@ export function selectRoute(route) {
         payload: route
     };
 }
+
+export function nextPlayer() {
+    return {
+        type: constants.NEXT_PLAYER
+    };
+}

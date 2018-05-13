@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {score, trains_remaining} from '../ttc-ocaml/src/player.bs';
+import {nextPlayer} from "../actions/index";
 
 class PlayerDetails extends Component {
     render () {
@@ -22,7 +24,8 @@ class PlayerDetails extends Component {
                         View decks
                     </button>
                     <button id="next-player-button"
-                            className="pure-button pure-button-success">
+                            className="pure-button pure-button-success"
+                            onClick={this.props.nextPlayer}>
                         Next player
                     </button>
                 </div>
@@ -39,4 +42,10 @@ const mapStateToProps = ({gameState}) => {
     };
 };
 
-export default connect(mapStateToProps)(PlayerDetails);
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({
+        nextPlayer
+    }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerDetails);
