@@ -279,7 +279,7 @@ let rec get_next_loc l1 goal acc count visited = function
   (* let rt = (get_route (get_string l) h routes) in *)
     let e = eval (get_location goal locations) in
     let coor = eval (get_location h locations) in
-    if ((distance coor e) < count || count = -1.) then get_next_loc l1 goal (Some h) (distance coor e) visited t else
+    if (((distance coor e) < count) && (coor -. e >= 0.)  || count = -1.) then get_next_loc l1 goal (Some h) (distance coor e) visited t else
     get_next_loc l1 goal acc count visited t
 
 

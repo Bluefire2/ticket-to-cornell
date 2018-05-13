@@ -42,9 +42,9 @@ let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Ecology House"; loc2 = "Newman Arboretum"; points = 20};
   {loc1 = "House Becker"; loc2 = "Filtration Plant"; points = 17};
   {loc1 = "Noyes Community Center"; loc2 = "Forest Home"; points = 17};
-  {loc1 = "Hasbrouck Community Center"; loc2 = "Engineering Quad"; points = 16};
+  {loc1 = "Engineering Quad"; loc2 = "Hasbrouck Community Center"; points = 16};
   {loc1 = "Appel Commons"; loc2 = "Schoellkopf Field"; points = 13};
-  {loc1 = "Risley"; loc2 = "The Commons"; points = 13};
+  {loc1 = "The Commons"; loc2 = "Risley"; points = 13};
   {loc1 = "Dairy Bar"; loc2 = "Johnson Museum"; points = 13};
   {loc1 = "Stewart Ave Bridge"; loc2 = "Riley-Robb Hall"; points = 12};
   {loc1 = "RPCC"; loc2 = "Barton Hall"; points = 12};
