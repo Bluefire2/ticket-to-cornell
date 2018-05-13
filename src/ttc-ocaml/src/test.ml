@@ -487,27 +487,72 @@ let tests =
      (Board.completed  "A LOT" "Blair Farm Barn" (shuffler p4.routes [] (List.length p4.routes)) [])); *)
 ]
 
+let num_cards cards =
+  let rec loop acc = function
+    | [] -> acc
+    | (_, n)::t -> loop (acc + n) t in
+  loop 0 cards
+
+let diff_cards old nw =
+  (num_cards nw) - (num_cards old)
+
+
 let error = "Player only chose 1 tickets, must take at least 2."
+let error2 = "Can't setup when it is not the first turn."
+
+let st1 = (decided_routes (init_state 2 |> setup_state) [0])
+let st2 = (decided_routes (init_state 2 |> setup_state) [0; 1])
+let st3 = (decided_routes (init_state 2 |> setup_state) [0; 1; 2])
+let st3' = (decided_routes (st3 |> next_player |> setup_state) [0;1;2])
+let st3'' = (st3' |> next_player)
+let st4 = { player_index = 0;
+            players = [p3; p4];
+            routes = [];
+            destination_deck = DestinationDeck.init_deck ();
+            destination_trash = DestinationDeck.init_trash;
+            choose_destinations = [];
+            train_deck = TrainDeck.init_deck ();
+            facing_up_trains = TrainDeck.init_faceup ();
+            train_trash = TrainDeck.init_trash;
+            taking_routes = false;
+            error = "";
+            turn_ended = false;
+            last_round = false }
 
 let state_tests =
 [
   (* init state *)
-  "state1" >:: (fun _ -> assert_equal 45 State.(init_state 5 |> current_player |> Player.trains_remaining));
-  "state2" >:: (fun _ -> assert_equal 0 State.(init_state 5 |> current_player |> Player.score));
-  "state3" >:: (fun _ -> assert_equal [] State.(init_state 5 |> current_player |> Player.destination_tickets));
+  "state1" >:: (fun _ -> assert_equal 45 (init_state 5 |> current_player |> trains_remaining));
+  "state2" >:: (fun _ -> assert_equal 0 (init_state 5 |> current_player |> score));
+  "state3" >:: (fun _ -> assert_equal [] (init_state 5 |> current_player |> destination_tickets));
   "state4" >:: (fun _ -> assert_equal [(Red,0);(Blue,0);(Green,0);(Yellow,0);
-                                       (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)] State.(init_state 5 |> current_player |> Player.train_cards));
+                                       (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)]
+                   (init_state 5 |> current_player |> train_cards));
   (* setup state *)
-  "state5" >:: (fun _ -> assert_equal 3 State.(init_state 2 |> setup_state |> choose_destinations |> List.length));
-  "state6" >:: (fun _ -> assert_equal false (same_lst [(Red,0);(Blue,0);(Green,0);(Yellow,0);
-                                                       (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)]
-                                               State.(init_state 2 |> setup_state |> current_player |> Player.train_cards)));
-  "state7" >:: (fun _ -> assert_equal false State.(init_state 2 |> setup_state |> turn_ended));
-  "state8" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> turn_ended));
-  "state9" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1]) |> turn_ended));
-  "state10" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0]) |> turn_ended));
-  "state10" >:: (fun _ -> assert_equal error State.((decided_routes (init_state 2 |> setup_state) [0]) |> message));
-  "state11" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> turn_ended));
+  "state5" >:: (fun _ -> assert_equal 3 (init_state 2 |> setup_state |> choose_destinations |> List.length));
+  "state6" >:: (fun _ -> assert_equal 4 (diff_cards
+                (init_state 2 |> current_player |> train_cards)
+                (init_state 2 |> setup_state |> current_player |> train_cards)));
+  "state7" >:: (fun _ -> assert_equal false (init_state 2 |> setup_state |> turn_ended));
+  "state8" >:: (fun _ -> assert_equal true (st3 |> turn_ended));
+  "state9" >:: (fun _ -> assert_equal true (st2 |> turn_ended));
+  "state10" >:: (fun _ -> assert_equal false (st1 |> turn_ended));
+  "state10" >:: (fun _ -> assert_equal error (st1 |> message));
+  "state11" >:: (fun _ -> assert_equal false (st3 |> next_player |> turn_ended));
+  "state12" >:: (fun _ -> assert_equal true (st3' |> turn_ended));
+  "state13" >:: (fun _ -> assert_equal error2 (st3'' |> setup_state |> message));
+  "state14" >:: (fun _ -> assert_equal true (st3'' |> draw_card_pile |> turn_ended));
+  "state15" >:: (fun _ -> assert_equal "" (st3'' |> draw_card_pile |> message));
+  "state16" >:: (fun _ -> assert_equal 2 (diff_cards
+                (st3'' |> current_player |> train_cards)
+                (st3'' |> draw_card_pile |> current_player |> train_cards)));
+  "state17" >:: (fun _ -> assert_equal ~-2 (diff_cards
+                (st4 |> current_player |> train_cards)
+                (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> train_cards)));
+  "state18" >:: (fun _ -> assert_equal true (same_lst
+               ((dairy_bar,plantations,2,Green,None)::(st4 |> current_player |> routes))
+               (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> routes)));
+  "state19" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> score));
 ]
 
 let suite =
