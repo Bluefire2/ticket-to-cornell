@@ -3,13 +3,15 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {score, trains_remaining} from '../ttc-ocaml/src/player.bs';
 import {nextPlayer} from "../actions/index";
+import {playerColorFromIndex} from "../util";
 
 class PlayerDetails extends Component {
     render () {
+        const playerColor = playerColorFromIndex(this.props.playerIndex);
         return (
             <div id="player-details">
                 <div id="player-details-name" className="player-detail">
-                    Current player: {this.props.playerIndex}
+                    Current player: <span id="player-name" style={{color: playerColor}}>{playerColor}</span>
                 </div>
                 <div id="player-details-score" className="player-detail">
                     Score: {score(this.props.player)}

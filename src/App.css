@@ -207,6 +207,11 @@
     color: white;
 }
 
+#player-name {
+    font-weight: bold;
+    /*font-size: 125%;*/
+}
+
 #view-decks-button, #next-player-button {
     margin-left: 5px;
     margin-right: 5px;
