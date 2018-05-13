@@ -113,7 +113,22 @@ export const trainColorFromIndex = i => {
     }
 };
 
-// TODO: do the same for player colours
+export const playerColorFromIndex = i => {
+    switch(i) {
+        case 0:
+            return 'blue';
+        case 1:
+            return 'red';
+        case 2:
+            return 'yellow';
+        case 3:
+            return 'green';
+        case 4:
+            return 'black';
+        default:
+            return 'grey';
+    }
+};
 
 export const destinationToObj = destination => {
     return {
