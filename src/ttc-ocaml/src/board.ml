@@ -8,6 +8,11 @@ let get_length (_,_,x,_,_) = x
 
 let get_color (_,_,_,x,_) = x
 
+let rec contains x = function
+  | [] -> false
+  | h::t -> if h=x then true else contains x t
+
+
 let route_score r =
   match r with
   | (_,_,1,_,_) -> 1
@@ -243,6 +248,8 @@ let rec get_location s locations =
   | h::t -> ( match h with
             | Location (x,_,_,_) -> if s=x then h else get_location s t )
 
+let get_string (Location (s, _,_,_)) = s
+
 let get_neighbors (Location (_,_,_,x)) = x
 
 let rec get_route s1 s2 routes =
@@ -251,6 +258,34 @@ let rec get_route s1 s2 routes =
   | (x,y,a,b,c)::t -> if ((get_location s1 locations) = x && (get_location s2 locations) = y) ||
   ((get_location s1 locations) = y && (get_location s2 locations) = x) then (x,y,a,b,c) else
   get_route s1 s2 t
+
+let distance a b = let diff = a -. b in
+if diff < 0. then (diff *. -1.) else diff
+
+
+let pyth x y = sqrt (x**2. +. y**2.)
+
+let eval l = match l with
+  | Location (_,x,y,_) -> pyth x y
+
+
+let rec check_neighbors s = function
+  | [] -> false
+  | h::t -> if s=h then true else check_neighbors s t
+
+let rec get_next_loc l1 goal acc count visited = function
+  | [] -> acc
+  | h::t -> if contains h visited then get_next_loc l1 goal acc count visited t else
+  (* let rt = (get_route (get_string l) h routes) in *)
+    let e = eval (get_location goal locations) in
+    let coor = eval (get_location h locations) in
+    if ((distance coor e) < count || count = -1.) then get_next_loc l1 goal (Some h) (distance coor e) visited t else
+    get_next_loc l1 goal acc count visited t
+
+
+  let get_val = function
+    | None -> failwith "major yikes :("
+    | Some x -> x
 
 (* let get_paths s1 s2 acc1 =
   let l1 = get_location s1 locations in
@@ -261,5 +296,14 @@ let rec get_route s1 s2 routes =
     let new_l = (get_location h locations) in
     (path new_l end_s (h::acc2) (get_neighbors new_l))@(path start_l end_s [s1] t)
   in path l1 s2 [s1] (get_neighbors l1) *)
+
+  let rec get_paths s1 s2 acc =
+    if s1 = s2 then (s2::acc) else
+    let l1 = get_location s1 locations in
+    let next_loc = get_val (get_next_loc l1 s2 None (-1.) acc (get_neighbors l1) ) in
+    get_paths next_loc s2 (s1::acc)
+
+
+
 
   (* CURRENT PROBLEM: NOT PROPERLY LINKING ON OTHER LISTS, ALSO IT'S STOPPING WITH THE REPEATS THING YAY LOVE DFS.*)

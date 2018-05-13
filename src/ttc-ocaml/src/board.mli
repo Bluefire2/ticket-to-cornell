@@ -32,3 +32,7 @@ val locations: location list
 val completed : string -> string -> route list -> route list -> bool
 
 val get_location : string -> location list -> location
+
+val get_next_loc : location -> string -> string option -> float -> string list -> string list -> string option
+
+val get_paths : string -> string -> string list -> string list
