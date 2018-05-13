@@ -488,6 +488,12 @@ let tests =
 ]
 
 let error = "Player only chose 1 tickets, must take at least 2."
+let error2 = "Can't setup when it is not the first turn."
+
+let st1 = State.(decided_routes (init_state 2 |> setup_state) [0])
+let st2 = State.(decided_routes (init_state 2 |> setup_state) [0; 1])
+let st3 = State.(decided_routes (init_state 2 |> setup_state) [0; 1; 2])
+let st3' = State.(decided_routes (st3 |> next_player |> setup_state) [0;1;2])
 
 let state_tests =
 [
@@ -503,11 +509,13 @@ let state_tests =
                                                        (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)]
                                                State.(init_state 2 |> setup_state |> current_player |> Player.train_cards)));
   "state7" >:: (fun _ -> assert_equal false State.(init_state 2 |> setup_state |> turn_ended));
-  "state8" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> turn_ended));
-  "state9" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1]) |> turn_ended));
-  "state10" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0]) |> turn_ended));
-  "state10" >:: (fun _ -> assert_equal error State.((decided_routes (init_state 2 |> setup_state) [0]) |> message));
-  "state11" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> turn_ended));
+  "state8" >:: (fun _ -> assert_equal true State.(st3 |> turn_ended));
+  "state9" >:: (fun _ -> assert_equal true State.(st2 |> turn_ended));
+  "state10" >:: (fun _ -> assert_equal false State.(st1 |> turn_ended));
+  "state10" >:: (fun _ -> assert_equal error State.(st1 |> message));
+  "state11" >:: (fun _ -> assert_equal false State.(st3 |> next_player |> turn_ended));
+  "state12" >:: (fun _ -> assert_equal true State.(st3' |> turn_ended));
+  "state13" >:: (fun _ -> assert_equal error2 State.(st3' |> next_player |> setup_state |> message));
 ]
 
 let suite =

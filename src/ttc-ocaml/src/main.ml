@@ -76,7 +76,7 @@ let play num =
         | _ -> Grey ) in *)
      ANSITerminal.(print_string [red] ("select\n"));
      let r = (Board.Location ("Olin Hall", 539.,1278., []),Board.Location ("Statler Hotel", 699.,1191., []),3,Blue,None) in
-     let st' = State.select_route st r in
+     let st' = State.select_route st r None in
      ANSITerminal.(print_string [red] ((State.message st') ^ "\n"));
      ANSITerminal.(print_string [yellow] ((print_routes st') ^ "\n")))
   | _ -> ()

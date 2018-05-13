@@ -17,7 +17,7 @@ val draw_card_pile : State.state -> State.state
 val draw_card_facing_up : State.state -> int -> State.state
 val take_route : State.state -> State.state
 val decided_routes : State.state -> int list -> State.state
-val select_route : State.state -> Board.route -> State.state
+val select_route : state -> Board.route -> Components.train_color option -> state
 val longest_route : State.state -> Player.player
 end
 

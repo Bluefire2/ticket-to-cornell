@@ -73,9 +73,7 @@ val decided_routes : state -> int list -> state
 
 (* [select_route st r] returns a new state for which the player decides to
  * build a train route [r]. *)
-val select_route : state -> Board.route -> state
-
-val select_route_grey : state -> Board.route -> Components.train_color -> state
+val select_route : state -> Board.route -> Components.train_color option -> state
 
 (* [longest_route st] returns the player who has the longest consecutive route. *)
 val longest_route : state -> player
