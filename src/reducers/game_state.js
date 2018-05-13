@@ -29,7 +29,9 @@ export default (state = initialState, action) => {
         case constants.SELECT_ROUTE:
             // try to fill a route
             // state.select_route
-            return modifyState(state, (st) => select_route(st, action.payload));
+            const route = action.payload.route,
+                color = action.payload.color === -1 ? 0 : [action.payload.color];
+            return modifyState(state, (st) => select_route(st, route, color));
         case constants.NEXT_PLAYER:
             // end the current player's turn, and move on to the next player
             // state.next_player

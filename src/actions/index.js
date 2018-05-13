@@ -19,10 +19,10 @@ export function decidedRoutes(destinations) {
     };
 }
 
-export function selectRoute(route) {
+export function selectRoute(route, color) {
     return {
         type: constants.SELECT_ROUTE,
-        payload: route
+        payload: {route, color}
     };
 }
 
