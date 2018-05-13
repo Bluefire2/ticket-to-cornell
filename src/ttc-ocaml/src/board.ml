@@ -245,14 +245,21 @@ let rec get_location s locations =
 
 let get_neighbors (Location (_,_,_,x)) = x
 
-let get_paths s1 s2 acc1 =
+let rec get_route s1 s2 routes =
+  match routes with
+  | [] -> failwith "impossible"
+  | (x,y,a,b,c)::t -> if ((get_location s1 locations) = x && (get_location s2 locations) = y) ||
+  ((get_location s1 locations) = y && (get_location s2 locations) = x) then (x,y,a,b,c) else
+  get_route s1 s2 t
+
+(* let get_paths s1 s2 acc1 =
   let l1 = get_location s1 locations in
   let rec path start_l end_s acc2 = function
-    | [] -> acc2::acc1
-    | h::t -> if h=s2 then ((h::acc2)::acc1) else
+    | [] -> acc1
+    | h::t -> if h=s2 then (h::acc2)::acc1 else
     if List.mem h acc2 then path start_l end_s acc2 t else
     let new_l = (get_location h locations) in
-    path new_l end_s (h::acc2) (get_neighbors new_l)
-  in path l1 s2 [s1] (get_neighbors l1)
+    (path new_l end_s (h::acc2) (get_neighbors new_l))@(path start_l end_s [s1] t)
+  in path l1 s2 [s1] (get_neighbors l1) *)
 
   (* CURRENT PROBLEM: NOT PROPERLY LINKING ON OTHER LISTS, ALSO IT'S STOPPING WITH THE REPEATS THING YAY LOVE DFS.*)
