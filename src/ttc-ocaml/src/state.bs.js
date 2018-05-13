@@ -177,7 +177,6 @@ function next_player(st) {
       var st$prime_008 = /* train_trash */st[/* train_trash */8];
       var st$prime_009 = /* taking_routes */st[/* taking_routes */9];
       var st$prime_010 = /* error */st[/* error */10];
-      var st$prime_011 = /* turn_ended */st[/* turn_ended */11];
       var st$prime_012 = /* last_round */st[/* last_round */12];
       var st$prime = /* record */[
         /* player_index */next_player$1,
@@ -191,7 +190,7 @@ function next_player(st) {
         st$prime_008,
         st$prime_009,
         st$prime_010,
-        st$prime_011,
+        /* turn_ended */false,
         st$prime_012
       ];
       if (check_last_round(st) || st[/* last_round */12]) {
@@ -570,6 +569,41 @@ function select_route(st, r) {
   }
 }
 
+function select_route_grey(st, r, clr) {
+  if (st[/* turn_ended */11]) {
+    return turn_ended_error(st);
+  } else if (r[3] >= 9) {
+    var r$prime_000 = r[0];
+    var r$prime_001 = r[1];
+    var r$prime_002 = r[2];
+    var r$prime_004 = r[4];
+    var r$prime = /* tuple */[
+      r$prime_000,
+      r$prime_001,
+      r$prime_002,
+      clr,
+      r$prime_004
+    ];
+    return select_route(st, r$prime);
+  } else {
+    return /* record */[
+            /* player_index */st[/* player_index */0],
+            /* players */st[/* players */1],
+            /* routes */st[/* routes */2],
+            /* destination_deck */st[/* destination_deck */3],
+            /* destination_trash */st[/* destination_trash */4],
+            /* choose_destinations */st[/* choose_destinations */5],
+            /* train_deck */st[/* train_deck */6],
+            /* facing_up_trains */st[/* facing_up_trains */7],
+            /* train_trash */st[/* train_trash */8],
+            /* taking_routes */st[/* taking_routes */9],
+            /* error */"Not grey route.",
+            /* turn_ended */st[/* turn_ended */11],
+            /* last_round */st[/* last_round */12]
+          ];
+  }
+}
+
 function longest_route(st) {
   var first = List.hd(st[/* players */1]);
   var _plyrs = st[/* players */1];
@@ -612,5 +646,6 @@ exports.draw_card_facing_up = draw_card_facing_up;
 exports.take_route = take_route;
 exports.decided_routes = decided_routes;
 exports.select_route = select_route;
+exports.select_route_grey = select_route_grey;
 exports.longest_route = longest_route;
 /* Board Not a pure module */

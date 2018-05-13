@@ -214,7 +214,7 @@ function place_train(p, r) {
           /* color */p[/* color */0],
           /* destination_tickets */p[/* destination_tickets */1],
           /* train_cards */remove_color(Board.get_length(r), Board.get_color(r), p[/* train_cards */2]),
-          /* score */Board.route_score(r),
+          /* score */p[/* score */3] + Board.route_score(r) | 0,
           /* routes : :: */[
             r,
             p[/* routes */4]
