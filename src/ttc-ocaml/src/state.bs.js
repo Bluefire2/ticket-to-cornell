@@ -176,7 +176,6 @@ function next_player(st) {
       var st$prime_007 = /* facing_up_trains */st[/* facing_up_trains */7];
       var st$prime_008 = /* train_trash */st[/* train_trash */8];
       var st$prime_009 = /* taking_routes */st[/* taking_routes */9];
-      var st$prime_010 = /* error */st[/* error */10];
       var st$prime_012 = /* last_round */st[/* last_round */12];
       var st$prime = /* record */[
         /* player_index */next_player$1,
@@ -189,7 +188,7 @@ function next_player(st) {
         st$prime_007,
         st$prime_008,
         st$prime_009,
-        st$prime_010,
+        /* error */"",
         /* turn_ended */false,
         st$prime_012
       ];
@@ -206,7 +205,7 @@ function next_player(st) {
                 st$prime_007,
                 st$prime_008,
                 st$prime_009,
-                st$prime_010,
+                /* error */"",
                 /* turn_ended */false,
                 /* last_round */true
               ];
@@ -252,7 +251,7 @@ function draw_card_facing_up(st, i) {
             /* facing_up_trains */match$1[0],
             /* train_trash */match$1[2],
             /* taking_routes */st[/* taking_routes */9],
-            /* error */st[/* error */10],
+            /* error */"",
             /* turn_ended */true,
             /* last_round */st[/* last_round */12]
           ];
@@ -277,7 +276,7 @@ function draw_card_pile_no_error(st) {
           /* facing_up_trains */st[/* facing_up_trains */7],
           /* train_trash */match$1[2],
           /* taking_routes */st[/* taking_routes */9],
-          /* error */st[/* error */10],
+          /* error */"",
           /* turn_ended */st[/* turn_ended */11],
           /* last_round */st[/* last_round */12]
         ];
@@ -299,7 +298,7 @@ function draw_card_pile(st) {
             /* facing_up_trains */st$prime[/* facing_up_trains */7],
             /* train_trash */st$prime[/* train_trash */8],
             /* taking_routes */st$prime[/* taking_routes */9],
-            /* error */st$prime[/* error */10],
+            /* error */"",
             /* turn_ended */true,
             /* last_round */st$prime[/* last_round */12]
           ];
@@ -324,7 +323,7 @@ function take_route(st) {
             /* facing_up_trains */st[/* facing_up_trains */7],
             /* train_trash */st[/* train_trash */8],
             /* taking_routes */false,
-            /* error */st[/* error */10],
+            /* error */"",
             /* turn_ended */st[/* turn_ended */11],
             /* last_round */st[/* last_round */12]
           ];
