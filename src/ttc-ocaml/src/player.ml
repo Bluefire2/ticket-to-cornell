@@ -75,7 +75,7 @@ let draw_train_card p c =
 assume state checked player color option if is already taken by person.  *)
 let place_train p r =
   { p with train_cards = remove_color (Board.get_length r) (Board.get_color r) p.train_cards;
-           score = Board.route_score r;
+           score = p.score + (Board.route_score r);
            routes = r::p.routes;
            trains_remaining = p.trains_remaining - Board.get_length r }
 

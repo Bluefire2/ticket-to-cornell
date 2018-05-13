@@ -84,13 +84,13 @@ let next_player st =
     if (game_ended st) then {st with error = "Game has ended."}
     else
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
-      let st' = {st with player_index = next_player} in
+      let st' = {st with player_index = next_player;
+                         turn_ended = false } in
       if ((check_last_round st) || (last_round st))
       then
         let p' = set_last_turn (current_player st') in
         {st' with last_round = true;
-                  players = update_players (st'.player_index) p' st'.players;
-                  turn_ended = false }
+                  players = update_players (st'.player_index) p' st'.players}
       else st'
   else
     { st with error = "Turn has not ended yet for the current player." }
@@ -201,10 +201,19 @@ let place_on_board st r clr =
 let select_route st r =
   if (turn_ended st) then turn_ended_error st
   else (
-  match r with
-  | (_, _, _, _, Some _) -> {st with error = "Route already taken."}
-  | (_, _, _, Grey, _) -> {st with error = "Choose a train card color."}
-  | (_, _, _, clr, _) -> place_on_board st r clr )
+    match r with
+    | (_, _, _, _, Some _) -> {st with error = "Route already taken."}
+    | (_, _, _, Grey, _) -> {st with error = "Choose a train card color."}
+    | (_, _, _, clr, _) -> place_on_board st r clr )
+
+let select_route_grey st r clr =
+  if (turn_ended st) then turn_ended_error st
+  else (
+    match r with
+    | (l1, l2, p, Grey, lst) ->
+      let r' = (l1, l2, p, clr, lst) in
+      select_route st r'
+    | (_, _, _, clr, _) -> {st with error = "Not grey route."})
 
 let longest_route st =
   let rec players_loop plyrs best =

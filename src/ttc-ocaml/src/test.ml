@@ -247,6 +247,29 @@ let p3 =
     last_turn = false;
   }
 
+let p3' =
+  {
+    color= PYellow;
+    destination_tickets = [{loc1 = "Risley"; loc2 = "The Commons"; points = 13};
+                           {loc1 = "Werly Island"; loc2 = "Engineering Quad"; points = 11}];
+    train_cards = [(Red,1);(Blue,1);(Green,2);(Yellow,2);
+                   (Black,0);(White,2);(Pink,0);(Wild,1);(Orange,0)];
+    score = 20;
+    routes = [
+      (barton,schoellkopf,2,Red,None);
+      (beebe,island,2,Orange,None);
+      (psb,kennedy,2,Grey,None);
+      (risley,beebe,2,Grey,None);
+      (commons,eddy,3,Black,None);
+      (psb,island,4,Red,None);
+      (engineering,barton,2,Grey,None);
+      (kennedy,barton,2,Grey,None);
+      (eddy,engineering,3,Grey,None)];
+    trains_remaining = 16;
+    first_turn = false;
+    last_turn = false;
+  }
+
 let p4 = {p3 with
           destination_tickets = [{loc1 = "A LOT"; loc2 = "Blair Farm Barn"; points = 20};
                                  {loc1 = "Stewart Ave Bridge"; loc2 = "Riley-Robb Hall"; points = 12};
@@ -449,6 +472,7 @@ let tests =
   (Player.draw_train_card p1 White));
 
   (* test place_trains after some routes are written. *)
+  "place_train" >:: (fun _ -> assert_equal p3' (Player.place_train p3 (barton,schoellkopf,2,Red,None)));
 
   (* Board tests *)
   "loc1" >:: (fun _ -> assert_equal true (same_lst ["Appel Commons"; "Risley"; "RPCC"] (lst (find_location "CKB Quad" Board.locations))));
@@ -507,7 +531,8 @@ let state_tests =
   "state9" >:: (fun _ -> assert_equal true State.((decided_routes (init_state 2 |> setup_state) [0; 1]) |> turn_ended));
   "state10" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0]) |> turn_ended));
   "state10" >:: (fun _ -> assert_equal error State.((decided_routes (init_state 2 |> setup_state) [0]) |> message));
-  (* "state11" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> turn_ended)); *)
+  "state11" >:: (fun _ -> assert_equal false State.((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> turn_ended));
+  "state12" >:: (fun _ -> assert_equal true State.((decided_routes ((decided_routes (init_state 2 |> setup_state) [0; 1; 2]) |> next_player |> setup_state) [0; 1; 2]) |> turn_ended));
 ]
 
 let suite =
