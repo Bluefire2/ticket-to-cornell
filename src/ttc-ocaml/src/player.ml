@@ -105,3 +105,11 @@ let rec path = function
 
 let set_last_turn p =
   { p with last_turn = true }
+
+let longest_route p =
+  let rec loop longest = function
+    | [] -> longest
+    | r::t -> let n = Board.get_length r in
+      if n >= longest then loop n t
+      else loop longest t in
+  loop 0 (routes p)

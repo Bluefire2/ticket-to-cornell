@@ -68,7 +68,7 @@ let longest_route_player st =
     | [] -> best
     | p::t ->
       let p_best = List.nth (players st) best in
-      if (Player.score p) > (Player.score p_best)
+      if (Player.longest_route p) > (Player.longest_route p_best)
       then players_loop (best+1) (i+1) t
       else players_loop best (i+1) t ) in
   players_loop 0 0 (players st)

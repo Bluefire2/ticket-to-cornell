@@ -272,8 +272,10 @@ let ppd' = {ppd with destination_tickets = [{loc1 = "Sigma Chi"; loc2 = "CKB Qua
 
 let ppd'' = {ppd with routes = [(dairy_bar,plantations,2,White,None)]}
 
+let train_deck = TrainDeck.init_deck ()
+let dest_ticket_deck = DestinationDeck.init_deck ()
 
-let tests =
+let components_tests =
 [
   (* TrainDeck Tests *)
   "shuffle1" >:: (fun _ -> assert_equal (test_list1,[]) (Components.TrainDeck.shuffle test_list1 []));
@@ -346,7 +348,79 @@ let tests =
   "discard nothing with existing trash" >:: (fun _ -> assert_equal [toclass] (Components.DestinationDeck.discard [] [toclass]));
   "init_deck" >:: (fun _ -> assert_equal true (same_lst (dest_ticket_deck) (Components.DestinationDeck.init_deck ())));
   "init_trash" >:: (fun _ -> assert_equal ([]) (Components.DestinationDeck.init_trash));
+]
 
+let board_tests =
+[
+  (* Board tests *)
+  "loc1" >:: (fun _ -> assert_equal true (same_lst ["Appel Commons"; "Risley"; "RPCC"] (lst (find_location "CKB Quad" Board.locations))));
+  "loc2" >:: (fun _ -> assert_equal true (same_lst ["Bartels Hall"; "Cascadilla Creek"; "Barton Hall"; "Engineering Quad"; "Blair Farm Barn"; "Riley-Robb Hall"] (lst (find_location "Schoellkopf Field" Board.locations))));
+  "checking completed1" >:: (fun _ -> assert_equal (true)
+                                (Board.completed (List.hd ppd.destination_tickets).loc1 (List.hd ppd.destination_tickets).loc2 ppd.routes [] ));
+  "checking completed2" >:: (fun _ -> assert_equal (false)
+                                (Board.completed "Plantations" "Bartels" default5.routes []));
+  "checking completed3" >:: (fun _ -> assert_equal (false)
+                                (Board.completed (List.hd ppd'.destination_tickets).loc1 (List.hd ppd'.destination_tickets).loc2 ppd'.routes [] ));
+  "checking completed4" >:: (fun _ -> assert_equal (false)
+                                (Board.completed (List.hd ppd''.destination_tickets).loc1 (List.hd ppd''.destination_tickets).loc2 ppd''.routes [] ));
+  "checking completed5" >:: (fun _ -> assert_equal (true)
+                                (Board.completed "Risley" "The Commons" p3.routes []));
+  "checking completed6" >:: (fun _ -> assert_equal (true)
+                                (Board.completed "Werly Island" "Engineering Quad" p3.routes []));
+  "checking completed7" >:: (fun _ -> assert_equal (false)
+                                (Board.completed "Risley" "Noyes Community Center" p3.routes []));
+  "checking completed8" >:: (fun _ -> assert_equal (false)
+                                (Board.completed "Werly Island" "House Becker" p3.routes []));
+  "checking completed9" >:: (fun _ -> assert_equal (true)
+                                (Board.completed "Engineering Quad" "Werly Island" p3.routes []));
+  "checking completed10" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "The Commons" "Risley" p3.routes []));
+  "checking completed11" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "Sigma Chi" "CKB Quad" p4.routes []));
+  "checking completed11" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "Sigma Chi" "CKB Quad" p4.routes []));
+  "checking completed12" >:: (fun _ -> assert_equal (true)
+                                 (Board.completed "A LOT" "Blair Farm Barn" p4.routes []));
+  "checking completed13" >:: (fun _ -> assert_equal (false)
+                                 (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" p4.routes []));
+  "checking completed14" >:: (fun _ -> assert_equal (false)
+                                 (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" (shuffler p4.routes [] (List.length p4.routes)) []));
+  (*    "checking completed15" >:: (fun _ -> assert_equal (true)
+        (Board.completed  "A LOT" "Blair Farm Barn" (shuffler p4.routes [] (List.length p4.routes)) [])); *)
+]
+
+let st1 = (decided_routes (init_state 2 |> setup_state) [0])
+let st2 = (decided_routes (init_state 2 |> setup_state) [0; 1])
+let st3 = (decided_routes (init_state 2 |> setup_state) [0; 1; 2])
+let st3' = (decided_routes (st3 |> next_player |> setup_state) [0;1;2])
+let st3'' = (st3' |> next_player)
+let st4 = { player_index = 0;
+            players = [p3; p4];
+            routes = Board.routes;
+            destination_deck = DestinationDeck.init_deck ();
+            destination_trash = DestinationDeck.init_trash;
+            choose_destinations = [];
+            train_deck = TrainDeck.init_deck ();
+            facing_up_trains = TrainDeck.init_faceup ();
+            train_trash = TrainDeck.init_trash;
+            taking_routes = false;
+            error = "";
+            turn_ended = false;
+            last_round = false;
+            winner = None }
+
+let r = List.nth (Board.routes) 21
+let r' = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some PYellow)
+let r_select = select_route st4 r None
+let r'' = List.nth (r_select |> State.routes) 21
+let p3' = {p3 with train_cards = [(Red,3);(Blue,1);(Green,0);(Yellow,2);
+                                  (Black,0);(White,2);(Pink,0);(Wild,1);(Orange,0)];
+                   score = p3.score + 2;
+                   routes = r'::p3.routes;
+                   trains_remaining = p3.trains_remaining - 2}
+
+let player_tests =
+[
   (* Player Tests *)
   "destination tickets" >:: (fun _ -> assert_equal ([gates;toclass]) (Player.destination_tickets p1 ));
   "destination tickets empty" >:: (fun _ -> assert_equal ([]) (Player.destination_tickets p2));
@@ -448,43 +522,7 @@ let tests =
     ({p1 with train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,2)] })
   (Player.draw_train_card p1 White));
 
-  (* test place_trains after some routes are written. *)
-
-  (* Board tests *)
-  "loc1" >:: (fun _ -> assert_equal true (same_lst ["Appel Commons"; "Risley"; "RPCC"] (lst (find_location "CKB Quad" Board.locations))));
-  "loc2" >:: (fun _ -> assert_equal true (same_lst ["Bartels Hall"; "Cascadilla Creek"; "Barton Hall"; "Engineering Quad"; "Blair Farm Barn"; "Riley-Robb Hall"] (lst (find_location "Schoellkopf Field" Board.locations))));
-  "checking completed1" >:: (fun _ -> assert_equal (true)
-                                (Board.completed (List.hd ppd.destination_tickets).loc1 (List.hd ppd.destination_tickets).loc2 ppd.routes [] ));
-  "checking completed2" >:: (fun _ -> assert_equal (false)
-                                (Board.completed "Plantations" "Bartels" default5.routes []));
-  "checking completed3" >:: (fun _ -> assert_equal (false)
-                                (Board.completed (List.hd ppd'.destination_tickets).loc1 (List.hd ppd'.destination_tickets).loc2 ppd'.routes [] ));
-  "checking completed4" >:: (fun _ -> assert_equal (false)
-                                (Board.completed (List.hd ppd''.destination_tickets).loc1 (List.hd ppd''.destination_tickets).loc2 ppd''.routes [] ));
-  "checking completed5" >:: (fun _ -> assert_equal (true)
-                                (Board.completed "Risley" "The Commons" p3.routes []));
-  "checking completed6" >:: (fun _ -> assert_equal (true)
-                                (Board.completed "Werly Island" "Engineering Quad" p3.routes []));
-  "checking completed7" >:: (fun _ -> assert_equal (false)
-                                (Board.completed "Risley" "Noyes Community Center" p3.routes []));
-  "checking completed8" >:: (fun _ -> assert_equal (false)
-                                (Board.completed "Werly Island" "House Becker" p3.routes []));
-  "checking completed9" >:: (fun _ -> assert_equal (true)
-                                (Board.completed "Engineering Quad" "Werly Island" p3.routes []));
-  "checking completed10" >:: (fun _ -> assert_equal (true)
-                                 (Board.completed "The Commons" "Risley" p3.routes []));
-  "checking completed11" >:: (fun _ -> assert_equal (true)
-                                 (Board.completed "Sigma Chi" "CKB Quad" p4.routes []));
-  "checking completed11" >:: (fun _ -> assert_equal (true)
-                                 (Board.completed "Sigma Chi" "CKB Quad" p4.routes []));
-  "checking completed12" >:: (fun _ -> assert_equal (true)
-                                 (Board.completed "A LOT" "Blair Farm Barn" p4.routes []));
-  "checking completed13" >:: (fun _ -> assert_equal (false)
-                                 (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" p4.routes []));
-  "checking completed14" >:: (fun _ -> assert_equal (false)
-                                 (Board.completed  "Stewart Ave Bridge" "Riley-Robb Hall" (shuffler p4.routes [] (List.length p4.routes)) []));
-(*    "checking completed15" >:: (fun _ -> assert_equal (true)
-     (Board.completed  "A LOT" "Blair Farm Barn" (shuffler p4.routes [] (List.length p4.routes)) [])); *)
+  "place_train1" >:: (fun _ -> assert_equal p3' (place_train p3 r'));
 ]
 
 let num_cards cards =
@@ -500,25 +538,6 @@ let diff_cards old nw =
 let error = "Player only chose 1 tickets, must take at least 2."
 let error2 = "Can't setup when it is not the first turn."
 
-let st1 = (decided_routes (init_state 2 |> setup_state) [0])
-let st2 = (decided_routes (init_state 2 |> setup_state) [0; 1])
-let st3 = (decided_routes (init_state 2 |> setup_state) [0; 1; 2])
-let st3' = (decided_routes (st3 |> next_player |> setup_state) [0;1;2])
-let st3'' = (st3' |> next_player)
-let st4 = { player_index = 0;
-            players = [p3; p4];
-            routes = Board.routes;
-            destination_deck = DestinationDeck.init_deck ();
-            destination_trash = DestinationDeck.init_trash;
-            choose_destinations = [];
-            train_deck = TrainDeck.init_deck ();
-            facing_up_trains = TrainDeck.init_faceup ();
-            train_trash = TrainDeck.init_trash;
-            taking_routes = false;
-            error = "";
-            turn_ended = false;
-            last_round = false;
-            winner = None }
 let p_end =
   {
     color= PRed;
@@ -531,7 +550,15 @@ let p_end =
     first_turn = false;
     last_turn = false;
   }
+
+let tick = {loc1 = "Undergraduate Admissions";
+            loc2  = "Risley";
+            points = 15}
 let p_end2 = {p_end with score = 15}
+let p_end3 = {p_end with destination_tickets = [tick];
+              color = PYellow;
+                         routes = [r']}
+let p_end4 = {p_end3 with destination_tickets = []}
 let st_end = { player_index = 0;
                players = [p_end; p_end2];
                routes = Board.routes;
@@ -546,12 +573,10 @@ let st_end = { player_index = 0;
                turn_ended = true;
                last_round = false;
                winner = None }
-let st_end_over = st_end |> next_player |> draw_card_pile |> next_player
+let st_end' = {st_end with players = [p_end; p_end3]}
+let st_end'' = {st_end with players = [p_end; p_end4]}
+let st_end_over st = st |> next_player |> draw_card_pile |> next_player
                   |> draw_card_pile |> next_player
-let r = List.nth (Board.routes) 21
-let r' = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some PYellow)
-let r_select = select_route st4 r None
-let r'' = List.nth (r_select |> State.routes) 21
 
 let state_tests =
 [
@@ -601,14 +626,18 @@ let state_tests =
                                              |> draw_card_pile
                                              |> next_player
                                              |> message));
-  "state24" >:: (fun _ -> assert_equal "Game has ended." (st_end_over
+  "state24" >:: (fun _ -> assert_equal "Game has ended." (st_end_over st_end
                                                           |> message));
-  "state25" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over |> players) 0))
-                    (st_end_over |> winner));
+  "state25" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end |> players) 0))
+                    (st_end_over st_end |> winner));
+  "state26" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end' |> players) 1))
+                    (st_end_over st_end' |> winner));
+  "state27" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end'' |> players) 1))
+                    (st_end_over st_end'' |> winner));
 ]
 
 let suite =
   "Ticket to Cornell test suite"
-  >::: tests @ state_tests
+  >::: components_tests @ board_tests @ player_tests @ state_tests
 
 let _ = run_test_tt_main suite

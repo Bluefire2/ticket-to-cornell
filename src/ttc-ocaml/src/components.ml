@@ -23,6 +23,7 @@ type destination_ticket = {
   points : int
 }
 
+(* [train_deck] is the intial train color list. *)
 let train_deck : train_color list =
   [Red; Red;Red;Red;Red;Red;Red;Red;Red;Red;Red;Red;
   Green; Green; Green; Green; Green; Green; Green; Green; Green; Green; Green; Green;
@@ -35,6 +36,7 @@ let train_deck : train_color list =
   Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild; Wild
   ]
 
+(* [dest_ticket_deck] is the initial destination ticket list. *)
 let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Eddy Gate"; loc2 = "Golf Center"; points = 22};
   {loc1 = "Sigma Chi"; loc2 = "Veterinary School"; points = 21};
@@ -68,25 +70,37 @@ let dest_ticket_deck : destination_ticket list = [
   {loc1 = "Plantations"; loc2 = "Bartels Hall"; points = 4};
 ]
 
+(* [tfst triple] is the first element of [triple]. *)
 let tfst (x,_,_) = x
+
+(* [tsnd triple] is the second element of [triple]. *)
 let tsnd (_,y,_) = y
+
+(* [tthd triple] is the third element of [triple]. *)
 let tthd (_,_,z) = z
+
+(* [fs triple] is the first and the second element of [triple]. *)
 let fs (x,y,_) = (x,y)
 
+(* [remove_n n lst]  *)
 let rec remove_n n lst =
   if n > (List.length lst) then lst else
   match lst with
   | [] -> []
   | h::t -> if n=0 then t else h::(remove_n (n-1) t)
 
+(* [remove item lst] removes [item] from [lst], if [item] isn't present, it
+ * returns the same [lst]. *)
 let rec remove item = function
   | [] -> []
   | h::t -> if h=item then t else h::remove item t
 
+(* [random_int n] return a random int between 0 (inclusive) and n (exclusive). *)
 let random_int n =
   try Random.int (n) with
   | Invalid_argument _ -> 0
 
+(* [shuffler from to_list len] *)
 let rec shuffler from to_list len =
   match len with
   | 0 -> to_list
@@ -97,21 +111,23 @@ let rec drop n lst =
     | [] -> []
     | x::xs -> drop (n-1) xs
 
+(* [count item lst] returns the number of times [item] appears in [lst]. *)
 let rec count item = function
   | [] -> 0
   | h::t -> if h=item then 1 + count item t else count item t
 
-let rec checkify lst = match lst with
+(* [checkify lst] returns true if every element in [lst] appears a maximum of
+ * 2 times in the [lst], false otherwise. *)
+let rec checkify lst =
+  match lst with
   | [] -> true
   | h::t -> if (count h lst) > 2 then false else checkify t
-
 
 module type TrainDeck = sig
   type card = train_color
   type t = card list
   type tr = card list
   val shuffle : t -> tr -> t * tr
-  (*val discard : card -> tr -> tr*)
   val init_deck : unit -> t
   val init_trash : tr
   val draw_card : t -> tr -> (card * t * tr)
@@ -135,12 +151,10 @@ end
 module TrainDeck = struct
   type card = train_color
   type t = card list
-  (*type f = card list*)
   type tr = card list
   let rec shuffle tr t  = let shuf = shuffler tr [] (List.length tr) in (shuf,[])
   let rec draw_card t tr = if t <> [] then (List.hd t, List.tl t,tr) else
       let shuff = shuffle tr t in draw_card (fst shuff) []
-  (*let discard c tr = c::tr*)
   let init_deck =  fun () -> fst (shuffle train_deck [])
   let init_trash = []
   let rec five_faceup t tr =
