@@ -4,10 +4,10 @@ const applyToObjectField = (obj, field, fn) => {
 
 // Convert OCaml List to JS Array
 export const listToArray = list => {
-    if(list === 0) return [];
+    if (list === 0) return [];
     const listToArrayStep = (list, acc) => {
         acc.push(list[0]);
-        if(list[1] !== 0) {
+        if (list[1] !== 0) {
             return listToArrayStep(list[1], acc);
         } else {
             return acc;
@@ -20,7 +20,7 @@ export const listToArray = list => {
 // Convert JS Array to OCaml List
 export const arrayToList = array => {
     const arrayToListStep = (array, i) => {
-        if(array.length === i) {
+        if (array.length === i) {
             return 0;
         } else {
             return [array[i], arrayToListStep(array, i + 1)];
@@ -60,7 +60,7 @@ const stateListFields = [
 export const stateToObj = state => {
     return stateToObjMap.reduce(
         (acc, elem, index) => {
-            if(stateListFields.includes(elem)) {
+            if (stateListFields.includes(elem)) {
                 acc[elem] = listToArray(state[index]);
             } else {
                 acc[elem] = state[index];
@@ -74,9 +74,9 @@ export const stateToObj = state => {
 // Convert JS State Object to OCaml State
 export const objToState = obj => {
     const state = [];
-    for(const [key, value] of Object.entries(obj)) {
+    for (const [key, value] of Object.entries(obj)) {
         const i = stateToObjMap.indexOf(key);
-        if(stateListFields.includes(key)) {
+        if (stateListFields.includes(key)) {
             state[i] = arrayToList(value);
         } else {
             state[i] = value;
@@ -87,7 +87,7 @@ export const objToState = obj => {
 
 // Convert BuckleScript colour indices to actual colours
 export const trainColorFromIndex = i => {
-    switch(i) {
+    switch (i) {
         case 0:
             return '#f43434'; // red
         case 1:
@@ -112,9 +112,21 @@ export const trainColorFromIndex = i => {
     }
 };
 
+// Convert English colour name to train colour index
+export const trainEnglishColorsToIndicesMap = ['red', 'green', 'blue', 'yellow', 'pink', 'orange', 'white', 'black'];
+
+export const trainIndexFromEnglishColor = color => {
+    const i = trainEnglishColorsToIndicesMap.indexOf(color);
+    if(i === -1) {
+        return 'grey';
+    } else {
+        return i;
+    }
+};
+
 // Convert BuckleScript colour indices to actual colours
 export const trainColorCardFromIndex = i => {
-    switch(i) {
+    switch (i) {
         case 0:
             return 'linear-gradient(#f43434, #f43434) 1'; // red
         case 1:
@@ -140,7 +152,7 @@ export const trainColorCardFromIndex = i => {
 };
 
 export const playerColorFromIndex = i => {
-    switch(i) {
+    switch (i) {
         case 0:
             return 'blue';
         case 1:
@@ -170,10 +182,12 @@ export const destinationToObj = destination => {
  */
 export const getCategoryInput = (promptText, values, equal = (a, b) => a === b, error = false) => {
     const input = prompt(promptText);
-    if(values.some(elem => equal(elem, input))) {
+    if (values.some(elem => equal(elem, input))) {
         return input;
     } else {
         const newPromptText = error ? 'Invalid input value. ' + promptText : promptText;
         return getCategoryInput(newPromptText, values, equal, true);
     }
 };
+
+export const equalCaseInsensitive = (a, b) => a.toLowerCase() === b.toLowerCase();
