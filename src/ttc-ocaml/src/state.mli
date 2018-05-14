@@ -15,7 +15,8 @@ type state = { player_index : int;
                taking_routes : bool;
                error : string;
                turn_ended : bool;
-               last_round : bool}
+               last_round : bool;
+               winner : player option }
 
 (* [init_state i] initializes the game with [i] players.
  * After this state, call setup_state for each player. *)
@@ -56,6 +57,8 @@ val choose_destinations : state -> DestinationDeck.card list
 (* [score] returns the total score of a particular player. *)
 val score : state -> player -> int
 
+val winner : state -> player option
+
 (* [setup_state st] returns a new state with the initial setup for the current
  * player in [st]: 4 new train cards and 3 destination tickets to choose from.
  * After this state: call `decided_routes` with the chosen tickets. *)
@@ -88,4 +91,4 @@ val decided_routes : state -> int list -> state
 val select_route : state -> Board.route -> Components.train_color option -> state
 
 (* [longest_route st] returns the player who has the longest consecutive route. *)
-val longest_route : state -> player
+val longest_route_player : state -> int

@@ -34,6 +34,21 @@ let update_destination_tickets p tickets =
   { p with destination_tickets = tickets @ p.destination_tickets;
            first_turn = false }
 
+let increase_score p n =
+  { p with score = p.score + n }
+
+let completed_destination_tickets p routes =
+  let rec loop p = function
+    | [] -> p
+    | (_, _, _, _, None)::t -> loop p t
+    | (l1, l2, pts, _, Some p_clr)::t ->
+      let n1 = Board.name l1 in
+      let n2 = Board.name l2 in
+      if (p_clr = p.color && (Board.completed n1 n2 routes []))
+      then loop (increase_score p pts) t
+      else loop p t in
+  loop p routes
+
 let train_cards p = p.train_cards
 
 let score p = p.score

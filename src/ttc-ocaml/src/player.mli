@@ -19,6 +19,10 @@ val destination_tickets : player -> Components.DestinationDeck.card list
  * [lst] included in their destination tickets. *)
 val update_destination_tickets : player -> Components.DestinationDeck.card list -> player
 
+val increase_score : player -> int -> player
+
+val completed_destination_tickets : player -> Board.route list -> player
+
 (* [train_card t] is a list of the train cards the player has  *)
 val train_cards : player -> (Components.TrainDeck.card * int) list
 

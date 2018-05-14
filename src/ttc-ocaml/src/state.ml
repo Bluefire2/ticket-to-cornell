@@ -14,7 +14,8 @@ type state = { player_index : int;
                taking_routes : bool;
                error : string;
                turn_ended : bool;
-               last_round : bool}
+               last_round : bool;
+               winner: player option}
 
 let init_state num =
   let init = { player_index = 0;
@@ -29,7 +30,8 @@ let init_state num =
                taking_routes = false;
                error = "Number players must be 2-5.";
                turn_ended = false;
-               last_round = false } in
+               last_round = false;
+               winner = None } in
   if (num < 2 || num > 5) then init
   else
     let players = init_players num in
@@ -59,6 +61,18 @@ let choose_destinations st = st.choose_destinations
 let score st player =
   (Player.score (current_player st))
 
+let winner st = st.winner
+
+let longest_route_player st =
+  let rec players_loop best i = (function
+    | [] -> best
+    | p::t ->
+      let p_best = List.nth (players st) best in
+      if (Player.score p) > (Player.score p_best)
+      then players_loop (best+1) (i+1) t
+      else players_loop best (i+1) t ) in
+  players_loop 0 0 (players st)
+
 (* If the current player has less than or equal to 2 remaining trains, then
  * it is the last round. *)
 let check_last_round st =
@@ -72,12 +86,6 @@ let game_ended st =
     | p::t -> (last_turn p) && loop t in
   loop (players st)
 
-let turn_ended_error st =
-  { st with error = "Turn has already ended for the current player." }
-
-let first_turn_error st =
-  { st with error = "Can't call this function in the first turn, must choose destination tickets first. "}
-
 (* [update_players i new_p lst] returns [lst] but with the player at index [i]
  * changed to [new_p]. *)
 let update_players i new_p lst =
@@ -87,9 +95,45 @@ let update_players i new_p lst =
     else update_loop (i+1) new_i new_p (acc @ [h]) t in
   update_loop 0 i new_p [] lst
 
+let update_players_tickets st =
+  let rec loop acc = function
+    | [] -> acc
+    | p::t ->
+      let p' = (Player.completed_destination_tickets p (routes st)) in
+      loop (acc @ [p']) t in
+  loop [] (players st)
+
+let calculate_winner st =
+  let longest_i = longest_route_player st in
+  let plyrs = players st in
+  let longest_p = List.nth plyrs longest_i in
+  let p' = Player.increase_score longest_p 10 in
+  let st' = {st with players = update_players longest_i p' plyrs } in
+  let st'' = update_players_tickets st' in
+  let rec loop best = function
+    | [] -> best
+    | p::t ->
+      match best with
+      | None -> loop (Some p) t
+      | Some p_best ->
+        if (Player.score p > Player.score p_best)
+        then loop (Some p) t
+        else loop best t in
+  loop None plyrs
+
+let end_game st =
+  {st with error = "Game has ended.";
+           winner = (calculate_winner st) }
+
+let turn_ended_error st =
+  { st with error = "Turn has already ended for the current player." }
+
+let first_turn_error st =
+  { st with error = "Can't call this function in the first turn, must choose destination tickets first. "}
+
 let next_player st =
   if (turn_ended st) then
-    if (game_ended st) then {st with error = "Game has ended."}
+    if (game_ended st) then end_game st
     else
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
       let st' = {st with player_index = next_player;
@@ -228,16 +272,3 @@ let select_route st r clr =
       | None -> {st with error = "Choose a train card color."}
       | Some clr' -> place_on_board st r clr' )
     | (_, _, _, clr, _) -> place_on_board st r clr ))
-
-let longest_route st =
-  let rec players_loop plyrs best =
-    ( if List.length plyrs > 0 then
-      ( let p = List.hd plyrs in
-        let rest = List.tl plyrs in
-        if (Player.score p) > (Player.score best) then
-          players_loop rest p
-        else
-          players_loop rest best )
-      else best) in
-  let first = List.hd st.players in
-  players_loop st.players first
