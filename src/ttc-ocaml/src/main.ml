@@ -36,6 +36,15 @@ let print_cards st =
   ANSITerminal.(print_string [blue] ("\nYou have the following cards in your hand:\n"
                                      ^ (stringify_cards (p.train_cards) ^ "\n")))
 
+let rec stringify_tickets acc = function
+  | [] -> ""
+  | {loc1 = a; loc2 = b; points = p}::t ->
+    ((string_of_int acc) ^ ". From: " ^ a ^ ". To: " ^ b ^ ". Points: " ^ (string_of_int p) ^ ".\n" ^ (stringify_tickets (acc+1) t))
+
+let print_tickets tickets =
+  ANSITerminal.(print_string [blue] ("\nYou can choose from the following destination tickets:\n"
+                                     ^ (stringify_tickets 1 tickets) ^ "Which ones do you want? (type as '1-2' or '1-2-3' or '2-3')\n"))
+
 let print_routes st =
   let r = State.routes st in
   let rec loop acc = function
@@ -50,36 +59,25 @@ let play num =
     (if i < num then
     (print_player st;
     ANSITerminal.(print_string [blue] ("Grab 4 train cards from deck\n"));
-    let st = State.draw_card_pile st in
-    let st = State.draw_card_pile st in
+    let st = State.setup_state st in
     print_cards st;
+    let tickets = (State.choose_destinations st) in
+    print_tickets tickets;
+    let choose = match Command.parse (read_line ()) with
+      | "1-2", "" -> [0; 1]
+      | "2-3", "" -> [1; 2]
+      | "1-3", "" -> [0; 2]
+      | _ -> [0; 1; 2] in
+    let st = (State.decided_routes st choose) in
     let st = State.next_player st in
     game_loop st (i+1))
      else st ) in
   let st = State.init_state num in
   let st = game_loop st 0 in
-  ANSITerminal.(print_string [blue] ("What do you want to do next?\nDRAW PILE or DRAW FACING UP to get train cards, TAKE destination ticket, or SELECT <color> route? \n"));
+  ANSITerminal.(print_string [blue]
+                  ("What do you want to do next?\nDRAW PILE or DRAW FACING UP to get train cards, TAKE destination ticket, or SELECT <color> route? \n"));
   match Command.parse (read_line ()) with
-  | "draw", "pile" -> ANSITerminal.(print_string [red] ("pile\n"));
-  | "draw", "facing up" -> ANSITerminal.(print_string [red] ("facing up\n"));
-  | "take", "" -> ANSITerminal.(print_string [red] ("take\n"));
-  | "select", x -> (
-    (* (let clr = ( match x with
-         | "red" -> Red
-        | "green" -> Green
-        | "blue" -> Blue
-        | "yellow" -> Yellow
-        | "pink" -> Pink
-        | "orange" -> Orange
-        | "white" -> White
-        | "black" -> Black
-        | _ -> Grey ) in *)
-     ANSITerminal.(print_string [red] ("select\n"));
-     let r = (Board.Location ("Olin Hall", 539.,1278., []),Board.Location ("Statler Hotel", 699.,1191., []),3,Blue,None) in
-     let st' = State.select_route st r None in
-     ANSITerminal.(print_string [red] ((State.message st') ^ "\n"));
-     ANSITerminal.(print_string [yellow] ((print_routes st') ^ "\n")))
-  | _ -> ()
+  | _ ->   ANSITerminal.(print_string [red] "You should try this out on our GUI!\n")
 
 let main () =
   ANSITerminal.(print_string [red]
@@ -89,6 +87,11 @@ let main () =
   print_string  "> ";
   match read_line () with
   | exception End_of_file -> ()
-  | num -> play (int_of_string num)
+  | s ->
+    try (let num = int_of_string s in
+         let () = assert ((2 <= num) && (2<=5)) in
+         play num)
+    with
+    | _ -> ANSITerminal.(print_string [blue] "\nMust be number between 2 and 5.\n")
 
 let () = main ()
