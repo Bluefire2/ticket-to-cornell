@@ -277,7 +277,7 @@ let rec get_next_loc l1 goal acc count visited = function
 
 
 let get_val = function
-    | None -> ""
+    | None ->  raise (Failure "Not_available")
     | Some x -> x
 
 let rec get_paths s1 s2 acc =
@@ -285,3 +285,11 @@ let rec get_paths s1 s2 acc =
     let l1 = get_location s1 locations in
     let next_loc = get_val (get_next_loc l1 s2 None (-1.) acc (get_neighbors l1) ) in
     get_paths next_loc s2 (s1::acc)
+
+let rec path_routes rts paths = match paths with
+  | [] -> []
+  | h1::h2::t -> (get_route h1 h2 rts)::(path_routes rts (h2::t))
+  | _::t -> []
+
+
+

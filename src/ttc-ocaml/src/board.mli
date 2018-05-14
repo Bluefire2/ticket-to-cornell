@@ -39,3 +39,9 @@ val get_location : string -> location list -> location
 val get_next_loc : location -> string -> string option -> float -> string list -> string list -> string option
 
 val get_paths : string -> string -> string list -> string list
+
+val path_routes : route list -> string list -> route list
+
+val get_string : location -> string
+
+val get_neighbors : location -> string list

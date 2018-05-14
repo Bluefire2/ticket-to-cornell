@@ -43,11 +43,57 @@ let draw_action st =
    * take wild if 1 away from 5 or 6 route needed. *)
    failwith "Unimplemented"
 
+let rec best_paths taken  =  function
+  | [] -> []
+  | {loc1 = x; loc2 = y; points = z}::t -> (get_paths x y [])@(best_paths taken t)
+
+let check_routes lst p st = match lst with
+  | [] -> []
+
+let rec best_routes st = function
+  | [] -> []
+  | h::t -> (path_routes st.routes h)@(best_routes st t)
+
+let other_player p = function
+  | (_,_,_,_,None) -> false
+  | (_,_,_,_,x) -> Some p.color <> x
+
+let extract_goal rts =
+  let last_el = List.nth rts ((List.length rts) -1) in
+  match last_el with
+  | (_,goal,_,_,_) -> get_string goal
+
+let rec extract_strings rts =
+  match rts with
+  | [] -> []
+  | (Location (n1, _,_,_),Location (n2,_,_,_),_,_,_)::t -> n2::n1::(extract_strings t)
+
+let get_val = function
+    | None -> raise (Failure "Not_available")
+    | Some x -> x
+
+
+let rec check_routes p st (rts : route list) acc =
+  match rts with
+  | [] -> acc
+  | rt::t -> if other_player p rt then
+             let goal = extract_goal rts in
+             ( match rt with
+              | (l1,l2,_,_,_) -> try (let new_l = get_val (get_next_loc l1 goal None (-1.) ((get_string l2)::(extract_strings acc)) (get_neighbors l1)) in
+              let new_path = (get_paths (new_l) (goal) (extract_strings acc)) in
+              let reroute = path_routes st.routes new_path in
+               check_routes p st reroute []) with
+              | Failure _ -> rts )
+              else check_routes p st t (rt::acc)
+
+
 let ai_move st =
-  (*let cpu = current_player st in
+  (* let cpu = current_player st in
   if completed cpu.destination_tickets && cpu.trains_remaining > 5 then
   let ddraw = DestinationDeck.draw_card st.destination_deck st.destination_trash in
   dest_ticket_action (fst ddraw) {st with (*updates*)}
   else
-  (* check routes needed for completion *)*)
-  failwith "Unimplemented"
+  let goal_routes = best_routes st.routes (best_paths cpu.destination_tickets) in
+  f
+  (* check routes needed for completion *) *)
+  failwith "nada"
