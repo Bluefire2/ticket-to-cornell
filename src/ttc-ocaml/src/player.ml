@@ -106,10 +106,46 @@ let rec path = function
 let set_last_turn p =
   { p with last_turn = true }
 
+let rec between_before l acc = function
+  | [] -> acc
+  | h::t -> if h=l then acc @ [l] else between_before l (acc @ [l]) t
+
+let calculate_paths l1 l2 locations paths =
+  if (List.mem l1 locations) then
+    let rec loop acc = function
+      | [] -> acc
+      | (hd, between, last)::t ->
+        if (l1 = last) then loop (acc @ [(hd, (between @ [l1]), l2)]) t
+        else if (List.mem l1 between)
+        then loop (acc @ [(hd, between, last)] @ [(hd, (between_before l1 [] between), l2)]) t
+        else loop (acc @ [(hd, between, last)] @ [(l1, [], l2)]) t in
+    (locations, loop [] paths)
+  else (l1::locations, (l1, [], l2)::paths)
+
+let rec length acc = function
+  | [] -> acc
+  | r::t -> length (acc + (Board.get_length r)) t
+
 let longest_route p =
-  let rec loop longest = function
+  let rec loop longest locations paths = function
     | [] -> longest
-    | r::t -> let n = Board.get_length r in
-      if n >= longest then loop n t
-      else loop longest t in
-  loop 0 (routes p)
+    | (l1, l2, _, _, _)::t ->
+      let n1 = Board.name l1 in
+      let n2 = Board.name l2 in
+      let (locations, paths) = calculate_paths n1 n2 locations paths in
+      let (locations', paths') = calculate_paths n2 n1 locations paths in
+      let paths'' =
+        let rec loop2 acc = function
+          | [] -> acc
+          | (hd, between, last)::t ->
+            let p = Board.path_routes (routes p) ([hd] @ between @ [last]) in
+            loop2 (acc @ [p]) t in
+        loop2 [] paths' in
+      let rec loop3 best = function
+        | [] -> best
+        | lst::t -> let l = length 0 lst in
+          if l >= best then loop3 l t else loop3 best t in
+      let l2 = loop3 0 paths'' in
+      if l2 >= longest then loop l2 locations' paths' t
+      else loop longest locations' paths' t in
+  loop 0 [] [] (routes p)
