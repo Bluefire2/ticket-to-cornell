@@ -25,6 +25,36 @@ let ai_setup st =
     | _ -> failwith "not possible"
   in decided_routes st' keep_tickets
 
+let get_val = function
+    | None -> raise (Failure "Not_available")
+    | Some x -> x
+
+let rec priorize_build (count : int)  (acc : route option) = function
+  | [] -> acc
+  | h::t -> ( match h with
+    | (_,_,l,_,_,_,_) -> if (l > count) then priorize_build l (Some h) t else priorize_build count acc t)
+
+let rec extract_hand_colors c = function
+  | [] -> 0
+  | (c',num)::t -> if c = c' then num else extract_hand_colors c t
+
+let rec desired_colors goal_routes p acc =
+  match goal_routes with
+  | [] -> acc
+  | (_,_,l,c,o,_,_)::t -> if (o = None && (l - (extract_hand_colors c p.train_cards) > 0)) then desired_colors t p (c::acc)
+  else desired_colors t p acc
+
+ let rec check_like_cards hand n =
+    match hand with
+    | [] -> None
+    | (c,num)::t -> if num >= n then Some c else check_like_cards hand n
+
+ let rec enough_cards hand n =
+    match hand with
+    | [] -> false
+    | (c,num)::t -> if num >= n then true else enough_cards hand n
+
+
 
 let dest_ticket_action clist st =
   (* draw destination tickets -> contained in clist *)
@@ -34,14 +64,24 @@ let dest_ticket_action clist st =
   failwith "Unimplemented"
 
 
-let place_action hand st =
+let place_action p st build_options =
   (* place at a long route, 5-6 prioritized.*)
-  failwith "Unimplemented"
+  let build = get_val (priorize_build 0 None build_options) in
+  let color = get_color build in
+  (* if color = Grey then *)
+  select_route st build (Some color)
 
-let draw_action st =
+let draw_action st p goals =
+  let colors = desired_colors goals p [] in
+  let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
+  (* if Board.contains c st.facing_up trains then (*draw_card_facing_up*) st else *)
+  let d1 = draw_card_pile st in
+  draw_card_pile st
+
+
   (* check what colors are needed, if showing, take showing, otherwise take random.
    * take wild if 1 away from 5 or 6 route needed. *)
-   failwith "Unimplemented"
+
 
 let rec completed_dtickets st dtickets =
   match dtickets with
@@ -78,31 +118,12 @@ let rec extract_strings rts =
   | [] -> []
   | (Location (n1, _,_,_),Location (n2,_,_,_),_,_,_,_,_)::t -> n2::n1::(extract_strings t)
 
-let get_val = function
-    | None -> raise (Failure "Not_available")
-    | Some x -> x
-
-let rec extract_hand_colors c = function
-  | [] -> 0
-  | (c',num)::t -> if c = c' then num else extract_hand_colors c t
-
 let rec can_build goal_routes st p =
   match goal_routes with
   | [] -> []
   | h::t -> ( match h with
-      | (_,_,l,c,o,_,_) -> if o = None && (extract_hand_colors c p.train_cards = l) then (h::(can_build t st p))
+      | (_,_,l,c,o,_,_) -> if o = None && (extract_hand_colors c p.train_cards = l || (c = Grey && enough_cards p.train_cards l)) then (h::(can_build t st p))
                        else can_build t st p )
-
-let rec priorize_build count acc = function
-  | [] -> acc
-  | h::t -> ( match h with
-    | (_,_,l,_,_) -> if (l > count) then priorize_build l (h::acc) t else priorize_build count acc t)
-
-let rec desired_colors goal_routes p acc =
-  match goal_routes with
-  | [] -> acc
-  | (_,_,l,c,o,_,_)::t -> if (o = None && (l - (extract_hand_colors c p.train_cards) > 0)) then desired_colors t p (c::acc)
-  else desired_colors t p acc
 
 let rec check_routes p st (rts : route list) acc =
   match rts with
@@ -135,10 +156,9 @@ let ai_move st =
   let routes = check_routes_list cpu st (goal_routes) [] in
   let goal_routes = List.flatten routes in
   let build_options = can_build goal_routes st cpu in
-  if List.length (build_options) > 0 then place_action build_options st cpu
+  if List.length (build_options) > 0 then place_action cpu st build_options
   else
-  draw_action
+  draw_action st cpu goal_routes
 
 
   (* check routes needed for completion *)
-  failwith "nada"
