@@ -2,7 +2,7 @@ open Components
 
 type location = Location of string * float * float * string list
 
-type route = location * location * int * train_color * player_color option (* may need to change to be a list if more than one can be placed*)
+type route = location * location * int * train_color * player_color option
 
 let get_length (_,_,x,_,_) = x
 
@@ -259,43 +259,27 @@ let rec get_route s1 s2 routes =
   ((get_location s1 locations) = y && (get_location s2 locations) = x) then (x,y,a,b,c) else
   get_route s1 s2 t
 
-let distance a b = let diff = a -. b in
-if diff < 0. then (diff *. -1.) else diff
-
-
-let pyth x y = sqrt (x**2. +. y**2.)
-
-let eval l = match l with
-  | Location (_,x,y,_) -> pyth x y
+let distance a b = match a with
+  | Location (_,x1,y1,_) -> ( match b with
+                      | Location (_,x2,y2,_) -> sqrt ((x2 -. x1)**2. +. (y2 -. y1)**2.) )
 
 
 let rec check_neighbors s = function
   | [] -> false
   | h::t -> if s=h then true else check_neighbors s t
 
-let rec get_next_loc l1 goal acc count visited = function
+  let rec get_next_loc l1 goal acc count visited = function
   | [] -> acc
   | h::t -> if contains h visited then get_next_loc l1 goal acc count visited t else
-  (* let rt = (get_route (get_string l) h routes) in *)
-    let e = eval (get_location goal locations) in
-    let coor = eval (get_location h locations) in
-    if (((distance coor e) < count) && (coor -. e >= 0.)  || count = -1.) then get_next_loc l1 goal (Some h) (distance coor e) visited t else
+    let e = (get_location goal locations) in
+    let coor = get_location h locations in
+    if (((distance coor e) < count) || count = -1.) then get_next_loc l1 goal (Some h) (distance coor e) visited t else
     get_next_loc l1 goal acc count visited t
 
 
   let get_val = function
-    | None -> failwith "major yikes :("
+    | None -> ""
     | Some x -> x
-
-(* let get_paths s1 s2 acc1 =
-  let l1 = get_location s1 locations in
-  let rec path start_l end_s acc2 = function
-    | [] -> acc1
-    | h::t -> if h=s2 then (h::acc2)::acc1 else
-    if List.mem h acc2 then path start_l end_s acc2 t else
-    let new_l = (get_location h locations) in
-    (path new_l end_s (h::acc2) (get_neighbors new_l))@(path start_l end_s [s1] t)
-  in path l1 s2 [s1] (get_neighbors l1) *)
 
   let rec get_paths s1 s2 acc =
     if s1 = s2 then (s2::acc) else
@@ -306,4 +290,4 @@ let rec get_next_loc l1 goal acc count visited = function
 
 
 
-  (* CURRENT PROBLEM: NOT PROPERLY LINKING ON OTHER LISTS, ALSO IT'S STOPPING WITH THE REPEATS THING YAY LOVE DFS.*)
+
