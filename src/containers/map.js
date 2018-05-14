@@ -11,7 +11,8 @@ import {get_color} from '../ttc-ocaml/src/board.bs';
 // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
 const SCALE = config.scale,
     RECTANGLE_TO_SPACING_RATIO = 4,
-    RECTANGLE_HEIGHT = 10;
+    RECTANGLE_HEIGHT = 10,
+    RECTANGLE_HEIGHT_TO_DOUBLE_ROUTE_SPACING = 10;
 
 const createRectangleDatum = (x, y, theta, width, height, trainColor, route, routeID) => {
     return {
@@ -46,6 +47,9 @@ const routeToRectangleArray = (route, index) => {
 
     const trainColor = trainColorFromIndex(get_color(route));
 
+    const doubleRoute = route[5], // is it a double route?
+        leftOrRight = doubleRoute ? route[6][0] : -1; // if so, is it a left or right double route?
+    // Recursive for extra functional zing!
     return (function addRect(acc, i) {
         if(i === n) return acc;
         // These are the raw X and Y values for the rectangle
@@ -55,8 +59,18 @@ const routeToRectangleArray = (route, index) => {
         // Rotate (x, y) about (A.x, A.y) by theta
         // We still need to orient the rectangle after this! All this does is change the X and Y co-ordinates of
         // its top left corner.
-        const xRotated = A.x + (x - A.x) * Math.cos(theta) - (y - A.y) * Math.sin(theta),
+        let xRotated = A.x + (x - A.x) * Math.cos(theta) - (y - A.y) * Math.sin(theta),
             yRotated = A.y + (x - A.x) * Math.sin(theta) + (y - A.y) * Math.cos(theta);
+
+        if(doubleRoute) {
+            // if it's a double route we need to transform left or right
+            const sign = leftOrRight === 0 ? 1 : -1,
+                transform = RECTANGLE_HEIGHT / 2 + (RECTANGLE_HEIGHT / RECTANGLE_HEIGHT_TO_DOUBLE_ROUTE_SPACING);
+            const [xTransform, yTransform] = [transform * Math.sin(theta), -transform * Math.cos(theta)].map(elem => elem * sign);
+
+            xRotated += xTransform;
+            yRotated += yTransform;
+        }
 
         // color and taken are not implemented yet
         const datum =

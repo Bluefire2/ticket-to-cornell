@@ -112,7 +112,7 @@ export const trainColorFromIndex = i => {
     }
 };
 
-// Convert English colour name to train colour index
+// Convert English colour names to train colour indices
 export const trainEnglishColorsToIndicesMap = ['red', 'green', 'blue', 'yellow', 'pink', 'orange', 'white', 'black'];
 
 export const trainIndexFromEnglishColor = color => {
