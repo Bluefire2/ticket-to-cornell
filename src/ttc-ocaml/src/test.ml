@@ -272,6 +272,8 @@ let ppd' = {ppd with destination_tickets = [{loc1 = "Sigma Chi"; loc2 = "CKB Qua
 
 let ppd'' = {ppd with routes = [(dairy_bar,plantations,2,White,None)]}
 
+let train_deck = TrainDeck.init_deck ()
+let dest_ticket_deck = DestinationDeck.init_deck ()
 
 let tests =
 [

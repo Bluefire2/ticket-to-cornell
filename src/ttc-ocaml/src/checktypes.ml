@@ -58,14 +58,11 @@ module type COMPONENTS = sig
     loc2 : string;
     points : int
   }
-  val train_deck : train_color list
-  val dest_ticket_deck : destination_ticket list
   module type TrainDeck = sig
     type card = train_color
     type t = card list
     type tr = card list
     val shuffle : t -> tr -> t * tr
-    (*val discard : card -> tr -> tr*)
     val init_deck : unit -> t
     val init_trash : tr
     val draw_card : t -> tr -> (card * t * tr)
