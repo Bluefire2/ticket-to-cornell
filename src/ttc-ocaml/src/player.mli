@@ -7,6 +7,7 @@ type player = { color : Components.player_color;
                 trains_remaining : int ;
                 first_turn : bool;
                 last_turn : bool;
+                bot : bool;
               }
 
 (* [destination_tickets p] is a list of the destination tickets [p] has *)

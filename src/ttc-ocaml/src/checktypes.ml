@@ -90,7 +90,16 @@ end
 
 
 module type PLAYER = sig
-  type player
+  type player = { color : Components.player_color;
+                  destination_tickets : Components.DestinationDeck.card list;
+                  train_cards : (Components.TrainDeck.card * int) list;
+                  score : int;
+                  routes : Board.route list;
+                  trains_remaining : int ;
+                  first_turn : bool;
+                  last_turn : bool;
+                  bot : bool;
+                }
   val update_destination_tickets : player -> Components.DestinationDeck.card list -> player
   val destination_tickets : player -> Components.DestinationDeck.card list
   val train_cards : player -> (Components.TrainDeck.card * int) list

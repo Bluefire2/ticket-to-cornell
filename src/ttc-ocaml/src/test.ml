@@ -120,6 +120,7 @@ routes = [];
 trains_remaining = 45;
 first_turn = false;
 last_turn = false;
+bot = false;
 }
 
 let p2 =
@@ -132,6 +133,7 @@ routes = [];
 trains_remaining = 45;
 first_turn = false;
 last_turn = false;
+bot = false;
 }
 
 
@@ -146,6 +148,7 @@ let default1 =
   trains_remaining = 45;
   first_turn = true;
   last_turn = false;
+  bot = false;
 }
 
 
@@ -160,6 +163,7 @@ let default2 =
   trains_remaining = 45;
   first_turn = true;
   last_turn = false;
+  bot = false;
 }
 
 
@@ -174,6 +178,7 @@ let default3 =
   trains_remaining = 45;
   first_turn = true;
   last_turn = false;
+  bot = false;
 }
 
 
@@ -188,6 +193,7 @@ let default4 =
   trains_remaining = 45;
   first_turn = true;
   last_turn = false;
+  bot = false;
 }
 
 
@@ -202,6 +208,7 @@ let default5 =
   trains_remaining = 45;
   first_turn = true;
   last_turn = false;
+  bot = false;
 }
 
 
@@ -223,6 +230,7 @@ routes = [(dairy_bar,plantations,2,White,None, false, None); (bartels,dairy_bar,
 trains_remaining = 19;
 first_turn = false;
 last_turn = false;
+bot = false;
 }
 
 let p3 =
@@ -245,6 +253,7 @@ let p3 =
     trains_remaining = 18;
     first_turn = false;
     last_turn = false;
+    bot = false;
   }
 
 let p4 = {p3 with
@@ -412,6 +421,7 @@ let player_tests =
     trains_remaining = 45;
     first_turn = false;
     last_turn = false;
+    bot = false;
     })
     (Player.update_destination_tickets p1 [test1]));
   "update destination_tickets2" >:: (fun _ -> assert_equal
@@ -424,6 +434,7 @@ let player_tests =
     trains_remaining = 45;
     first_turn = false;
     last_turn = false;
+    bot = false;
     })
     (Player.update_destination_tickets p1 [test1;gates]));
   "update destination_tickets3" >:: (fun _ -> assert_equal
@@ -436,6 +447,7 @@ let player_tests =
     trains_remaining = 45;
     first_turn = false;
     last_turn = false;
+    bot = false;
     })
     (Player.update_destination_tickets p2 [toclass]));
   "update destination_tickets4" >:: (fun _ -> assert_equal
@@ -448,6 +460,7 @@ let player_tests =
     trains_remaining = 45;
     first_turn = false;
     last_turn = false;
+    bot = false;
     })
     (Player.update_destination_tickets p2 [toclass;gates;test1]));
   "train cards1" >:: (fun _ -> assert_equal [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,1)]
@@ -527,6 +540,7 @@ let p_end =
     trains_remaining = 2;
     first_turn = false;
     last_turn = false;
+    bot = false;
   }
 
 let st1 = (decided_routes (init_state 2 |> setup_state) [0])

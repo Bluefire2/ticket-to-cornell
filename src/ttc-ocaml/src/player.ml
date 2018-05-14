@@ -16,7 +16,8 @@ type player = { color : player_color;
                 routes : Board.route list;
                 trains_remaining : int ;
                 first_turn : bool ;
-                last_turn : bool ; }
+                last_turn : bool ;
+                bot : bool }
 
 let destination_tickets p = p.destination_tickets
 
@@ -76,7 +77,8 @@ let rec init_players n =
                   routes = [];
                   trains_remaining = 45;
                   first_turn = true;
-                  last_turn = false } in
+                  last_turn = false;
+                  bot = false } in
             p::(init_players (n-1))
 
 let draw_train_card p c =
