@@ -265,12 +265,12 @@ let check_cards cards n clr =
 let place_on_board st r clr =
   (* Checking player has train cards for selected route *)
   let cards = train_cards (current_player st) in
-  let num = match r with | (_, _, n, _, _) -> n in
+  let num = match r with | (_, _, n, _, _, _, _) -> n in
   if (check_cards cards num clr) then (
     let num_trains = trains_remaining (current_player st) in
     if (num_trains >= num) then (
       let p_clr = (current_player st).color in
-      let r' = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some p_clr) in
+      let r' = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some p_clr, b, lr) in
       let p' = place_train (current_player st) r' in
       let i = st.player_index in
       {st with players = update_players i p' st.players;
@@ -286,9 +286,9 @@ let select_route st r clr =
   if (first_turn (current_player st)) then first_turn_error st
   else (
     match r with
-    | (_, _, _, _, Some _) -> {st with error = "Route already taken."}
-    | (_, _, _, Grey, _) ->
+    | (_, _, _, _, Some _, _, _) -> {st with error = "Route already taken."}
+    | (_, _, _, Grey, _, _, _) ->
       ( match clr with
       | None -> {st with error = "Choose a train card color."}
       | Some clr' -> place_on_board st r clr' )
-    | (_, _, _, clr, _) -> place_on_board st r clr ))
+    | (_, _, _, clr, _, _, _) -> place_on_board st r clr ))

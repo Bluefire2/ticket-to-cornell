@@ -111,7 +111,8 @@ end
 
 module type BOARD = sig
   type location = Location of string * float * float * string list
-  type route = location * location * int * Components.train_color * Components.player_color option
+  type leftRightRoute = LeftRoute | RightRoute
+  type route = location * location * int * Components.train_color * Components.player_color option * bool * leftRightRoute option
   val route_score : route -> int
   val is_taken : route -> bool
   val get_length : route -> int

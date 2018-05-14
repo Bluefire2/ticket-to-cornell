@@ -49,7 +49,7 @@ let print_routes st =
   let r = State.routes st in
   let rec loop acc = function
     | [] -> acc
-    | (l1, l2, _, _, x)::t -> match x with
+    | (l1, l2, _, _, x, _, _)::t -> match x with
       | None -> loop acc t
       | Some p -> loop (("Route from " ^ (name l1) ^ " to " ^ (name l2) ^ " belongs to " ^ (stringify_clr p) ^ "\n") ^ acc) t in
   loop "" r

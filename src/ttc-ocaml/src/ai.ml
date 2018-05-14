@@ -65,18 +65,18 @@ let rec best_routes st = function
   | h::t -> (path_routes st.routes h)::(best_routes st t)
 
 let other_player p = function
-  | (_,_,_,_,None) -> false
-  | (_,_,_,_,x) -> Some p.color <> x
+  | (_,_,_,_,None,_,_) -> false
+  | (_,_,_,_,x,_,_) -> Some p.color <> x
 
 let extract_goal rts =
   let last_el = List.nth rts ((List.length rts) -1) in
   match last_el with
-  | (_,goal,_,_,_) -> get_string goal
+  | (_,goal,_,_,_,_,_) -> get_string goal
 
 let rec extract_strings rts =
   match rts with
   | [] -> []
-  | (Location (n1, _,_,_),Location (n2,_,_,_),_,_,_)::t -> n2::n1::(extract_strings t)
+  | (Location (n1, _,_,_),Location (n2,_,_,_),_,_,_,_,_)::t -> n2::n1::(extract_strings t)
 
 let get_val = function
     | None -> raise (Failure "Not_available")
@@ -90,7 +90,7 @@ let rec can_build goal_routes st p =
   match goal_routes with
   | [] -> []
   | h::t -> ( match h with
-      | (_,_,l,c,o) -> if o = None && (extract_hand_colors c p.train_cards = l) then (h::(can_build t st p))
+      | (_,_,l,c,o,_,_) -> if o = None && (extract_hand_colors c p.train_cards = l) then (h::(can_build t st p))
                        else can_build t st p )
 
 let rec priorize_build count acc = function
@@ -101,7 +101,7 @@ let rec priorize_build count acc = function
 let rec desired_colors goal_routes p acc =
   match goal_routes with
   | [] -> acc
-  | (_,_,l,c,o)::t -> if (o = None && (l - (extract_hand_colors c p.train_cards) > 0)) then desired_colors t p (c::acc)
+  | (_,_,l,c,o,_,_)::t -> if (o = None && (l - (extract_hand_colors c p.train_cards) > 0)) then desired_colors t p (c::acc)
   else desired_colors t p acc
 
 let rec check_routes p st (rts : route list) acc =
@@ -110,7 +110,7 @@ let rec check_routes p st (rts : route list) acc =
   | rt::t -> if other_player p rt then
              let goal = extract_goal rts in
              ( match rt with
-              | (l1,l2,_,_,_) -> try (let new_l = get_val (get_next_loc l1 goal None (-1.) ((get_string l2)::(extract_strings acc)) (get_neighbors l1)) in
+              | (l1,l2,_,_,_,_,_) -> try (let new_l = get_val (get_next_loc l1 goal None (-1.) ((get_string l2)::(extract_strings acc)) (get_neighbors l1)) in
               let new_path = (get_paths (new_l) (goal) (extract_strings acc)) in
               let reroute = path_routes st.routes new_path in
                check_routes p st reroute []) with

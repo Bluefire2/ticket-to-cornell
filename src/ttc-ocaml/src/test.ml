@@ -219,7 +219,7 @@ color = PBlue;
 destination_tickets = [{loc1 = "Plantations"; loc2 = "Bartels Hall"; points = 4}];
 train_cards = [];
 score = 90;
-routes = [(dairy_bar,plantations,2,White,None); (bartels,dairy_bar,3,Orange,None)];
+routes = [(dairy_bar,plantations,2,White,None, false, None); (bartels,dairy_bar,3,Orange,None, false, None)];
 trains_remaining = 19;
 first_turn = false;
 last_turn = false;
@@ -234,14 +234,14 @@ let p3 =
                    (Black,0);(White,2);(Pink,0);(Wild,1);(Orange,0)];
     score = 18;
     routes = [
-      (beebe,island,2,Orange,None);
-      (psb,kennedy,2,Grey,None);
-      (risley,beebe,2,Grey,None);
-      (commons,eddy,3,Black,None);
-      (psb,island,4,Red,None);
-      (engineering,barton,2,Grey,None);
-      (kennedy,barton,2,Grey,None);
-      (eddy,engineering,3,Grey,None)];
+      (beebe,island,2,Orange,None, false, None);
+      (psb,kennedy,2,Grey,None, false, None);
+      (risley,beebe,2,Grey,None, false, None);
+      (commons,eddy,3,Black,None, false, None);
+      (psb,island,4,Red,None, false, None);
+      (engineering,barton,2,Grey,None, false, None);
+      (kennedy,barton,2,Grey,None, false, None);
+      (eddy,engineering,3,Grey,None, false, None)];
     trains_remaining = 18;
     first_turn = false;
     last_turn = false;
@@ -253,24 +253,24 @@ let p4 = {p3 with
                                  {loc1 = "Sigma Chi"; loc2 = "CKB Quad"; points = 6}];
           routes =
             [
-              (sigma_chi,undergrad,4,Pink,None);
-              (bridge,sigma_chi,5,Black,None);
-              (ckb,risley,2,Blue,None);
-              (undergrad,risley,2,White,None);
-              (dairy_bar,riley_robb,1,Grey,None);
-              (rpcc,appel,1,Grey,None);
-              (island,plantations,1,Grey,None);
-              (beebe,appel,2,Pink,None);
-              (beebe,island,2,Black,None);
-              (dairy_bar,plantations,2,Green,None);
-              (a_lot,rpcc,2,Grey,None);
-              (riley_robb,farm_barn,3,Grey,None);
+              (sigma_chi,undergrad,4,Pink,None, false, None);
+              (bridge,sigma_chi,5,Black,None, false, None);
+              (ckb,risley,2,Blue,None, false, None);
+              (undergrad,risley,2,White,None, false, None);
+              (dairy_bar,riley_robb,1,Grey,None, false, None);
+              (rpcc,appel,1,Grey,None, false, None);
+              (island,plantations,1,Grey,None, false, None);
+              (beebe,appel,2,Pink,None, false, None);
+              (beebe,island,2,Black,None, false, None);
+              (dairy_bar,plantations,2,Green,None, false, None);
+              (a_lot,rpcc,2,Grey,None, false, None);
+              (riley_robb,farm_barn,3,Grey,None, false, None);
             ]
          }
 
 let ppd' = {ppd with destination_tickets = [{loc1 = "Sigma Chi"; loc2 = "CKB Quad"; points = 6}]}
 
-let ppd'' = {ppd with routes = [(dairy_bar,plantations,2,White,None)]}
+let ppd'' = {ppd with routes = [(dairy_bar,plantations,2,White,None, false, None)]}
 
 let train_deck = TrainDeck.init_deck ()
 let dest_ticket_deck = DestinationDeck.init_deck ()
@@ -390,7 +390,7 @@ let board_tests =
 ]
 
 let r = List.nth (Board.routes) 21
-let r' = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some PYellow)
+let r' = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
 let p3' = {p3 with train_cards = [(Red,3);(Blue,1);(Green,0);(Yellow,2);
                                   (Black,0);(White,2);(Pink,0);(Wild,1);(Orange,0)];
                    score = p3.score + 2;
@@ -549,7 +549,7 @@ let st4 = { player_index = 0;
             last_round = false;
             winner = None }
 
-let fill_in r = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some PYellow)
+let fill_in r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
 let r_select = select_route st4 r None
 let r'' = List.nth (r_select |> State.routes) 21
 let r2 = List.nth (r_select |> State.routes) 9
@@ -631,11 +631,11 @@ let state_tests =
   (* select_route *)
   "state19" >:: (fun _ -> assert_equal ~-2 (diff_cards
                 (st4 |> current_player |> train_cards)
-                (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> train_cards)));
+                (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None |> current_player |> train_cards)));
   "state20" >:: (fun _ -> assert_equal true (same_lst
-               ((dairy_bar,plantations,2,Green,Some PYellow)::(st4 |> current_player |> routes))
-               (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> routes)));
-  "state21" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> score));
+               ((dairy_bar,plantations,2,Green,Some PYellow, false, None)::(st4 |> current_player |> routes))
+               (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None |> current_player |> routes)));
+  "state21" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None |> current_player |> score));
   "state22" >:: (fun _ -> assert_equal r' (List.nth (r_select |> State.routes) 21));
   "state23" >:: (fun _ -> assert_equal "Route already taken."
                     ((select_route (r_select |> next_player) r'' None) |> message));

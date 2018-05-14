@@ -2,11 +2,13 @@ open Components
 
 type location = Location of string * float * float * string list
 
-type route = location * location * int * train_color * player_color option
+type leftRightRoute = LeftRoute | RightRoute
 
-let get_length (_,_,x,_,_) = x
+type route = location * location * int * train_color * player_color option * bool * leftRightRoute option
 
-let get_color (_,_,_,x,_) = x
+let get_length (_,_,x,_,_,_,_) = x
+
+let get_color (_,_,_,x,_,_,_) = x
 
 let rec contains x = function
   | [] -> false
@@ -14,17 +16,17 @@ let rec contains x = function
 
 let route_score r =
   match r with
-  | (_,_,1,_,_) -> 1
-  | (_,_,2,_,_) -> 2
-  | (_,_,3,_,_) -> 4
-  | (_,_,4,_,_) -> 7
-  | (_,_,5,_,_) -> 10
-  | (_,_,6,_,_) -> 15
+  | (_,_,1,_,_,_,_) -> 1
+  | (_,_,2,_,_,_,_) -> 2
+  | (_,_,3,_,_,_,_) -> 4
+  | (_,_,4,_,_,_,_) -> 7
+  | (_,_,5,_,_,_,_) -> 10
+  | (_,_,6,_,_,_,_) -> 15
   | _ -> failwith "Not possible; deal with later"
 
 let is_taken r =
   match r with
-  | (_,_,_,_,None) -> false
+  | (_,_,_,_,None,_,_) -> false
   | _ -> true
 
 let eco_house = Location ("Ecology House", 574., 141., [])
@@ -76,106 +78,106 @@ let lst l = match l with | Location (_, _, _, x) -> x
 
 let route_connections =
   [
-    (ckb,appel,1,Grey,None);
-    (ckb,appel,1,Grey,None);
-    (dairy_bar,riley_robb,1,Grey,None);
-    (dairy_bar,riley_robb,1,Grey,None);
-    (rpcc,ckb,1,Grey,None);
-    (rpcc,ckb,1,Grey,None);
-    (rpcc,appel,1,Grey,None);
-    (island,plantations,1,Grey,None);
-    (island,plantations,1,Grey,None);
-    (ckb,risley,2,Blue,None);
-    (noyes,mcgraw,2,Grey,None);
-    (noyes,mcgraw,2,Grey,None);
-    (creek,schoellkopf,2,Grey,None);
-    (creek,schoellkopf,2,Grey,None);
-    (beebe,appel,2,Pink,None);
-    (engineering,barton,2,Grey,None);
-    (engineering,barton,2,Grey,None);
-    (beebe,island,2,Black,None);
-    (beebe,island,2,Orange,None);
-    (kennedy,mann,2,Grey,None);
-    (kennedy,mann,2,Grey,None);
-    (undergrad,risley,2,Green,None);
-    (undergrad,risley,2,White,None);
-    (dairy_bar,plantations,2,White,None);
-    (dairy_bar,plantations,2,Green,None);
-    (mann,plantations,2,Grey,None);
-    (barton,schoellkopf,2,Yellow,None);
-    (barton,schoellkopf,2,Red,None);
-    (undergrad,museum,2,Grey,None);
-    (psb,kennedy,2,Grey,None);
-    (psb,kennedy,2,Grey,None);
-    (schoellkopf,bartels,2,Grey,None);
-    (schoellkopf,bartels,2,Grey,None);
-    (engineering,schoellkopf,2,Grey,None);
-    (a_lot,rpcc,2,Grey,None);
-    (forest_home,filtration,2,Grey,None);
-    (museum,bridge,2,Grey,None);
-    (filtration,vet,2,Grey,None);
-    (becker,noyes,2,Grey,None);
-    (risley,beebe,2,Grey,None);
-    (kennedy,barton,2,Grey,None);
-    (mcgraw,engineering,2,Grey,None);
-    (becker,mcgraw,2,Grey,None);
-    (appel,island,2,Grey,None);
-    (kennedy,bartels,2,Grey,None);
-    (becker,museum,3,Yellow,None);
-    (becker,museum,3,Pink,None);
-    (eddy,engineering,3,Grey,None);
-    (hasbrouck,golf,3,Green,None);
-    (museum,psb,3,Red,None);
-    (museum,psb,3,Yellow,None);
-    (risley,psb,3,White,None);
-    (becker,bridge,3,Blue,None);
-    (commons,eddy,3,Black,None);
-    (creek,maplewood,3,Orange,None);
-    (creek,maplewood,3,Black,None);
-    (riley_robb,farm_barn,3,Grey,None);
-    (bartels,dairy_bar,3,Orange,None);
-    (bridge,undergrad,3,Pink,None);
-    (mcgraw,psb,3,Grey,None);
-    (dairy_bar,vet,3,Grey,None);
-    (plantations,filtration,3,Blue,None);
-    (becker,psb,3,Red,None);
-    (filtration,arboretum,3,Grey,None);
-    (museum,risley,3,Grey,None);
-    (schoellkopf,farm_barn,4,Yellow,None);
-    (a_lot,hasbrouck,4,Grey,None);
-    (arboretum,forest_home,4,Grey,None);
-    (appel,hasbrouck,4,Green,None);
-    (eddy,noyes,4,Blue,None);
-    (mcgraw,kennedy,4,Pink,None);
-    (psb,island,4,Red,None);
-    (island,forest_home,4,Yellow,None);
-    (island,forest_home,4,Orange,None);
-    (eco_house,rpcc,4,Red,None);
-    (rpcc,hasbrouck,4,Black,None);
-    (undergrad,rpcc,4,Blue,None);
-    (sigma_chi,undergrad,4,Pink,None);
-    (hasbrouck,forest_home,4,White,None);
-    (maplewood,farm_barn,4,Black,None);
-    (maplewood,farm_barn,4,Orange,None);
-    (arboretum,vet,5,Red,None);
-    (vet,plantations,5,White,None);
-    (eddy,creek,5,Yellow,None);
-    (undergrad,eco_house,5,Green,None);
-    (schoellkopf,riley_robb,5,Orange,None);
-    (schoellkopf,riley_robb,5,White,None);
-    (bridge,sigma_chi,5,Black,None);
-    (sigma_chi,eco_house,5,Green,None);
-    (sigma_chi,eco_house,5,Pink,None);
-    (riley_robb,vet,5,Blue,None);
-    (commons,becker,6,Blue,None);
-    (a_lot,golf,6,Yellow,None);
-    (golf,forest_home,6,Black,None);
-    (appel,forest_home,6,White,None);
-    (eco_house,a_lot,6,Green,None);
-    (commons,noyes,6,Orange,None);
-    (golf,arboretum,6,Grey,None);
-    (farm_barn,vet,6,Pink,None);
-    (kennedy,dairy_bar,6,Red,None);
+    (ckb,appel,1,Grey,None, true, Some LeftRoute);
+    (ckb,appel,1,Grey,None, true, Some RightRoute);
+    (dairy_bar,riley_robb,1,Grey,None, true, Some LeftRoute);
+    (dairy_bar,riley_robb,1,Grey,None, true, Some RightRoute);
+    (rpcc,ckb,1,Grey,None, true, Some LeftRoute);
+    (rpcc,ckb,1,Grey,None, true, Some RightRoute);
+    (rpcc,appel,1,Grey,None, false, None);
+    (island,plantations,1,Grey,None, true, Some LeftRoute);
+    (island,plantations,1,Grey,None, true, Some RightRoute);
+    (ckb,risley,2,Blue,None, false, None);
+    (noyes,mcgraw,2,Grey,None, true, Some LeftRoute);
+    (noyes,mcgraw,2,Grey,None, true, Some RightRoute);
+    (creek,schoellkopf,2,Grey,None, true, Some LeftRoute);
+    (creek,schoellkopf,2,Grey,None, true, Some RightRoute);
+    (beebe,appel,2,Pink,None, false, None);
+    (engineering,barton,2,Grey,None, true, Some LeftRoute);
+    (engineering,barton,2,Grey,None, true, Some RightRoute);
+    (beebe,island,2,Black,None, true, Some LeftRoute);
+    (beebe,island,2,Orange,None, true, Some RightRoute);
+    (kennedy,mann,2,Grey,None, true, Some LeftRoute);
+    (kennedy,mann,2,Grey,None, true, Some RightRoute);
+    (undergrad,risley,2,Green,None, true, Some LeftRoute);
+    (undergrad,risley,2,White,None, true, Some RightRoute);
+    (dairy_bar,plantations,2,White,None, true, Some LeftRoute);
+    (dairy_bar,plantations,2,Green,None, true, Some RightRoute);
+    (mann,plantations,2,Grey,None, false, None);
+    (barton,schoellkopf,2,Yellow,None, true, Some LeftRoute);
+    (barton,schoellkopf,2,Red,None, true, Some RightRoute);
+    (undergrad,museum,2,Grey,None, false, None);
+    (psb,kennedy,2,Grey,None, true, Some LeftRoute);
+    (psb,kennedy,2,Grey,None, true, Some RightRoute);
+    (schoellkopf,bartels,2,Grey,None, true, Some LeftRoute);
+    (schoellkopf,bartels,2,Grey,None, true, Some RightRoute);
+    (engineering,schoellkopf,2,Grey,None, false, None);
+    (a_lot,rpcc,2,Grey,None, false, None);
+    (forest_home,filtration,2,Grey,None, false, None);
+    (museum,bridge,2,Grey,None, false, None);
+    (filtration,vet,2,Grey,None, false, None);
+    (becker,noyes,2,Grey,None, false, None);
+    (risley,beebe,2,Grey,None, false, None);
+    (kennedy,barton,2,Grey,None, false, None);
+    (mcgraw,engineering,2,Grey,None, false, None);
+    (becker,mcgraw,2,Grey,None, false, None);
+    (appel,island,2,Grey,None, false, None);
+    (kennedy,bartels,2,Grey,None, false, None);
+    (becker,museum,3,Yellow,None, true, Some LeftRoute);
+    (becker,museum,3,Pink,None, true, Some RightRoute);
+    (eddy,engineering,3,Grey,None, false, None);
+    (hasbrouck,golf,3,Green,None, false, None);
+    (museum,psb,3,Red,None, true, Some LeftRoute);
+    (museum,psb,3,Yellow,None, true, Some RightRoute);
+    (risley,psb,3,White,None, false, None);
+    (becker,bridge,3,Blue,None, false, None);
+    (commons,eddy,3,Black,None, false, None);
+    (creek,maplewood,3,Orange,None, true, Some LeftRoute);
+    (creek,maplewood,3,Black,None, true, Some RightRoute);
+    (riley_robb,farm_barn,3,Grey,None, false, None);
+    (bartels,dairy_bar,3,Orange,None, false, None);
+    (bridge,undergrad,3,Pink,None, false, None);
+    (mcgraw,psb,3,Grey,None, false, None);
+    (dairy_bar,vet,3,Grey,None, false, None);
+    (plantations,filtration,3,Blue,None, false, None);
+    (becker,psb,3,Red,None, false, None);
+    (filtration,arboretum,3,Grey,None, false, None);
+    (museum,risley,3,Grey,None, false, None);
+    (schoellkopf,farm_barn,4,Yellow,None, false, None);
+    (a_lot,hasbrouck,4,Grey,None, false, None);
+    (arboretum,forest_home,4,Grey,None, false, None);
+    (appel,hasbrouck,4,Green,None, false, None);
+    (eddy,noyes,4,Blue,None, false, None);
+    (mcgraw,kennedy,4,Pink,None, false, None);
+    (psb,island,4,Red,None, false, None);
+    (island,forest_home,4,Yellow,None, true, Some LeftRoute);
+    (island,forest_home,4,Orange,None, true, Some RightRoute);
+    (eco_house,rpcc,4,Red,None, false, None);
+    (rpcc,hasbrouck,4,Black,None, false, None);
+    (undergrad,rpcc,4,Blue,None, false, None);
+    (sigma_chi,undergrad,4,Pink,None, false, None);
+    (hasbrouck,forest_home,4,White,None, false, None);
+    (maplewood,farm_barn,4,Black,None, true, Some LeftRoute);
+    (maplewood,farm_barn,4,Orange,None, true, Some RightRoute);
+    (arboretum,vet,5,Red,None, false, None);
+    (vet,plantations,5,White,None, false, None);
+    (eddy,creek,5,Yellow,None, false, None);
+    (undergrad,eco_house,5,Green,None, false, None);
+    (schoellkopf,riley_robb,5,Orange,None, true, Some LeftRoute);
+    (schoellkopf,riley_robb,5,White,None, true, Some RightRoute);
+    (bridge,sigma_chi,5,Black,None, false, None);
+    (sigma_chi,eco_house,5,Green,None, false, None);
+    (sigma_chi,eco_house,5,Pink,None, false, None);
+    (riley_robb,vet,5,Blue,None, false, None);
+    (commons,becker,6,Blue,None, false, None);
+    (a_lot,golf,6,Yellow,None, false, None);
+    (golf,forest_home,6,Black,None, false, None);
+    (appel,forest_home,6,White,None, false, None);
+    (eco_house,a_lot,6,Green,None, false, None);
+    (commons,noyes,6,Orange,None, false, None);
+    (golf,arboretum,6,Grey,None, false, None);
+    (farm_barn,vet,6,Pink,None, false, None);
+    (kennedy,dairy_bar,6,Red,None, false, None);
   ]
 
 let update_locations n neighbor locations =
@@ -191,7 +193,7 @@ let update_locations n neighbor locations =
 let locations =
   let rec loop acc = ( function
     | [] -> acc
-    | (l1, l2, _, _, _)::t ->
+    | (l1, l2, _, _, _, _, _)::t ->
       let n1 = name l1 in
       let n2 = name l2 in
       let loc = update_locations n1 n2 acc in
@@ -209,11 +211,11 @@ let find_location s locations =
 let routes =
   let rec loop acc = function
     | [] -> acc
-    | (l1, l2, pts, clr, ply)::t ->
+    | (l1, l2, pts, clr, ply, double, lr)::t ->
       let n1 = name l1 in
       let n2 = name l2 in
       let new_r = ((find_location n1 locations), (find_location n2 locations),
-                   pts, clr, ply) in
+                   pts, clr, ply, double, lr) in
       loop (acc @ [new_r]) t in
   loop [] route_connections
 
@@ -221,7 +223,7 @@ let rec completed loc1 loc2 routes prev =
     match routes with
     | [] -> false
     | h::t -> ( match h with
-        | ((Location (l1,_,_,_)),(Location (l2,_,_,_)),_,_,_) ->
+        | ((Location (l1,_,_,_)),(Location (l2,_,_,_)),_,_,_,_,_) ->
           if loc1 = l1 then
             if loc2 = l2 then true else
               completed l2 loc2 t (h::prev) || completed l2 loc2 prev [] || completed loc1 loc2 t (h::prev)
@@ -254,8 +256,8 @@ let get_neighbors (Location (_,_,_,x)) = x
 let rec get_route s1 s2 routes =
   match routes with
   | [] -> failwith "impossible"
-  | (x,y,a,b,c)::t -> if ((get_location s1 locations) = x && (get_location s2 locations) = y) ||
-  ((get_location s1 locations) = y && (get_location s2 locations) = x) then (x,y,a,b,c) else
+  | (x,y,a,b,c,n,lr)::t -> if ((get_location s1 locations) = x && (get_location s2 locations) = y) ||
+  ((get_location s1 locations) = y && (get_location s2 locations) = x) then (x,y,a,b,c,n,lr) else
   get_route s1 s2 t
 
 let distance a b = match a with
@@ -286,10 +288,7 @@ let rec get_paths s1 s2 acc =
     let next_loc = get_val (get_next_loc l1 s2 None (-1.) acc (get_neighbors l1) ) in
     get_paths next_loc s2 (s1::acc)
 
-let rec path_routes rts paths = match paths with
+let rec path_routes (rts:route list) paths = match paths with
   | [] -> []
   | h1::h2::t -> (get_route h1 h2 rts)::(path_routes rts (h2::t))
   | _::t -> []
-
-
-
