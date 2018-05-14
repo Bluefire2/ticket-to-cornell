@@ -15,7 +15,7 @@ type state = { player_index : int;
                error : string;
                turn_ended : bool;
                last_round : bool;
-               winner: player option}
+               winner: player option }
 
 let init_state num =
   let init = { player_index = 0;
@@ -95,21 +95,26 @@ let update_players i new_p lst =
     else update_loop (i+1) new_i new_p (acc @ [h]) t in
   update_loop 0 i new_p [] lst
 
+(* [update_players_tickets st] returns a list of players in which they have all
+ * been updated by adding to their score points they have earned for completing
+ * destination tickets. *)
 let update_players_tickets st =
   let rec loop acc = function
     | [] -> acc
     | p::t ->
-      let p' = (Player.completed_destination_tickets p (routes st)) in
+      let p' = (Player.completed_destination_tickets p) in
       loop (acc @ [p']) t in
   loop [] (players st)
 
+(* [calculate_winner st] returns the winner for [st], or None if ther are no
+ * players. *)
 let calculate_winner st =
   let longest_i = longest_route_player st in
   let plyrs = players st in
   let longest_p = List.nth plyrs longest_i in
   let p' = Player.increase_score longest_p 10 in
   let st' = {st with players = update_players longest_i p' plyrs } in
-  let st'' = update_players_tickets st' in
+  let st'' = {st with players = update_players_tickets st'} in
   let rec loop best = function
     | [] -> best
     | p::t ->
@@ -119,15 +124,21 @@ let calculate_winner st =
         if (Player.score p > Player.score p_best)
         then loop (Some p) t
         else loop best t in
-  loop None plyrs
+  (st'', loop None (players st''))
 
+(* [end_game st] represents when [st] has ended. *)
 let end_game st =
-  {st with error = "Game has ended.";
-           winner = (calculate_winner st) }
+  let (st', winner) = calculate_winner st in
+  {st' with error = "Game has ended.";
+           winner =  winner }
 
+(* [turn_ended_error st] is [st] but with a turn ended error message. *)
 let turn_ended_error st =
   { st with error = "Turn has already ended for the current player." }
 
+(* [first_turn_error st] is [st] but with an error message for when a player
+ * tries to do something other than collect destination tickets in their first
+ * turn. *)
 let first_turn_error st =
   { st with error = "Can't call this function in the first turn, must choose destination tickets first. "}
 
@@ -163,6 +174,8 @@ let draw_card_facing_up st i =
             turn_ended = true;
             error = "" } ) )
 
+(* [draw_card_pile_no_error st] is `draw_card_pile st` but it does not end
+ * the turn for the player, used for setup_state. *)
 let draw_card_pile_no_error st =
   let tr = st.train_trash in
   let (c1, deck',tr') = TrainDeck.draw_card (st.train_deck) tr in
@@ -193,7 +206,6 @@ let take_route st =
             taking_routes = false;
             error = "" } )
 
-(* grab 4 train cards, grabs 3 destination tickets and choose 2-3. *)
 let setup_state st =
   if (turn_ended st) then turn_ended_error st
   else (
@@ -228,20 +240,26 @@ let decided_routes st indexes =
                   ^ " tickets, must take at least "
                   ^ (string_of_int required_tickets) ^ "."} )
 
+(* [update_routes rts old new] is [rts] but with the [old] route replaced by
+ * the [new] route. *)
 let update_routes routes old_r new_r =
   let rec loop acc = function
     | [] -> acc
     | h::t -> if h = old_r then (acc @ [new_r] @ t) else loop (acc @ [h]) t in
   loop [] routes
 
+(* [check_cards cards n clr] is true if there are at least [n] cards of the [clr]
+ * color in [cards]. *)
 let check_cards cards n clr =
   let rec loop = function
     | [] -> 0
     | (clr', i)::t -> ( if clr' = clr then i else loop t ) in
   (loop cards) >= n
 
-let name l = match l with | Location (x, _, _, _) -> x
-
+(* [place_on_board st r clr] returns a new [st] with the route [r] added to the
+ * current player and with the routes updated to reflect this change. It checks
+ * that the current player has enough cards of color [clr] to take this route
+ * and enough trains remaining. *)
 let place_on_board st r clr =
   (* Checking player has train cards for selected route *)
   let cards = train_cards (current_player st) in

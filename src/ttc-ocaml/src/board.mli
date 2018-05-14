@@ -26,6 +26,7 @@ val get_color : route -> train_color
 (* [routes] is the total list of the routes on the map. *)
 val routes : route list
 
+(* [name l] is a string representing the location [l]. *)
 val name : location -> string
 
 (* [locations] is a list of all of the locations on the board. *)

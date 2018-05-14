@@ -18,14 +18,6 @@ type player = { color : player_color;
                 first_turn : bool ;
                 last_turn : bool ; }
 
-let rec remove_color n c h =
-  if n = 0 then h else
-  let rec loop acc = function
-    | [] -> acc
-    | (a1, a2)::t -> if a1 = c then acc @ [(a1, a2-n)] @ t
-      else loop (acc @ [(a1, a2)]) t in
-  loop [] h
-
 let destination_tickets p = p.destination_tickets
 
 let routes p = p.routes
@@ -37,17 +29,14 @@ let update_destination_tickets p tickets =
 let increase_score p n =
   { p with score = p.score + n }
 
-let completed_destination_tickets p routes =
+let completed_destination_tickets p =
   let rec loop p = function
     | [] -> p
-    | (_, _, _, _, None)::t -> loop p t
-    | (l1, l2, pts, _, Some p_clr)::t ->
-      let n1 = Board.name l1 in
-      let n2 = Board.name l2 in
-      if (p_clr = p.color && (Board.completed n1 n2 routes []))
+    | {loc1 = n1; loc2 = n2; points = pts}::t ->
+      if (Board.completed n1 n2 (routes p) [])
       then loop (increase_score p pts) t
       else loop p t in
-  loop p routes
+  loop p (destination_tickets p)
 
 let train_cards p = p.train_cards
 
@@ -57,7 +46,10 @@ let first_turn p = p.first_turn
 
 let last_turn p = p.last_turn
 
+let color p = p.color
+
 let trains_remaining p = p.trains_remaining
+
 (* TODO: let players choose their colors. For now:
   P1 -> blue
   P2 -> red
@@ -65,12 +57,14 @@ let trains_remaining p = p.trains_remaining
   P4 -> green
   P5 -> black
 *)
-let rec add_train_cards tlist c acc=
-  match tlist with
+(* [add_train_cards lst c acc] adds one card to [lst] that matches the color [c]. *)
+let rec add_train_cards lst c acc =
+  match lst with
   | [] -> acc
-  | (a,b)::t -> if c=a then acc @ ((a,b+1)::t) else add_train_cards t c (acc@[(a,b)])
+  | (a,b)::t ->
+    if c = a then acc @ ((a,b+1)::t)
+    else add_train_cards t c (acc @ [(a,b)])
 
-let color p = p.color
 let rec init_players n =
   match n with
   | 0 -> []
@@ -88,8 +82,16 @@ let rec init_players n =
 let draw_train_card p c =
   { p with train_cards = add_train_cards p.train_cards c []}
 
-(*precondition: hplayer hand has correct number of trains, assume player selected color for route aka not none,
-assume state checked player color option if is already taken by person.  *)
+(* [remove_color n c lst] removes [n] number of cards of color [c] from [lst]. *)
+let rec remove_color n c lst =
+  if n = 0 then lst else
+  let rec loop acc = function
+    | [] -> acc
+    | (a1, a2)::t ->
+      if a1 = c then acc @ [(a1, a2-n)] @ t
+      else loop (acc @ [(a1, a2)]) t in
+  loop [] lst
+
 let place_train p r =
   { p with train_cards = remove_color (Board.get_length r) (Board.get_color r) p.train_cards;
            score = p.score + (Board.route_score r);
