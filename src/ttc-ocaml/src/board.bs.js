@@ -2,7 +2,9 @@
 'use strict';
 
 var List = require("bs-platform/lib/js/list.js");
+var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Pervasives = require("bs-platform/lib/js/pervasives.js");
+var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
 
 function get_length(param) {
   return param[2];
@@ -10,6 +12,22 @@ function get_length(param) {
 
 function get_color(param) {
   return param[3];
+}
+
+function contains(x, _param) {
+  while(true) {
+    var param = _param;
+    if (param) {
+      if (Caml_obj.caml_equal(param[0], x)) {
+        return true;
+      } else {
+        _param = param[1];
+        continue ;
+      }
+    } else {
+      return false;
+    }
+  };
 }
 
 function route_score(r) {
@@ -416,7 +434,9 @@ var route_connections_000 = /* tuple */[
   appel,
   1,
   /* Grey */9,
-  /* None */0
+  /* None */0,
+  true,
+  /* Some */[/* LeftRoute */0]
 ];
 
 var route_connections_001 = /* :: */[
@@ -425,7 +445,9 @@ var route_connections_001 = /* :: */[
     appel,
     1,
     /* Grey */9,
-    /* None */0
+    /* None */0,
+    true,
+    /* Some */[/* RightRoute */1]
   ],
   /* :: */[
     /* tuple */[
@@ -433,7 +455,9 @@ var route_connections_001 = /* :: */[
       riley_robb,
       1,
       /* Grey */9,
-      /* None */0
+      /* None */0,
+      true,
+      /* Some */[/* LeftRoute */0]
     ],
     /* :: */[
       /* tuple */[
@@ -441,7 +465,9 @@ var route_connections_001 = /* :: */[
         riley_robb,
         1,
         /* Grey */9,
-        /* None */0
+        /* None */0,
+        true,
+        /* Some */[/* RightRoute */1]
       ],
       /* :: */[
         /* tuple */[
@@ -449,7 +475,9 @@ var route_connections_001 = /* :: */[
           ckb,
           1,
           /* Grey */9,
-          /* None */0
+          /* None */0,
+          true,
+          /* Some */[/* LeftRoute */0]
         ],
         /* :: */[
           /* tuple */[
@@ -457,7 +485,9 @@ var route_connections_001 = /* :: */[
             ckb,
             1,
             /* Grey */9,
-            /* None */0
+            /* None */0,
+            true,
+            /* Some */[/* RightRoute */1]
           ],
           /* :: */[
             /* tuple */[
@@ -465,6 +495,8 @@ var route_connections_001 = /* :: */[
               appel,
               1,
               /* Grey */9,
+              /* None */0,
+              false,
               /* None */0
             ],
             /* :: */[
@@ -473,7 +505,9 @@ var route_connections_001 = /* :: */[
                 plantations,
                 1,
                 /* Grey */9,
-                /* None */0
+                /* None */0,
+                true,
+                /* Some */[/* LeftRoute */0]
               ],
               /* :: */[
                 /* tuple */[
@@ -481,7 +515,9 @@ var route_connections_001 = /* :: */[
                   plantations,
                   1,
                   /* Grey */9,
-                  /* None */0
+                  /* None */0,
+                  true,
+                  /* Some */[/* RightRoute */1]
                 ],
                 /* :: */[
                   /* tuple */[
@@ -489,6 +525,8 @@ var route_connections_001 = /* :: */[
                     risley,
                     2,
                     /* Blue */2,
+                    /* None */0,
+                    false,
                     /* None */0
                   ],
                   /* :: */[
@@ -497,7 +535,9 @@ var route_connections_001 = /* :: */[
                       mcgraw,
                       2,
                       /* Grey */9,
-                      /* None */0
+                      /* None */0,
+                      true,
+                      /* Some */[/* LeftRoute */0]
                     ],
                     /* :: */[
                       /* tuple */[
@@ -505,7 +545,9 @@ var route_connections_001 = /* :: */[
                         mcgraw,
                         2,
                         /* Grey */9,
-                        /* None */0
+                        /* None */0,
+                        true,
+                        /* Some */[/* RightRoute */1]
                       ],
                       /* :: */[
                         /* tuple */[
@@ -513,7 +555,9 @@ var route_connections_001 = /* :: */[
                           schoellkopf,
                           2,
                           /* Grey */9,
-                          /* None */0
+                          /* None */0,
+                          true,
+                          /* Some */[/* LeftRoute */0]
                         ],
                         /* :: */[
                           /* tuple */[
@@ -521,7 +565,9 @@ var route_connections_001 = /* :: */[
                             schoellkopf,
                             2,
                             /* Grey */9,
-                            /* None */0
+                            /* None */0,
+                            true,
+                            /* Some */[/* RightRoute */1]
                           ],
                           /* :: */[
                             /* tuple */[
@@ -529,6 +575,8 @@ var route_connections_001 = /* :: */[
                               appel,
                               2,
                               /* Pink */4,
+                              /* None */0,
+                              false,
                               /* None */0
                             ],
                             /* :: */[
@@ -537,7 +585,9 @@ var route_connections_001 = /* :: */[
                                 barton,
                                 2,
                                 /* Grey */9,
-                                /* None */0
+                                /* None */0,
+                                true,
+                                /* Some */[/* LeftRoute */0]
                               ],
                               /* :: */[
                                 /* tuple */[
@@ -545,7 +595,9 @@ var route_connections_001 = /* :: */[
                                   barton,
                                   2,
                                   /* Grey */9,
-                                  /* None */0
+                                  /* None */0,
+                                  true,
+                                  /* Some */[/* RightRoute */1]
                                 ],
                                 /* :: */[
                                   /* tuple */[
@@ -553,7 +605,9 @@ var route_connections_001 = /* :: */[
                                     island,
                                     2,
                                     /* Black */7,
-                                    /* None */0
+                                    /* None */0,
+                                    true,
+                                    /* Some */[/* LeftRoute */0]
                                   ],
                                   /* :: */[
                                     /* tuple */[
@@ -561,7 +615,9 @@ var route_connections_001 = /* :: */[
                                       island,
                                       2,
                                       /* Orange */5,
-                                      /* None */0
+                                      /* None */0,
+                                      true,
+                                      /* Some */[/* RightRoute */1]
                                     ],
                                     /* :: */[
                                       /* tuple */[
@@ -569,7 +625,9 @@ var route_connections_001 = /* :: */[
                                         mann,
                                         2,
                                         /* Grey */9,
-                                        /* None */0
+                                        /* None */0,
+                                        true,
+                                        /* Some */[/* LeftRoute */0]
                                       ],
                                       /* :: */[
                                         /* tuple */[
@@ -577,7 +635,9 @@ var route_connections_001 = /* :: */[
                                           mann,
                                           2,
                                           /* Grey */9,
-                                          /* None */0
+                                          /* None */0,
+                                          true,
+                                          /* Some */[/* RightRoute */1]
                                         ],
                                         /* :: */[
                                           /* tuple */[
@@ -585,7 +645,9 @@ var route_connections_001 = /* :: */[
                                             risley,
                                             2,
                                             /* Green */1,
-                                            /* None */0
+                                            /* None */0,
+                                            true,
+                                            /* Some */[/* LeftRoute */0]
                                           ],
                                           /* :: */[
                                             /* tuple */[
@@ -593,7 +655,9 @@ var route_connections_001 = /* :: */[
                                               risley,
                                               2,
                                               /* White */6,
-                                              /* None */0
+                                              /* None */0,
+                                              true,
+                                              /* Some */[/* RightRoute */1]
                                             ],
                                             /* :: */[
                                               /* tuple */[
@@ -601,7 +665,9 @@ var route_connections_001 = /* :: */[
                                                 plantations,
                                                 2,
                                                 /* White */6,
-                                                /* None */0
+                                                /* None */0,
+                                                true,
+                                                /* Some */[/* LeftRoute */0]
                                               ],
                                               /* :: */[
                                                 /* tuple */[
@@ -609,7 +675,9 @@ var route_connections_001 = /* :: */[
                                                   plantations,
                                                   2,
                                                   /* Green */1,
-                                                  /* None */0
+                                                  /* None */0,
+                                                  true,
+                                                  /* Some */[/* RightRoute */1]
                                                 ],
                                                 /* :: */[
                                                   /* tuple */[
@@ -617,6 +685,8 @@ var route_connections_001 = /* :: */[
                                                     plantations,
                                                     2,
                                                     /* Grey */9,
+                                                    /* None */0,
+                                                    false,
                                                     /* None */0
                                                   ],
                                                   /* :: */[
@@ -625,7 +695,9 @@ var route_connections_001 = /* :: */[
                                                       schoellkopf,
                                                       2,
                                                       /* Yellow */3,
-                                                      /* None */0
+                                                      /* None */0,
+                                                      true,
+                                                      /* Some */[/* LeftRoute */0]
                                                     ],
                                                     /* :: */[
                                                       /* tuple */[
@@ -633,7 +705,9 @@ var route_connections_001 = /* :: */[
                                                         schoellkopf,
                                                         2,
                                                         /* Red */0,
-                                                        /* None */0
+                                                        /* None */0,
+                                                        true,
+                                                        /* Some */[/* RightRoute */1]
                                                       ],
                                                       /* :: */[
                                                         /* tuple */[
@@ -641,6 +715,8 @@ var route_connections_001 = /* :: */[
                                                           museum,
                                                           2,
                                                           /* Grey */9,
+                                                          /* None */0,
+                                                          false,
                                                           /* None */0
                                                         ],
                                                         /* :: */[
@@ -649,7 +725,9 @@ var route_connections_001 = /* :: */[
                                                             kennedy,
                                                             2,
                                                             /* Grey */9,
-                                                            /* None */0
+                                                            /* None */0,
+                                                            true,
+                                                            /* Some */[/* LeftRoute */0]
                                                           ],
                                                           /* :: */[
                                                             /* tuple */[
@@ -657,7 +735,9 @@ var route_connections_001 = /* :: */[
                                                               kennedy,
                                                               2,
                                                               /* Grey */9,
-                                                              /* None */0
+                                                              /* None */0,
+                                                              true,
+                                                              /* Some */[/* RightRoute */1]
                                                             ],
                                                             /* :: */[
                                                               /* tuple */[
@@ -665,7 +745,9 @@ var route_connections_001 = /* :: */[
                                                                 bartels,
                                                                 2,
                                                                 /* Grey */9,
-                                                                /* None */0
+                                                                /* None */0,
+                                                                true,
+                                                                /* Some */[/* LeftRoute */0]
                                                               ],
                                                               /* :: */[
                                                                 /* tuple */[
@@ -673,7 +755,9 @@ var route_connections_001 = /* :: */[
                                                                   bartels,
                                                                   2,
                                                                   /* Grey */9,
-                                                                  /* None */0
+                                                                  /* None */0,
+                                                                  true,
+                                                                  /* Some */[/* RightRoute */1]
                                                                 ],
                                                                 /* :: */[
                                                                   /* tuple */[
@@ -681,6 +765,8 @@ var route_connections_001 = /* :: */[
                                                                     schoellkopf,
                                                                     2,
                                                                     /* Grey */9,
+                                                                    /* None */0,
+                                                                    false,
                                                                     /* None */0
                                                                   ],
                                                                   /* :: */[
@@ -689,6 +775,8 @@ var route_connections_001 = /* :: */[
                                                                       rpcc,
                                                                       2,
                                                                       /* Grey */9,
+                                                                      /* None */0,
+                                                                      false,
                                                                       /* None */0
                                                                     ],
                                                                     /* :: */[
@@ -697,6 +785,8 @@ var route_connections_001 = /* :: */[
                                                                         filtration,
                                                                         2,
                                                                         /* Grey */9,
+                                                                        /* None */0,
+                                                                        false,
                                                                         /* None */0
                                                                       ],
                                                                       /* :: */[
@@ -705,6 +795,8 @@ var route_connections_001 = /* :: */[
                                                                           bridge,
                                                                           2,
                                                                           /* Grey */9,
+                                                                          /* None */0,
+                                                                          false,
                                                                           /* None */0
                                                                         ],
                                                                         /* :: */[
@@ -713,6 +805,8 @@ var route_connections_001 = /* :: */[
                                                                             vet,
                                                                             2,
                                                                             /* Grey */9,
+                                                                            /* None */0,
+                                                                            false,
                                                                             /* None */0
                                                                           ],
                                                                           /* :: */[
@@ -721,6 +815,8 @@ var route_connections_001 = /* :: */[
                                                                               noyes,
                                                                               2,
                                                                               /* Grey */9,
+                                                                              /* None */0,
+                                                                              false,
                                                                               /* None */0
                                                                             ],
                                                                             /* :: */[
@@ -729,6 +825,8 @@ var route_connections_001 = /* :: */[
                                                                                 beebe,
                                                                                 2,
                                                                                 /* Grey */9,
+                                                                                /* None */0,
+                                                                                false,
                                                                                 /* None */0
                                                                               ],
                                                                               /* :: */[
@@ -737,6 +835,8 @@ var route_connections_001 = /* :: */[
                                                                                   barton,
                                                                                   2,
                                                                                   /* Grey */9,
+                                                                                  /* None */0,
+                                                                                  false,
                                                                                   /* None */0
                                                                                 ],
                                                                                 /* :: */[
@@ -745,6 +845,8 @@ var route_connections_001 = /* :: */[
                                                                                     engineering,
                                                                                     2,
                                                                                     /* Grey */9,
+                                                                                    /* None */0,
+                                                                                    false,
                                                                                     /* None */0
                                                                                   ],
                                                                                   /* :: */[
@@ -753,6 +855,8 @@ var route_connections_001 = /* :: */[
                                                                                       mcgraw,
                                                                                       2,
                                                                                       /* Grey */9,
+                                                                                      /* None */0,
+                                                                                      false,
                                                                                       /* None */0
                                                                                     ],
                                                                                     /* :: */[
@@ -761,6 +865,8 @@ var route_connections_001 = /* :: */[
                                                                                         island,
                                                                                         2,
                                                                                         /* Grey */9,
+                                                                                        /* None */0,
+                                                                                        false,
                                                                                         /* None */0
                                                                                       ],
                                                                                       /* :: */[
@@ -769,6 +875,8 @@ var route_connections_001 = /* :: */[
                                                                                           bartels,
                                                                                           2,
                                                                                           /* Grey */9,
+                                                                                          /* None */0,
+                                                                                          false,
                                                                                           /* None */0
                                                                                         ],
                                                                                         /* :: */[
@@ -777,7 +885,9 @@ var route_connections_001 = /* :: */[
                                                                                             museum,
                                                                                             3,
                                                                                             /* Yellow */3,
-                                                                                            /* None */0
+                                                                                            /* None */0,
+                                                                                            true,
+                                                                                            /* Some */[/* LeftRoute */0]
                                                                                           ],
                                                                                           /* :: */[
                                                                                             /* tuple */[
@@ -785,7 +895,9 @@ var route_connections_001 = /* :: */[
                                                                                               museum,
                                                                                               3,
                                                                                               /* Pink */4,
-                                                                                              /* None */0
+                                                                                              /* None */0,
+                                                                                              true,
+                                                                                              /* Some */[/* RightRoute */1]
                                                                                             ],
                                                                                             /* :: */[
                                                                                               /* tuple */[
@@ -793,6 +905,8 @@ var route_connections_001 = /* :: */[
                                                                                                 engineering,
                                                                                                 3,
                                                                                                 /* Grey */9,
+                                                                                                /* None */0,
+                                                                                                false,
                                                                                                 /* None */0
                                                                                               ],
                                                                                               /* :: */[
@@ -801,6 +915,8 @@ var route_connections_001 = /* :: */[
                                                                                                   golf,
                                                                                                   3,
                                                                                                   /* Green */1,
+                                                                                                  /* None */0,
+                                                                                                  false,
                                                                                                   /* None */0
                                                                                                 ],
                                                                                                 /* :: */[
@@ -809,7 +925,9 @@ var route_connections_001 = /* :: */[
                                                                                                     psb,
                                                                                                     3,
                                                                                                     /* Red */0,
-                                                                                                    /* None */0
+                                                                                                    /* None */0,
+                                                                                                    true,
+                                                                                                    /* Some */[/* LeftRoute */0]
                                                                                                   ],
                                                                                                   /* :: */[
                                                                                                     /* tuple */[
@@ -817,7 +935,9 @@ var route_connections_001 = /* :: */[
                                                                                                       psb,
                                                                                                       3,
                                                                                                       /* Yellow */3,
-                                                                                                      /* None */0
+                                                                                                      /* None */0,
+                                                                                                      true,
+                                                                                                      /* Some */[/* RightRoute */1]
                                                                                                     ],
                                                                                                     /* :: */[
                                                                                                       /* tuple */[
@@ -825,6 +945,8 @@ var route_connections_001 = /* :: */[
                                                                                                         psb,
                                                                                                         3,
                                                                                                         /* White */6,
+                                                                                                        /* None */0,
+                                                                                                        false,
                                                                                                         /* None */0
                                                                                                       ],
                                                                                                       /* :: */[
@@ -833,6 +955,8 @@ var route_connections_001 = /* :: */[
                                                                                                           bridge,
                                                                                                           3,
                                                                                                           /* Blue */2,
+                                                                                                          /* None */0,
+                                                                                                          false,
                                                                                                           /* None */0
                                                                                                         ],
                                                                                                         /* :: */[
@@ -841,6 +965,8 @@ var route_connections_001 = /* :: */[
                                                                                                             eddy,
                                                                                                             3,
                                                                                                             /* Black */7,
+                                                                                                            /* None */0,
+                                                                                                            false,
                                                                                                             /* None */0
                                                                                                           ],
                                                                                                           /* :: */[
@@ -849,7 +975,9 @@ var route_connections_001 = /* :: */[
                                                                                                               maplewood,
                                                                                                               3,
                                                                                                               /* Orange */5,
-                                                                                                              /* None */0
+                                                                                                              /* None */0,
+                                                                                                              true,
+                                                                                                              /* Some */[/* LeftRoute */0]
                                                                                                             ],
                                                                                                             /* :: */[
                                                                                                               /* tuple */[
@@ -857,7 +985,9 @@ var route_connections_001 = /* :: */[
                                                                                                                 maplewood,
                                                                                                                 3,
                                                                                                                 /* Black */7,
-                                                                                                                /* None */0
+                                                                                                                /* None */0,
+                                                                                                                true,
+                                                                                                                /* Some */[/* RightRoute */1]
                                                                                                               ],
                                                                                                               /* :: */[
                                                                                                                 /* tuple */[
@@ -865,6 +995,8 @@ var route_connections_001 = /* :: */[
                                                                                                                   farm_barn,
                                                                                                                   3,
                                                                                                                   /* Grey */9,
+                                                                                                                  /* None */0,
+                                                                                                                  false,
                                                                                                                   /* None */0
                                                                                                                 ],
                                                                                                                 /* :: */[
@@ -873,6 +1005,8 @@ var route_connections_001 = /* :: */[
                                                                                                                     dairy_bar,
                                                                                                                     3,
                                                                                                                     /* Orange */5,
+                                                                                                                    /* None */0,
+                                                                                                                    false,
                                                                                                                     /* None */0
                                                                                                                   ],
                                                                                                                   /* :: */[
@@ -881,6 +1015,8 @@ var route_connections_001 = /* :: */[
                                                                                                                       undergrad,
                                                                                                                       3,
                                                                                                                       /* Pink */4,
+                                                                                                                      /* None */0,
+                                                                                                                      false,
                                                                                                                       /* None */0
                                                                                                                     ],
                                                                                                                     /* :: */[
@@ -889,6 +1025,8 @@ var route_connections_001 = /* :: */[
                                                                                                                         psb,
                                                                                                                         3,
                                                                                                                         /* Grey */9,
+                                                                                                                        /* None */0,
+                                                                                                                        false,
                                                                                                                         /* None */0
                                                                                                                       ],
                                                                                                                       /* :: */[
@@ -897,6 +1035,8 @@ var route_connections_001 = /* :: */[
                                                                                                                           vet,
                                                                                                                           3,
                                                                                                                           /* Grey */9,
+                                                                                                                          /* None */0,
+                                                                                                                          false,
                                                                                                                           /* None */0
                                                                                                                         ],
                                                                                                                         /* :: */[
@@ -905,6 +1045,8 @@ var route_connections_001 = /* :: */[
                                                                                                                             filtration,
                                                                                                                             3,
                                                                                                                             /* Blue */2,
+                                                                                                                            /* None */0,
+                                                                                                                            false,
                                                                                                                             /* None */0
                                                                                                                           ],
                                                                                                                           /* :: */[
@@ -913,6 +1055,8 @@ var route_connections_001 = /* :: */[
                                                                                                                               psb,
                                                                                                                               3,
                                                                                                                               /* Red */0,
+                                                                                                                              /* None */0,
+                                                                                                                              false,
                                                                                                                               /* None */0
                                                                                                                             ],
                                                                                                                             /* :: */[
@@ -921,6 +1065,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                 arboretum,
                                                                                                                                 3,
                                                                                                                                 /* Grey */9,
+                                                                                                                                /* None */0,
+                                                                                                                                false,
                                                                                                                                 /* None */0
                                                                                                                               ],
                                                                                                                               /* :: */[
@@ -929,6 +1075,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                   risley,
                                                                                                                                   3,
                                                                                                                                   /* Grey */9,
+                                                                                                                                  /* None */0,
+                                                                                                                                  false,
                                                                                                                                   /* None */0
                                                                                                                                 ],
                                                                                                                                 /* :: */[
@@ -937,6 +1085,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                     farm_barn,
                                                                                                                                     4,
                                                                                                                                     /* Yellow */3,
+                                                                                                                                    /* None */0,
+                                                                                                                                    false,
                                                                                                                                     /* None */0
                                                                                                                                   ],
                                                                                                                                   /* :: */[
@@ -945,6 +1095,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                       hasbrouck,
                                                                                                                                       4,
                                                                                                                                       /* Grey */9,
+                                                                                                                                      /* None */0,
+                                                                                                                                      false,
                                                                                                                                       /* None */0
                                                                                                                                     ],
                                                                                                                                     /* :: */[
@@ -953,6 +1105,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                         forest_home,
                                                                                                                                         4,
                                                                                                                                         /* Grey */9,
+                                                                                                                                        /* None */0,
+                                                                                                                                        false,
                                                                                                                                         /* None */0
                                                                                                                                       ],
                                                                                                                                       /* :: */[
@@ -961,6 +1115,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                           hasbrouck,
                                                                                                                                           4,
                                                                                                                                           /* Green */1,
+                                                                                                                                          /* None */0,
+                                                                                                                                          false,
                                                                                                                                           /* None */0
                                                                                                                                         ],
                                                                                                                                         /* :: */[
@@ -969,6 +1125,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                             noyes,
                                                                                                                                             4,
                                                                                                                                             /* Blue */2,
+                                                                                                                                            /* None */0,
+                                                                                                                                            false,
                                                                                                                                             /* None */0
                                                                                                                                           ],
                                                                                                                                           /* :: */[
@@ -977,6 +1135,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                               kennedy,
                                                                                                                                               4,
                                                                                                                                               /* Pink */4,
+                                                                                                                                              /* None */0,
+                                                                                                                                              false,
                                                                                                                                               /* None */0
                                                                                                                                             ],
                                                                                                                                             /* :: */[
@@ -985,6 +1145,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                 island,
                                                                                                                                                 4,
                                                                                                                                                 /* Red */0,
+                                                                                                                                                /* None */0,
+                                                                                                                                                false,
                                                                                                                                                 /* None */0
                                                                                                                                               ],
                                                                                                                                               /* :: */[
@@ -993,7 +1155,9 @@ var route_connections_001 = /* :: */[
                                                                                                                                                   forest_home,
                                                                                                                                                   4,
                                                                                                                                                   /* Yellow */3,
-                                                                                                                                                  /* None */0
+                                                                                                                                                  /* None */0,
+                                                                                                                                                  true,
+                                                                                                                                                  /* Some */[/* LeftRoute */0]
                                                                                                                                                 ],
                                                                                                                                                 /* :: */[
                                                                                                                                                   /* tuple */[
@@ -1001,7 +1165,9 @@ var route_connections_001 = /* :: */[
                                                                                                                                                     forest_home,
                                                                                                                                                     4,
                                                                                                                                                     /* Orange */5,
-                                                                                                                                                    /* None */0
+                                                                                                                                                    /* None */0,
+                                                                                                                                                    true,
+                                                                                                                                                    /* Some */[/* RightRoute */1]
                                                                                                                                                   ],
                                                                                                                                                   /* :: */[
                                                                                                                                                     /* tuple */[
@@ -1009,6 +1175,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                       rpcc,
                                                                                                                                                       4,
                                                                                                                                                       /* Red */0,
+                                                                                                                                                      /* None */0,
+                                                                                                                                                      false,
                                                                                                                                                       /* None */0
                                                                                                                                                     ],
                                                                                                                                                     /* :: */[
@@ -1017,6 +1185,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                         hasbrouck,
                                                                                                                                                         4,
                                                                                                                                                         /* Black */7,
+                                                                                                                                                        /* None */0,
+                                                                                                                                                        false,
                                                                                                                                                         /* None */0
                                                                                                                                                       ],
                                                                                                                                                       /* :: */[
@@ -1025,6 +1195,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                           rpcc,
                                                                                                                                                           4,
                                                                                                                                                           /* Blue */2,
+                                                                                                                                                          /* None */0,
+                                                                                                                                                          false,
                                                                                                                                                           /* None */0
                                                                                                                                                         ],
                                                                                                                                                         /* :: */[
@@ -1033,6 +1205,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                             undergrad,
                                                                                                                                                             4,
                                                                                                                                                             /* Pink */4,
+                                                                                                                                                            /* None */0,
+                                                                                                                                                            false,
                                                                                                                                                             /* None */0
                                                                                                                                                           ],
                                                                                                                                                           /* :: */[
@@ -1041,6 +1215,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                               forest_home,
                                                                                                                                                               4,
                                                                                                                                                               /* White */6,
+                                                                                                                                                              /* None */0,
+                                                                                                                                                              false,
                                                                                                                                                               /* None */0
                                                                                                                                                             ],
                                                                                                                                                             /* :: */[
@@ -1049,7 +1225,9 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                 farm_barn,
                                                                                                                                                                 4,
                                                                                                                                                                 /* Black */7,
-                                                                                                                                                                /* None */0
+                                                                                                                                                                /* None */0,
+                                                                                                                                                                true,
+                                                                                                                                                                /* Some */[/* LeftRoute */0]
                                                                                                                                                               ],
                                                                                                                                                               /* :: */[
                                                                                                                                                                 /* tuple */[
@@ -1057,7 +1235,9 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                   farm_barn,
                                                                                                                                                                   4,
                                                                                                                                                                   /* Orange */5,
-                                                                                                                                                                  /* None */0
+                                                                                                                                                                  /* None */0,
+                                                                                                                                                                  true,
+                                                                                                                                                                  /* Some */[/* RightRoute */1]
                                                                                                                                                                 ],
                                                                                                                                                                 /* :: */[
                                                                                                                                                                   /* tuple */[
@@ -1065,6 +1245,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                     vet,
                                                                                                                                                                     5,
                                                                                                                                                                     /* Red */0,
+                                                                                                                                                                    /* None */0,
+                                                                                                                                                                    false,
                                                                                                                                                                     /* None */0
                                                                                                                                                                   ],
                                                                                                                                                                   /* :: */[
@@ -1073,6 +1255,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                       plantations,
                                                                                                                                                                       5,
                                                                                                                                                                       /* White */6,
+                                                                                                                                                                      /* None */0,
+                                                                                                                                                                      false,
                                                                                                                                                                       /* None */0
                                                                                                                                                                     ],
                                                                                                                                                                     /* :: */[
@@ -1081,6 +1265,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                         creek,
                                                                                                                                                                         5,
                                                                                                                                                                         /* Yellow */3,
+                                                                                                                                                                        /* None */0,
+                                                                                                                                                                        false,
                                                                                                                                                                         /* None */0
                                                                                                                                                                       ],
                                                                                                                                                                       /* :: */[
@@ -1089,6 +1275,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                           eco_house,
                                                                                                                                                                           5,
                                                                                                                                                                           /* Green */1,
+                                                                                                                                                                          /* None */0,
+                                                                                                                                                                          false,
                                                                                                                                                                           /* None */0
                                                                                                                                                                         ],
                                                                                                                                                                         /* :: */[
@@ -1097,7 +1285,9 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                             riley_robb,
                                                                                                                                                                             5,
                                                                                                                                                                             /* Orange */5,
-                                                                                                                                                                            /* None */0
+                                                                                                                                                                            /* None */0,
+                                                                                                                                                                            true,
+                                                                                                                                                                            /* Some */[/* LeftRoute */0]
                                                                                                                                                                           ],
                                                                                                                                                                           /* :: */[
                                                                                                                                                                             /* tuple */[
@@ -1105,7 +1295,9 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                               riley_robb,
                                                                                                                                                                               5,
                                                                                                                                                                               /* White */6,
-                                                                                                                                                                              /* None */0
+                                                                                                                                                                              /* None */0,
+                                                                                                                                                                              true,
+                                                                                                                                                                              /* Some */[/* RightRoute */1]
                                                                                                                                                                             ],
                                                                                                                                                                             /* :: */[
                                                                                                                                                                               /* tuple */[
@@ -1113,6 +1305,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                 sigma_chi,
                                                                                                                                                                                 5,
                                                                                                                                                                                 /* Black */7,
+                                                                                                                                                                                /* None */0,
+                                                                                                                                                                                false,
                                                                                                                                                                                 /* None */0
                                                                                                                                                                               ],
                                                                                                                                                                               /* :: */[
@@ -1121,6 +1315,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                   eco_house,
                                                                                                                                                                                   5,
                                                                                                                                                                                   /* Green */1,
+                                                                                                                                                                                  /* None */0,
+                                                                                                                                                                                  false,
                                                                                                                                                                                   /* None */0
                                                                                                                                                                                 ],
                                                                                                                                                                                 /* :: */[
@@ -1129,6 +1325,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                     eco_house,
                                                                                                                                                                                     5,
                                                                                                                                                                                     /* Pink */4,
+                                                                                                                                                                                    /* None */0,
+                                                                                                                                                                                    false,
                                                                                                                                                                                     /* None */0
                                                                                                                                                                                   ],
                                                                                                                                                                                   /* :: */[
@@ -1137,6 +1335,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                       vet,
                                                                                                                                                                                       5,
                                                                                                                                                                                       /* Blue */2,
+                                                                                                                                                                                      /* None */0,
+                                                                                                                                                                                      false,
                                                                                                                                                                                       /* None */0
                                                                                                                                                                                     ],
                                                                                                                                                                                     /* :: */[
@@ -1145,6 +1345,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                         becker,
                                                                                                                                                                                         6,
                                                                                                                                                                                         /* Blue */2,
+                                                                                                                                                                                        /* None */0,
+                                                                                                                                                                                        false,
                                                                                                                                                                                         /* None */0
                                                                                                                                                                                       ],
                                                                                                                                                                                       /* :: */[
@@ -1153,6 +1355,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                           golf,
                                                                                                                                                                                           6,
                                                                                                                                                                                           /* Yellow */3,
+                                                                                                                                                                                          /* None */0,
+                                                                                                                                                                                          false,
                                                                                                                                                                                           /* None */0
                                                                                                                                                                                         ],
                                                                                                                                                                                         /* :: */[
@@ -1161,6 +1365,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                             forest_home,
                                                                                                                                                                                             6,
                                                                                                                                                                                             /* Black */7,
+                                                                                                                                                                                            /* None */0,
+                                                                                                                                                                                            false,
                                                                                                                                                                                             /* None */0
                                                                                                                                                                                           ],
                                                                                                                                                                                           /* :: */[
@@ -1169,6 +1375,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                               forest_home,
                                                                                                                                                                                               6,
                                                                                                                                                                                               /* White */6,
+                                                                                                                                                                                              /* None */0,
+                                                                                                                                                                                              false,
                                                                                                                                                                                               /* None */0
                                                                                                                                                                                             ],
                                                                                                                                                                                             /* :: */[
@@ -1177,6 +1385,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                                 a_lot,
                                                                                                                                                                                                 6,
                                                                                                                                                                                                 /* Green */1,
+                                                                                                                                                                                                /* None */0,
+                                                                                                                                                                                                false,
                                                                                                                                                                                                 /* None */0
                                                                                                                                                                                               ],
                                                                                                                                                                                               /* :: */[
@@ -1185,6 +1395,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                                   noyes,
                                                                                                                                                                                                   6,
                                                                                                                                                                                                   /* Orange */5,
+                                                                                                                                                                                                  /* None */0,
+                                                                                                                                                                                                  false,
                                                                                                                                                                                                   /* None */0
                                                                                                                                                                                                 ],
                                                                                                                                                                                                 /* :: */[
@@ -1193,6 +1405,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                                     arboretum,
                                                                                                                                                                                                     6,
                                                                                                                                                                                                     /* Grey */9,
+                                                                                                                                                                                                    /* None */0,
+                                                                                                                                                                                                    false,
                                                                                                                                                                                                     /* None */0
                                                                                                                                                                                                   ],
                                                                                                                                                                                                   /* :: */[
@@ -1201,6 +1415,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                                       vet,
                                                                                                                                                                                                       6,
                                                                                                                                                                                                       /* Pink */4,
+                                                                                                                                                                                                      /* None */0,
+                                                                                                                                                                                                      false,
                                                                                                                                                                                                       /* None */0
                                                                                                                                                                                                     ],
                                                                                                                                                                                                     /* :: */[
@@ -1209,6 +1425,8 @@ var route_connections_001 = /* :: */[
                                                                                                                                                                                                         dairy_bar,
                                                                                                                                                                                                         6,
                                                                                                                                                                                                         /* Red */0,
+                                                                                                                                                                                                        /* None */0,
+                                                                                                                                                                                                        false,
                                                                                                                                                                                                         /* None */0
                                                                                                                                                                                                       ],
                                                                                                                                                                                                       /* [] */0
@@ -1421,12 +1639,16 @@ function loop$1(_acc, _param) {
       var new_r_002 = match[2];
       var new_r_003 = match[3];
       var new_r_004 = match[4];
+      var new_r_005 = match[5];
+      var new_r_006 = match[6];
       var new_r = /* tuple */[
         new_r_000,
         new_r_001,
         new_r_002,
         new_r_003,
-        new_r_004
+        new_r_004,
+        new_r_005,
+        new_r_006
       ];
       _param = param[1];
       _acc = Pervasives.$at(acc, /* :: */[
@@ -1538,12 +1760,140 @@ function get_location(s, _locations) {
   };
 }
 
+function get_string(param) {
+  return param[0];
+}
+
+function get_neighbors(param) {
+  return param[3];
+}
+
+function get_route(s1, s2, _routes) {
+  while(true) {
+    var routes = _routes;
+    if (routes) {
+      var match = routes[0];
+      var y = match[1];
+      var x = match[0];
+      if (Caml_obj.caml_equal(get_location(s1, locations$1), x) && Caml_obj.caml_equal(get_location(s2, locations$1), y) || Caml_obj.caml_equal(get_location(s1, locations$1), y) && Caml_obj.caml_equal(get_location(s2, locations$1), x)) {
+        return /* tuple */[
+                x,
+                y,
+                match[2],
+                match[3],
+                match[4],
+                match[5],
+                match[6]
+              ];
+      } else {
+        _routes = routes[1];
+        continue ;
+      }
+    } else {
+      return Pervasives.failwith("impossible");
+    }
+  };
+}
+
+function distance(a, b) {
+  return Math.sqrt(Math.pow(b[1] - a[1], 2) + Math.pow(b[2] - a[2], 2));
+}
+
+function get_next_loc(_, goal, _acc, _count, visited, _param) {
+  while(true) {
+    var param = _param;
+    var count = _count;
+    var acc = _acc;
+    if (param) {
+      var t = param[1];
+      var h = param[0];
+      if (contains(h, visited)) {
+        _param = t;
+        continue ;
+      } else {
+        var e = get_location(goal, locations$1);
+        var coor = get_location(h, locations$1);
+        if (distance(coor, e) < count || count === -1) {
+          _param = t;
+          _count = distance(coor, e);
+          _acc = /* Some */[h];
+          continue ;
+        } else {
+          _param = t;
+          continue ;
+        }
+      }
+    } else {
+      return acc;
+    }
+  };
+}
+
+function get_val(param) {
+  if (param) {
+    return param[0];
+  } else {
+    throw [
+          Caml_builtin_exceptions.failure,
+          "Not_available"
+        ];
+  }
+}
+
+function get_paths(_s1, s2, _acc) {
+  while(true) {
+    var acc = _acc;
+    var s1 = _s1;
+    if (s1 === s2) {
+      return /* :: */[
+              s2,
+              acc
+            ];
+    } else {
+      var l1 = get_location(s1, locations$1);
+      var next_loc = get_val(get_next_loc(l1, s2, /* None */0, -1, acc, get_neighbors(l1)));
+      _acc = /* :: */[
+        s1,
+        acc
+      ];
+      _s1 = next_loc;
+      continue ;
+    }
+  };
+}
+
+function path_routes(rts, paths) {
+  if (paths) {
+    var t = paths[1];
+    if (t) {
+      var h2 = t[0];
+      return /* :: */[
+              get_route(paths[0], h2, rts),
+              path_routes(rts, /* :: */[
+                    h2,
+                    t[1]
+                  ])
+            ];
+    } else {
+      return /* [] */0;
+    }
+  } else {
+    return /* [] */0;
+  }
+}
+
 exports.route_score = route_score;
 exports.is_taken = is_taken;
 exports.get_length = get_length;
 exports.get_color = get_color;
 exports.routes = routes;
+exports.name = name;
 exports.locations = locations$1;
 exports.completed = completed;
 exports.get_location = get_location;
+exports.get_next_loc = get_next_loc;
+exports.get_paths = get_paths;
+exports.path_routes = path_routes;
+exports.get_string = get_string;
+exports.get_neighbors = get_neighbors;
 /* locations Not a pure module */

@@ -340,218 +340,6 @@ var train_deck = /* :: */[
   ]
 ];
 
-var dest_ticket_deck = /* :: */[
-  /* record */[
-    /* loc1 */"Eddy Gate",
-    /* loc2 */"Golf Center",
-    /* points */22
-  ],
-  /* :: */[
-    /* record */[
-      /* loc1 */"Sigma Chi",
-      /* loc2 */"Veterinary School",
-      /* points */21
-    ],
-    /* :: */[
-      /* record */[
-        /* loc1 */"A LOT",
-        /* loc2 */"Blair Farm Barn",
-        /* points */20
-      ],
-      /* :: */[
-        /* record */[
-          /* loc1 */"Ecology House",
-          /* loc2 */"Newman Arboretum",
-          /* points */20
-        ],
-        /* :: */[
-          /* record */[
-            /* loc1 */"House Becker",
-            /* loc2 */"Filtration Plant",
-            /* points */17
-          ],
-          /* :: */[
-            /* record */[
-              /* loc1 */"Noyes Community Center",
-              /* loc2 */"Forest Home",
-              /* points */17
-            ],
-            /* :: */[
-              /* record */[
-                /* loc1 */"Hasbrouck Community Center",
-                /* loc2 */"Engineering Quad",
-                /* points */16
-              ],
-              /* :: */[
-                /* record */[
-                  /* loc1 */"Appel Commons",
-                  /* loc2 */"Schoellkopf Field",
-                  /* points */13
-                ],
-                /* :: */[
-                  /* record */[
-                    /* loc1 */"Risley",
-                    /* loc2 */"The Commons",
-                    /* points */13
-                  ],
-                  /* :: */[
-                    /* record */[
-                      /* loc1 */"Dairy Bar",
-                      /* loc2 */"Johnson Museum",
-                      /* points */13
-                    ],
-                    /* :: */[
-                      /* record */[
-                        /* loc1 */"Stewart Ave Bridge",
-                        /* loc2 */"Riley-Robb Hall",
-                        /* points */12
-                      ],
-                      /* :: */[
-                        /* record */[
-                          /* loc1 */"RPCC",
-                          /* loc2 */"Barton Hall",
-                          /* points */12
-                        ],
-                        /* :: */[
-                          /* record */[
-                            /* loc1 */"Physical Sciences Building",
-                            /* loc2 */"Newman Arboretum",
-                            /* points */12
-                          ],
-                          /* :: */[
-                            /* record */[
-                              /* loc1 */"Bartels Hall",
-                              /* loc2 */"Undergraduate Admissions",
-                              /* points */12
-                            ],
-                            /* :: */[
-                              /* record */[
-                                /* loc1 */"Beebe Lake",
-                                /* loc2 */"Cascadilla Creek",
-                                /* points */11
-                              ],
-                              /* :: */[
-                                /* record */[
-                                  /* loc1 */"Werly Island",
-                                  /* loc2 */"Engineering Quad",
-                                  /* points */11
-                                ],
-                                /* :: */[
-                                  /* record */[
-                                    /* loc1 */"Maplewood Park",
-                                    /* loc2 */"Mann Library",
-                                    /* points */11
-                                  ],
-                                  /* :: */[
-                                    /* record */[
-                                      /* loc1 */"McGraw Tower",
-                                      /* loc2 */"Plantations",
-                                      /* points */11
-                                    ],
-                                    /* :: */[
-                                      /* record */[
-                                        /* loc1 */"CKB Quad",
-                                        /* loc2 */"Bartels Hall",
-                                        /* points */10
-                                      ],
-                                      /* :: */[
-                                        /* record */[
-                                          /* loc1 */"Eddy Gate",
-                                          /* loc2 */"Blair Farm Barn",
-                                          /* points */10
-                                        ],
-                                        /* :: */[
-                                          /* record */[
-                                            /* loc1 */"House Becker",
-                                            /* loc2 */"Werly Island",
-                                            /* points */9
-                                          ],
-                                          /* :: */[
-                                            /* record */[
-                                              /* loc1 */"Maplewood Park",
-                                              /* loc2 */"Dairy Bar",
-                                              /* points */9
-                                            ],
-                                            /* :: */[
-                                              /* record */[
-                                                /* loc1 */"Kennedy Hall",
-                                                /* loc2 */"Appel Commons",
-                                                /* points */9
-                                              ],
-                                              /* :: */[
-                                                /* record */[
-                                                  /* loc1 */"Mann Library",
-                                                  /* loc2 */"RPCC",
-                                                  /* points */9
-                                                ],
-                                                /* :: */[
-                                                  /* record */[
-                                                    /* loc1 */"Ecology House",
-                                                    /* loc2 */"Forest Home",
-                                                    /* points */8
-                                                  ],
-                                                  /* :: */[
-                                                    /* record */[
-                                                      /* loc1 */"McGraw Tower",
-                                                      /* loc2 */"Undergraduate Admissions",
-                                                      /* points */8
-                                                    ],
-                                                    /* :: */[
-                                                      /* record */[
-                                                        /* loc1 */"Risley",
-                                                        /* loc2 */"Noyes Community Center",
-                                                        /* points */7
-                                                      ],
-                                                      /* :: */[
-                                                        /* record */[
-                                                          /* loc1 */"Sigma Chi",
-                                                          /* loc2 */"CKB Quad",
-                                                          /* points */6
-                                                        ],
-                                                        /* :: */[
-                                                          /* record */[
-                                                            /* loc1 */"Veterinary School",
-                                                            /* loc2 */"Mann Library",
-                                                            /* points */5
-                                                          ],
-                                                          /* :: */[
-                                                            /* record */[
-                                                              /* loc1 */"Plantations",
-                                                              /* loc2 */"Bartels Hall",
-                                                              /* points */4
-                                                            ],
-                                                            /* [] */0
-                                                          ]
-                                                        ]
-                                                      ]
-                                                    ]
-                                                  ]
-                                                ]
-                                              ]
-                                            ]
-                                          ]
-                                        ]
-                                      ]
-                                    ]
-                                  ]
-                                ]
-                              ]
-                            ]
-                          ]
-                        ]
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ]
-          ]
-        ]
-      ]
-    ]
-  ]
-];
-
 function tfst(param) {
   return param[0];
 }
@@ -853,7 +641,217 @@ function draw_card$1(_t, _tr) {
 var discard = Pervasives.$at;
 
 function init_deck$1() {
-  return shuffle$1(dest_ticket_deck, /* [] */0)[0];
+  return shuffle$1(/* :: */[
+                /* record */[
+                  /* loc1 */"Eddy Gate",
+                  /* loc2 */"Golf Center",
+                  /* points */22
+                ],
+                /* :: */[
+                  /* record */[
+                    /* loc1 */"Sigma Chi",
+                    /* loc2 */"Veterinary School",
+                    /* points */21
+                  ],
+                  /* :: */[
+                    /* record */[
+                      /* loc1 */"A LOT",
+                      /* loc2 */"Blair Farm Barn",
+                      /* points */20
+                    ],
+                    /* :: */[
+                      /* record */[
+                        /* loc1 */"Ecology House",
+                        /* loc2 */"Newman Arboretum",
+                        /* points */20
+                      ],
+                      /* :: */[
+                        /* record */[
+                          /* loc1 */"House Becker",
+                          /* loc2 */"Filtration Plant",
+                          /* points */17
+                        ],
+                        /* :: */[
+                          /* record */[
+                            /* loc1 */"Noyes Community Center",
+                            /* loc2 */"Forest Home",
+                            /* points */17
+                          ],
+                          /* :: */[
+                            /* record */[
+                              /* loc1 */"Engineering Quad",
+                              /* loc2 */"Hasbrouck Community Center",
+                              /* points */16
+                            ],
+                            /* :: */[
+                              /* record */[
+                                /* loc1 */"Appel Commons",
+                                /* loc2 */"Schoellkopf Field",
+                                /* points */13
+                              ],
+                              /* :: */[
+                                /* record */[
+                                  /* loc1 */"The Commons",
+                                  /* loc2 */"Risley",
+                                  /* points */13
+                                ],
+                                /* :: */[
+                                  /* record */[
+                                    /* loc1 */"Dairy Bar",
+                                    /* loc2 */"Johnson Museum",
+                                    /* points */13
+                                  ],
+                                  /* :: */[
+                                    /* record */[
+                                      /* loc1 */"Stewart Ave Bridge",
+                                      /* loc2 */"Riley-Robb Hall",
+                                      /* points */12
+                                    ],
+                                    /* :: */[
+                                      /* record */[
+                                        /* loc1 */"RPCC",
+                                        /* loc2 */"Barton Hall",
+                                        /* points */12
+                                      ],
+                                      /* :: */[
+                                        /* record */[
+                                          /* loc1 */"Physical Sciences Building",
+                                          /* loc2 */"Newman Arboretum",
+                                          /* points */12
+                                        ],
+                                        /* :: */[
+                                          /* record */[
+                                            /* loc1 */"Bartels Hall",
+                                            /* loc2 */"Undergraduate Admissions",
+                                            /* points */12
+                                          ],
+                                          /* :: */[
+                                            /* record */[
+                                              /* loc1 */"Beebe Lake",
+                                              /* loc2 */"Cascadilla Creek",
+                                              /* points */11
+                                            ],
+                                            /* :: */[
+                                              /* record */[
+                                                /* loc1 */"Werly Island",
+                                                /* loc2 */"Engineering Quad",
+                                                /* points */11
+                                              ],
+                                              /* :: */[
+                                                /* record */[
+                                                  /* loc1 */"Maplewood Park",
+                                                  /* loc2 */"Mann Library",
+                                                  /* points */11
+                                                ],
+                                                /* :: */[
+                                                  /* record */[
+                                                    /* loc1 */"McGraw Tower",
+                                                    /* loc2 */"Plantations",
+                                                    /* points */11
+                                                  ],
+                                                  /* :: */[
+                                                    /* record */[
+                                                      /* loc1 */"CKB Quad",
+                                                      /* loc2 */"Bartels Hall",
+                                                      /* points */10
+                                                    ],
+                                                    /* :: */[
+                                                      /* record */[
+                                                        /* loc1 */"Eddy Gate",
+                                                        /* loc2 */"Blair Farm Barn",
+                                                        /* points */10
+                                                      ],
+                                                      /* :: */[
+                                                        /* record */[
+                                                          /* loc1 */"House Becker",
+                                                          /* loc2 */"Werly Island",
+                                                          /* points */9
+                                                        ],
+                                                        /* :: */[
+                                                          /* record */[
+                                                            /* loc1 */"Maplewood Park",
+                                                            /* loc2 */"Dairy Bar",
+                                                            /* points */9
+                                                          ],
+                                                          /* :: */[
+                                                            /* record */[
+                                                              /* loc1 */"Kennedy Hall",
+                                                              /* loc2 */"Appel Commons",
+                                                              /* points */9
+                                                            ],
+                                                            /* :: */[
+                                                              /* record */[
+                                                                /* loc1 */"Mann Library",
+                                                                /* loc2 */"RPCC",
+                                                                /* points */9
+                                                              ],
+                                                              /* :: */[
+                                                                /* record */[
+                                                                  /* loc1 */"Ecology House",
+                                                                  /* loc2 */"Forest Home",
+                                                                  /* points */8
+                                                                ],
+                                                                /* :: */[
+                                                                  /* record */[
+                                                                    /* loc1 */"McGraw Tower",
+                                                                    /* loc2 */"Undergraduate Admissions",
+                                                                    /* points */8
+                                                                  ],
+                                                                  /* :: */[
+                                                                    /* record */[
+                                                                      /* loc1 */"Risley",
+                                                                      /* loc2 */"Noyes Community Center",
+                                                                      /* points */7
+                                                                    ],
+                                                                    /* :: */[
+                                                                      /* record */[
+                                                                        /* loc1 */"Sigma Chi",
+                                                                        /* loc2 */"CKB Quad",
+                                                                        /* points */6
+                                                                      ],
+                                                                      /* :: */[
+                                                                        /* record */[
+                                                                          /* loc1 */"Veterinary School",
+                                                                          /* loc2 */"Mann Library",
+                                                                          /* points */5
+                                                                        ],
+                                                                        /* :: */[
+                                                                          /* record */[
+                                                                            /* loc1 */"Plantations",
+                                                                            /* loc2 */"Bartels Hall",
+                                                                            /* points */4
+                                                                          ],
+                                                                          /* [] */0
+                                                                        ]
+                                                                      ]
+                                                                    ]
+                                                                  ]
+                                                                ]
+                                                              ]
+                                                            ]
+                                                          ]
+                                                        ]
+                                                      ]
+                                                    ]
+                                                  ]
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ], /* [] */0)[0];
 }
 
 var TrainDeck = [
@@ -875,8 +873,6 @@ var DestinationDeck = [
   draw_card$1
 ];
 
-exports.train_deck = train_deck;
-exports.dest_ticket_deck = dest_ticket_deck;
 exports.TrainDeck = TrainDeck;
 exports.DestinationDeck = DestinationDeck;
 /* No side effect */
