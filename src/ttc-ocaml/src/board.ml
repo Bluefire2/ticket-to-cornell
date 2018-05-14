@@ -267,7 +267,7 @@ let rec check_neighbors s = function
   | [] -> false
   | h::t -> if s=h then true else check_neighbors s t
 
-  let rec get_next_loc l1 goal acc count visited = function
+let rec get_next_loc l1 goal acc count visited = function
   | [] -> acc
   | h::t -> if contains h visited then get_next_loc l1 goal acc count visited t else
     let e = (get_location goal locations) in
@@ -276,12 +276,20 @@ let rec check_neighbors s = function
     get_next_loc l1 goal acc count visited t
 
 
-  let get_val = function
-    | None -> ""
+let get_val = function
+    | None ->  raise (Failure "Not_available")
     | Some x -> x
 
-  let rec get_paths s1 s2 acc =
+let rec get_paths s1 s2 acc =
     if s1 = s2 then (s2::acc) else
     let l1 = get_location s1 locations in
     let next_loc = get_val (get_next_loc l1 s2 None (-1.) acc (get_neighbors l1) ) in
     get_paths next_loc s2 (s1::acc)
+
+let rec path_routes rts paths = match paths with
+  | [] -> []
+  | h1::h2::t -> (get_route h1 h2 rts)::(path_routes rts (h2::t))
+  | _::t -> []
+
+
+

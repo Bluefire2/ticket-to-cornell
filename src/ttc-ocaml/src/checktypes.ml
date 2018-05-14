@@ -106,7 +106,7 @@ module type PLAYER = sig
   val draw_train_card : player -> Components.TrainDeck.card  -> player
   val place_train : player -> Board.route -> player
   val set_last_turn : player -> player
-  val longest_route : player -> int 
+  val longest_route : player -> int
 end
 
 module type BOARD = sig
@@ -121,6 +121,10 @@ module type BOARD = sig
   val get_location : string -> location list -> location
   val get_next_loc : location -> string -> string option -> float -> string list -> string list -> string option
   val get_paths : string -> string -> string list -> string list
+  val path_routes : route list -> string list -> route list
+  val get_string : location -> string
+  val get_neighbors : location -> string list
+
 end
 
 module type AI = sig

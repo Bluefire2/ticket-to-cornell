@@ -32,10 +32,26 @@ val name : location -> string
 (* [locations] is a list of all of the locations on the board. *)
 val locations: location list
 
+(* [completed] returns whether or not there is a path between [loc1] and [loc2].
+ * Requires: a list of routes that accounts for all routes a player has completed. *)
 val completed : string -> string -> route list -> route list -> bool
 
 val get_location : string -> location list -> location
 
+(* [get_nexT_loc] returns the next location name that should be traveled to from a starting location
+ * to an ending location based on the shortest distance. *)
 val get_next_loc : location -> string -> string option -> float -> string list -> string list -> string option
 
+(* [get_paths] returns a list of locations names that lead from the shortest distance from
+ * [s1] to [s2]. *)
 val get_paths : string -> string -> string list -> string list
+
+(* [path_routes] returns a list of routes leading from a path list.
+ * Requires: a valid string list as determined from [get_paths]. *)
+val path_routes : route list -> string list -> route list
+
+(* [get_string] returns the location as a string.*)
+val get_string : location -> string
+
+(* [get_neighbors] returns all of the adjacent location names to a given location. *)
+val get_neighbors : location -> string list
