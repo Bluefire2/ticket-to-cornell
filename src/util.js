@@ -163,3 +163,17 @@ export const destinationToObj = destination => {
         points: destination[2]
     }
 };
+
+/*
+    This takes input from the user by means of a simple browser prompt. The input must be categorical, i.e. in a set of
+    values. The function that checks for equality can be set by the caller but defaults to ===.
+ */
+export const getCategoryInput = (promptText, values, equal = (a, b) => a === b, error = false) => {
+    const input = prompt(promptText);
+    if(values.some(elem => equal(elem, input))) {
+        return input;
+    } else {
+        const newPromptText = error ? 'Invalid input value. ' + promptText : promptText;
+        return getCategoryInput(newPromptText, values, equal, true);
+    }
+};
