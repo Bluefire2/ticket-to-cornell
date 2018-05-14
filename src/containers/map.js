@@ -65,8 +65,8 @@ const routeToRectangleArray = (route, index) => {
         if(doubleRoute) {
             // if it's a double route we need to transform left or right
             const sign = leftOrRight === 0 ? 1 : -1,
-                transform = RECTANGLE_HEIGHT / 2 + (RECTANGLE_HEIGHT / RECTANGLE_HEIGHT_TO_DOUBLE_ROUTE_SPACING);
-            const [xTransform, yTransform] = [transform * Math.sin(theta), -transform * Math.cos(theta)].map(elem => elem * sign);
+                transformDistance = RECTANGLE_HEIGHT / 2 + (RECTANGLE_HEIGHT / RECTANGLE_HEIGHT_TO_DOUBLE_ROUTE_SPACING);
+            const [xTransform, yTransform] = [transformDistance * Math.sin(theta), -transformDistance * Math.cos(theta)].map(elem => elem * sign);
 
             xRotated += xTransform;
             yRotated += yTransform;
