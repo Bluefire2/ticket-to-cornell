@@ -62,3 +62,5 @@ val place_train : player -> Board.route -> player
 
 (* [set_last_turn p] is [p] but with the field last_turn as true. *)
 val set_last_turn : player -> player
+
+val longest_route : player -> int
