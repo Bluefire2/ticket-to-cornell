@@ -43,16 +43,26 @@ let draw_action st =
    * take wild if 1 away from 5 or 6 route needed. *)
    failwith "Unimplemented"
 
-let rec best_paths taken  =  function
-  | [] -> []
-  | {loc1 = x; loc2 = y; points = z}::t -> (get_paths x y [])@(best_paths taken t)
+let rec completed_dtickets st dtickets =
+  match dtickets with
+  | [] -> true
+  | {loc1 = x; loc2 = y; points = z}::t -> completed x y st.routes [] && completed_dtickets st t
 
-let check_routes lst p st = match lst with
+let rec incomplete_dticket st dtickets acc =
+  match dtickets with
+  | [] -> acc
+  | {loc1 = x; loc2 = y; points = z}::t -> if not (completed x y st.routes [])
+                                           then incomplete_dticket st t (({loc1 = x; loc2 = y; points = z})::acc)
+                                           else incomplete_dticket st t acc
+
+
+let rec best_paths =  function
   | [] -> []
+  | {loc1 = x; loc2 = y; points = z}::t -> (get_paths x y [])::(best_paths t)
 
 let rec best_routes st = function
   | [] -> []
-  | h::t -> (path_routes st.routes h)@(best_routes st t)
+  | h::t -> (path_routes st.routes h)::(best_routes st t)
 
 let other_player p = function
   | (_,_,_,_,None) -> false
@@ -72,6 +82,27 @@ let get_val = function
     | None -> raise (Failure "Not_available")
     | Some x -> x
 
+let rec extract_hand_colors c = function
+  | [] -> 0
+  | (c',num)::t -> if c = c' then num else extract_hand_colors c t
+
+let rec can_build goal_routes st p =
+  match goal_routes with
+  | [] -> []
+  | h::t -> ( match h with
+      | (_,_,l,c,o) -> if o = None && (extract_hand_colors c p.train_cards = l) then (h::(can_build t st p))
+                       else can_build t st p )
+
+let rec priorize_build count acc = function
+  | [] -> acc
+  | h::t -> ( match h with
+    | (_,_,l,_,_) -> if (l > count) then priorize_build l (h::acc) t else priorize_build count acc t)
+
+let rec desired_colors goal_routes p acc =
+  match goal_routes with
+  | [] -> acc
+  | (_,_,l,c,o)::t -> if (o = None && (l - (extract_hand_colors c p.train_cards) > 0)) then desired_colors t p (c::acc)
+  else desired_colors t p acc
 
 let rec check_routes p st (rts : route list) acc =
   match rts with
@@ -86,14 +117,28 @@ let rec check_routes p st (rts : route list) acc =
               | Failure _ -> rts )
               else check_routes p st t (rt::acc)
 
+let rec check_routes_list p st rtss acc =
+  match rtss with
+  | [] -> acc
+  | rts::t -> (check_routes_list p st t (check_routes p st rts []::acc))
+
 
 let ai_move st =
-  (* let cpu = current_player st in
-  if completed cpu.destination_tickets && cpu.trains_remaining > 5 then
+  let cpu = current_player st in
+  if completed_dtickets st cpu.destination_tickets && cpu.trains_remaining > 5 then
   let ddraw = DestinationDeck.draw_card st.destination_deck st.destination_trash in
-  dest_ticket_action (fst ddraw) {st with (*updates*)}
+  dest_ticket_action (fst ddraw) {st with
+                                  destination_deck = (snd ddraw);
+                                  choose_destinations = (fst ddraw)}
   else
-  let goal_routes = best_routes st.routes (best_paths cpu.destination_tickets) in
-  f
-  (* check routes needed for completion *) *)
+  let goal_routes = best_routes st (best_paths cpu.destination_tickets) in
+  let routes = check_routes_list cpu st (goal_routes) [] in
+  let goal_routes = List.flatten routes in
+  let build_options = can_build goal_routes st cpu in
+  if List.length (build_options) > 0 then place_action build_options st cpu
+  else
+  draw_action
+
+
+  (* check routes needed for completion *)
   failwith "nada"
