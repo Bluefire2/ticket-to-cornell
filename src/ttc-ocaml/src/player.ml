@@ -129,7 +129,7 @@ let rec length acc = function
 let longest_route p =
   let rec loop longest locations paths = function
     | [] -> longest
-    | (l1, l2, _, _, _)::t ->
+    | (l1, l2, _, _, _, _, _)::t ->
       let n1 = Board.name l1 in
       let n2 = Board.name l2 in
       let (locations, paths) = calculate_paths n1 n2 locations paths in
