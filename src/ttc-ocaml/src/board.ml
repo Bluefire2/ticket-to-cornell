@@ -12,7 +12,6 @@ let rec contains x = function
   | [] -> false
   | h::t -> if h=x then true else contains x t
 
-
 let route_score r =
   match r with
   | (_,_,1,_,_) -> 1
@@ -286,6 +285,3 @@ let rec get_paths s1 s2 acc =
     let l1 = get_location s1 locations in
     let next_loc = get_val (get_next_loc l1 s2 None (-1.) acc (get_neighbors l1) ) in
     get_paths next_loc s2 (s1::acc)
-
-
-

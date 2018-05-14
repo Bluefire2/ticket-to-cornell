@@ -517,9 +517,41 @@ let st4 = { player_index = 0;
             taking_routes = false;
             error = "";
             turn_ended = false;
-            last_round = false }
+            last_round = false;
+            winner = None }
+let p_end =
+  {
+    color= PRed;
+    destination_tickets = [];
+    train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
+                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
+    score = 18;
+    routes = [];
+    trains_remaining = 2;
+    first_turn = false;
+    last_turn = false;
+  }
+let p_end2 = {p_end with score = 15}
+let st_end = { player_index = 0;
+               players = [p_end; p_end2];
+               routes = Board.routes;
+               destination_deck = DestinationDeck.init_deck ();
+               destination_trash = DestinationDeck.init_trash;
+               choose_destinations = [];
+               train_deck = TrainDeck.init_deck ();
+               facing_up_trains = TrainDeck.init_faceup ();
+               train_trash = TrainDeck.init_trash;
+               taking_routes = false;
+               error = "";
+               turn_ended = true;
+               last_round = false;
+               winner = None }
+let st_end_over = st_end |> next_player |> draw_card_pile |> next_player
+                  |> draw_card_pile |> next_player
 let r = List.nth (Board.routes) 21
 let r' = match r with | (s1, s2, n, clr', _) -> (s1, s2, n, clr', Some PYellow)
+let r_select = select_route st4 r None
+let r'' = List.nth (r_select |> State.routes) 21
 
 let state_tests =
 [
@@ -548,6 +580,8 @@ let state_tests =
   "state16" >:: (fun _ -> assert_equal 2 (diff_cards
                 (st3'' |> current_player |> train_cards)
                 (st3'' |> draw_card_pile |> current_player |> train_cards)));
+
+  (* select route *)
   "state17" >:: (fun _ -> assert_equal ~-2 (diff_cards
                 (st4 |> current_player |> train_cards)
                 (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> train_cards)));
@@ -556,7 +590,21 @@ let state_tests =
                (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> routes)));
   "state19" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None) None |> current_player |> score));
   "state20" >:: (fun _ -> assert_equal r'
-                (List.nth (select_route st4 r None |> State.routes) 21));
+                    (List.nth (r_select |> State.routes) 21));
+  "state21" >:: (fun _ -> assert_equal "Route already taken."
+                    ((select_route (r_select |> next_player) r'' None) |> message));
+
+  (* end game *)
+  "state22" >:: (fun _ -> assert_equal true (st_end |> next_player |> last_round));
+  "state23" >:: (fun _ -> assert_equal "" (st_end
+                                             |> next_player
+                                             |> draw_card_pile
+                                             |> next_player
+                                             |> message));
+  "state24" >:: (fun _ -> assert_equal "Game has ended." (st_end_over
+                                                          |> message));
+  "state25" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over |> players) 0))
+                    (st_end_over |> winner));
 ]
 
 let suite =
