@@ -69,7 +69,7 @@ let longest_route_player st =
     | p::t ->
       let p_best = List.nth (players st) best in
       if (Player.longest_route p) > (Player.longest_route p_best)
-      then players_loop (best+1) (i+1) t
+      then players_loop i (i+1) t
       else players_loop best (i+1) t ) in
   players_loop 0 0 (players st)
 
@@ -203,7 +203,7 @@ let take_route st =
   let (tickets, deck') = DestinationDeck.draw_card deck tr in
   { st with destination_deck = deck';
             choose_destinations = tickets;
-            taking_routes = false;
+            taking_routes = true;
             error = "" } )
 
 let setup_state st =
@@ -219,6 +219,7 @@ let setup_state st =
 let decided_routes st indexes =
   if (turn_ended st) then turn_ended_error st
   else (
+    if (st.taking_routes) then (
     let p = current_player st in
     let required_tickets = if first_turn p then 2 else 1 in
     let tickets_chosen = List.length indexes in
@@ -239,6 +240,7 @@ let decided_routes st indexes =
           error = "Player only chose " ^ (string_of_int tickets_chosen)
                   ^ " tickets, must take at least "
                   ^ (string_of_int required_tickets) ^ "."} )
+    else {st with error = "Must take destination tickets first."} )
 
 (* [update_routes rts old new] is [rts] but with the [old] route replaced by
  * the [new] route. *)

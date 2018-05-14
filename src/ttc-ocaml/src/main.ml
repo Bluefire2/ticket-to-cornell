@@ -89,7 +89,7 @@ let main () =
   | exception End_of_file -> ()
   | s ->
     try (let num = int_of_string s in
-         let () = assert ((2 <= num) && (2<=5)) in
+         let () = assert ((2 <= num) && (num<=5)) in
          play num)
     with
     | _ -> ANSITerminal.(print_string [blue] "\nMust be number between 2 and 5.\n")
