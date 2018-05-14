@@ -89,27 +89,53 @@ export const objToState = obj => {
 export const trainColorFromIndex = i => {
     switch(i) {
         case 0:
-            return 'red';
+            return '#f43434'; // red
         case 1:
-            return 'green';
+            return '#2e9030'; // green
         case 2:
-            return 'blue';
+            return '#3e7aab'; // blue
         case 3:
-            return 'yellow';
+            return '#e5d31e'; // yellow
         case 4:
-            return 'pink';
+            return '#f66f98'; // pink
         case 5:
-            return 'orange';
+            return '#f6882c'; // orange
         case 6:
             return 'white';
         case 7:
             return 'black';
         case 8:
-            // TODO: figure out a colour to use for Wild
             return 'black'; // Wild
         case 9:
         default:
             return 'grey';
+    }
+};
+
+// Convert BuckleScript colour indices to actual colours
+export const trainColorCardFromIndex = i => {
+    switch(i) {
+        case 0:
+            return 'linear-gradient(#f43434, #f43434) 1'; // red
+        case 1:
+            return 'linear-gradient(#2e9030, #2e9030) 1'; // green
+        case 2:
+            return 'linear-gradient(#3e7aab, #3e7aab) 1'; // blue
+        case 3:
+            return 'linear-gradient(#e5d31e, #e5d31e) 1'; // yellow
+        case 4:
+            return 'linear-gradient(#f66f98, #f66f98) 1'; // pink
+        case 5:
+            return 'linear-gradient(#f6882c, #f6882c) 1'; // orange
+        case 6:
+            return 'linear-gradient(white, white) 1';
+        case 7:
+            return 'linear-gradient(black, black) 1';
+        case 8:
+            return 'linear-gradient(#00C0FF 0%, #FFCF00 49%, #FC4F4F 100%) 1'; // Wild
+        case 9:
+        default:
+            return 'linear-gradient(grey, grey) 1';
     }
 };
 
@@ -135,5 +161,19 @@ export const destinationToObj = destination => {
         from: destination[0],
         to: destination[1],
         points: destination[2]
+    }
+};
+
+/*
+    This takes input from the user by means of a simple browser prompt. The input must be categorical, i.e. in a set of
+    values. The function that checks for equality can be set by the caller but defaults to ===.
+ */
+export const getCategoryInput = (promptText, values, equal = (a, b) => a === b, error = false) => {
+    const input = prompt(promptText);
+    if(values.some(elem => equal(elem, input))) {
+        return input;
+    } else {
+        const newPromptText = error ? 'Invalid input value. ' + promptText : promptText;
+        return getCategoryInput(newPromptText, values, equal, true);
     }
 };

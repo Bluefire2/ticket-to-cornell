@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import {trainColorFromIndex} from "../util";
+import {trainColorCardFromIndex} from "../util";
 
 export default ({color, amount}) => {
-    const actualColor = trainColorFromIndex(color),
+    const actualColor = trainColorCardFromIndex(color),
         trainCardAmountStyle = amount === 0 ? {
             color: 'red'
         } : {};
     return (
-        <div className="train-card" style={{borderColor: actualColor}}>
+        <div className="train-card" style={{borderImage: actualColor}}>
             <div className="train-card-amount" style={trainCardAmountStyle}>{amount}</div>
         </div>
     );
