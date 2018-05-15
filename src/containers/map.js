@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {withFauxDOM} from 'react-faux-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import * as d3 from 'd3';
@@ -113,7 +112,7 @@ class Map extends Component {
             .style('stroke', d => {
                 return playerColorFromIndex(d.takenBy)
             })
-            .attr('class', 'route-path-rect clickable')
+            .attr('class', d => `route-path-rect clickable ${d.takenBy > -1 ? 'route-path-rect-taken' : ''}`)
             .attr('route', d => `${d.routeID}`)
             .style('fill', d => d.trainColor)
             .attr('x', d => d.x)
@@ -191,4 +190,4 @@ const mapDispatchToProps = dispatch => {
     }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withFauxDOM(Map));
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

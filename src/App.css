@@ -46,6 +46,12 @@
     stroke-dasharray: 5, 2;
 }
 
+.route-path-rect-taken {
+    background-size: cover;
+    background-image: url('./images/bus-profile.png'); /* TODO: fix this (SVG rects can't use this property) */
+    stroke-dasharray: 0;
+}
+
 .train-card {
     background-image: url('./images/tcat_card.png');
     background-size: cover;
