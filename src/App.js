@@ -55,12 +55,8 @@ class App extends Component {
                 <div id="bottom-pane">
                     <Hands/>
                 </div>
-                {this.props.error.length > 0 &&
-                <ErrorMsg text={this.props.error}/>
-                }
-                {this.props.success.length > 0 &&
-                <SuccessMsg text={this.props.success}/>
-                }
+                {this.props.error.length > 0 && <ErrorMsg>{this.props.error}</ErrorMsg>}
+                {this.props.success.length > 0 && <SuccessMsg>{this.props.success}</SuccessMsg>}
             </div>
         );
     }
