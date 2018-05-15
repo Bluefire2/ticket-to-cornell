@@ -134,7 +134,6 @@ module type BOARD = sig
   val path_routes : route list -> string list -> route list
   val get_string : location -> string
   val get_neighbors : location -> string list
-
 end
 
 module type AI = sig
