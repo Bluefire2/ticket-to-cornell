@@ -16,7 +16,8 @@ type state = { player_index : int;
                turn_ended : bool;
                last_round : bool;
                winner: player option;
-               cards_grabbed : int}
+               cards_grabbed : int;
+               success : string }
 
 let init_state n bots =
   let init = { player_index = 0;
@@ -33,14 +34,16 @@ let init_state n bots =
                turn_ended = false;
                last_round = false;
                winner = None;
-               cards_grabbed = 0 } in
+               cards_grabbed = 0;
+               success = "" } in
   if ((n+bots) < 2 || (n+bots) > 5) then init
   else
     let players = init_players n false in
     let bots = init_players bots true in
     {init with players = (players @ bots);
                routes = Board.routes;
-               error = "" }
+               error = "";
+               success = ""}
 
 let current_player st =
   List.nth st.players st.player_index
@@ -53,7 +56,9 @@ let destination_items st = (st.destination_deck, st.destination_trash)
 
 let train_items st = (st.train_deck, st.facing_up_trains, st.train_trash)
 
-let message st = st.error
+let error st = st.error
+
+let success st = st.success
 
 let turn_ended st = st.turn_ended
 
@@ -133,20 +138,31 @@ let calculate_winner st =
 let end_game st =
   let (st', winner) = calculate_winner st in
   {st' with error = "Game has ended.";
-           winner =  winner }
+            winner =  winner;
+            success = ""}
 
 (* [turn_ended_error st] is [st] but with a turn ended error message. *)
 let turn_ended_error st =
-  { st with error = "Turn has already ended for the current player." }
+  { st with error = "Turn has already ended for the current player.";
+            success = ""}
 
 (* [first_turn_error st] is [st] but with an error message for when a player
  * tries to do something other than collect destination tickets in their first
  * turn. *)
 let first_turn_error st =
-  { st with error = "Can't call this function in the first turn, must choose destination tickets first. "}
+  { st with error = "Can't call this function in the first turn, must choose destination tickets first. ";
+            success = ""}
 
 let grabbing_cards_error st =
-  { st with error = "You still need to grab another card from the pile or facing up cards."}
+  { st with error = "You still need to grab another card from the pile or facing up cards.";
+            success = ""}
+
+let stringify_clr = function
+  | PBlue -> "blue"
+  | PRed -> "red"
+  | PYellow -> "yellow"
+  | PGreen -> "green"
+  | PBlack -> "black"
 
 let next_player st =
   if (st.cards_grabbed = 1) then grabbing_cards_error st
@@ -155,10 +171,12 @@ let next_player st =
     if (game_ended st) then end_game st
     else (
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
+      let p_clr = ((List.nth st.players next_player) |> Player.color |> stringify_clr) in
       let st' = {st with player_index = next_player;
                          turn_ended = false;
                          error = "";
-                         cards_grabbed = 0} in
+                         cards_grabbed = 0;
+                         success = "Now " ^ p_clr ^ "'s turn."} in
       (* let st' =
         if (is_bot (current_player st')) then (Ai.ai_move st')
         else st' in *)
@@ -169,7 +187,8 @@ let next_player st =
                   players = update_players (st'.player_index) p' st'.players }
       else st' )
   else
-    { st with error = "Turn has not ended yet for the current player." } )
+    { st with error = "Turn has not ended yet for the current player.";
+              success = ""} )
 
 let draw_card_facing_up st i =
   if (turn_ended st) then turn_ended_error st
@@ -185,7 +204,8 @@ let draw_card_facing_up st i =
             train_trash = trash;
             turn_ended = ((st.cards_grabbed+1) = 2);
             error = "";
-            cards_grabbed = st.cards_grabbed + 1  } ) )
+            cards_grabbed = st.cards_grabbed + 1;
+            success = "Train card drawn."} ) )
 
 (* [draw_card_pile_no_error st] is `draw_card_pile st` but it does not end
  * the turn for the player, used for setup_state. *)
@@ -197,7 +217,8 @@ let draw_card_pile_no_error st =
   { st with train_deck = deck';
             train_trash = tr';
             players = update_players i p st.players;
-            error = "" }
+            error = "";
+            success = ""}
 
 let draw_card_pile st =
   if (turn_ended st) then turn_ended_error st
@@ -205,7 +226,8 @@ let draw_card_pile st =
     let st' = draw_card_pile_no_error st in
     { st' with turn_ended = ((st'.cards_grabbed+1) = 2);
              error = "";
-             cards_grabbed = st'.cards_grabbed + 1 } )
+             cards_grabbed = st'.cards_grabbed + 1;
+             success = "Train card drawn."} )
 
 let take_route st =
   if (st.cards_grabbed = 1) then grabbing_cards_error st
@@ -218,7 +240,8 @@ let take_route st =
   { st with destination_deck = deck';
             choose_destinations = tickets;
             taking_routes = true;
-            error = "" } )
+            error = "";
+            success = "Three destinations tickets are now available to choose from."} )
 
 let setup_state st =
   if (turn_ended st) then turn_ended_error st
@@ -230,7 +253,8 @@ let setup_state st =
   let st3 = draw_card_pile_no_error st2 in
   let st4 = draw_card_pile_no_error st3 in
   take_route st4 )
-  else {st with error = "Can't setup when it is not the first turn."} )
+  else {st with error = "Can't setup when it is not the first turn.";
+                success = ""} )
 
 let decided_routes st indexes =
   if (st.cards_grabbed = 1) then grabbing_cards_error st
@@ -253,12 +277,15 @@ let decided_routes st indexes =
                    choose_destinations = [];
                    taking_routes = false;
                    error = "";
-                   turn_ended = true } )
+                   turn_ended = true;
+                   success = "Took " ^ (string_of_int tickets_chosen) ^ " destination tickets."} )
     else {st with
           error = "Player only chose " ^ (string_of_int tickets_chosen)
                   ^ " tickets, must take at least "
-                  ^ (string_of_int required_tickets) ^ "."} )
-    else {st with error = "Must take destination tickets first."} )
+                  ^ (string_of_int required_tickets) ^ ".";
+         success = ""} )
+    else {st with error = "Must take destination tickets first.";
+                  success = ""} )
 
 (* [update_routes rts old new] is [rts] but with the [old] route replaced by
  * the [new] route. *)
@@ -290,14 +317,17 @@ let place_on_board st r clr wild =
     if (num_trains >= num) then (
       let p_clr = (current_player st).color in
       let r' = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some p_clr, b, lr) in
-      let p' = place_train (current_player st) r' wild in
+      let p' = place_train (current_player st) clr r' wild in
       let i = st.player_index in
       {st with players = update_players i p' st.players;
                routes = update_routes (routes st) r r';
                error = "";
-               turn_ended = true })
-    else {st with error = "Not enough trains."} )
-  else {st with error = "Not enough train cards."}
+               turn_ended = true;
+               success = "Placed trains on route."})
+    else {st with error = "Not enough trains.";
+                  success = ""} )
+  else {st with error = "Not enough train cards.";
+                success = ""}
 
 let select_route st r clr wild =
   if (st.cards_grabbed = 1) then grabbing_cards_error st
@@ -307,9 +337,11 @@ let select_route st r clr wild =
   if (first_turn (current_player st)) then first_turn_error st
   else (
     match r with
-    | (_, _, _, _, Some _, _, _) -> {st with error = "Route already taken."}
+    | (_, _, _, _, Some _, _, _) -> {st with error = "Route already taken.";
+                                             success = ""}
     | (_, _, _, Grey, _, _, _) ->
       ( match clr with
-      | None -> {st with error = "Choose a train card color."}
+        | None -> {st with error = "Choose a train card color.";
+                           success = ""}
       | Some clr' -> place_on_board st r clr' wild )
     | (_, _, _, clr, _, _, _) -> place_on_board st r clr wild ))

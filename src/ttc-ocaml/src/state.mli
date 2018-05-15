@@ -17,7 +17,8 @@ type state = { player_index : int;
                turn_ended : bool;
                last_round : bool;
                winner : player option;
-               cards_grabbed : int }
+               cards_grabbed : int;
+               success : string }
 
 (* [init_state n m] initializes the game with [n] players and [m] bots.
  * After this state, call setup_state for each player. *)
@@ -40,8 +41,10 @@ val destination_items : state -> (DestinationDeck.t * DestinationDeck.tr)
  * up, and the train cards trash in [st]. *)
 val train_items : state -> (TrainDeck.t * TrainDeck.t * TrainDeck.tr)
 
-(* [message st] returns a message for the GUI to display for the current [st]. *)
-val message : state -> string
+(* [error st] returns a message for the GUI to display for the current [st]. *)
+val error : state -> string
+
+val success : state -> string
 
 (* [turn_ended st] returns true if the turn has ended for the current [st],
  * false otherwise. *)
