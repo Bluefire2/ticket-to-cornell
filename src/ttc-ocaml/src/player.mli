@@ -67,4 +67,5 @@ val place_train : player -> Components.train_color -> Board.route -> int -> play
 (* [set_last_turn p] is [p] but with the field last_turn as true. *)
 val set_last_turn : player -> player
 
+(* [longest_route p] is the length of the longest consecutive route [p] has done. *)
 val longest_route : player -> int
