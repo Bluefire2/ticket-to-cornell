@@ -3,6 +3,7 @@ open Components
 open State
 open Board
 open Player
+open Ai
 
 let rec remove_n n lst =
   if n > (List.length lst) then lst else
@@ -699,8 +700,15 @@ let state_tests =
   "state41" >:: (fun _ -> assert_equal 0 (st_end5 |> longest_route_player));
 ]
 
+let ai_tests =
+[
+  (* init_ai *)
+
+
+]
+
 let suite =
   "Ticket to Cornell test suite"
-  >::: components_tests @ board_tests @ player_tests @ state_tests
+  >::: components_tests @ board_tests @ player_tests @ state_tests @ ai_tests
 
 let _ = run_test_tt_main suite
