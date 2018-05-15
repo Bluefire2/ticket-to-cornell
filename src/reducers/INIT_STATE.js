@@ -1,4 +1,4 @@
-import {init_state, setup_state} from '../ttc-ocaml/src/state.bs';
+import {init_state, setup_state, end_state1, end_state2} from '../ttc-ocaml/src/state.bs';
 import {stateToObj} from '../util';
 
 const url = new URL(window.location.href);
