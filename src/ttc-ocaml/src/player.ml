@@ -100,11 +100,13 @@ let place_train p clr r wild =
 let set_last_turn p =
   { p with last_turn = true }
 
-
+(* [between_before l acc lst] is everything that is before [l] in [lst] and [l]. *)
 let rec between_before l acc = function
   | [] -> acc
   | h::t -> if h=l then acc @ [l] else between_before l (acc @ [l]) t
 
+(* [calculate_paths l1 l2 locs paths] is a tuple with the locations in between
+ * l1 and l2 (added to [locs]) and the path between l1 and l2 (added to [paths]). *)
 let calculate_paths l1 l2 locations paths =
   if (List.mem l1 locations) then
     let rec loop acc = function
