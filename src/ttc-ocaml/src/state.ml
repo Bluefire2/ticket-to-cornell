@@ -17,7 +17,7 @@ type state = { player_index : int;
                last_round : bool;
                winner: player option }
 
-let init_state num =
+let init_state n bots =
   let init = { player_index = 0;
                players = [];
                routes = [];
@@ -32,10 +32,11 @@ let init_state num =
                turn_ended = false;
                last_round = false;
                winner = None } in
-  if (num < 2 || num > 5) then init
+  if ((n+bots) < 2 || (n+bots) > 5) then init
   else
-    let players = init_players num in
-    {init with players = players;
+    let players = init_players n false in
+    let bots = init_players bots true in
+    {init with players = (players @ bots);
                routes = Board.routes;
                error = "" }
 

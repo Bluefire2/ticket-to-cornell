@@ -472,10 +472,10 @@ let player_tests =
   "trains_remaining" >:: (fun _ -> assert_equal (45) (Player.trains_remaining p1));
   "color1" >:: (fun _ -> assert_equal (PBlue) (Player.color p1));
   "color2" >:: (fun _ -> assert_equal (PYellow) (Player.color p2));
-  "init 2 players" >:: (fun _ -> assert_equal ([default2;default1]) (Player.init_players 2));
-  "init 3 players" >:: (fun _ -> assert_equal ([default3;default2;default1]) (Player.init_players 3));
-  "init 4 players" >:: (fun _ -> assert_equal ([default4;default3;default2;default1]) (Player.init_players 4));
-  "init 5 players" >:: (fun _ -> assert_equal ([default5;default4;default3;default2;default1]) (Player.init_players 5));
+  "init 2 players" >:: (fun _ -> assert_equal ([default2;default1]) (Player.init_players 2 false));
+  "init 3 players" >:: (fun _ -> assert_equal ([default3;default2;default1]) (Player.init_players 3 false));
+  "init 4 players" >:: (fun _ -> assert_equal ([default4;default3;default2;default1]) (Player.init_players 4 false));
+  "init 5 players" >:: (fun _ -> assert_equal ([default5;default4;default3;default2;default1]) (Player.init_players 5 false));
   "draw card1" >:: (fun _ -> assert_equal
     ({p2 with train_cards = [(Red,1);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)]})
     (Player.draw_train_card p2 Red));
@@ -543,9 +543,9 @@ let p_end =
     bot = false;
   }
 
-let st1 = (decided_routes (init_state 2 |> setup_state) [0])
-let st2 = (decided_routes (init_state 2 |> setup_state) [0; 1])
-let st3 = (decided_routes (init_state 2 |> setup_state) [0; 1; 2])
+let st1 = (decided_routes (init_state 2 0 |> setup_state) [0])
+let st2 = (decided_routes (init_state 2 0 |> setup_state) [0; 1])
+let st3 = (decided_routes (init_state 2 0 |> setup_state) [0; 1; 2])
 let st3' = (decided_routes (st3 |> next_player |> setup_state) [0;1;2])
 let st3'' = (st3' |> next_player)
 let st4 = { player_index = 0;
@@ -614,18 +614,18 @@ let st_end5 = {st_end with players = [p_end7; p_end8]}
 let state_tests =
 [
   (* init state *)
-  "state1" >:: (fun _ -> assert_equal 45 (init_state 5 |> current_player |> trains_remaining));
-  "state2" >:: (fun _ -> assert_equal 0 (init_state 5 |> current_player |> score));
-  "state3" >:: (fun _ -> assert_equal [] (init_state 5 |> current_player |> destination_tickets));
+  "state1" >:: (fun _ -> assert_equal 45 (init_state 5 0 |> current_player |> trains_remaining));
+  "state2" >:: (fun _ -> assert_equal 0 (init_state 5 0 |> current_player |> score));
+  "state3" >:: (fun _ -> assert_equal [] (init_state 5 0 |> current_player |> destination_tickets));
   "state4" >:: (fun _ -> assert_equal [(Red,0);(Blue,0);(Green,0);(Yellow,0);
                                        (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)]
-                   (init_state 5 |> current_player |> train_cards));
+                   (init_state 5 0 |> current_player |> train_cards));
   (* setup state *)
-  "state5" >:: (fun _ -> assert_equal 3 (init_state 2 |> setup_state |> choose_destinations |> List.length));
+  "state5" >:: (fun _ -> assert_equal 3 (init_state 2 0 |> setup_state |> choose_destinations |> List.length));
   "state6" >:: (fun _ -> assert_equal 4 (diff_cards
-                (init_state 2 |> current_player |> train_cards)
-                (init_state 2 |> setup_state |> current_player |> train_cards)));
-  "state7" >:: (fun _ -> assert_equal false (init_state 2 |> setup_state |> turn_ended));
+                (init_state 2 0 |> current_player |> train_cards)
+                (init_state 2 0 |> setup_state |> current_player |> train_cards)));
+  "state7" >:: (fun _ -> assert_equal false (init_state 2 0 |> setup_state |> turn_ended));
   "state8" >:: (fun _ -> assert_equal true (st3 |> turn_ended));
   "state9" >:: (fun _ -> assert_equal true (st2 |> turn_ended));
   "state10" >:: (fun _ -> assert_equal false (st1 |> turn_ended));

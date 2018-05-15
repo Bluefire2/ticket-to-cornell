@@ -5,10 +5,12 @@ open Components
  * are adjacent. *)
 type location = Location of string * float * float * string list
 
+(* [leftRightRoute] represents a left route or a right route. *)
 type leftRightRoute = LeftRoute | RightRoute
 
 (* [route] represents a route between two locations on the map. It can be
- * any length between 1 and 6 and has any train_color, or none. *)
+ * any length between 1 and 6 and has any train_color, or none. It also might
+ * be a double route or not, and it can be a LeftRoute or a RightRoute, or none. *)
 type route = location * location * int * train_color * player_color option * bool * leftRightRoute option
 
 (* [route_score] represents the score of a route length as specified

@@ -18,9 +18,9 @@ type state = { player_index : int;
                last_round : bool;
                winner : player option }
 
-(* [init_state i] initializes the game with [i] players.
+(* [init_state n m] initializes the game with [n] players and [m] bots.
  * After this state, call setup_state for each player. *)
-val init_state : int -> state
+val init_state : int -> int -> state
 
 (* [current_player st] returns the current player whose turn it is in [st]. *)
 val current_player : state -> player
