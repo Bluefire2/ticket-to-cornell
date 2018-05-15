@@ -45,87 +45,6 @@ let init_state n bots =
                error = "";
                success = ""}
 
-(* TESTING PURPOSES *)
-let st = init_state 2 0
-let p3 =
-  {
-    color= PBlue;
-    destination_tickets = [];
-    train_cards = [];
-    score = 30;
-    routes = [];
-    trains_remaining = 2;
-    first_turn = false;
-    last_turn = false;
-    bot = false;
-  }
-
-let p4 = {p3 with color = PRed;
-                  score = 2}
-
-(* STATE FOR KIRILL:
- * If you call next_player it should start the end round. Play once more for each
- * player and then the winner should be blue. *)
-let end_state1 =
-  {st with players = [p3; p4]}
-
-let p3' = {p3 with last_turn = true}
-let p4' = {p4 with last_turn = true}
-
-(* STATE FOR KIRLL:
- * Here it is already the last round and p3 is the winner. *)
-let end_state2 =
-  {end_state1 with players = [p3; p4];
-                   last_round = true;
-                   winner = Some p3 }
-
-let p_end =
-  {
-    color = PBlue;
-    destination_tickets = [];
-    train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
-                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
-    score = 18;
-    routes = [];
-    trains_remaining = 2;
-    first_turn = false;
-    last_turn = false;
-    bot = false;
-  }
-
-let tick = {loc1 = "Undergraduate Admissions";
-            loc2  = "Risley";
-            points = 15}
-
-let r = List.nth (Board.routes) 21
-let fill_in r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
-(* let r2 = List.nth (r_select |> State.routes) 9 *)
-
-let p_end2 = {p_end with color = PRed;
-                         destination_tickets = [tick];
-                         routes = [(fill_in r)]}
-
-(* STATE FOR KIRILL:
- * Player Yellow should have one completed ticket. *)
-let end_state3 = { player_index = 0;
-               players = [p_end; p_end2];
-               routes = Board.routes;
-               destination_deck = DestinationDeck.init_deck ();
-               destination_trash = DestinationDeck.init_trash;
-               choose_destinations = [];
-               train_deck = TrainDeck.init_deck ();
-               facing_up_trains = TrainDeck.init_faceup ();
-               train_trash = TrainDeck.init_trash;
-               taking_routes = false;
-               error = "";
-               turn_ended = true;
-               last_round = false;
-               winner = None;
-               cards_grabbed = 0;
-               success = ""}
-
-(* END OF TESTING STUFF *)
-
 let current_player st =
   List.nth st.players st.player_index
 
@@ -459,6 +378,6 @@ and next_player st =
                 success = ""} )
 
 let completed_ticket loc1 loc2 state =
-  let routes = (routes st) in
+  let routes = (routes state) in
   let prev = [] in
   Board.completed loc1 loc2 routes prev
