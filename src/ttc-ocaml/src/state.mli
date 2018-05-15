@@ -105,3 +105,5 @@ val decided_routes : state -> int list -> state
  * takes in [i] which represents the number of wild cards that are to be used
  * for this action. *)
 val select_route : state -> Board.route -> Components.train_color option -> int -> state
+
+val completed_ticket : string -> string -> state -> bool
