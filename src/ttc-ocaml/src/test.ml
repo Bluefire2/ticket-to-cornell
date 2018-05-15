@@ -513,7 +513,7 @@ let player_tests =
     ({p1 with train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,2)] })
   (Player.draw_train_card p1 White));
 
-  "place_train1" >:: (fun _ -> assert_equal p3' (place_train p3 r'));
+  "place_train1" >:: (fun _ -> assert_equal p3' (place_train p3 r' 0));
 ]
 
 let num_cards cards =
@@ -565,7 +565,7 @@ let st4 = { player_index = 0;
             cards_grabbed = 0; }
 
 let fill_in r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
-let r_select = select_route st4 r None
+let r_select = select_route st4 r None 0
 let r'' = List.nth (r_select |> State.routes) 21
 let r2 = List.nth (r_select |> State.routes) 9
 let r2' = fill_in r2
@@ -654,14 +654,14 @@ let state_tests =
   (* select_route *)
   "state19" >:: (fun _ -> assert_equal ~-2 (diff_cards
                 (st4 |> current_player |> train_cards)
-                (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None |> current_player |> train_cards)));
+                (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> train_cards)));
   "state20" >:: (fun _ -> assert_equal true (same_lst
                ((dairy_bar,plantations,2,Green,Some PYellow, false, None)::(st4 |> current_player |> routes))
-               (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None |> current_player |> routes)));
-  "state21" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None |> current_player |> score));
+               (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> routes)));
+  "state21" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> score));
   "state22" >:: (fun _ -> assert_equal r' (List.nth (r_select |> State.routes) 21));
   "state23" >:: (fun _ -> assert_equal "Route already taken."
-                    ((select_route (r_select |> next_player) r'' None) |> message));
+                    ((select_route (r_select |> next_player) r'' None 0) |> message));
 
   (* end game *)
   "state24" >:: (fun _ -> assert_equal true (st_end |> next_player |> last_round));

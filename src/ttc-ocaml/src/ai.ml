@@ -144,7 +144,7 @@ let place_action p st build_options =
   let build = get_val (priorize_build 0 None build_options) in
   let color = get_color build in
   (* if color = Grey then *)
-  select_route st build (Some color)
+  select_route st build (Some color) 0
 
 let draw_action st p goals =
   let colors = desired_colors goals p [] in
