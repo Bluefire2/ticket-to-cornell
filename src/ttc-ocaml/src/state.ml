@@ -15,7 +15,8 @@ type state = { player_index : int;
                error : string;
                turn_ended : bool;
                last_round : bool;
-               winner: player option }
+               winner: player option;
+               cards_grabbed : int}
 
 let init_state n bots =
   let init = { player_index = 0;
@@ -31,7 +32,8 @@ let init_state n bots =
                error = "Number players must be 2-5.";
                turn_ended = false;
                last_round = false;
-               winner = None } in
+               winner = None;
+               cards_grabbed = 0 } in
   if ((n+bots) < 2 || (n+bots) > 5) then init
   else
     let players = init_players n false in
@@ -143,14 +145,18 @@ let turn_ended_error st =
 let first_turn_error st =
   { st with error = "Can't call this function in the first turn, must choose destination tickets first. "}
 
+let grabbing_cards_error st =
+  { st with error = "You still need to grab another card from the pile or facing up cards."}
+
 let next_player st =
   if (turn_ended st) then
     if (game_ended st) then end_game st
-    else
+    else (
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
       let st' = {st with player_index = next_player;
                          turn_ended = false;
-                         error = "" } in
+                         error = "";
+                         cards_grabbed = 0} in
       (* let st' =
         if (is_bot (current_player st')) then (Ai.ai_move st')
         else st' in *)
@@ -159,7 +165,7 @@ let next_player st =
         let p' = set_last_turn (current_player st') in
         {st' with last_round = true;
                   players = update_players (st'.player_index) p' st'.players }
-      else st'
+      else st' )
   else
     { st with error = "Turn has not ended yet for the current player." }
 
@@ -175,29 +181,29 @@ let draw_card_facing_up st i =
             train_deck = deck;
             players = update_players i p' st.players;
             train_trash = trash;
-            turn_ended = true;
-            error = "" } ) )
+            turn_ended = ((st.cards_grabbed+1) = 2);
+            error = "";
+            cards_grabbed = st.cards_grabbed + 1  } ) )
 
 (* [draw_card_pile_no_error st] is `draw_card_pile st` but it does not end
  * the turn for the player, used for setup_state. *)
 let draw_card_pile_no_error st =
   let tr = st.train_trash in
   let (c1, deck',tr') = TrainDeck.draw_card (st.train_deck) tr in
-  let (c2, deck'',tr'') = TrainDeck.draw_card deck' tr in
-  let p' = draw_train_card (current_player st) c1 in
-  let p'' = draw_train_card p' c2 in
+  let p = draw_train_card (current_player st) c1 in
   let i = st.player_index in
-  { st with train_deck = deck'';
-            train_trash = tr'';
-            players = update_players i p'' st.players;
+  { st with train_deck = deck';
+            train_trash = tr';
+            players = update_players i p st.players;
             error = "" }
 
 let draw_card_pile st =
   if (turn_ended st) then turn_ended_error st
   else (
-  let st' = draw_card_pile_no_error st in
-  { st' with turn_ended = true;
-             error = "" } )
+    let st' = draw_card_pile_no_error st in
+    { st' with turn_ended = ((st'.cards_grabbed+1) = 2);
+             error = "";
+             cards_grabbed = st'.cards_grabbed + 1 } )
 
 let take_route st =
   if (turn_ended st) then turn_ended_error st
@@ -217,7 +223,9 @@ let setup_state st =
   then (
   let st1 = draw_card_pile_no_error st in
   let st2 = draw_card_pile_no_error st1 in
-  take_route st2 )
+  let st3 = draw_card_pile_no_error st2 in
+  let st4 = draw_card_pile_no_error st3 in
+  take_route st4 )
   else {st with error = "Can't setup when it is not the first turn."} )
 
 let decided_routes st indexes =

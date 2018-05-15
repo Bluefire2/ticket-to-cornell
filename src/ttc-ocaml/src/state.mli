@@ -16,7 +16,8 @@ type state = { player_index : int;
                error : string;
                turn_ended : bool;
                last_round : bool;
-               winner : player option }
+               winner : player option;
+               cards_grabbed : int }
 
 (* [init_state n m] initializes the game with [n] players and [m] bots.
  * After this state, call setup_state for each player. *)
