@@ -32,7 +32,7 @@ val draw_card_pile : State.state -> State.state
 val draw_card_facing_up : State.state -> int -> State.state
 val take_route : State.state -> State.state
 val decided_routes : State.state -> int list -> State.state
-val select_route : state -> Board.route -> Components.train_color option -> state
+val select_route : state -> Board.route -> Components.train_color option -> int -> state
 val longest_route_player : State.state -> int
 end
 
@@ -114,7 +114,7 @@ module type PLAYER = sig
   val trains_remaining : player -> int
   val init_players : int -> bool -> player list
   val draw_train_card : player -> Components.TrainDeck.card  -> player
-  val place_train : player -> Board.route -> player
+  val place_train : player -> Board.route -> int -> player
   val set_last_turn : player -> player
   val longest_route : player -> int
 end

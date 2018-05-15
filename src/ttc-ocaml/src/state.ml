@@ -280,16 +280,17 @@ let check_cards cards n clr =
  * current player and with the routes updated to reflect this change. It checks
  * that the current player has enough cards of color [clr] to take this route
  * and enough trains remaining. *)
-let place_on_board st r clr =
+let place_on_board st r clr wild =
   (* Checking player has train cards for selected route *)
   let cards = train_cards (current_player st) in
-  let num = match r with | (_, _, n, _, _, _, _) -> n in
-  if (check_cards cards num clr) then (
+  let num = (match r with | (_, _, n, _, _, _, _) -> n) in
+  let num_clr = num - wild in
+  if ((check_cards cards num_clr clr) && (check_cards cards wild Wild)) then (
     let num_trains = trains_remaining (current_player st) in
     if (num_trains >= num) then (
       let p_clr = (current_player st).color in
       let r' = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some p_clr, b, lr) in
-      let p' = place_train (current_player st) r' in
+      let p' = place_train (current_player st) r' wild in
       let i = st.player_index in
       {st with players = update_players i p' st.players;
                routes = update_routes (routes st) r r';
@@ -298,7 +299,7 @@ let place_on_board st r clr =
     else {st with error = "Not enough trains."} )
   else {st with error = "Not enough train cards."}
 
-let select_route st r clr =
+let select_route st r clr wild =
   if (st.cards_grabbed = 1) then grabbing_cards_error st
   else
   if (turn_ended st) then turn_ended_error st
@@ -310,5 +311,5 @@ let select_route st r clr =
     | (_, _, _, Grey, _, _, _) ->
       ( match clr with
       | None -> {st with error = "Choose a train card color."}
-      | Some clr' -> place_on_board st r clr' )
-    | (_, _, _, clr, _, _, _) -> place_on_board st r clr ))
+      | Some clr' -> place_on_board st r clr' wild )
+    | (_, _, _, clr, _, _, _) -> place_on_board st r clr wild ))

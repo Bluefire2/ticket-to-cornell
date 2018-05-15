@@ -92,6 +92,8 @@ val take_route : state -> state
  * choose_destinations that the player decided to keep.  *)
 val decided_routes : state -> int list -> state
 
-(* [select_route st r clr] returns a new state for which the player decides to
- * build a train route [r], with [clr] if the route is a grey route. *)
-val select_route : state -> Board.route -> Components.train_color option -> state
+(* [select_route st r clr i] returns a new state for which the player decides to
+ * build a train route [r], with [clr] if the route is a grey route. It also
+ * takes in [i] which represents the number of wild cards that are to be used
+ * for this action. *)
+val select_route : state -> Board.route -> Components.train_color option -> int -> state
