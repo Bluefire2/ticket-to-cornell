@@ -379,10 +379,10 @@ let rec ai_move st second =
   | Take_Faceup ->
       let i = Ai.ai_facing_up p routes facing_up in
       let st' = draw_card_facing_up st i in
-      ai_move st' true
+      if second then st' else ai_move st' true
   | Take_Deck ->
       let st' = draw_card_pile st in
-      ai_move st' true in
+      if second then st' else ai_move st' true in
   next_player (st')
 
 and next_player st =
