@@ -96,9 +96,9 @@ let rec remove_color n c lst =
       else loop (acc @ [(a1, a2)]) t in
   loop [] lst
 
-let place_train p r wild =
+let place_train p clr r wild =
   let wild_removed = remove_color wild Wild p.train_cards in
-  let cards = remove_color ((Board.get_length r)-wild) (Board.get_color r) wild_removed in
+  let cards = remove_color ((Board.get_length r)-wild) clr wild_removed in
   { p with train_cards = cards;
            score = p.score + (Board.route_score r);
            routes = r::p.routes;

@@ -16,7 +16,8 @@ type state = { player_index : int;
                turn_ended : bool;
                last_round : bool;
                winner: player option;
-               cards_grabbed : int}
+               cards_grabbed : int;
+               success : string }
 
 let init_state n bots =
   let init = { player_index = 0;
@@ -33,14 +34,16 @@ let init_state n bots =
                turn_ended = false;
                last_round = false;
                winner = None;
-               cards_grabbed = 0 } in
+               cards_grabbed = 0;
+               success = "" } in
   if ((n+bots) < 2 || (n+bots) > 5) then init
   else
     let players = init_players n false in
     let bots = init_players bots true in
     {init with players = (players @ bots);
                routes = Board.routes;
-               error = "" }
+               error = "";
+               success = ""}
 
 let current_player st =
   List.nth st.players st.player_index
@@ -53,7 +56,9 @@ let destination_items st = (st.destination_deck, st.destination_trash)
 
 let train_items st = (st.train_deck, st.facing_up_trains, st.train_trash)
 
-let message st = st.error
+let error st = st.error
+
+let success st = st.success
 
 let turn_ended st = st.turn_ended
 
@@ -133,7 +138,8 @@ let calculate_winner st =
 let end_game st =
   let (st', winner) = calculate_winner st in
   {st' with error = "Game has ended.";
-           winner =  winner }
+            winner =  winner;
+            success = ""}
 
 (* [turn_ended_error st] is [st] but with a turn ended error message. *)
 let turn_ended_error st =
@@ -290,7 +296,7 @@ let place_on_board st r clr wild =
     if (num_trains >= num) then (
       let p_clr = (current_player st).color in
       let r' = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some p_clr, b, lr) in
-      let p' = place_train (current_player st) r' wild in
+      let p' = place_train (current_player st) clr r' wild in
       let i = st.player_index in
       {st with players = update_players i p' st.players;
                routes = update_routes (routes st) r r';
