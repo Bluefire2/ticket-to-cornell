@@ -4,6 +4,7 @@
 var List = require("bs-platform/lib/js/list.js");
 var Board = require("./board.bs.js");
 var Js_exn = require("bs-platform/lib/js/js_exn.js");
+var Random = require("bs-platform/lib/js/random.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Pervasives = require("bs-platform/lib/js/pervasives.js");
 var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
@@ -129,7 +130,8 @@ function check_faceup(_clist, faceup) {
   while(true) {
     var clist = _clist;
     if (clist) {
-      if (contains(clist[0], faceup)) {
+      var h = clist[0];
+      if (contains(h, faceup) || h === /* Grey */9) {
         return true;
       } else {
         _clist = clist[1];
@@ -447,52 +449,7 @@ function ai_take_dticket(p, rts, dest_choice) {
   if (List.length(keep) === 0) {
     var min_path = get_smallest_path(dest_choice, rts, p, 0, -1, 0);
     if (min_path > p[/* trains_remaining */5]) {
-      var param = dest_choice;
-      var exit = 0;
-      if (param) {
-        var match = param[1];
-        if (match) {
-          var match$1 = match[1];
-          if (match$1 && !match$1[1]) {
-            var z = match$1[0][/* points */2];
-            var y = match[0][/* points */2];
-            var x = param[0][/* points */2];
-            if (min(x, y, z) === x) {
-              return /* :: */[
-                      0,
-                      /* [] */0
-                    ];
-            } else if (min(x, y, z) === y) {
-              return /* :: */[
-                      1,
-                      /* [] */0
-                    ];
-            } else {
-              return /* :: */[
-                      2,
-                      /* [] */0
-                    ];
-            }
-          } else {
-            exit = 1;
-          }
-        } else {
-          exit = 1;
-        }
-      } else {
-        exit = 1;
-      }
-      if (exit === 1) {
-        throw [
-              Caml_builtin_exceptions.match_failure,
-              [
-                "ai.ml",
-                131,
-                22
-              ]
-            ];
-      }
-      
+      return Pervasives.failwith("impossible");
     } else {
       return /* :: */[
               min_path,
@@ -585,7 +542,6 @@ function ai_facing_up(p, rts, faceup) {
   var goal_routes = best_routes(rts, best_paths(p[/* destination_tickets */1]));
   var routes = check_routes_list(p, rts, goal_routes);
   var goal_routes$1 = List.flatten(routes);
-  can_build(goal_routes$1, p);
   var colors = desired_colors(goal_routes$1, p, /* [] */0);
   var match = priorize_build(0, /* None */0, goal_routes$1);
   if (match) {
@@ -616,9 +572,11 @@ function ai_facing_up(p, rts, faceup) {
       while(true) {
         var n$1 = _n$1;
         var colors$1 = _colors;
-        if (colors$1 && !contains(colors$1[0], faceup$1)) {
+        if (contains(/* Grey */9, colors$1)) {
+          return Random.$$int(5);
+        } else if (faceup$1 && !contains(faceup$1[0], colors$1)) {
           _n$1 = n$1 + 1 | 0;
-          _colors = colors$1[1];
+          _colors = faceup$1[1];
           continue ;
         } else {
           return n$1;

@@ -1350,6 +1350,11 @@ function next_player(st) {
   }
 }
 
+function completed_ticket(loc1, loc2, _) {
+  var routes = st[/* routes */2];
+  return Board.completed(loc1, loc2, routes, /* [] */0);
+}
+
 exports.init_state = init_state;
 exports.end_state1 = end_state1;
 exports.end_state2 = end_state2;
@@ -1374,4 +1379,5 @@ exports.draw_card_facing_up = draw_card_facing_up;
 exports.take_route = take_route;
 exports.decided_routes = decided_routes;
 exports.select_route = select_route;
+exports.completed_ticket = completed_ticket;
 /* st Not a pure module */
