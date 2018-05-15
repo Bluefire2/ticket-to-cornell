@@ -34,7 +34,7 @@ const createRectangleDatum = (x, y, theta, width, height, trainColor, route, rou
 const routeToRectangleArray = (route, index) => {
     const fromName = route[0][0],
         toName = route[1][0],
-        uniqueRouteID = `${fromName}->${toName}`;
+        uniqueRouteID = `${fromName}-${toName}`;
 
     const n = route[2], // number of rectangles to draw (route length)
         A = {x: route[0][1] / SCALE, y: route[0][2] / SCALE},
