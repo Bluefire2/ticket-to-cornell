@@ -12,6 +12,7 @@ let get_color (_,_,_,x,_,_,_) = x
 
 let get_player (_,_,_,_,x,_,_) = x
 
+(* [contains x] checks to see if an element [x] is contained in a list. *)
 let rec contains x = function
   | [] -> false
   | h::t -> if h=x then true else contains x t
@@ -24,7 +25,7 @@ let route_score r =
   | (_,_,4,_,_,_,_) -> 7
   | (_,_,5,_,_,_,_) -> 10
   | (_,_,6,_,_,_,_) -> 15
-  | _ -> failwith "Not possible; deal with later"
+  | _ -> failwith "Not possible"
 
 let is_taken r =
   match r with
@@ -74,7 +75,7 @@ let locations = [ eco_house; a_lot; golf; hasbrouck; rpcc; appel; mcgraw; risley
                   psb; mann; engineering; commons; maplewood; vet; riley_robb;
                   barton; farm_barn; plantations; arboretum; filtration; creek;
                   becker ]
-
+(* [lst l] returns the neighbors of a given location.*)
 let name l = match l with | Location (x, _, _, _) -> x
 let lst l = match l with | Location (_, _, _, x) -> x
 
@@ -221,8 +222,6 @@ let routes =
       loop (acc @ [new_r]) t in
   loop [] route_connections
 
-
-(* locations = total list of locations. *)
 let rec get_location s locations =
   match locations with
   | [] -> failwith "not possible"
@@ -233,6 +232,9 @@ let get_string (Location (s, _,_,_)) = s
 
 let get_neighbors (Location (_,_,_,x)) = x
 
+(* [get_route s1 s2 routes] returns a route that connects the two locations.
+ * requires: s1 and s2 are adjacent to each other. If they are not adjacent,
+ * raises impossible. *)
 let rec get_route s1 s2 routes =
   match routes with
   | [] -> failwith "impossible"
@@ -240,14 +242,10 @@ let rec get_route s1 s2 routes =
   (s1 = get_string y) && (s2 = get_string x) then (x,y,a,b,c,n,lr) else
   get_route s1 s2 t
 
+(* [distance a b] calculates the coordinate distance formula between two points. *)
 let distance a b = match a with
   | Location (_,x1,y1,_) -> ( match b with
                       | Location (_,x2,y2,_) -> sqrt ((x2 -. x1)**2. +. (y2 -. y1)**2.) )
-
-
-let rec check_neighbors s = function
-  | [] -> false
-  | h::t -> if s=h then true else check_neighbors s t
 
 let rec get_next_loc l1 goal acc count visited = function
   | [] -> acc
@@ -257,7 +255,7 @@ let rec get_next_loc l1 goal acc count visited = function
     if (((distance coor e) < count) || count = -1.) then get_next_loc l1 goal (Some h) (distance coor e) visited t else
     get_next_loc l1 goal acc count visited t
 
-
+(* [get_val] returns the value of an option. Raises Not_available if None. *)
 let get_val = function
     | None ->  raise (Failure "Not_available")
     | Some x -> x

@@ -46,7 +46,7 @@ val completed : string -> string -> route list -> route list -> bool
 (* [get_location s lst] is a location in [lst] with name [s]. *)
 val get_location : string -> location list -> location
 
-(* [get_nexT_loc] returns the next location name that should be traveled to from a starting location
+(* [get_next_loc] returns the next location name that should be traveled to from a starting location
  * to an ending location based on the shortest distance. *)
 val get_next_loc : location -> string -> string option -> float -> string list -> string list -> string option
 
