@@ -85,6 +85,10 @@
 
 }
 
+fieldset {
+  border-color:black;
+}
+
 #train-hand {
     /* float: left; the child divs instead of this: */
     /*display: flex;*/
