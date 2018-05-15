@@ -106,6 +106,7 @@ let rec shuffler from to_list len =
   | 0 -> to_list
   | _ -> let i = random_int (len) in shuffler (remove_n i from) ((List.nth from i)::to_list) (len-1)
 
+(* [drop n lst] is [lst] but with the first [n] cards removed. *)
 let rec drop n lst =
   if n = 0 then lst else match lst with
     | [] -> []
