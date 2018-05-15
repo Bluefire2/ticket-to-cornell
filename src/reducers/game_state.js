@@ -1,7 +1,7 @@
 import initialState from './INIT_STATE';
 import * as constants from '../constants';
 import {arrayToList, objToState, stateToObj} from "../util";
-import {setup_state, current_player, draw_card_pile, take_route, decided_routes, select_route, next_player} from '../ttc-ocaml/src/state.bs';
+import {setup_state, current_player, draw_card_pile, take_route, decided_routes, select_route, next_player, draw_card_facing_up} from '../ttc-ocaml/src/state.bs';
 import {first_turn} from '../ttc-ocaml/src/player.bs';
 
 const modifyState = (state, fn) => {
@@ -43,6 +43,10 @@ export default (state = initialState, action) => {
             } else {
                 return newState;
             }
+        case constants.DRAW_CARD_FACING_UP:
+            // draw a card from the face-up pile
+            // state.draw_card_facing_up
+            return modifyState(state, (st) => draw_card_facing_up(st, action.payload));
         default:
             return state;
     }

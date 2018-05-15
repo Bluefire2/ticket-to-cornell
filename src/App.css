@@ -176,7 +176,7 @@
     color: black;
 }
 
-#choose-destinations {
+#choose-destinations, #face-up-pile {
     position: relative;
     width: auto;
 }

@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="35bd7f64-a57c-4a61-820a-1fe40a446d60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.css" afterPath="$PROJECT_DIR$/src/App.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/map.js" afterPath="$PROJECT_DIR$/src/containers/map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/actions/index.js" afterPath="$PROJECT_DIR$/src/actions/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/train_card.js" afterPath="$PROJECT_DIR$/src/components/train_card.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/constants.js" afterPath="$PROJECT_DIR$/src/constants.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/decks.js" afterPath="$PROJECT_DIR$/src/containers/decks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/game_state.js" afterPath="$PROJECT_DIR$/src/reducers/game_state.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,7 +25,7 @@
       <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/util.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3885">
+            <state relative-caret-position="3633">
               <caret line="197" column="2" lean-forward="false" selection-start-line="197" selection-start-column="2" selection-end-line="197" selection-end-column="2" />
               <folding />
             </state>
@@ -33,7 +35,7 @@
       <file leaf-file-name="map.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
+            <state relative-caret-position="342">
               <caret line="190" column="2" lean-forward="false" selection-start-line="190" selection-start-column="2" selection-end-line="190" selection-end-column="2" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -45,23 +47,21 @@
         </entry>
       </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+        <entry file="file://$PROJECT_DIR$/src/actions/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+            <state relative-caret-position="321">
+              <caret line="34" column="38" lean-forward="false" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="INIT_STATE.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/INIT_STATE.js">
+      <file leaf-file-name="constants.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#66#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="105">
+              <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,8 +69,8 @@
       <file leaf-file-name="game_state.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reducers/game_state.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="32" column="80" lean-forward="false" selection-start-line="32" selection-start-column="80" selection-end-line="32" selection-end-column="80" />
+            <state relative-caret-position="321">
+              <caret line="48" column="87" lean-forward="false" selection-start-line="48" selection-start-column="87" selection-end-line="48" selection-end-column="87" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -78,47 +78,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="components.ml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/components.ml">
+      <file leaf-file-name="decks.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/decks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2205">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="-120">
+              <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="train_hand.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/train_hand.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="42">
+              <caret line="3" column="35" lean-forward="true" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="board.ml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/board.ml">
+      <file leaf-file-name="train_card.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/train_card.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="44" lean-forward="false" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+            <state relative-caret-position="231">
+              <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+            <state relative-caret-position="203">
+              <caret line="178" column="7" lean-forward="false" selection-start-line="178" selection-start-column="1" selection-end-line="178" selection-end-column="7" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="16" column="14" lean-forward="false" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-              <folding>
-                <marker date="1526343480842" expanded="true" signature="92:381" ph="{&quot;d3&quot;: &quot;^5.2.0&quot;...}" />
-                <marker date="1526343480842" expanded="true" signature="397:421" ph="[...]" />
-                <marker date="1526343480842" expanded="true" signature="436:703" ph="{&quot;bs-clean&quot;: &quot;bsb -clean-world&quot;...}" />
-                <marker date="1526343480842" expanded="true" signature="726:759" ph="{&quot;bs-platform&quot;: &quot;^3.0.0&quot;...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -126,12 +123,9 @@
       <file leaf-file-name="state.bs.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3890">
-              <caret line="696" column="14" lean-forward="false" selection-start-line="696" selection-start-column="14" selection-end-line="696" selection-end-column="14" />
-              <folding>
-                <marker date="1526341422220" expanded="true" signature="465:1237" ph="{...}" />
-                <marker date="1526341422220" expanded="true" signature="926:1237" ph="[...]" />
-              </folding>
+            <state relative-caret-position="-16981">
+              <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,8 +158,11 @@
       <find>place_</find>
       <find>update_routes</find>
       <find>place_on</find>
-      <find>place</find>
       <find>this.RECTANGLE_HEIGHT</find>
+      <find>place</find>
+      <find>facing</find>
+      <find>choose-des</find>
+      <find>choose</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -201,13 +198,10 @@
         <option value="$PROJECT_DIR$/src/components/deck.js" />
         <option value="$PROJECT_DIR$/src/images/tick.svg" />
         <option value="$PROJECT_DIR$/src/components/destination_ticket.js" />
-        <option value="$PROJECT_DIR$/src/containers/decks.js" />
         <option value="$PROJECT_DIR$/src/components/train_hand.js" />
         <option value="$PROJECT_DIR$/src/components/destination_hand.js" />
-        <option value="$PROJECT_DIR$/src/components/train_card.js" />
         <option value="$PROJECT_DIR$/public/buttons.css" />
         <option value="$PROJECT_DIR$/src/index.css" />
-        <option value="$PROJECT_DIR$/src/constants.js" />
         <option value="$PROJECT_DIR$/src/ttc-ocaml/src/state.ml" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/App.js" />
@@ -215,12 +209,15 @@
         <option value="$PROJECT_DIR$/src/ttc-ocaml/src/board.ml" />
         <option value="$PROJECT_DIR$/src/ttc-ocaml/src/board.bs.js" />
         <option value="$PROJECT_DIR$/src/containers/player_details.js" />
-        <option value="$PROJECT_DIR$/src/actions/index.js" />
-        <option value="$PROJECT_DIR$/src/reducers/game_state.js" />
         <option value="$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js" />
         <option value="$PROJECT_DIR$/src/util.js" />
         <option value="$PROJECT_DIR$/src/containers/map.js" />
+        <option value="$PROJECT_DIR$/src/constants.js" />
+        <option value="$PROJECT_DIR$/src/actions/index.js" />
+        <option value="$PROJECT_DIR$/src/reducers/game_state.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/containers/decks.js" />
+        <option value="$PROJECT_DIR$/src/components/train_card.js" />
       </list>
     </option>
   </component>
@@ -370,7 +367,7 @@
       <workItem from="1525567486626" duration="10477000" />
       <workItem from="1525895605954" duration="64930000" />
       <workItem from="1526150989078" duration="18146000" />
-      <workItem from="1526329035250" duration="10255000" />
+      <workItem from="1526329035250" duration="11969000" />
     </task>
     <task id="LOCAL-00001" summary="Add bucklescript stuff">
       <created>1525566961408</created>
@@ -397,7 +394,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104776000" />
+    <option name="totallyTimeSpent" value="106490000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -585,18 +582,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/train_card.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/buttons.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="447">
           <caret line="141" column="6" lean-forward="false" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -604,14 +594,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/train_hand.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="26" lean-forward="false" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -629,23 +611,6 @@
           <folding>
             <element signature="e#0#39#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/decks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="846">
-          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/deck.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="12" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -732,44 +697,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/game_state.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="32" column="80" lean-forward="false" selection-start-line="32" selection-start-column="80" selection-end-line="32" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/components.ml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2205">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/board.ml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="44" lean-forward="false" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -779,17 +710,6 @@
         <state relative-caret-position="-37">
           <caret line="260" column="12" lean-forward="false" selection-start-line="260" selection-start-column="12" selection-end-line="260" selection-end-column="12" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3890">
-          <caret line="696" column="14" lean-forward="false" selection-start-line="696" selection-start-column="14" selection-end-line="696" selection-end-column="14" />
-          <folding>
-            <marker date="1526341422220" expanded="true" signature="465:1237" ph="{...}" />
-            <marker date="1526341422220" expanded="true" signature="926:1237" ph="[...]" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -824,9 +744,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/board.ml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="44" lean-forward="false" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/deck.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="12" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3885">
+        <state relative-caret-position="3633">
           <caret line="197" column="2" lean-forward="false" selection-start-line="197" selection-start-column="2" selection-end-line="197" selection-end-column="2" />
           <folding />
         </state>
@@ -834,7 +770,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
+        <state relative-caret-position="342">
           <caret line="190" column="2" lean-forward="false" selection-start-line="190" selection-start-column="2" selection-end-line="190" selection-end-column="2" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -844,10 +780,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/train_hand.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="3" column="35" lean-forward="true" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="34" column="38" lean-forward="false" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="32" lean-forward="false" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ttc-ocaml/src/state.bs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16981">
+          <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/game_state.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="48" column="87" lean-forward="false" selection-start-line="48" selection-start-column="87" selection-end-line="48" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+        <state relative-caret-position="203">
+          <caret line="178" column="7" lean-forward="false" selection-start-line="178" selection-start-column="1" selection-end-line="178" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/decks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-120">
+          <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/train_card.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
           <folding />
         </state>
       </provider>

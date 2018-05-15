@@ -3,3 +3,4 @@ export const TAKE_ROUTE = 1;
 export const DECIDED_ROUTES = 2;
 export const SELECT_ROUTE = 3;
 export const NEXT_PLAYER = 4;
+export const DRAW_CARD_FACING_UP = 5;

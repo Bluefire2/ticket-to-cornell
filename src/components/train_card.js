@@ -8,7 +8,9 @@ export default ({color, amount}) => {
         } : {};
     return (
         <div className="train-card" style={{borderImage: actualColor}}>
-            <div className="train-card-amount" style={trainCardAmountStyle}>{amount}</div>
+            {amount > -1 &&
+                <div className="train-card-amount" style={trainCardAmountStyle}>{amount}</div>
+            }
         </div>
     );
 };

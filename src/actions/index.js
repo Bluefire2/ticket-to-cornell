@@ -31,3 +31,10 @@ export function nextPlayer() {
         type: constants.NEXT_PLAYER
     };
 }
+
+export function drawCardFacingUp(index) {
+    return {
+        type: constants.DRAW_CARD_FACING_UP,
+        payload: index
+    };
+}
