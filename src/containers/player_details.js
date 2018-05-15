@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {score, trains_remaining} from '../ttc-ocaml/src/player.bs';
+import {score, trains_remaining, color} from '../ttc-ocaml/src/player.bs';
+import {current_player} from '../ttc-ocaml/src/state.bs';
 import {nextPlayer} from "../actions/index";
-import {playerColorFromIndex} from "../util";
+import {objToState, playerColorFromIndex} from "../util";
 
 class PlayerDetails extends Component {
     render () {
-        const playerColor = playerColorFromIndex(this.props.playerIndex);
+        const playerColor = playerColorFromIndex(color(this.props.player));
         return (
             <div id="player-details">
                 <div id="player-details-name" className="player-detail">
@@ -37,10 +38,8 @@ class PlayerDetails extends Component {
 }
 
 const mapStateToProps = ({gameState}) => {
-    const currentPlayerIndex = gameState.player_index;
     return {
-        player: gameState.players[currentPlayerIndex],
-        playerIndex: gameState.player_index
+        player: current_player(objToState(gameState))
     };
 };
 

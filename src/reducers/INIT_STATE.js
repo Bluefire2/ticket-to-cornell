@@ -1,4 +1,4 @@
-import {init_state, setup_state, end_state1, end_state2} from '../ttc-ocaml/src/state.bs';
+import {init_state, setup_state, end_state1, end_state2, end_state3} from '../ttc-ocaml/src/state.bs';
 import {stateToObj} from '../util';
 
 const url = new URL(window.location.href);
@@ -11,3 +11,4 @@ if(nPlayers === null) {
 }
 
 export default stateToObj(setup_state(init_state(nPlayers, 0)));
+// export default stateToObj(end_state3);

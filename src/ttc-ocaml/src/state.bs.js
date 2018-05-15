@@ -283,7 +283,7 @@ var p_end2_004 = /* routes : :: */[
 ];
 
 var p_end2 = /* record */[
-  /* color : PYellow */2,
+  /* color : PRed */1,
   p_end2_001,
   p_end2_002,
   /* score */18,
@@ -296,7 +296,7 @@ var p_end2 = /* record */[
 
 var end_state3_001 = /* players : :: */[
   /* record */[
-    /* color : PRed */1,
+    /* color : PBlue */0,
     /* destination_tickets : [] */0,
     /* train_cards : :: */[
       /* tuple */[

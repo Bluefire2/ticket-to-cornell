@@ -81,7 +81,7 @@ let end_state2 =
 
 let p_end =
   {
-    color= PRed;
+    color = PBlue;
     destination_tickets = [];
     train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
                    (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
@@ -101,7 +101,7 @@ let r = List.nth (Board.routes) 21
 let fill_in r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
 (* let r2 = List.nth (r_select |> State.routes) 9 *)
 
-let p_end2 = {p_end with color = PYellow;
+let p_end2 = {p_end with color = PRed;
                          destination_tickets = [tick];
                          routes = [(fill_in r)]}
 
