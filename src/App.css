@@ -41,8 +41,8 @@
 }
 
 .route-path-rect {
-    stroke: black; /* for now */
-    stroke-width: 2;
+    stroke: none;
+    stroke-width: 3;
     stroke-dasharray: 5, 2;
 }
 

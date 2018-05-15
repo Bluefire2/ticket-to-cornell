@@ -164,7 +164,7 @@ export const playerColorFromIndex = i => {
         case 4:
             return 'black';
         default:
-            return 'grey';
+            return 'none';
     }
 };
 

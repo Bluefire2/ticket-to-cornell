@@ -104,23 +104,43 @@ class Map extends Component {
 
         console.log('updating');
         d3.select('#mapContainer').select('#map').selectAll('.route-path-rect').remove();
-        const routePaths = d3.select('#mapContainer').select('#map').selectAll('.route-path')
+
+        // Draw the borders:
+        const routePathBorders = d3.select('#mapContainer').select('#map').selectAll('.route-path')
             .data(routeRectangles)
             .enter()
             .append('rect')
             .on('click', d => this.claimRoute.bind(this)(d.route))
-            .style('stroke', d => {
-                return playerColorFromIndex(d.takenBy)
-            })
+            .style('stroke', d => d.trainColor)
             .attr('class', d => `route-path-rect clickable ${d.takenBy > -1 ? 'route-path-rect-taken' : ''}`)
             .attr('route', d => `${d.routeID}`)
-            .style('fill', d => d.trainColor)
+            .style('fill', d => playerColorFromIndex(d.takenBy))
             .attr('x', d => d.x)
             .attr('y', d => d.y)
             // orient the rectangle, by rotating about its top left corner:
             .attr('transform', d => `rotate(${d.theta * 180 / Math.PI}, ${d.x}, ${d.y})`)
             .attr('width', d => d.width)
             .attr('height', d => d.height);
+
+        // Now draw the actual rectangles with zero opacity:
+        // TODO: extract all this into a function or something
+        const routePathRectangles = d3.select('#mapContainer').select('#map').selectAll('.route-path')
+            .data(routeRectangles)
+            .enter()
+            .append('rect')
+            .on('click', d => this.claimRoute.bind(this)(d.route))
+            .style('stroke', d => d.trainColor)
+            .attr('class', d => `route-path-rect clickable ${d.takenBy > -1 ? 'route-path-rect-taken' : ''}`)
+            .attr('route', d => `${d.routeID}`)
+            .style('opacity', 0)
+            .attr('x', d => d.x)
+            .attr('y', d => d.y)
+            // orient the rectangle, by rotating about its top left corner:
+            .attr('transform', d => `rotate(${d.theta * 180 / Math.PI}, ${d.x}, ${d.y})`)
+            .attr('width', d => d.width)
+            .attr('height', d => d.height);
+
+        // This allows the interior of the "rectangle" to be transparent but still clickable
     }
 
     componentDidMount() {
