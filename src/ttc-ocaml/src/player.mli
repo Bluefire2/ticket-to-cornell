@@ -33,6 +33,9 @@ val score : player -> int
 (* [color p] is [p]'s color.  *)
 val color : player -> Components.player_color
 
+(* [is_bot p] is true if [p] is a bot, false otherwise.  *)
+val is_bot : player -> bool
+
 (* [routes p] is [p]'s completed routes.  *)
 val routes : player -> Board.route list
 

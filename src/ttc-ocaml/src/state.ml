@@ -151,6 +151,9 @@ let next_player st =
       let st' = {st with player_index = next_player;
                          turn_ended = false;
                          error = "" } in
+      (* let st' =
+        if (is_bot (current_player st')) then (Ai.ai_move st')
+        else st' in *)
       if ((check_last_round st) || (last_round st))
       then
         let p' = set_last_turn (current_player st') in
