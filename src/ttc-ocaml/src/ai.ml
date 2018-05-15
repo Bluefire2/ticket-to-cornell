@@ -11,22 +11,19 @@ let max a b c =
 let min a b c =
   min c (min a b)
 
-let ai_setup = failwith "bla"
+let ai_setup p dlist =
 (* will call [state_setup], and be able to choose 2-3 destination tickets, and then call
  * decided routes *)
  (* CURRENTLY WILL ONLY EVER TAKE TWO ROUTES, FOR BASICNESS. WILL BE IMPROVED IF TIME RIP*)
-(* let ai_setup st =
-  let st' = setup_state st in
-  let keep_tickets = match choose_destinations st' with
-    | {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] ->
-      if a = c || a = d || b = c || b = d then [0; 1] else
-      if a = e || a = f || b = e || b = f then [0; 2] else
-      if c = e || c = f || d = e || d = f then [1; 2] else
-      if max x y z = x && min x y z = y then [0; 1] else
-      if max x y z = x && min x y z = z then [0; 2] else
-      [1; 2]
-    | _ -> failwith "not possible"
-  in decided_routes st' keep_tickets *)
+  match dlist with
+  | {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] ->
+    if a = c || a = d || b = c || b = d then [0; 1] else
+    if a = e || a = f || b = e || b = f then [0; 2] else
+    if c = e || c = f || d = e || d = f then [1; 2] else
+    if max x y z = x && min x y z = y then [0; 1] else
+    if max x y z = x && min x y z = z then [0; 2] else
+    [1; 2]
+  | _ -> failwith "not possible"
 
 
 let get_val = function
