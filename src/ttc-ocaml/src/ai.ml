@@ -29,6 +29,10 @@ let get_val = function
     | None -> raise (Failure "Not_available")
     | Some x -> x
 
+let rec contains x = function
+  | [] -> false
+  | h::t -> if h=x then true else contains x t
+
 let rec priorize_build (count : int)  (acc : route option) = function
   | [] -> acc
   | h::t -> ( match h with
@@ -138,6 +142,10 @@ let dest_ticket_action clist st p =
   else decided_routes st keep
   (* take w/ smallest point value*)
 
+let rec get_index n c = function
+  | [] -> failwith "out of bounds"
+  | h::t -> if h=c then n else get_index (n+1) c t
+
 
 let place_action p st build_options =
   (* place at a long route, 5-6 prioritized.*)
@@ -146,12 +154,22 @@ let place_action p st build_options =
   (* if color = Grey then *)
   select_route st build (Some color)
 
-let draw_action st p goals =
-  let colors = desired_colors goals p [] in
+let rec draw_action st p goals =
+  (* let colors = desired_colors goals p [] in *)
   let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
-  (* if Board.contains c st.facing_up trains then (*draw_card_facing_up*) st else *)
+  if contains c st.facing_up_trains then
+    let d1 = draw_card_facing_up st (get_index 0 c st.facing_up_trains) in
+    (* let colors' = desired_colors goals p [] in *)
+    let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
+    if contains c st.facing_up_trains then draw_card_facing_up d1 (get_index 0 c d1.facing_up_trains)
+    else draw_card_pile d1
+  else
   let d1 = draw_card_pile st in
-  draw_card_pile st
+  (* let colors' = desired_colors goals p [] in *)
+    let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
+    if contains c st.facing_up_trains then draw_card_facing_up d1 (get_index 0 c d1.facing_up_trains)
+    else draw_card_pile d1
+
 
 
   (* check what colors are needed, if showing, take showing, otherwise take random.
