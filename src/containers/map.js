@@ -171,8 +171,9 @@ class Map extends Component {
     }
 
     claimRoute(route) {
-        const trainColor = get_color(route),
+        let trainColor = get_color(route),
             trainColorParsed = trainColorFromIndex(trainColor);
+        // first check if we need to ask for the primary train colour (i.e. if the route is gray)
         if(trainColorParsed === 'grey') {
             const selectedColor =
                 getCategoryInput(
@@ -180,11 +181,14 @@ class Map extends Component {
                     trainEnglishColorsToIndicesMap,
                     equalCaseInsensitive
                 ).toLowerCase();
-            const selectedColorIndex = trainIndexFromEnglishColor(selectedColor);
-            this.props.selectRoute(route, selectedColorIndex);
-        } else {
-            this.props.selectRoute(route, trainColor);
+            trainColor = trainIndexFromEnglishColor(selectedColor);
         }
+        // then, check if they want to use any wildcards, and if so, how many
+        const amountOfWildcards = parseInt(
+            getCategoryInput('How many wildcards do you want to use?',
+                [0, 1, 2, 3, 4, 5, 6].map(elem => '' + elem)) // :(
+        );
+        this.props.selectRoute(route, trainColor, amountOfWildcards);
     }
 
     render() {
