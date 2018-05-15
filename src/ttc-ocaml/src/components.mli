@@ -58,8 +58,15 @@ module type TrainDeck = sig
    * the trash is shuffled into the deck. *)
   val draw_card : t -> tr -> (card * t * tr)
 
+  (* [five_faceup t tr] is a tuple with an updated deck, trash, and facing up cards 
+   * after adding 5 new faceup cards. *)
   val five_faceup : t -> tr -> (card list * card list * card list)
+
+  (* [add_faceup t tr f] is a tuple with an updated deck, trash, and facing up cards
+   * after adding a new faceup card. *)
   val add_faceup : card list -> card list -> card list -> (card list * card list * card list)
+
+  (* [init_faceup] returns an initialized faceup card list (5). *)
   val init_faceup : unit -> card list
 
   (* [draw_faceup t i f tr] returns the card that the index [i] represents in
