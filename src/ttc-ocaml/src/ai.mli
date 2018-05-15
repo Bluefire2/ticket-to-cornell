@@ -9,7 +9,7 @@ val next_move : Board.route list -> TrainDeck.t -> Player.player -> action
 
 (* [ai_facing_up p td] is the facing up card index the AI wants to choose from
  * the facing up cards [td]. *)
-val ai_facing_up : Player.player -> TrainDeck.t -> int
+val ai_facing_up : Player.player -> Board.route list -> TrainDeck.t -> int
 
 (* [ai_take_dticket p lst td] is the list of indeces the AI wants to choose from
  * the list of destination tickets [lst]. *)
