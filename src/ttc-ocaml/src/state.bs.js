@@ -1184,11 +1184,45 @@ function ai_move(st, second) {
       case 2 : 
           var i = Ai.ai_facing_up(p, routes, facing_up);
           var st$prime$2 = draw_card_facing_up(st, i);
-          tmp = second ? st$prime$2 : ai_move(st$prime$2, true);
+          tmp = second ? /* record */[
+              /* player_index */st$prime$2[/* player_index */0],
+              /* players */st$prime$2[/* players */1],
+              /* routes */st$prime$2[/* routes */2],
+              /* destination_deck */st$prime$2[/* destination_deck */3],
+              /* destination_trash */st$prime$2[/* destination_trash */4],
+              /* choose_destinations */st$prime$2[/* choose_destinations */5],
+              /* train_deck */st$prime$2[/* train_deck */6],
+              /* facing_up_trains */st$prime$2[/* facing_up_trains */7],
+              /* train_trash */st$prime$2[/* train_trash */8],
+              /* taking_routes */st$prime$2[/* taking_routes */9],
+              /* error */st$prime$2[/* error */10],
+              /* turn_ended */true,
+              /* last_round */st$prime$2[/* last_round */12],
+              /* winner */st$prime$2[/* winner */13],
+              /* cards_grabbed */st$prime$2[/* cards_grabbed */14],
+              /* success */st$prime$2[/* success */15]
+            ] : ai_move(st$prime$2, true);
           break;
       case 3 : 
           var st$prime$3 = draw_card_pile(st);
-          tmp = second ? st$prime$3 : ai_move(st$prime$3, true);
+          tmp = second ? /* record */[
+              /* player_index */st$prime$3[/* player_index */0],
+              /* players */st$prime$3[/* players */1],
+              /* routes */st$prime$3[/* routes */2],
+              /* destination_deck */st$prime$3[/* destination_deck */3],
+              /* destination_trash */st$prime$3[/* destination_trash */4],
+              /* choose_destinations */st$prime$3[/* choose_destinations */5],
+              /* train_deck */st$prime$3[/* train_deck */6],
+              /* facing_up_trains */st$prime$3[/* facing_up_trains */7],
+              /* train_trash */st$prime$3[/* train_trash */8],
+              /* taking_routes */st$prime$3[/* taking_routes */9],
+              /* error */st$prime$3[/* error */10],
+              /* turn_ended */true,
+              /* last_round */st$prime$3[/* last_round */12],
+              /* winner */st$prime$3[/* winner */13],
+              /* cards_grabbed */st$prime$3[/* cards_grabbed */14],
+              /* success */st$prime$3[/* success */15]
+            ] : ai_move(st$prime$3, true);
           break;
       
     }
