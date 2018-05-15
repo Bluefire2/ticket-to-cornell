@@ -149,6 +149,8 @@ let grabbing_cards_error st =
   { st with error = "You still need to grab another card from the pile or facing up cards."}
 
 let next_player st =
+  if (st.cards_grabbed = 1) then grabbing_cards_error st
+  else (
   if (turn_ended st) then
     if (game_ended st) then end_game st
     else (
@@ -167,7 +169,7 @@ let next_player st =
                   players = update_players (st'.player_index) p' st'.players }
       else st' )
   else
-    { st with error = "Turn has not ended yet for the current player." }
+    { st with error = "Turn has not ended yet for the current player." } )
 
 let draw_card_facing_up st i =
   if (turn_ended st) then turn_ended_error st
@@ -206,6 +208,8 @@ let draw_card_pile st =
              cards_grabbed = st'.cards_grabbed + 1 } )
 
 let take_route st =
+  if (st.cards_grabbed = 1) then grabbing_cards_error st
+  else
   if (turn_ended st) then turn_ended_error st
   else (
   let deck = st.destination_deck in
@@ -229,6 +233,8 @@ let setup_state st =
   else {st with error = "Can't setup when it is not the first turn."} )
 
 let decided_routes st indexes =
+  if (st.cards_grabbed = 1) then grabbing_cards_error st
+  else
   if (turn_ended st) then turn_ended_error st
   else (
     if (st.taking_routes) then (
@@ -293,6 +299,8 @@ let place_on_board st r clr =
   else {st with error = "Not enough train cards."}
 
 let select_route st r clr =
+  if (st.cards_grabbed = 1) then grabbing_cards_error st
+  else
   if (turn_ended st) then turn_ended_error st
   else (
   if (first_turn (current_player st)) then first_turn_error st
