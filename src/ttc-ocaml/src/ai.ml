@@ -20,6 +20,8 @@ let ai_take_dticket = failwith "unimplemented"
 
 let ai_place_train = failwith "unimplemented"
 
+let ai_setup = failwith "unimplemented"
+
 
 (* will call [state_setup], and be able to choose 2-3 destination tickets, and then call
  * decided routes *)

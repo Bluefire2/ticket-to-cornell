@@ -812,7 +812,7 @@ let state_tests =
   "state47" >:: (fun _ -> assert_equal 0 (st_end5 |> longest_route_player));
 ]
 
-let cpu =
+(* let cpu =
   {
   color = PBlue;
   destination_tickets = [];
@@ -824,7 +824,7 @@ let cpu =
   first_turn = true;
   last_turn = false ;
   bot = true
-   }
+   } *)
 
 
 let ai_tests =

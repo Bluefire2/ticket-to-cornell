@@ -12,14 +12,8 @@ val ai_take_dticket : Player.player -> Board.route list -> DestinationDeck.card 
 
 (* Gives me the route you want to place, the train color that you want to use to
  * place these trains and the number of wild cards that you want to use for this. *)
-val ai_place_train : Player.player -> Board.route list -> Board.route -> Components.train_color -> int
-(*
-(* [ai_move] represents the next move taken by the AI.*)
-val ai_move : state -> state
+val ai_place_train : Player.player -> Board.route list -> Board.route * Components.train_color * int
 
-val ai_setup : state -> state
-
-val dest_ticket_action: state -> Components.destination_ticket list -> int list
-
-(* what train color you want to use to place the train and how many number of wildcards *)
-val place_action : state -> Components.train_color -> int *)
+(* [ai_setup p lst] is the list of indeces of the cards the AI wants to keep from
+ * [lst]. *)
+val ai_setup : Player.player -> DestinationDeck.card list -> int list

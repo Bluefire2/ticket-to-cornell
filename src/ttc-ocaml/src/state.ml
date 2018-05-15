@@ -359,11 +359,23 @@ let select_route st r clr wild =
 
 let rec ai_move st =
   let p = (current_player st) in
+  if (first_turn p) then
+    let st' = setup_state st in
+    let choose = (choose_destinations st') in
+    let lst = Ai.ai_setup p choose in
+    next_player (decided_routes st' lst)
+  else
   let routes = (routes st) in
   let facing_up = (st.facing_up_trains) in
   let st' = match (Ai.next_move routes facing_up p) with
-  | Take_DTicket -> failwith "unimplemented"
-  | Place_Train -> failwith "unimplemented"
+    | Take_DTicket ->
+      let st' = take_route st in
+      let choose = (choose_destinations st') in
+      let lst = Ai.ai_take_dticket p routes choose in
+      decided_routes st' lst
+    | Place_Train ->
+      let (r, clr, n) = Ai.ai_place_train p routes in
+      select_route st r (Some clr) n
   | Take_Faceup ->
     let i = Ai.ai_facing_up p facing_up in
     ai_move (draw_card_facing_up st i)
@@ -390,7 +402,7 @@ and next_player st =
           let st' = {st' with last_round = true;
                               players = update_players (st'.player_index) p' st'.players } in
           if (ai) then ai_move st' else st'
-             else if (ai) then ai_move st' else st' )
+         else if (ai) then ai_move st' else st' )
     else
       { st with error = "Turn has not ended yet for the current player.";
                 success = ""} )
