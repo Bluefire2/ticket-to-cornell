@@ -135,12 +135,33 @@ class Map extends Component {
             .data(this.props.locations)
             .enter()
             .append('circle')
+            .on('mouseover', d => {
+                this.tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                this.tooltip.html(d[0])
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on('mouseout', d => {
+                this.tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            })
+            .attr('data-tip', '')
+            .attr('data-for', 'location-tip')
             .attr('cx', d => d[1] / SCALE)
             .attr('cy', d => d[2] / SCALE)
             .attr('r', 5)
             .attr('fill', 'red');
 
         this.locations = locations;
+
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        this.tooltip = tooltip;
 
         this.draw();
     }
