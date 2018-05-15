@@ -9,6 +9,7 @@ import Decks from './containers/decks';
 import PlayerDetails from './containers/player_details';
 import ErrorMsg from './components/error_msg';
 import SuccessMsg from './components/success_msg';
+import WinScreen from './containers/win_screen';
 
 import Map from './containers/map';
 
@@ -57,15 +58,17 @@ class App extends Component {
                 </div>
                 {this.props.error.length > 0 && <ErrorMsg>{this.props.error}</ErrorMsg>}
                 {this.props.success.length > 0 && <SuccessMsg>{this.props.success}</SuccessMsg>}
+                {this.props.lastRound && <WinScreen/>}
             </div>
         );
     }
 }
 
-const mapStateToProps = ({gameState}) => {
+const mapStateToProps = ({gameState: {error, success, last_round}}) => {
     return {
-        error: gameState.error,
-        success: gameState.success
+        error,
+        success,
+        lastRound: last_round
     };
 };
 
