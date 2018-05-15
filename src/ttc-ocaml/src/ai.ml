@@ -3,11 +3,19 @@ open Player
 open Board
 open State
 
+type action = Take_DTicket | Place_Train | Take_Faceup | Take_Deck
+
 let max a b c =
   max c (max a b)
 
 let min a b c =
   min c (min a b)
+
+let next_move st =
+  failwith "Unimplemem=nted"
+
+
+
 
 (* will call [state_setup], and be able to choose 2-3 destination tickets, and then call
  * decided routes *)
@@ -25,6 +33,7 @@ let ai_setup st =
     | _ -> failwith "not possible"
   in decided_routes st' keep_tickets
 
+
 let get_val = function
     | None -> raise (Failure "Not_available")
     | Some x -> x
@@ -37,6 +46,10 @@ let rec priorize_build (count : int)  (acc : route option) = function
   | [] -> acc
   | h::t -> ( match h with
     | (_,_,l,_,_,_,_) -> if (l > count) then priorize_build l (Some h) t else priorize_build count acc t)
+(* extracts only the color without wilds. *)
+let rec only_color c = function
+  | [] -> 0
+  | (c',num)::t -> if c = c' then num  else only_color c t
 
 let rec extract_hand_colors c acc = function
   | [] -> acc
@@ -124,7 +137,7 @@ let smallest_points = function
 
 
 let dest_ticket_action clist st p =
-  (* draw destination tickets -> contained in clist *)
+  (* (* draw destination tickets -> contained in clist *)
   (* check current routes completed, see if any d tickets are included/easy to do*)
   (* check how many trains are remaining if feasible *)
   (* take ones that aren't difficult. *)
@@ -135,19 +148,31 @@ let dest_ticket_action clist st p =
       decided_routes st (smallest_points clist)
     else decided_routes st ([min_path])
   else decided_routes st keep
-  (* take w/ smallest point value*)
+  (* take w/ smallest point value*) *)
+  failwith "unim"
 
 let rec get_index n c = function
   | [] -> failwith "out of bounds"
   | h::t -> if h=c then n else get_index (n+1) c t
 
+let rec place_on_grey (len : int) hand = match hand with
+  | [] -> failwith "not possible"
+  | (c,num)::t -> if (extract_hand_colors c 0 hand) >= len then c else place_on_grey len t
+
 
 let place_action p st build_options =
-  (* place at a long route, 5-6 prioritized.*)
+  (* (* place at a long route, 5-6 prioritized.*)
   let build = get_val (priorize_build 0 None build_options) in
   let color = get_color build in
-  (* if color = Grey then *)
-  select_route st build (Some color) 0
+  if color = Grey then
+    let choose_color = place_on_grey (Board.get_length build) (p.train_cards) in
+    if (only_color choose_color p.train_cards) < (Board.get_length build) then
+      select_route st build (Some choose_color) 1
+    else select_route st build (Some choose_color) 0
+  else
+    if only_color color p.train_cards < (Board.get_length build) then
+    select_route st build (Some color) 1
+  else select_route st build (Some color) 0 *) failwith "unimp"
 
 let rec draw_action st p goals =
   (* let colors = desired_colors goals p [] in *)
@@ -191,7 +216,7 @@ let rec can_build goal_routes st p =
                        else can_build t st p )
 
 let ai_move st =
-  let cpu = current_player st in
+  (* let cpu = current_player st in
   if completed_dtickets cpu cpu.destination_tickets && cpu.trains_remaining > 5 then
   let ddraw = DestinationDeck.draw_card st.destination_deck st.destination_trash in
   dest_ticket_action (fst ddraw) {st with
@@ -204,7 +229,8 @@ let ai_move st =
   let build_options = can_build goal_routes st cpu in
   if List.length (build_options) > 0 then place_action cpu st build_options
   else
-  draw_action st cpu goal_routes
+  draw_action st cpu goal_routes *)
+  failwith "unimplemented"
 
 
   (* check routes needed for completion *)
