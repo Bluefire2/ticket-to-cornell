@@ -31,7 +31,8 @@ function update_destination_tickets(p, tickets) {
           /* routes */p[/* routes */4],
           /* trains_remaining */p[/* trains_remaining */5],
           /* first_turn */false,
-          /* last_turn */p[/* last_turn */7]
+          /* last_turn */p[/* last_turn */7],
+          /* bot */p[/* bot */8]
         ];
 }
 
@@ -44,7 +45,8 @@ function increase_score(p, n) {
           /* routes */p[/* routes */4],
           /* trains_remaining */p[/* trains_remaining */5],
           /* first_turn */p[/* first_turn */6],
-          /* last_turn */p[/* last_turn */7]
+          /* last_turn */p[/* last_turn */7],
+          /* bot */p[/* bot */8]
         ];
 }
 
@@ -91,6 +93,10 @@ function color(p) {
   return p[/* color */0];
 }
 
+function is_bot(p) {
+  return p[/* bot */8];
+}
+
 function trains_remaining(p) {
   return p[/* trains_remaining */5];
 }
@@ -129,7 +135,7 @@ function add_train_cards(_lst, c, _acc) {
   };
 }
 
-function init_players(n) {
+function init_players(n, bot) {
   if (n !== 0) {
     var p_000 = /* color */color_of_int(n - 1 | 0);
     var p_002 = /* train_cards : :: */[
@@ -195,11 +201,12 @@ function init_players(n) {
       /* routes : [] */0,
       /* trains_remaining */45,
       /* first_turn */true,
-      /* last_turn */false
+      /* last_turn */false,
+      /* bot */bot
     ];
     return /* :: */[
             p,
-            init_players(n - 1 | 0)
+            init_players(n - 1 | 0, bot)
           ];
   } else {
     return /* [] */0;
@@ -215,7 +222,8 @@ function draw_train_card(p, c) {
           /* routes */p[/* routes */4],
           /* trains_remaining */p[/* trains_remaining */5],
           /* first_turn */p[/* first_turn */6],
-          /* last_turn */p[/* last_turn */7]
+          /* last_turn */p[/* last_turn */7],
+          /* bot */p[/* bot */8]
         ];
 }
 
@@ -259,11 +267,13 @@ function remove_color(n, c, lst) {
   }
 }
 
-function place_train(p, r) {
+function place_train(p, r, wild) {
+  var wild_removed = remove_color(wild, /* Wild */8, p[/* train_cards */2]);
+  var cards = remove_color(Board.get_length(r) - wild | 0, Board.get_color(r), wild_removed);
   return /* record */[
           /* color */p[/* color */0],
           /* destination_tickets */p[/* destination_tickets */1],
-          /* train_cards */remove_color(Board.get_length(r), Board.get_color(r), p[/* train_cards */2]),
+          /* train_cards */cards,
           /* score */p[/* score */3] + Board.route_score(r) | 0,
           /* routes : :: */[
             r,
@@ -271,7 +281,8 @@ function place_train(p, r) {
           ],
           /* trains_remaining */p[/* trains_remaining */5] - Board.get_length(r) | 0,
           /* first_turn */p[/* first_turn */6],
-          /* last_turn */p[/* last_turn */7]
+          /* last_turn */p[/* last_turn */7],
+          /* bot */p[/* bot */8]
         ];
 }
 
@@ -284,7 +295,8 @@ function set_last_turn(p) {
           /* routes */p[/* routes */4],
           /* trains_remaining */p[/* trains_remaining */5],
           /* first_turn */p[/* first_turn */6],
-          /* last_turn */true
+          /* last_turn */true,
+          /* bot */p[/* bot */8]
         ];
 }
 
@@ -502,6 +514,7 @@ exports.completed_destination_tickets = completed_destination_tickets;
 exports.train_cards = train_cards;
 exports.score = score;
 exports.color = color;
+exports.is_bot = is_bot;
 exports.routes = routes;
 exports.first_turn = first_turn;
 exports.last_turn = last_turn;
