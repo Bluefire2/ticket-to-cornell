@@ -129,6 +129,7 @@ module type BOARD = sig
   val is_taken : route -> bool
   val get_length : route -> int
   val get_color : route -> Components.train_color
+  val get_player : route -> Components.player_color option
   val name : location -> string
   val completed : string -> string -> route list -> route list -> bool
   val get_location : string -> location list -> location

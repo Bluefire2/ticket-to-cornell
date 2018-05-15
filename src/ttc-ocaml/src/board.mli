@@ -27,6 +27,9 @@ val get_length : route -> int
 (* [get_color] returns the color of the route on the board. *)
 val get_color : route -> train_color
 
+(* [get_player] returns the player if the route has been taken, None otherwise. *)
+val get_player : route -> player_color option
+
 (* [routes] is the total list of the routes on the map. *)
 val routes : route list
 

@@ -5,11 +5,16 @@ import * as d3 from 'd3';
 import config from '../config.json';
 import {playerColorFromIndex, trainColorFromIndex, trainEnglishColorsToIndicesMap, trainIndexFromEnglishColor, getCategoryInput, equalCaseInsensitive, mod} from "../util";
 import {selectRoute} from "../actions/index";
-import {get_color} from '../ttc-ocaml/src/board.bs';
+import {get_color, get_player, route_score} from '../ttc-ocaml/src/board.bs';
 
 const url = new URL(window.location.href);
 let nPlayers = url.searchParams.get("n_players");
-if(nPlayers === null) nPlayers = 2;
+
+if(nPlayers === null) {
+    nPlayers = 2;
+} else {
+    nPlayers = parseInt(nPlayers);
+}
 
 // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
 const SCALE = config.scale,
@@ -26,7 +31,7 @@ const createRectangleDatum = (x, y, theta, width, height, trainColor, route, rou
         height,
         trainColor,
         // TODO: figure out why this doesn't work properly and why it need to be adjusted
-        takenBy: Array.isArray(route[4]) ? mod(route[4][0] - 1, nPlayers) : -1,
+        takenBy: Array.isArray(get_player(route)) ? get_player(route)[0] : -1,
         route,
         routeID
     }
@@ -133,7 +138,7 @@ class Map extends Component {
                 this.routeTooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                this.routeTooltip.html(`${d.routeID} <br\> Points: ${d.route[2]}`)
+                this.routeTooltip.html(`${d.routeID} <br\> Points: ${route_score(d.route)}`)
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
