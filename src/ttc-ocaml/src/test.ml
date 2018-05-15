@@ -826,19 +826,13 @@ let state_tests =
   bot = true
    } *)
 
+let ai1 = init_state 0 2 |> setup_state |> current_player
+let ai1' = init_state 0 2 |> setup_state |> choose_destinations
 
 let ai_tests =
 [
- (*  (* init_ai *)
-  "ai1" >:: (fun _ -> assert_equal true (init_state 0 2 |> current_player |> is_bot));
-  "ai2" >:: (fun _ -> assert_equal true (init_state 0 2 |> ai_setup |> turn_ended));
-  "ai3" >:: (fun _ -> assert_equal false (init_state 0 2 |> ai_setup |> current_player |> first_turn));
-  "ai4" >:: (fun _ -> assert_equal false (init_state 0 2 |> ai_setup |> current_player |> last_turn));
-  "ai5" >:: (fun _ -> assert_equal 2 (init_state 0 2 |> ai_setup |> current_player |> destination_tickets |> List.length));
-  "ai6" >:: (fun _ -> assert_equal 4 ((diff_cards
-                (init_state 0 2 |> current_player |> train_cards)
-                (init_state 0 2 |> setup_state |> current_player |> train_cards))));
-  "ai7" >:: (fun _ -> assert_equal true (init_state 0 2 |> next_player |> current_player |> is_bot)); *)
+(* init_ai *)
+"ai1" >:: (fun _ -> assert_equal true  (init_state 0 2 |> current_player |> is_bot));
 
 ]
 
