@@ -41,9 +41,10 @@ val destination_items : state -> (DestinationDeck.t * DestinationDeck.tr)
  * up, and the train cards trash in [st]. *)
 val train_items : state -> (TrainDeck.t * TrainDeck.t * TrainDeck.tr)
 
-(* [error st] returns a message for the GUI to display for the current [st]. *)
+(* [error st] returns an error message for the GUI to display for the current [st]. *)
 val error : state -> string
 
+(* [success st] returns a success message for the GUI to display for the current [st]. *)
 val success : state -> string
 
 (* [turn_ended st] returns true if the turn has ended for the current [st],
