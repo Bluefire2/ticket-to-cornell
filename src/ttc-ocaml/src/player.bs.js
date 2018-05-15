@@ -135,9 +135,9 @@ function add_train_cards(_lst, c, _acc) {
   };
 }
 
-function init_players(n, bot) {
+function init_players(n, bot, i) {
   if (n !== 0) {
-    var p_000 = /* color */color_of_int(n - 1 | 0);
+    var p_000 = /* color */color_of_int((n + i | 0) - 1 | 0);
     var p_002 = /* train_cards : :: */[
       /* tuple */[
         /* Red */0,
@@ -206,7 +206,7 @@ function init_players(n, bot) {
     ];
     return /* :: */[
             p,
-            init_players(n - 1 | 0, bot)
+            init_players(n - 1 | 0, bot, i)
           ];
   } else {
     return /* [] */0;

@@ -37,8 +37,8 @@ function init_state(n, bots) {
   if ((n + bots | 0) < 2 || (n + bots | 0) > 5) {
     return init;
   } else {
-    var players = Player.init_players(n, false);
-    var bots$1 = Player.init_players(bots, true);
+    var players = Player.init_players(n, false, 0);
+    var bots$1 = Player.init_players(bots, true, n);
     return /* record */[
             /* player_index */0,
             /* players */Pervasives.$at(players, bots$1),
@@ -196,6 +196,203 @@ var end_state2 = /* record */[
   end_state2_013,
   end_state2_014,
   end_state2_015
+];
+
+var r = List.nth(Board.routes, 21);
+
+function fill_in(r) {
+  return /* tuple */[
+          r[0],
+          r[1],
+          r[2],
+          r[3],
+          /* Some */[/* PYellow */2],
+          r[5],
+          r[6]
+        ];
+}
+
+var p_end2_001 = /* destination_tickets : :: */[
+  /* record */[
+    /* loc1 */"Undergraduate Admissions",
+    /* loc2 */"Risley",
+    /* points */15
+  ],
+  /* [] */0
+];
+
+var p_end2_002 = /* train_cards : :: */[
+  /* tuple */[
+    /* Red */0,
+    0
+  ],
+  /* :: */[
+    /* tuple */[
+      /* Blue */2,
+      0
+    ],
+    /* :: */[
+      /* tuple */[
+        /* Green */1,
+        0
+      ],
+      /* :: */[
+        /* tuple */[
+          /* Yellow */3,
+          0
+        ],
+        /* :: */[
+          /* tuple */[
+            /* Black */7,
+            0
+          ],
+          /* :: */[
+            /* tuple */[
+              /* White */6,
+              0
+            ],
+            /* :: */[
+              /* tuple */[
+                /* Pink */4,
+                0
+              ],
+              /* :: */[
+                /* tuple */[
+                  /* Wild */8,
+                  0
+                ],
+                /* :: */[
+                  /* tuple */[
+                    /* Orange */5,
+                    0
+                  ],
+                  /* [] */0
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+];
+
+var p_end2_004 = /* routes : :: */[
+  fill_in(r),
+  /* [] */0
+];
+
+var p_end2 = /* record */[
+  /* color : PYellow */2,
+  p_end2_001,
+  p_end2_002,
+  /* score */18,
+  p_end2_004,
+  /* trains_remaining */2,
+  /* first_turn */false,
+  /* last_turn */false,
+  /* bot */false
+];
+
+var end_state3_001 = /* players : :: */[
+  /* record */[
+    /* color : PRed */1,
+    /* destination_tickets : [] */0,
+    /* train_cards : :: */[
+      /* tuple */[
+        /* Red */0,
+        0
+      ],
+      /* :: */[
+        /* tuple */[
+          /* Blue */2,
+          0
+        ],
+        /* :: */[
+          /* tuple */[
+            /* Green */1,
+            0
+          ],
+          /* :: */[
+            /* tuple */[
+              /* Yellow */3,
+              0
+            ],
+            /* :: */[
+              /* tuple */[
+                /* Black */7,
+                0
+              ],
+              /* :: */[
+                /* tuple */[
+                  /* White */6,
+                  0
+                ],
+                /* :: */[
+                  /* tuple */[
+                    /* Pink */4,
+                    0
+                  ],
+                  /* :: */[
+                    /* tuple */[
+                      /* Wild */8,
+                      0
+                    ],
+                    /* :: */[
+                      /* tuple */[
+                        /* Orange */5,
+                        0
+                      ],
+                      /* [] */0
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    /* score */18,
+    /* routes : [] */0,
+    /* trains_remaining */2,
+    /* first_turn */false,
+    /* last_turn */false,
+    /* bot */false
+  ],
+  /* :: */[
+    p_end2,
+    /* [] */0
+  ]
+];
+
+var end_state3_003 = /* destination_deck */Components.DestinationDeck[/* init_deck */2](/* () */0);
+
+var end_state3_004 = /* destination_trash */Components.DestinationDeck[/* init_trash */3];
+
+var end_state3_006 = /* train_deck */Components.TrainDeck[/* init_deck */1](/* () */0);
+
+var end_state3_007 = /* facing_up_trains */Components.TrainDeck[/* init_faceup */6](/* () */0);
+
+var end_state3_008 = /* train_trash */Components.TrainDeck[/* init_trash */2];
+
+var end_state3 = /* record */[
+  /* player_index */0,
+  end_state3_001,
+  /* routes */Board.routes,
+  end_state3_003,
+  end_state3_004,
+  /* choose_destinations : [] */0,
+  end_state3_006,
+  end_state3_007,
+  end_state3_008,
+  /* taking_routes */false,
+  /* error */"",
+  /* turn_ended */true,
+  /* last_round */false,
+  /* winner : None */0,
+  /* cards_grabbed */0,
+  /* success */""
 ];
 
 function current_player(st) {
@@ -1026,7 +1223,6 @@ function next_player(st) {
               /* success */""
             ];
     } else {
-      var p_clr = stringify_clr(Player.color(current_player(st)));
       var next_player$1 = Caml_int32.mod_(st[/* player_index */0] + 1 | 0, List.length(st[/* players */1]));
       var st$prime_001 = /* players */st[/* players */1];
       var st$prime_002 = /* routes */st[/* routes */2];
@@ -1039,7 +1235,7 @@ function next_player(st) {
       var st$prime_009 = /* taking_routes */st[/* taking_routes */9];
       var st$prime_012 = /* last_round */st[/* last_round */12];
       var st$prime_013 = /* winner */st[/* winner */13];
-      var st$prime_015 = /* success */"Now " + (p_clr + "'s turn.");
+      var st$prime_015 = /* success */st[/* success */15];
       var st$prime$1 = /* record */[
         /* player_index */next_player$1,
         st$prime_001,
@@ -1058,47 +1254,78 @@ function next_player(st) {
         /* cards_grabbed */0,
         st$prime_015
       ];
-      var ai = Player.is_bot(current_player(st$prime$1));
+      var p_clr = stringify_clr(Player.color(current_player(st$prime$1)));
+      var st$prime_001$1 = st$prime_001;
+      var st$prime_002$1 = st$prime_002;
+      var st$prime_003$1 = st$prime_003;
+      var st$prime_004$1 = st$prime_004;
+      var st$prime_005$1 = st$prime_005;
+      var st$prime_006$1 = st$prime_006;
+      var st$prime_007$1 = st$prime_007;
+      var st$prime_008$1 = st$prime_008;
+      var st$prime_009$1 = st$prime_009;
+      var st$prime_012$1 = st$prime_012;
+      var st$prime_013$1 = st$prime_013;
+      var st$prime_015$1 = /* success */"Now " + (p_clr + "'s turn.");
+      var st$prime$2 = /* record */[
+        /* player_index */next_player$1,
+        st$prime_001$1,
+        st$prime_002$1,
+        st$prime_003$1,
+        st$prime_004$1,
+        st$prime_005$1,
+        st$prime_006$1,
+        st$prime_007$1,
+        st$prime_008$1,
+        st$prime_009$1,
+        /* error */"",
+        /* turn_ended */false,
+        st$prime_012$1,
+        st$prime_013$1,
+        /* cards_grabbed */0,
+        st$prime_015$1
+      ];
+      var ai = Player.is_bot(current_player(st$prime$2));
       if (check_last_round(st) || st[/* last_round */12]) {
-        var p$prime = Player.set_last_turn(current_player(st$prime$1));
-        var st$prime_001$1 = /* players */update_players(next_player$1, p$prime, st$prime_001);
-        var st$prime_002$1 = st$prime_002;
-        var st$prime_003$1 = st$prime_003;
-        var st$prime_004$1 = st$prime_004;
-        var st$prime_005$1 = st$prime_005;
-        var st$prime_006$1 = st$prime_006;
-        var st$prime_007$1 = st$prime_007;
-        var st$prime_008$1 = st$prime_008;
-        var st$prime_009$1 = st$prime_009;
-        var st$prime_013$1 = st$prime_013;
-        var st$prime_015$1 = st$prime_015;
-        var st$prime$2 = /* record */[
+        var p$prime = Player.set_last_turn(current_player(st$prime$2));
+        var st$prime_001$2 = /* players */update_players(next_player$1, p$prime, st$prime_001$1);
+        var st$prime_002$2 = st$prime_002$1;
+        var st$prime_003$2 = st$prime_003$1;
+        var st$prime_004$2 = st$prime_004$1;
+        var st$prime_005$2 = st$prime_005$1;
+        var st$prime_006$2 = st$prime_006$1;
+        var st$prime_007$2 = st$prime_007$1;
+        var st$prime_008$2 = st$prime_008$1;
+        var st$prime_009$2 = st$prime_009$1;
+        var st$prime_013$2 = st$prime_013$1;
+        var st$prime_015$2 = st$prime_015$1;
+        var st$prime$3 = /* record */[
           /* player_index */next_player$1,
-          st$prime_001$1,
-          st$prime_002$1,
-          st$prime_003$1,
-          st$prime_004$1,
-          st$prime_005$1,
-          st$prime_006$1,
-          st$prime_007$1,
-          st$prime_008$1,
-          st$prime_009$1,
+          st$prime_001$2,
+          st$prime_002$2,
+          st$prime_003$2,
+          st$prime_004$2,
+          st$prime_005$2,
+          st$prime_006$2,
+          st$prime_007$2,
+          st$prime_008$2,
+          st$prime_009$2,
           /* error */"",
           /* turn_ended */false,
           /* last_round */true,
-          st$prime_013$1,
+          st$prime_013$2,
           /* cards_grabbed */0,
-          st$prime_015$1
+          st$prime_015$2
         ];
         if (ai) {
-          return ai_move(st$prime$2, false);
+          return ai_move(st$prime$3, false);
         } else {
-          return st$prime$2;
+          return st$prime$3;
         }
       } else if (ai) {
-        return ai_move(st$prime$1, false);
+        return ai_move(st$prime$2, false);
       } else {
-        return st$prime$1;
+        return st$prime$2;
       }
     }
   } else {
@@ -1126,6 +1353,7 @@ function next_player(st) {
 exports.init_state = init_state;
 exports.end_state1 = end_state1;
 exports.end_state2 = end_state2;
+exports.end_state3 = end_state3;
 exports.current_player = current_player;
 exports.players = players;
 exports.routes = routes;
