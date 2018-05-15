@@ -16,11 +16,6 @@ let next_move st =
 
 let ai_facing_up = failwith "unimplemented"
 
-let ai_take_dticket = failwith "unimplemented"
-
-let ai_place_train = failwith "unimplemented"
-
-
 (* will call [state_setup], and be able to choose 2-3 destination tickets, and then call
  * decided routes *)
  (* CURRENTLY WILL ONLY EVER TAKE TWO ROUTES, FOR BASICNESS. WILL BE IMPROVED IF TIME RIP*)
@@ -37,7 +32,7 @@ let ai_place_train = failwith "unimplemented"
     | _ -> failwith "not possible"
   in decided_routes st' keep_tickets *)
 
-(*
+
 let get_val = function
     | None -> raise (Failure "Not_available")
     | Some x -> x
@@ -88,15 +83,15 @@ let rec best_paths =  function
   | [] -> []
   | {loc1 = x; loc2 = y; points = z}::t -> (get_paths x y [])::(best_paths t)
 
-let rec best_routes st = function
+let rec best_routes st_routes = function
   | [] -> []
-  | h::t -> (path_routes st.routes h)::(best_routes st t)
+  | h::t -> (path_routes st_routes h)::(best_routes st_routes t)
 
 let other_player p = function
   | (_,_,_,_,None,_,_) -> false
   | (_,_,_,_,x,_,_) -> Some p.color <> x
 
-let rec check_routes p st (rts : route list) acc =
+let rec check_routes p st_routes (rts : route list) acc =
   match rts with
   | [] -> acc
   | rt::t -> if other_player p rt then
@@ -104,85 +99,95 @@ let rec check_routes p st (rts : route list) acc =
              ( match rt with
               | (l1,l2,_,_,_,_,_) -> try (let new_l = get_val (get_next_loc l1 goal None (-1.) ((get_string l2)::(extract_strings acc)) (get_neighbors l1)) in
               let new_path = (get_paths (new_l) (goal) (extract_strings acc)) in
-              let reroute = path_routes st.routes new_path in
-               check_routes p st reroute []) with
+              let reroute = path_routes st_routes new_path in
+               check_routes p st_routes reroute []) with
               | Failure _ -> [] )
-              else check_routes p st t (rt::acc)
+              else check_routes p st_routes t (rt::acc)
 
-let rec check_routes_list p st rtss acc =
+let rec check_routes_list p st_routes rtss acc =
   match rtss with
   | [] -> acc
-  | rts::t -> (check_routes_list p st t ((check_routes p st rts [])::acc))
+  | rts::t -> (check_routes_list p st_routes t ((check_routes p st_routes rts [])::acc))
 
 let rec count_route p (rts : route list) = match rts with
   | [] -> 0
   | (_,_,l,_,o,_,_)::t -> if o = Some p.color then count_route p t else l + count_route p t
 
-let rec dest_ticket_helper clist st acc p n = match clist with
+let rec dest_ticket_helper clist st_routes acc p n = match clist with
     | [] -> acc
     | h::t -> ( match h with
-            | {loc1 = x; loc2 = y; points = z} -> if completed x y (st.routes) [] then dest_ticket_helper t st (acc@[n]) p (n+1)
+            | {loc1 = x; loc2 = y; points = z} -> if completed x y (st_routes) [] then dest_ticket_helper t st_routes (acc@[n]) p (n+1)
                                                   else let path = get_paths x y [] in
-                                                  let pathroute = path_routes (st.routes) (path) in
-                                                  let confirmed = check_routes p st pathroute [] in
-                                                  if (count_route p confirmed > p.trains_remaining)  then dest_ticket_helper clist st acc p (n+1)
-                                                  else if count_route p confirmed >= 9 then dest_ticket_helper clist st (acc@[n]) p (n+1) else dest_ticket_helper clist st acc p (n+1) )
+                                                  let pathroute = path_routes (st_routes) (path) in
+                                                  let confirmed = check_routes p st_routes pathroute [] in
+                                                  if (count_route p confirmed > p.trains_remaining)  then dest_ticket_helper t st_routes acc p (n+1)
+                                                  else if count_route p confirmed >= 9 then dest_ticket_helper t st_routes (acc@[n]) p (n+1)
+                                                  else dest_ticket_helper t st_routes acc p (n+1) )
 
-let rec get_smallest_path clist st p count acc n = match clist with
+let rec get_smallest_path clist st_routes p count acc n = match clist with
   | [] -> acc
   | h::t -> ( match h with
             | {loc1 = x; loc2 = y; points = z} -> let path = get_paths x y [] in
-                                                  let pathroute = path_routes (st.routes) (path) in
-                                                  let confirmed = check_routes p st pathroute [] in
+                                                  let pathroute = path_routes (st_routes) (path) in
+                                                  let confirmed = check_routes p st_routes pathroute [] in
                                                   let num = count_route p confirmed in
-                                                  if num < count then get_smallest_path t st p num n (n+1) else
-                                                  get_smallest_path t st p count acc (n+1) )
+                                                  if num < count then get_smallest_path t st_routes p num n (n+1) else
+                                                  get_smallest_path t st_routes p count acc (n+1) )
 
 let smallest_points = function
   | {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] ->
         if min x y z = x then [0] else
-        if min x y z = y then [1] else [2] *)
+        if min x y z = y then [1] else [2]
 
 
-let dest_ticket_action  =
+let ai_take_dticket p rts dest_choice  =
   (* draw destination tickets -> contained in clist *)
   (* check current routes completed, see if any d tickets are included/easy to do*)
   (* check how many trains are remaining if feasible *)
   (* take ones that aren't difficult. *)
-  (* let keep = dest_ticket_helper clist st [] p 0 in
+  let keep = dest_ticket_helper dest_choice rts [] p 0 in
   if (List.length keep) = 0 then
-    let min_path = get_smallest_path clist st p 0 (-1) 0 in
+    let min_path = get_smallest_path dest_choice rts p 0 (-1) 0 in
     if min_path > p.trains_remaining then
-      (smallest_points clist)
+      (smallest_points dest_choice)
     else [min_path]
   else keep
-  (* take w/ smallest point value*) *) failwith "a"
-
-
   (* take w/ smallest point value*)
-(*
+
+
 let rec get_index n c = function
   | [] -> failwith "out of bounds"
   | h::t -> if h=c then n else get_index (n+1) c t
 
 let rec place_on_grey (len : int) hand = match hand with
   | [] -> failwith "not possible"
-  | (c,num)::t -> if (extract_hand_colors c 0 hand) >= len then c else place_on_grey len t *)
+  | (c,num)::t -> if (extract_hand_colors c 0 hand) >= len then c else place_on_grey len t
+
+let rec can_build goal_routes p =
+  match goal_routes with
+  | [] -> []
+  | h::t -> ( match h with
+      | (_,_,l,c,o,_,_) -> if o = None && (extract_hand_colors c 0 p.train_cards = l) || (c = Grey && enough_cards p.train_cards l) then (h::(can_build t p))
+                       else can_build t p )
 
 
-let place_action  =
+let ai_place_train cpu (rts : route list)  =
   (* place at a long route, 5-6 prioritized.*)
-  (* let build = get_val (priorize_build 0 None build_options) in
+  let goal_routes = best_routes rts (best_paths cpu.destination_tickets) in
+  let routes = check_routes_list cpu rts (goal_routes) [] in
+  let goal_routes = List.flatten routes in
+  let build_options = can_build goal_routes cpu in
+  let build = get_val (priorize_build 0 None build_options) in
   let color = get_color build in
   if color = Grey then
-    let choose_color = place_on_grey (Board.get_length build) (p.train_cards) in
-    if (only_color choose_color p.train_cards) < (Board.get_length build) then
-      choose_color (Board.get_length build - only_color (choose_color) (p.train_cards))
-    else choose_color 0
+    let choose_color = place_on_grey (Board.get_length build) (cpu.train_cards) in
+    if (only_color choose_color cpu.train_cards) < (Board.get_length build) then
+      (build, choose_color, (Board.get_length build - only_color (choose_color) (cpu.train_cards)))
+    else (build,choose_color,0)
   else
-    if only_color color p.train_cards < (Board.get_length build) then
-    color (Board.get_length build - only_color (color) (p.train_cards))
-  else color 0 *) failwith "done but not really"
+    if only_color color cpu.train_cards < (Board.get_length build) then
+    (build,color, (Board.get_length build - only_color (color) (cpu.train_cards)))
+  else (build,color, 0)
 
 (* let rec draw_action st p goals =
   (* let colors = desired_colors goals p [] in *)
@@ -206,36 +211,28 @@ let place_action  =
   (* check what colors are needed, if showing, take showing, otherwise take random.
    * take wild if 1 away from 5 or 6 route needed. *)
 
-(*
+
 let rec completed_dtickets (p : player) dtickets =
   match dtickets with
   | [] -> true
   | {loc1 = x; loc2 = y; points = z}::t -> completed x y p.routes [] && completed_dtickets p t
 
-let rec incomplete_dticket st dtickets acc =
+(* let rec incomplete_dticket st dtickets acc =
   match dtickets with
   | [] -> acc
   | {loc1 = x; loc2 = y; points = z}::t -> if not (completed x y st.routes [])
                                            then incomplete_dticket st t (({loc1 = x; loc2 = y; points = z})::acc)
-                                           else incomplete_dticket st t acc
+                                           else incomplete_dticket st t acc  *)
 
-let rec can_build goal_routes st p =
-  match goal_routes with
-  | [] -> []
-  | h::t -> ( match h with
-      | (_,_,l,c,o,_,_) -> if o = None && (extract_hand_colors c 0 p.train_cards = l || (c = Grey && enough_cards p.train_cards l)) then (h::(can_build t st p))
-                       else can_build t st p ) *)
-
-let next_move  =
-  (* let cpu = current_player st in
+let next_move rts faceup cpu =
   if completed_dtickets cpu cpu.destination_tickets && cpu.trains_remaining > 5 then Take_DTicket else
-  let goal_routes = best_routes st (best_paths cpu.destination_tickets) in
-  let routes = check_routes_list cpu st (goal_routes) [] in
+  let goal_routes = best_routes rts (best_paths cpu.destination_tickets) in
+  let routes = check_routes_list cpu rts (goal_routes) [] in
   let goal_routes = List.flatten routes in
-  let build_options = can_build goal_routes st cpu in
+  let build_options = can_build goal_routes cpu in
   if List.length (build_options) > 0 then Place_Train else
   let colors = desired_colors goal_routes cpu [] in
-  if check_faceup colors st.facing_up_trains then Take_Faceup else Take_Deck *) failwith "nada"
+  if check_faceup colors faceup then Take_Faceup else Take_Deck
 
 
 let ai_move st =
