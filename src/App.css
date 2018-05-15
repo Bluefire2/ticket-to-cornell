@@ -46,6 +46,12 @@
     stroke-dasharray: 5, 2;
 }
 
+.route-path-rect-taken {
+    background-size: cover;
+    background-image: url('./images/bus-profile.png'); /* TODO: fix this (SVG rects can't use this property) */
+    stroke-dasharray: 0;
+}
+
 .train-card {
     background-image: url('./images/tcat_card.png');
     background-size: cover;
@@ -103,13 +109,23 @@
     border: 5px solid #81a990; /* colour is specified inline */
     margin: 5px;
     float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .destination-ticket-top, .destination-ticket-bottom {
-    height: 20%;
-    margin: 20% 5% 5%;
+    /*height: 20%;*/
     text-align: center;
     color: beige;
+}
+
+.destination-ticket-top {
+    margin-top: 25%;
+}
+
+.destination-ticket-bottom {
+    margin-bottom: 25%;
 }
 
 .destination-ticket-points {
