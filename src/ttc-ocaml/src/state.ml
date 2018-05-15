@@ -377,7 +377,7 @@ let rec ai_move st =
       let (r, clr, n) = Ai.ai_place_train p routes in
       select_route st r (Some clr) n
   | Take_Faceup ->
-    let i = Ai.ai_facing_up p facing_up in
+    let i = Ai.ai_facing_up p routes facing_up in
     ai_move (draw_card_facing_up st i)
   | Take_Deck -> ai_move (draw_card_pile st) in
   next_player (st')

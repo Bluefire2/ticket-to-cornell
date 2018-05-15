@@ -142,7 +142,7 @@ end
 module type AI = sig
   type action = Take_DTicket | Place_Train | Take_Faceup | Take_Deck
   val next_move : Board.route list -> Components.TrainDeck.t -> Player.player -> action
-  val ai_facing_up : Player.player -> Components.TrainDeck.t -> int
+  val ai_facing_up : Player.player -> Board.route list -> Components.TrainDeck.t -> int
   val ai_take_dticket : Player.player -> Board.route list -> Components.DestinationDeck.card list -> int list
   val ai_place_train : Player.player -> Board.route list -> Board.route * Components.train_color * int
   val ai_setup : Player.player -> Components.DestinationDeck.card list -> int list
