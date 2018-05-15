@@ -103,13 +103,23 @@
     border: 5px solid #81a990; /* colour is specified inline */
     margin: 5px;
     float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .destination-ticket-top, .destination-ticket-bottom {
-    height: 20%;
-    margin: 20% 5% 5%;
+    /*height: 20%;*/
     text-align: center;
     color: beige;
+}
+
+.destination-ticket-top {
+    margin-top: 25%;
+}
+
+.destination-ticket-bottom {
+    margin-bottom: 25%;
 }
 
 .destination-ticket-points {
