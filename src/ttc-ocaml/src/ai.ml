@@ -61,7 +61,7 @@ let rec extract_strings rts =
 let rec enough_cards hand n =
     match hand with
     | [] -> false
-    | (c,num)::t -> if num >= n then true else enough_cards hand n
+    | (c,num)::t -> if num >= n then true else enough_cards t n
 
 let rec best_paths =  function
   | [] -> []
@@ -91,7 +91,7 @@ let rec check_routes p st (rts : route list) acc =
 let rec check_routes_list p st rtss acc =
   match rtss with
   | [] -> acc
-  | rts::t -> (check_routes_list p st t (check_routes p st rts []::acc))
+  | rts::t -> (check_routes_list p st t ((check_routes p st rts [])::acc))
 
 let rec count_route p (rts : route list) = match rts with
   | [] -> 0
@@ -171,10 +171,10 @@ let rec draw_action st p goals =
    * take wild if 1 away from 5 or 6 route needed. *)
 
 
-let rec completed_dtickets st dtickets =
+let rec completed_dtickets (p : player) dtickets =
   match dtickets with
   | [] -> true
-  | {loc1 = x; loc2 = y; points = z}::t -> completed x y st.routes [] && completed_dtickets st t
+  | {loc1 = x; loc2 = y; points = z}::t -> completed x y p.routes [] && completed_dtickets p t
 
 let rec incomplete_dticket st dtickets acc =
   match dtickets with
@@ -192,7 +192,7 @@ let rec can_build goal_routes st p =
 
 let ai_move st =
   let cpu = current_player st in
-  if completed_dtickets st cpu.destination_tickets && cpu.trains_remaining > 5 then
+  if completed_dtickets cpu cpu.destination_tickets && cpu.trains_remaining > 5 then
   let ddraw = DestinationDeck.draw_card st.destination_deck st.destination_trash in
   dest_ticket_action (fst ddraw) {st with
                                   destination_deck = (snd ddraw);
