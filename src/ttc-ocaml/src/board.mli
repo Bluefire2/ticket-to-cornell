@@ -43,6 +43,7 @@ val locations: location list
  * Requires: a list of routes that accounts for all routes a player has completed. *)
 val completed : string -> string -> route list -> route list -> bool
 
+(* [get_location s lst] is a location in [lst] with name [s]. *)
 val get_location : string -> location list -> location
 
 (* [get_nexT_loc] returns the next location name that should be traveled to from a starting location
