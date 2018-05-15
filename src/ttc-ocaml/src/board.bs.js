@@ -14,6 +14,10 @@ function get_color(param) {
   return param[3];
 }
 
+function get_player(param) {
+  return param[4];
+}
+
 function contains(x, _param) {
   while(true) {
     var param = _param;
@@ -1664,85 +1668,6 @@ function loop$1(_acc, _param) {
 
 var routes = loop$1(/* [] */0, route_connections);
 
-function completed(loc1, loc2, _routes, _prev) {
-  while(true) {
-    var prev = _prev;
-    var routes = _routes;
-    if (routes) {
-      var h = routes[0];
-      var l2 = h[1][0];
-      var l1 = h[0][0];
-      var t = routes[1];
-      if (loc1 === l1) {
-        if (loc2 === l2 || completed(l2, loc2, t, /* :: */[
-                h,
-                prev
-              ]) || completed(l2, loc2, prev, /* [] */0)) {
-          return true;
-        } else {
-          _prev = /* :: */[
-            h,
-            prev
-          ];
-          _routes = t;
-          continue ;
-        }
-      } else if (loc1 === l2) {
-        if (loc2 === l1 || completed(l1, loc2, t, /* :: */[
-                h,
-                prev
-              ]) || completed(l1, loc2, prev, /* [] */0)) {
-          return true;
-        } else {
-          _prev = /* :: */[
-            h,
-            prev
-          ];
-          _routes = t;
-          continue ;
-        }
-      } else if (loc2 === l1) {
-        if (loc1 === l2 || completed(loc1, l2, t, /* :: */[
-                h,
-                prev
-              ]) || completed(loc1, l2, prev, /* [] */0)) {
-          return true;
-        } else {
-          _prev = /* :: */[
-            h,
-            prev
-          ];
-          _routes = t;
-          continue ;
-        }
-      } else if (loc2 === l2) {
-        if (loc1 === l1 || completed(loc1, l1, t, /* :: */[
-                h,
-                prev
-              ]) || completed(loc1, l1, prev, /* [] */0)) {
-          return true;
-        } else {
-          _prev = /* :: */[
-            h,
-            prev
-          ];
-          _routes = t;
-          continue ;
-        }
-      } else {
-        _prev = /* :: */[
-          h,
-          prev
-        ];
-        _routes = t;
-        continue ;
-      }
-    } else {
-      return false;
-    }
-  };
-}
-
 function get_location(s, _locations) {
   while(true) {
     var locations = _locations;
@@ -1775,7 +1700,7 @@ function get_route(s1, s2, _routes) {
       var match = routes[0];
       var y = match[1];
       var x = match[0];
-      if (Caml_obj.caml_equal(get_location(s1, locations$1), x) && Caml_obj.caml_equal(get_location(s2, locations$1), y) || Caml_obj.caml_equal(get_location(s1, locations$1), y) && Caml_obj.caml_equal(get_location(s2, locations$1), x)) {
+      if (s1 === get_string(x) && s2 === get_string(y) || s1 === get_string(y) && s2 === get_string(x)) {
         return /* tuple */[
                 x,
                 y,
@@ -1882,10 +1807,90 @@ function path_routes(rts, paths) {
   }
 }
 
+function completed(loc1, loc2, _routes, _prev) {
+  while(true) {
+    var prev = _prev;
+    var routes = _routes;
+    if (routes) {
+      var h = routes[0];
+      var l2 = h[1][0];
+      var l1 = h[0][0];
+      var t = routes[1];
+      if (loc1 === l1) {
+        if (loc2 === l2 || completed(l2, loc2, t, /* :: */[
+                h,
+                prev
+              ]) || completed(l2, loc2, prev, /* [] */0)) {
+          return true;
+        } else {
+          _prev = /* :: */[
+            h,
+            prev
+          ];
+          _routes = t;
+          continue ;
+        }
+      } else if (loc1 === l2) {
+        if (loc2 === l1 || completed(l1, loc2, t, /* :: */[
+                h,
+                prev
+              ]) || completed(l1, loc2, prev, /* [] */0)) {
+          return true;
+        } else {
+          _prev = /* :: */[
+            h,
+            prev
+          ];
+          _routes = t;
+          continue ;
+        }
+      } else if (loc2 === l1) {
+        if (loc1 === l2 || completed(loc1, l2, t, /* :: */[
+                h,
+                prev
+              ]) || completed(loc1, l2, prev, /* [] */0)) {
+          return true;
+        } else {
+          _prev = /* :: */[
+            h,
+            prev
+          ];
+          _routes = t;
+          continue ;
+        }
+      } else if (loc2 === l2) {
+        if (loc1 === l1 || completed(loc1, l1, t, /* :: */[
+                h,
+                prev
+              ]) || completed(loc1, l1, prev, /* [] */0)) {
+          return true;
+        } else {
+          _prev = /* :: */[
+            h,
+            prev
+          ];
+          _routes = t;
+          continue ;
+        }
+      } else {
+        _prev = /* :: */[
+          h,
+          prev
+        ];
+        _routes = t;
+        continue ;
+      }
+    } else {
+      return false;
+    }
+  };
+}
+
 exports.route_score = route_score;
 exports.is_taken = is_taken;
 exports.get_length = get_length;
 exports.get_color = get_color;
+exports.get_player = get_player;
 exports.routes = routes;
 exports.name = name;
 exports.locations = locations$1;
