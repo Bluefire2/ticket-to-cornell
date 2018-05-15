@@ -206,13 +206,13 @@ let next_player st =
   if (turn_ended st) then
     if (game_ended st) then end_game st
     else (
+      let p_clr = (st |> current_player |> Player.color |> stringify_clr) in
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
       let st' = {st with player_index = next_player;
                          turn_ended = false;
                          error = "";
-                         cards_grabbed = 0} in
-      let p_clr = (st' |> current_player |> Player.color |> stringify_clr) in
-      let st' = {st' with success = "Now " ^ p_clr ^ "'s turn."} in
+                         cards_grabbed = 0;
+                         success = "Now " ^ p_clr ^ "'s turn."} in
       (* let st' =
         if (is_bot (current_player st')) then (Ai.ai_move st')
         else st' in *)

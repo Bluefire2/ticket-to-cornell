@@ -428,6 +428,7 @@ function next_player(st) {
               /* success */""
             ];
     } else {
+      var p_clr = stringify_clr(Player.color(current_player(st)));
       var next_player$1 = Caml_int32.mod_(st[/* player_index */0] + 1 | 0, List.length(st[/* players */1]));
       var st$prime_001 = /* players */st[/* players */1];
       var st$prime_002 = /* routes */st[/* routes */2];
@@ -440,7 +441,7 @@ function next_player(st) {
       var st$prime_009 = /* taking_routes */st[/* taking_routes */9];
       var st$prime_012 = /* last_round */st[/* last_round */12];
       var st$prime_013 = /* winner */st[/* winner */13];
-      var st$prime_015 = /* success */st[/* success */15];
+      var st$prime_015 = /* success */"Now " + (p_clr + "'s turn.");
       var st$prime$1 = /* record */[
         /* player_index */next_player$1,
         st$prime_001,
@@ -459,59 +460,28 @@ function next_player(st) {
         /* cards_grabbed */0,
         st$prime_015
       ];
-      var p_clr = stringify_clr(Player.color(current_player(st$prime$1)));
-      var st$prime_001$1 = st$prime_001;
-      var st$prime_002$1 = st$prime_002;
-      var st$prime_003$1 = st$prime_003;
-      var st$prime_004$1 = st$prime_004;
-      var st$prime_005$1 = st$prime_005;
-      var st$prime_006$1 = st$prime_006;
-      var st$prime_007$1 = st$prime_007;
-      var st$prime_008$1 = st$prime_008;
-      var st$prime_009$1 = st$prime_009;
-      var st$prime_012$1 = st$prime_012;
-      var st$prime_013$1 = st$prime_013;
-      var st$prime_015$1 = /* success */"Now " + (p_clr + "'s turn.");
-      var st$prime$2 = /* record */[
-        /* player_index */next_player$1,
-        st$prime_001$1,
-        st$prime_002$1,
-        st$prime_003$1,
-        st$prime_004$1,
-        st$prime_005$1,
-        st$prime_006$1,
-        st$prime_007$1,
-        st$prime_008$1,
-        st$prime_009$1,
-        /* error */"",
-        /* turn_ended */false,
-        st$prime_012$1,
-        st$prime_013$1,
-        /* cards_grabbed */0,
-        st$prime_015$1
-      ];
       if (check_last_round(st) || st[/* last_round */12]) {
-        var p$prime = Player.set_last_turn(current_player(st$prime$2));
+        var p$prime = Player.set_last_turn(current_player(st$prime$1));
         return /* record */[
                 /* player_index */next_player$1,
-                /* players */update_players(next_player$1, p$prime, st$prime_001$1),
-                st$prime_002$1,
-                st$prime_003$1,
-                st$prime_004$1,
-                st$prime_005$1,
-                st$prime_006$1,
-                st$prime_007$1,
-                st$prime_008$1,
-                st$prime_009$1,
+                /* players */update_players(next_player$1, p$prime, st$prime_001),
+                st$prime_002,
+                st$prime_003,
+                st$prime_004,
+                st$prime_005,
+                st$prime_006,
+                st$prime_007,
+                st$prime_008,
+                st$prime_009,
                 /* error */"",
                 /* turn_ended */false,
                 /* last_round */true,
-                st$prime_013$1,
+                st$prime_013,
                 /* cards_grabbed */0,
-                st$prime_015$1
+                st$prime_015
               ];
       } else {
-        return st$prime$2;
+        return st$prime$1;
       }
     }
   } else {
