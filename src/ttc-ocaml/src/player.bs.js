@@ -267,9 +267,9 @@ function remove_color(n, c, lst) {
   }
 }
 
-function place_train(p, r, wild) {
+function place_train(p, clr, r, wild) {
   var wild_removed = remove_color(wild, /* Wild */8, p[/* train_cards */2]);
-  var cards = remove_color(Board.get_length(r) - wild | 0, Board.get_color(r), wild_removed);
+  var cards = remove_color(Board.get_length(r) - wild | 0, clr, wild_removed);
   return /* record */[
           /* color */p[/* color */0],
           /* destination_tickets */p[/* destination_tickets */1],

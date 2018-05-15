@@ -111,6 +111,22 @@ function get_val(param) {
   }
 }
 
+function contains(x, _param) {
+  while(true) {
+    var param = _param;
+    if (param) {
+      if (Caml_obj.caml_equal(param[0], x)) {
+        return true;
+      } else {
+        _param = param[1];
+        continue ;
+      }
+    } else {
+      return false;
+    }
+  };
+}
+
 function priorize_build(_count, _acc, _param) {
   while(true) {
     var param = _param;
@@ -134,40 +150,19 @@ function priorize_build(_count, _acc, _param) {
   };
 }
 
-function extract_hand_colors(c, _param) {
+function extract_hand_colors(c, _acc, _param) {
   while(true) {
     var param = _param;
-    if (param) {
-      var match = param[0];
-      if (Caml_obj.caml_equal(c, match[0])) {
-        return match[1];
-      } else {
-        _param = param[1];
-        continue ;
-      }
-    } else {
-      return 0;
-    }
-  };
-}
-
-function desired_colors(_goal_routes, p, _acc) {
-  while(true) {
     var acc = _acc;
-    var goal_routes = _goal_routes;
-    if (goal_routes) {
-      var t = goal_routes[1];
-      var match = goal_routes[0];
-      var c = match[3];
-      if (match[4] === /* None */0 && (match[2] - extract_hand_colors(c, p[/* train_cards */2]) | 0) > 0) {
-        _acc = /* :: */[
-          c,
-          acc
-        ];
-        _goal_routes = t;
+    if (param) {
+      var t = param[1];
+      var match = param[0];
+      var c$prime = match[0];
+      _param = t;
+      if (c === c$prime || c$prime === /* Wild */8) {
+        _acc = acc + match[1] | 0;
         continue ;
       } else {
-        _goal_routes = t;
         continue ;
       }
     } else {
@@ -428,12 +423,30 @@ function smallest_points(param) {
           Caml_builtin_exceptions.match_failure,
           [
             "ai.ml",
-            121,
+            120,
             22
           ]
         ];
   }
   
+}
+
+function get_index(_n, c, _param) {
+  while(true) {
+    var param = _param;
+    var n = _n;
+    if (param) {
+      if (Caml_obj.caml_equal(param[0], c)) {
+        return n;
+      } else {
+        _param = param[1];
+        _n = n + 1 | 0;
+        continue ;
+      }
+    } else {
+      return Pervasives.failwith("out of bounds");
+    }
+  };
 }
 
 function completed_dtickets(st, _dtickets) {
@@ -461,7 +474,7 @@ function can_build(_goal_routes, st, p) {
       var c = h[3];
       var l = h[2];
       var t = goal_routes[1];
-      if (h[4] === /* None */0 && (extract_hand_colors(c, p[/* train_cards */2]) === l || c === /* Grey */9 && enough_cards(p[/* train_cards */2], l))) {
+      if (h[4] === /* None */0 && (extract_hand_colors(c, 0, p[/* train_cards */2]) === l || c === /* Grey */9 && enough_cards(p[/* train_cards */2], l))) {
         return /* :: */[
                 h,
                 can_build(t, st, p)
@@ -496,7 +509,8 @@ function ai_move(st) {
       /* turn_ended */st[/* turn_ended */11],
       /* last_round */st[/* last_round */12],
       /* winner */st[/* winner */13],
-      /* cards_grabbed */st[/* cards_grabbed */14]
+      /* cards_grabbed */st[/* cards_grabbed */14],
+      /* success */st[/* success */15]
     ];
     var p = cpu;
     var keep = dest_ticket_helper(clist, st$1, /* [] */0, p, 0);
@@ -526,19 +540,57 @@ function ai_move(st) {
       return State.select_route(st$2, build, /* Some */[color], 0);
     } else {
       var st$3 = st;
-      var p$1 = cpu;
       var goals = goal_routes$1;
-      desired_colors(goals, p$1, /* [] */0);
       var match = priorize_build(0, /* None */0, goals);
       if (match) {
-        State.draw_card_pile(st$3);
-        return State.draw_card_pile(st$3);
+        var c = match[0][3];
+        if (contains(c, st$3[/* facing_up_trains */7])) {
+          var d1 = State.draw_card_facing_up(st$3, get_index(0, c, st$3[/* facing_up_trains */7]));
+          var match$1 = priorize_build(0, /* None */0, goals);
+          if (match$1) {
+            var c$1 = match$1[0][3];
+            if (contains(c$1, st$3[/* facing_up_trains */7])) {
+              return State.draw_card_facing_up(d1, get_index(0, c$1, d1[/* facing_up_trains */7]));
+            } else {
+              return State.draw_card_pile(d1);
+            }
+          } else {
+            throw [
+                  Caml_builtin_exceptions.match_failure,
+                  [
+                    "ai.ml",
+                    158,
+                    8
+                  ]
+                ];
+          }
+        } else {
+          var d1$1 = State.draw_card_pile(st$3);
+          var match$2 = priorize_build(0, /* None */0, goals);
+          if (match$2) {
+            var c$2 = match$2[0][3];
+            if (contains(c$2, st$3[/* facing_up_trains */7])) {
+              return State.draw_card_facing_up(d1$1, get_index(0, c$2, d1$1[/* facing_up_trains */7]));
+            } else {
+              return State.draw_card_pile(d1$1);
+            }
+          } else {
+            throw [
+                  Caml_builtin_exceptions.match_failure,
+                  [
+                    "ai.ml",
+                    164,
+                    8
+                  ]
+                ];
+          }
+        }
       } else {
         throw [
               Caml_builtin_exceptions.match_failure,
               [
                 "ai.ml",
-                151,
+                154,
                 6
               ]
             ];

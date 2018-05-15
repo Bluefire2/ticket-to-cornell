@@ -30,7 +30,8 @@ function init_state(n, bots) {
     /* turn_ended */false,
     /* last_round */false,
     /* winner : None */0,
-    /* cards_grabbed */0
+    /* cards_grabbed */0,
+    /* success */""
   ];
   if ((n + bots | 0) < 2 || (n + bots | 0) > 5) {
     return init;
@@ -52,7 +53,8 @@ function init_state(n, bots) {
             /* turn_ended */false,
             /* last_round */false,
             /* winner : None */0,
-            /* cards_grabbed */0
+            /* cards_grabbed */0,
+            /* success */""
           ];
   }
 }
@@ -84,8 +86,12 @@ function train_items(st) {
         ];
 }
 
-function message(st) {
+function error(st) {
   return st[/* error */10];
+}
+
+function success(st) {
+  return st[/* success */15];
 }
 
 function turn_ended(st) {
@@ -229,6 +235,7 @@ function calculate_winner(st) {
   var st$prime_012 = /* last_round */st[/* last_round */12];
   var st$prime_013 = /* winner */st[/* winner */13];
   var st$prime_014 = /* cards_grabbed */st[/* cards_grabbed */14];
+  var st$prime_015 = /* success */st[/* success */15];
   var st$prime = /* record */[
     st$prime_000,
     st$prime_001,
@@ -244,7 +251,8 @@ function calculate_winner(st) {
     st$prime_011,
     st$prime_012,
     st$prime_013,
-    st$prime_014
+    st$prime_014,
+    st$prime_015
   ];
   var st$prime$prime_000 = /* player_index */st[/* player_index */0];
   var st$prime$prime_001 = /* players */update_players_tickets(st$prime);
@@ -261,6 +269,7 @@ function calculate_winner(st) {
   var st$prime$prime_012 = /* last_round */st[/* last_round */12];
   var st$prime$prime_013 = /* winner */st[/* winner */13];
   var st$prime$prime_014 = /* cards_grabbed */st[/* cards_grabbed */14];
+  var st$prime$prime_015 = /* success */st[/* success */15];
   var st$prime$prime = /* record */[
     st$prime$prime_000,
     st$prime$prime_001,
@@ -276,7 +285,8 @@ function calculate_winner(st) {
     st$prime$prime_011,
     st$prime$prime_012,
     st$prime$prime_013,
-    st$prime$prime_014
+    st$prime$prime_014,
+    st$prime$prime_015
   ];
   var loop = function (_best, _param) {
     while(true) {
@@ -326,7 +336,8 @@ function turn_ended_error(st) {
           /* turn_ended */st[/* turn_ended */11],
           /* last_round */st[/* last_round */12],
           /* winner */st[/* winner */13],
-          /* cards_grabbed */st[/* cards_grabbed */14]
+          /* cards_grabbed */st[/* cards_grabbed */14],
+          /* success */""
         ];
 }
 
@@ -346,7 +357,8 @@ function first_turn_error(st) {
           /* turn_ended */st[/* turn_ended */11],
           /* last_round */st[/* last_round */12],
           /* winner */st[/* winner */13],
-          /* cards_grabbed */st[/* cards_grabbed */14]
+          /* cards_grabbed */st[/* cards_grabbed */14],
+          /* success */""
         ];
 }
 
@@ -366,8 +378,25 @@ function grabbing_cards_error(st) {
           /* turn_ended */st[/* turn_ended */11],
           /* last_round */st[/* last_round */12],
           /* winner */st[/* winner */13],
-          /* cards_grabbed */st[/* cards_grabbed */14]
+          /* cards_grabbed */st[/* cards_grabbed */14],
+          /* success */""
         ];
+}
+
+function stringify_clr(param) {
+  switch (param) {
+    case 0 : 
+        return "blue";
+    case 1 : 
+        return "red";
+    case 2 : 
+        return "yellow";
+    case 3 : 
+        return "green";
+    case 4 : 
+        return "black";
+    
+  }
 }
 
 function next_player(st) {
@@ -393,10 +422,12 @@ function next_player(st) {
               /* turn_ended */st$prime[/* turn_ended */11],
               /* last_round */st$prime[/* last_round */12],
               /* winner */match[1],
-              /* cards_grabbed */st$prime[/* cards_grabbed */14]
+              /* cards_grabbed */st$prime[/* cards_grabbed */14],
+              /* success */""
             ];
     } else {
       var next_player$1 = Caml_int32.mod_(st[/* player_index */0] + 1 | 0, List.length(st[/* players */1]));
+      var p_clr = stringify_clr(Player.color(List.nth(st[/* players */1], next_player$1)));
       var st$prime_001 = /* players */st[/* players */1];
       var st$prime_002 = /* routes */st[/* routes */2];
       var st$prime_003 = /* destination_deck */st[/* destination_deck */3];
@@ -408,6 +439,7 @@ function next_player(st) {
       var st$prime_009 = /* taking_routes */st[/* taking_routes */9];
       var st$prime_012 = /* last_round */st[/* last_round */12];
       var st$prime_013 = /* winner */st[/* winner */13];
+      var st$prime_015 = /* success */"Now " + (p_clr + "'s turn.");
       var st$prime$1 = /* record */[
         /* player_index */next_player$1,
         st$prime_001,
@@ -423,7 +455,8 @@ function next_player(st) {
         /* turn_ended */false,
         st$prime_012,
         st$prime_013,
-        /* cards_grabbed */0
+        /* cards_grabbed */0,
+        st$prime_015
       ];
       if (check_last_round(st) || st[/* last_round */12]) {
         var p$prime = Player.set_last_turn(current_player(st$prime$1));
@@ -442,7 +475,8 @@ function next_player(st) {
                 /* turn_ended */false,
                 /* last_round */true,
                 st$prime_013,
-                /* cards_grabbed */0
+                /* cards_grabbed */0,
+                st$prime_015
               ];
       } else {
         return st$prime$1;
@@ -464,7 +498,8 @@ function next_player(st) {
             /* turn_ended */st[/* turn_ended */11],
             /* last_round */st[/* last_round */12],
             /* winner */st[/* winner */13],
-            /* cards_grabbed */st[/* cards_grabbed */14]
+            /* cards_grabbed */st[/* cards_grabbed */14],
+            /* success */""
           ];
   }
 }
@@ -494,7 +529,8 @@ function draw_card_facing_up(st, i) {
             /* turn_ended */(st[/* cards_grabbed */14] + 1 | 0) === 2,
             /* last_round */st[/* last_round */12],
             /* winner */st[/* winner */13],
-            /* cards_grabbed */st[/* cards_grabbed */14] + 1 | 0
+            /* cards_grabbed */st[/* cards_grabbed */14] + 1 | 0,
+            /* success */"Train card drawn."
           ];
   }
 }
@@ -519,7 +555,8 @@ function draw_card_pile_no_error(st) {
           /* turn_ended */st[/* turn_ended */11],
           /* last_round */st[/* last_round */12],
           /* winner */st[/* winner */13],
-          /* cards_grabbed */st[/* cards_grabbed */14]
+          /* cards_grabbed */st[/* cards_grabbed */14],
+          /* success */""
         ];
 }
 
@@ -543,7 +580,8 @@ function draw_card_pile(st) {
             /* turn_ended */(st$prime[/* cards_grabbed */14] + 1 | 0) === 2,
             /* last_round */st$prime[/* last_round */12],
             /* winner */st$prime[/* winner */13],
-            /* cards_grabbed */st$prime[/* cards_grabbed */14] + 1 | 0
+            /* cards_grabbed */st$prime[/* cards_grabbed */14] + 1 | 0,
+            /* success */"Train card drawn."
           ];
   }
 }
@@ -572,7 +610,8 @@ function take_route(st) {
             /* turn_ended */st[/* turn_ended */11],
             /* last_round */st[/* last_round */12],
             /* winner */st[/* winner */13],
-            /* cards_grabbed */st[/* cards_grabbed */14]
+            /* cards_grabbed */st[/* cards_grabbed */14],
+            /* success */"Three destinations tickets are now available to choose from."
           ];
   }
 }
@@ -601,7 +640,8 @@ function setup_state(st) {
             /* turn_ended */st[/* turn_ended */11],
             /* last_round */st[/* last_round */12],
             /* winner */st[/* winner */13],
-            /* cards_grabbed */st[/* cards_grabbed */14]
+            /* cards_grabbed */st[/* cards_grabbed */14],
+            /* success */""
           ];
   }
 }
@@ -651,7 +691,8 @@ function decided_routes(st, indexes) {
               /* turn_ended */true,
               /* last_round */st[/* last_round */12],
               /* winner */st[/* winner */13],
-              /* cards_grabbed */st[/* cards_grabbed */14]
+              /* cards_grabbed */st[/* cards_grabbed */14],
+              /* success */"Took " + (String(tickets_chosen) + " destination tickets.")
             ];
     } else {
       return /* record */[
@@ -669,7 +710,8 @@ function decided_routes(st, indexes) {
               /* turn_ended */st[/* turn_ended */11],
               /* last_round */st[/* last_round */12],
               /* winner */st[/* winner */13],
-              /* cards_grabbed */st[/* cards_grabbed */14]
+              /* cards_grabbed */st[/* cards_grabbed */14],
+              /* success */""
             ];
     }
   } else {
@@ -688,7 +730,8 @@ function decided_routes(st, indexes) {
             /* turn_ended */st[/* turn_ended */11],
             /* last_round */st[/* last_round */12],
             /* winner */st[/* winner */13],
-            /* cards_grabbed */st[/* cards_grabbed */14]
+            /* cards_grabbed */st[/* cards_grabbed */14],
+            /* success */""
           ];
   }
 }
@@ -765,7 +808,7 @@ function place_on_board(st, r, clr, wild) {
         r$prime_005,
         r$prime_006
       ];
-      var p$prime = Player.place_train(current_player(st), r$prime, wild);
+      var p$prime = Player.place_train(current_player(st), clr, r$prime, wild);
       var i = st[/* player_index */0];
       return /* record */[
               /* player_index */st[/* player_index */0],
@@ -782,7 +825,8 @@ function place_on_board(st, r, clr, wild) {
               /* turn_ended */true,
               /* last_round */st[/* last_round */12],
               /* winner */st[/* winner */13],
-              /* cards_grabbed */st[/* cards_grabbed */14]
+              /* cards_grabbed */st[/* cards_grabbed */14],
+              /* success */"Placed trains on route."
             ];
     } else {
       return /* record */[
@@ -800,7 +844,8 @@ function place_on_board(st, r, clr, wild) {
               /* turn_ended */st[/* turn_ended */11],
               /* last_round */st[/* last_round */12],
               /* winner */st[/* winner */13],
-              /* cards_grabbed */st[/* cards_grabbed */14]
+              /* cards_grabbed */st[/* cards_grabbed */14],
+              /* success */""
             ];
     }
   } else {
@@ -819,7 +864,8 @@ function place_on_board(st, r, clr, wild) {
             /* turn_ended */st[/* turn_ended */11],
             /* last_round */st[/* last_round */12],
             /* winner */st[/* winner */13],
-            /* cards_grabbed */st[/* cards_grabbed */14]
+            /* cards_grabbed */st[/* cards_grabbed */14],
+            /* success */""
           ];
   }
 }
@@ -849,7 +895,8 @@ function select_route(st, r, clr, wild) {
               /* turn_ended */st[/* turn_ended */11],
               /* last_round */st[/* last_round */12],
               /* winner */st[/* winner */13],
-              /* cards_grabbed */st[/* cards_grabbed */14]
+              /* cards_grabbed */st[/* cards_grabbed */14],
+              /* success */""
             ];
     } else if (clr$1 >= 9) {
       if (clr) {
@@ -870,7 +917,8 @@ function select_route(st, r, clr, wild) {
                 /* turn_ended */st[/* turn_ended */11],
                 /* last_round */st[/* last_round */12],
                 /* winner */st[/* winner */13],
-                /* cards_grabbed */st[/* cards_grabbed */14]
+                /* cards_grabbed */st[/* cards_grabbed */14],
+                /* success */""
               ];
       }
     } else {
@@ -885,7 +933,8 @@ exports.players = players;
 exports.routes = routes;
 exports.destination_items = destination_items;
 exports.train_items = train_items;
-exports.message = message;
+exports.error = error;
+exports.success = success;
 exports.turn_ended = turn_ended;
 exports.last_round = last_round;
 exports.choose_destinations = choose_destinations;
