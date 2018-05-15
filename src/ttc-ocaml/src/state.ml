@@ -45,6 +45,42 @@ let init_state n bots =
                error = "";
                success = ""}
 
+(* TESTING PURPOSES *)
+let st = init_state 2 0
+let p3 =
+  {
+    color= PBlue;
+    destination_tickets = [];
+    train_cards = [];
+    score = 30;
+    routes = [];
+    trains_remaining = 2;
+    first_turn = false;
+    last_turn = false;
+    bot = false;
+  }
+
+let p4 = {p3 with color = PRed;
+                  score = 2}
+
+(* STATE FOR KIRILL:
+ * If you call next_player it should start the end round. Play once more for each
+ * player and then the winner should be blue. *)
+let end_state1 =
+  {st with players = [p3; p4]}
+
+let p3' = {p3 with last_turn = true}
+let p4' = {p4 with last_turn = true}
+
+(* STATE FOR KIRLL:
+ * Here it is already the last round and p3 is the winner. *)
+let end_state2 =
+  {end_state1 with players = [p3; p4];
+                   last_round = true;
+                   winner = Some p3 }
+
+(* END OF TESTING STUFF *)
+
 let current_player st =
   List.nth st.players st.player_index
 
