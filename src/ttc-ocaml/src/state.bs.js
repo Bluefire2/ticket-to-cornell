@@ -59,6 +59,8 @@ function init_state(n, bots) {
   }
 }
 
+init_state(2, 0);
+
 function current_player(st) {
   return List.nth(st[/* players */1], st[/* player_index */0]);
 }
@@ -426,8 +428,8 @@ function next_player(st) {
               /* success */""
             ];
     } else {
+      var p_clr = stringify_clr(Player.color(current_player(st)));
       var next_player$1 = Caml_int32.mod_(st[/* player_index */0] + 1 | 0, List.length(st[/* players */1]));
-      var p_clr = stringify_clr(Player.color(List.nth(st[/* players */1], next_player$1)));
       var st$prime_001 = /* players */st[/* players */1];
       var st$prime_002 = /* routes */st[/* routes */2];
       var st$prime_003 = /* destination_deck */st[/* destination_deck */3];
@@ -611,7 +613,7 @@ function take_route(st) {
             /* last_round */st[/* last_round */12],
             /* winner */st[/* winner */13],
             /* cards_grabbed */st[/* cards_grabbed */14],
-            /* success */"Three destinations tickets are now available to choose from."
+            /* success */"Three destination tickets are now available to choose from."
           ];
   }
 }
@@ -948,4 +950,4 @@ exports.draw_card_facing_up = draw_card_facing_up;
 exports.take_route = take_route;
 exports.decided_routes = decided_routes;
 exports.select_route = select_route;
-/* Board Not a pure module */
+/*  Not a pure module */

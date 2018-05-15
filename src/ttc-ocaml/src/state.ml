@@ -45,6 +45,42 @@ let init_state n bots =
                error = "";
                success = ""}
 
+(* TESTING PURPOSES *)
+let st = init_state 2 0
+let p3 =
+  {
+    color= PBlue;
+    destination_tickets = [];
+    train_cards = [];
+    score = 30;
+    routes = [];
+    trains_remaining = 2;
+    first_turn = false;
+    last_turn = false;
+    bot = false;
+  }
+
+let p4 = {p3 with color = PRed;
+                  score = 2}
+
+(* STATE FOR KIRILL:
+ * If you call next_player it should start the end round. Play once more for each
+ * player and then the winner should be blue. *)
+let end_state1 =
+  {st with players = [p3; p4]}
+
+let p3' = {p3 with last_turn = true}
+let p4' = {p4 with last_turn = true}
+
+(* STATE FOR KIRLL:
+ * Here it is already the last round and p3 is the winner. *)
+let end_state2 =
+  {end_state1 with players = [p3; p4];
+                   last_round = true;
+                   winner = Some p3 }
+
+(* END OF TESTING STUFF *)
+
 let current_player st =
   List.nth st.players st.player_index
 
@@ -170,8 +206,8 @@ let next_player st =
   if (turn_ended st) then
     if (game_ended st) then end_game st
     else (
+      let p_clr = (st |> current_player |> Player.color |> stringify_clr) in
       let next_player = ((st.player_index + 1) mod (List.length st.players)) in
-      let p_clr = ((List.nth st.players next_player) |> Player.color |> stringify_clr) in
       let st' = {st with player_index = next_player;
                          turn_ended = false;
                          error = "";
@@ -241,7 +277,7 @@ let take_route st =
             choose_destinations = tickets;
             taking_routes = true;
             error = "";
-            success = "Three destinations tickets are now available to choose from."} )
+            success = "Three destination tickets are now available to choose from."} )
 
 let setup_state st =
   if (turn_ended st) then turn_ended_error st

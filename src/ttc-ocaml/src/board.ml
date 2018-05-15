@@ -97,13 +97,13 @@ let route_connections =
     (engineering,barton,2,Grey,None, true, Some RightRoute);
     (beebe,island,2,Black,None, true, Some LeftRoute);
     (beebe,island,2,Orange,None, true, Some RightRoute);
-    (kennedy,mann,2,Grey,None, true, Some LeftRoute);
-    (kennedy,mann,2,Grey,None, true, Some RightRoute);
+    (plantations,mann,2,Grey,None, true, Some LeftRoute);
+    (plantations,mann,2,Grey,None, true, Some RightRoute);
     (undergrad,risley,2,Green,None, true, Some LeftRoute);
     (undergrad,risley,2,White,None, true, Some RightRoute);
     (dairy_bar,plantations,2,White,None, true, Some LeftRoute);
     (dairy_bar,plantations,2,Green,None, true, Some RightRoute);
-    (mann,plantations,2,Grey,None, false, None);
+    (mann,kennedy,2,Grey,None, false, None);
     (barton,schoellkopf,2,Yellow,None, true, Some LeftRoute);
     (barton,schoellkopf,2,Red,None, true, Some RightRoute);
     (undergrad,museum,2,Grey,None, false, None);

@@ -34,7 +34,7 @@ const createRectangleDatum = (x, y, theta, width, height, trainColor, route, rou
 const routeToRectangleArray = (route, index) => {
     const fromName = route[0][0],
         toName = route[1][0],
-        uniqueRouteID = `${fromName}->${toName}`;
+        uniqueRouteID = `${fromName}-${toName}`;
 
     const n = route[2], // number of rectangles to draw (route length)
         A = {x: route[0][1] / SCALE, y: route[0][2] / SCALE},
@@ -129,6 +129,19 @@ class Map extends Component {
             .enter()
             .append('rect')
             .on('click', d => this.claimRoute.bind(this)(d.route))
+            .on('mouseover', d => {
+                this.routeTooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                this.routeTooltip.html(`${d.routeID} <br\> Points: ${d.route[2]}`)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on('mouseout', d => {
+                this.routeTooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            })
             .style('stroke', d => d.trainColor)
             .attr('class', d => `route-path-rect clickable ${d.takenBy > -1 ? 'route-path-rect-taken' : ''}`)
             .attr('route', d => `${d.routeID}`)
@@ -156,15 +169,15 @@ class Map extends Component {
             .enter()
             .append('circle')
             .on('mouseover', d => {
-                this.tooltip.transition()
+                this.locationTooltip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                this.tooltip.html(d[0])
+                this.locationTooltip.html(d[0])
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
             .on('mouseout', d => {
-                this.tooltip.transition()
+                this.locationTooltip.transition()
                     .duration(500)
                     .style("opacity", 0);
             })
@@ -177,11 +190,16 @@ class Map extends Component {
 
         this.locations = locations;
 
-        const tooltip = d3.select("body").append("div")
-            .attr("class", "tooltip")
+        const locationTooltip = d3.select("body").append("div")
+            .attr("class", "tooltip-location")
             .style("opacity", 0);
 
-        this.tooltip = tooltip;
+        const routeTooltip = d3.select("body").append("div")
+            .attr("class", "tooltip-route")
+            .style("opacity", 0);
+
+        this.locationTooltip = locationTooltip;
+        this.routeTooltip = routeTooltip;
 
         this.draw();
     }
