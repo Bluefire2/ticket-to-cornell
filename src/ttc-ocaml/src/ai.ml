@@ -14,8 +14,9 @@ let min a b c =
 let next_move st =
   failwith "Unimplemem=nted"
 
-let ai_facing_up = failwith "unimplemented"
+let ai_facing_up = failwith "bla"
 
+let ai_setup = failwith "bla"
 (* will call [state_setup], and be able to choose 2-3 destination tickets, and then call
  * decided routes *)
  (* CURRENTLY WILL ONLY EVER TAKE TWO ROUTES, FOR BASICNESS. WILL BE IMPROVED IF TIME RIP*)
