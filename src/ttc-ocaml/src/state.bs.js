@@ -59,6 +59,8 @@ function init_state(n, bots) {
   }
 }
 
+init_state(2, 0);
+
 function current_player(st) {
   return List.nth(st[/* players */1], st[/* player_index */0]);
 }
@@ -948,4 +950,4 @@ exports.draw_card_facing_up = draw_card_facing_up;
 exports.take_route = take_route;
 exports.decided_routes = decided_routes;
 exports.select_route = select_route;
-/* Board Not a pure module */
+/*  Not a pure module */
