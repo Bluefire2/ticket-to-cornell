@@ -106,4 +106,6 @@ val decided_routes : state -> int list -> state
  * for this action. *)
 val select_route : state -> Board.route -> Components.train_color option -> int -> state
 
+(* [completed_ticket s1 s2 st] is true if the locations with names [s1] and [s2]
+ * have been taken in [st] by [st]'s current player. False otherwise. '*)
 val completed_ticket : string -> string -> state -> bool
