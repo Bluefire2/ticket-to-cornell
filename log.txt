@@ -1,0 +1,1918 @@
+commit 5ad9c2cf2cfd713b708a1ad3ba5cc0603e955e51
+Merge: da2ba6f 9ffe525
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 15:35:58 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit da2ba6f5fbb8c3f12e28056abc3459c1705c618b
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 15:35:47 2018 -0400
+
+    Add details to README
+
+commit 9ffe52550359cc97420f63d33ed3cc655c7d59c1
+Merge: 61fe445 74b6e9b
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 15:31:03 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 61fe445d7f2f6a7270013afff51d4bbc6af674e0
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 15:31:00 2018 -0400
+
+    Fix state ai next_player
+
+commit 74b6e9bc8420fa5d82e1c5fe0a61c881f5149139
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 15:05:08 2018 -0400
+
+    Add link to NPM to the README
+
+commit 62ae92257856599734214e92f78c4a062b6fe939
+Merge: 06e2693 5ab5227
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 15:04:18 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 06e26938785a5084eda7b7c74d2ed88b949522e9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 15:04:01 2018 -0400
+
+    Add core README
+
+commit 5ab5227dceeb7a8e609a6e3a5164d761061131e2
+Merge: a355f33 8ad8ba3
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:57:12 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit a355f33dac677514e172e1d61738f7ba560279af
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:57:09 2018 -0400
+
+    Add checktypes
+
+commit 8ad8ba3e79f4b7f53e1f2f65c65245c9277f1372
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:56:53 2018 -0400
+
+    Update workspace
+
+commit 54223fbf2b779657359a9bcbf854e5b38e507165
+Merge: 1b04df0 a144d43
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:53:53 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 1b04df03c611612d5ecdec8ec91bcb33c9c4a287
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:53:41 2018 -0400
+
+    :(
+
+commit a144d435084292f5e12534da24396c8ee6c31a24
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:51:02 2018 -0400
+
+    Delete weird spec in command
+
+commit 5d915b2450b97cc8226b1fe71b9719a73a9d9b08
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:49:28 2018 -0400
+
+    Add some more specs
+
+commit ac247a7a61c876690f30387fee8e597d184961f7
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:47:58 2018 -0400
+
+    BS compile
+
+commit 9e62c92fd961706472504b6d49e9ba930560836f
+Merge: 213d488 710279a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:46:52 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 710279abb7eda4ce6935ff7054cf4b414463b250
+Merge: 06609e8 0c68f94
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:46:11 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 06609e8c9c2dbab0166b78b77cc119d09ef4de2e
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:46:08 2018 -0400
+
+    Add complete_ticket to state
+
+commit 213d488d02e79ac12099ba6f95198fc4b42709a7
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:45:12 2018 -0400
+
+    Add n_bots to the query string
+
+commit 0c68f94801e262c0f7065dfe2daf95992c7e5f4c
+Merge: 12986f7 525d008
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 14:32:52 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 12986f788527c56dde237eb4d9b001a57d4a7d33
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 14:32:25 2018 -0400
+
+    minor tweaks in ai
+
+commit ff1cfb201b1c8998f973bf9611daf9868ac56ae3
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:27:26 2018 -0400
+
+    Fix super annoying bug with player colours
+
+commit 525d00865bdcbf61db3acfbdb1bf24d2e7c96d2f
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:14:54 2018 -0400
+
+    BS compile
+
+commit f394f65d039106f6f8804dd871188e02360b5b82
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:13:34 2018 -0400
+
+    New state example
+
+commit 7e613f0bd8563ab3da689ba678a063842f051f70
+Merge: d689eb5 e89d8d7
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:03:29 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit e89d8d7a147584ceb1403645be40d1fe60e5a439
+Merge: f832dad 3d84502
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:02:13 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit d689eb5637e97e46f8f913a9531f3f83950401b9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 14:01:55 2018 -0400
+
+    Add deployment scripts
+
+commit f832dad7b45c4f7b571df133c2157493bc012e10
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 14:01:46 2018 -0400
+
+    Change init_players in Player
+
+commit 3d845021aca1cced35d50ea1757a3effe2e04bc7
+Merge: 53c47c7 a5541dd
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 13:59:00 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 53c47c7a2597001ef6686b69047b2f503cada0d8
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 13:58:51 2018 -0400
+
+    updated ai stuff
+
+commit a5541dde6e679f8c711aaa83902ac44cff22a29f
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 13:49:56 2018 -0400
+
+    Make the route tooltips display the points and not the length
+
+commit 359c4bbc5a65baa5812667203c5fc84e90615e0e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 13:46:22 2018 -0400
+
+    I don
+
+commit ed500c08507a1ac7cae73d06950966b2301ea15c
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 13:42:01 2018 -0400
+
+    Oops
+
+commit c572ed22df24e8c3deeb3a49daf07a72b08bc07d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 13:41:26 2018 -0400
+
+    Expose test states
+
+commit 1bd73c9fd8f11b5e22b364e77c90629f3b1ea753
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 12:52:40 2018 -0400
+
+    BS compile and make query string fetching work properly
+
+commit 063ace47ba306c7fb562d7be4d51b46524d4f255
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 12:46:26 2018 -0400
+
+    Add get_player in board
+
+commit 5693b13a0d96ae80de67f26d6fcb50386fe22b71
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 12:40:47 2018 -0400
+
+    Fix Take_Faceup and Take_Deck
+
+commit edc709743b9686be1c8822e6e4387dd8ed70e360
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 12:36:24 2018 -0400
+
+    state changes, ai stuff
+
+commit 67897d477da8408ffdceecc5df475237b932ede7
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 12:22:37 2018 -0400
+
+    finished ai_setup
+
+commit 8fb3c603dae34c474309d11dbc4d4d269e732f4b
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 12:18:47 2018 -0400
+
+    most of ai functions done
+
+commit 1093d3287c0df85d04b4af55fd577b04c8727630
+Merge: de3ee36 e5e8120
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 12:18:21 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit de3ee36544a1b33bfbc769c140316fe905fe71ef
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 12:18:11 2018 -0400
+
+    merge stuff
+
+commit e5e81203e5abed9bde93443939958639782a1c8c
+Merge: 7d3d37e f844cc0
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 12:16:39 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 7d3d37e730cb7a80c901c5509c674a45b07d92ad
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 12:16:33 2018 -0400
+
+    Add new argument to ai_facing_up
+
+commit f844cc07f2fca013350cf6a225082d8f6b187ad9
+Merge: 8248b6e cbf85cf
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 12:14:49 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 8248b6e410efa5f8ab1129c6b3bf9c1cad74490f
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 12:14:40 2018 -0400
+
+    Add win screen that is rendered when the game is over
+
+commit cbf85cf04500b7c1c60bf21c2abc724e9d565031
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 12:12:58 2018 -0400
+
+    Add some more specs
+
+commit 43813452030f6d097e503e4fb3f4e9a187b8c7b2
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 12:06:33 2018 -0400
+
+    Add success spec
+
+commit 29668307f45a3dd5158a5a667193c789ba616c10
+Merge: 28e114d 5f3b0cb
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 12:05:56 2018 -0400
+
+    merge conflict solved
+
+commit 5f3b0cbf3e031ea9b93e59cdb9ceed7bfd30d65b
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 12:03:17 2018 -0400
+
+    Add AI specs
+
+commit 28e114dd79b7ccb814cbbeddcc764897d9de1ced
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 12:03:13 2018 -0400
+
+    ai implemention
+
+commit f9229544f4f66ca9ac793b810f21c8c1fe861dbd
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 11:56:25 2018 -0400
+
+    Add ai_setup
+
+commit e0235029a006c20c519414cd7e94080c529a7955
+Merge: 5fb7ff4 a9356a7
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 11:49:45 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 5fb7ff4f59b93a297256ba46cade515a363be3a5
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 15 11:49:29 2018 -0400
+
+    Make error_msg and success_msg use children instead of an attribute property
+
+commit a9356a70c48ff6c44c8c2a5e7bfbc6de0b3bf097
+Merge: f0cfca8 b5b5860
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 11:36:26 2018 -0400
+
+    merge conflit
+
+commit f0cfca8a434f45a32a364d27343b64f404cd076c
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 11:32:54 2018 -0400
+
+    ai stuff
+
+commit b5b58602e31e8f8ad3c794c1b5981e721e43a516
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 15 11:30:16 2018 -0400
+
+    Change how state interacts with ai
+
+commit 4a2da42759e768c4398448c023f314482869c7c7
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 11:03:07 2018 -0400
+
+    changing ai
+
+commit 0b7b1b951e26d5fc5b3f525fe391958a847ff98e
+Merge: 8f146e7 52df44f
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 00:05:01 2018 -0400
+
+    fix merge
+
+commit 8f146e7367d98eb9ab7794a8c2b7e2052bfda672
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 15 00:03:29 2018 -0400
+
+    fixing minor ai errors
+
+commit 52df44fc481e890fd8b5837fb5db10b35983c017
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 23:59:00 2018 -0400
+
+    Change ply_clr in next_player for state
+
+commit 62873a82b7d092c3ce7415b6028eeb450662b0ba
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 23:43:25 2018 -0400
+
+    BS compile
+
+commit a11c3cd9fc64ca5f4fd849c259b7586d2f73a34c
+Merge: d3f7d91 a27602c
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 23:42:15 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit d3f7d91ef0d5e211f78aba71d8d3c50f1f38744e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 23:42:12 2018 -0400
+
+    Replace white with purple
+
+commit a27602c7775b86112a4cf8a8f88009e62d5bd2d6
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 23:41:19 2018 -0400
+
+    Change next_player success message
+
+commit 7bc896fa094013566e69bc16dac12f95840db66a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 23:30:28 2018 -0400
+
+    Add some padding to the error and success messages
+
+commit 3c1c4625825b6ce270022a817f25facc4593d970
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 23:28:58 2018 -0400
+
+    BS compile
+
+commit 1c5daa9dfe7d58696e03dda339c4e8334a7795de
+Merge: bbc7865 2831bfc
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 23:27:41 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit bbc7865acdcbe7286066e20e0c20219094205ebc
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 23:27:33 2018 -0400
+
+    Add success message
+
+commit 2831bfc9773a688281b3205bc844e9ca64652005
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 23:25:35 2018 -0400
+
+    Add two sample end states for testing
+
+commit 854151ff5e0cced975bb48cc6c6dfdaadb9905f8
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 23:15:05 2018 -0400
+
+    Add another state test
+
+commit 24dc29a06272e948a0ca3f0265b818e0f8a567e7
+Merge: 95f1ea7 b4c5b6b
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 23:06:41 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 95f1ea72e8642a3402c63de0286326e50322dde6
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 23:06:38 2018 -0400
+
+    Add background image
+
+commit b4c5b6b87a17176578e970b4b10c1b17ea92ba5c
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 22:46:21 2018 -0400
+
+    Change arrow to dash in route id
+
+commit 2f83725351038053d1b9b3282bec222348ebcd97
+Merge: 6523ac5 b323dfb
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 22:44:13 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 6523ac5d9a2c08be08b7f532227054c4bf66bfd4
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 22:44:10 2018 -0400
+
+    Add separate tooltips for locations and routes
+
+commit b323dfbdb711806cc4bd0f59bd253f6b085a362f
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 22:42:47 2018 -0400
+
+    Change a route and change white to purple
+
+commit 146aaa97a7b32965f5a539a486997bfdb2a50b09
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 22:30:22 2018 -0400
+
+    BS compile
+
+commit 00be6abfa933c5b0333783a06c3d4d0ef3176a43
+Merge: 54fb98b fa072fc
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 22:27:52 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 54fb98b41c4c01f71e56fd662ce926261174010d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 22:27:27 2018 -0400
+
+    Make the rectangles transparent, and make the borders reflect the train colour
+
+commit fa072fc8f48ad51ee91ed5ac1f99297e4dfceb63
+Merge: 0af8cb2 2531b9d
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 22:26:40 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 0af8cb23d9a033eab98e99ff34d98782b8849f5e
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 22:26:38 2018 -0400
+
+    Add success messages
+
+commit 2531b9d09ea69dd8d73dcfbee198257fb44d3a73
+Merge: d67a890 5c47107
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 22:13:02 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit d67a8900be6f293e10d238a08242a0bc08beeb6c
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 22:12:53 2018 -0400
+
+    ai initializer in test
+
+commit 5c471077afe22cb265b76de8663ad2dd49a2fe25
+Merge: 81e3d6e 1d8f727
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 22:12:08 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 81e3d6e3262a6cbdbd67e1075abbac5284fa61df
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 22:12:05 2018 -0400
+
+    Fix select_route for grey route
+
+commit 1d8f727911c1a897b2fce3cece49562004465c51
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 22:05:33 2018 -0400
+
+    fixed wild
+
+commit bee9386f162c4e7a38d75cea7aafca0b2351734e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 22:00:12 2018 -0400
+
+    Make the error message bottom-right instead of bottom-left so as not to override the tickets select button
+
+commit 3cab1c2094ecfda31f908bf705361af0474589c9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 21:59:33 2018 -0400
+
+    Adjust code to keep up with game API changes
+
+commit e58a4c857b919f8bcd7ecaa74e8e2986b90090ee
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 21:59:00 2018 -0400
+
+    BS compile
+
+commit 79e39feccc3b8c303c6a361deff799fb4fc1e24f
+Merge: 296bc0f 11a8194
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 21:52:49 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 296bc0f7fe4586f0c06c043b229dbfa7eb958b23
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 21:52:30 2018 -0400
+
+    added face_up
+
+commit 1bff38ec04c01f1987a68cd630ec8fb5c62d2aec
+Merge: a4994f0 11a8194
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 21:42:50 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 11a8194478abb4089bfc76a68893ea0b777a5609
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 21:39:42 2018 -0400
+
+    Change select_route to also take in number of wild cards
+
+commit a4994f0d5b2facbce2074406853ae10d5b0c833b
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 21:38:58 2018 -0400
+
+    Add tooltip to show the location name
+
+commit b3065b065d63a775ae6569962d41e253aa29e6ca
+Merge: c807b67 5504f40
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 21:21:15 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit c807b67e439e5e9ba7b2d5409f24bea92ae69b84
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 21:21:13 2018 -0400
+
+    Add error messages if in the middle of grabbing cards
+
+commit 5504f402ffee5f836433c50c8f9b6c06045aae0d
+Merge: 5af6f1a 228db5c
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 21:12:40 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 5af6f1aa209a32dbeb4ef28156aae9609b3b200d
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 21:12:28 2018 -0400
+
+    ai basic functionality complete
+
+commit 228db5cc2ef337e49d6ae287817e1220436204eb
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 21:05:30 2018 -0400
+
+    Change draw_card_pile to just draw one and fix draw_card_facing_up
+
+commit ed5e44a4c2cf80ff30efc20ae904828691b7e291
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 20:54:13 2018 -0400
+
+    Make the error message go in front of the modal side panel
+
+commit 7a31d3e8b63fe0a4057703f1ec1d5fffbe76600e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 20:52:06 2018 -0400
+
+    Add facing up train card pile and bind it to the appropriate action
+
+commit e9cf9c6e7c78b92374f90624ba202dbd80627a00
+Merge: ac8c8c2 582192a
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 20:30:39 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit ac8c8c2bc5e6fee46c0389ebae67ef2dd5ee338c
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 20:30:35 2018 -0400
+
+    Add is_bot to player.ml
+
+commit 582192a28e97e193d7d81e927199d23185619e99
+Merge: ef5acd2 66f421e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 20:28:54 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit ef5acd26b1e1ff2f46780cc8d582241d4b01a8be
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 20:25:59 2018 -0400
+
+    Add some (broken) css
+
+commit b5d750c8d6fde8c55d80b06ad20910a00a65e4b8
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 20:05:17 2018 -0400
+
+    Make destination tickets look nicer
+
+commit 66f421e69ab23b0801217fd4a94353d8d4dc70ab
+Merge: 9450b1f f53a1d3
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 20:00:56 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 9450b1f5ba1808e25b69ee14b0613f08cb3f9ff5
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 20:00:52 2018 -0400
+
+    Change init_state to take in num of players and num of bots
+
+commit f53a1d3c545f9f0c5ad638cce52b3583699ce053
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 19:52:18 2018 -0400
+
+    Rename variable
+
+commit 1e825a212ffd4c531eb9e5f2a0dfefd2ed411aa5
+Merge: a57917c bf209a2
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 19:51:01 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit a57917ca400a55cb2df142c6081523c39f499c32
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 19:50:27 2018 -0400
+
+    Render double routes
+
+commit bf209a259397654c0891bcdc7a71684b4eb6a6f7
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 19:46:44 2018 -0400
+
+    Add bot field to player
+
+commit bc059850d4634f4691438d67d012b9399046524a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 19:44:03 2018 -0400
+
+    BS compile
+
+commit a1e61fba2e447d2744beb84e494d1ab6d9750a7b
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 19:42:12 2018 -0400
+
+    fixed player
+
+commit 0d653f114bb9cee02f0c1182fb938d4856fd72a6
+Merge: 2c4ecba 0386da0
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 18:38:57 2018 -0400
+
+    Fix merge conflict in ai.ml
+
+commit 2c4ecbaf2d94499fca09dab50d0014c13f697810
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 18:34:48 2018 -0400
+
+    Change type of route to have a double and a leftRightRoute option
+
+commit 0386da0788769dbde093e16b84b7eda677808ce2
+Merge: 45f60dd e2bc2ec
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 18:20:32 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 45f60dd0713ad0972f69d57c00e61bbff84071c4
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 18:20:13 2018 -0400
+
+    2/3 of main functions complete
+
+commit e2bc2ec50224a6a6396ba43b06d791923f983ca8
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 17:57:55 2018 -0400
+
+    Fix longest_player_route
+
+commit 20d657f0df7bb8def009450f848fea42f518a685
+Merge: 1643073 5f0bcc5
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 17:56:37 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 16430731806966f7ef1d951cabc71c62e7f64e2b
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 17:56:24 2018 -0400
+
+    Make the routes take on the colour of the owning player, and MASSIVE REFACTOR
+
+commit 5f0bcc5ecb89c56e0bc481d8b1fec2efce22aeab
+Merge: 78eeae5 45370b9
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 17:02:44 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 78eeae59db88d88ed4d8ef564070d59d9fc3dc50
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 17:02:24 2018 -0400
+
+    preliminary ai_move complete, not end game
+
+commit 45370b9a87942bcd27b981c242dbde1e0c2bf1cc
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Mon May 14 16:34:04 2018 -0400
+
+    Add function to take category input from the user
+
+commit f9ef7c2977db54ca788f0745b2700b2741ead84d
+Merge: 4794145 aac3ae5
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 16:02:43 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 4794145565229b66c17f218e11594537b101547d
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 16:02:39 2018 -0400
+
+    Add wild color
+
+commit aac3ae5da894cfb376a848038deb14580491ea14
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 15:45:28 2018 -0400
+
+    added specs
+
+commit 4aa3fa2f072fcd89865590bdb3279e0c4d13d6de
+Merge: d164ae1 6ee305e
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 15:31:42 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit d164ae18ffe5141aab70677ee0aaad6396357973
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 15:31:21 2018 -0400
+
+    complete route selection for ai
+
+commit 6ee305ee887cf7f8dcb1cea0776a750a6d683620
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 14:46:16 2018 -0400
+
+    Clean up main.ml
+
+commit 88b7f8bddb8da468f5305ae775923f14ef9bb1d6
+Merge: b6bbc2a 35da922
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 11:22:29 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit b6bbc2acbd3669098c151a694ffe7a760074ef03
+Merge: 5eef4f0 499b54e
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 11:21:50 2018 -0400
+
+    fixed board merge
+
+commit 35da922dc7538930335d15dc2295f7fa4482acc4
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 03:25:58 2018 -0400
+
+    Fix longest_route_player
+
+commit 7aa5de6eede70995d3df6662876967e57815a5eb
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 01:57:04 2018 -0400
+
+    Add some components specifications
+
+commit 5eef4f05b81f9595cce11f46a0d46f6a71510766
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 14 01:06:03 2018 -0400
+
+    format
+
+commit 499b54e12c2c53b09c2d1ebc9f3dc93c6f906d42
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Mon May 14 00:42:28 2018 -0400
+
+    Add specifications and fix a couple of bugs
+
+commit c19fa49b431e75d9212b153583afb1aad338b1e5
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sun May 13 23:56:25 2018 -0400
+
+    Add winner field and functions to calculate which player is winner in state
+
+commit 4e67b45a6e7d2ce14f0e52f805e7394daa32ce11
+Author: tag96 <tag96@cornell.edu>
+Date:   Sun May 13 20:17:18 2018 -0400
+
+    working get_paths
+
+commit 01581ec0038e0e5cc5621107426a05be0c306a25
+Author: tag96 <tag96@cornell.edu>
+Date:   Sun May 13 18:18:20 2018 -0400
+
+    work on get_paths
+
+commit e7d273fde465a04ca6c0a61e2a73f947d0d0a266
+Author: tag96 <tag96@cornell.edu>
+Date:   Sun May 13 14:15:45 2018 -0400
+
+    get_paths is almost workinggit add checktypes.mlgit add checktypes.ml!
+
+commit 194470136677533caaa5cfc319ea23333aec0825
+Author: tag96 <tag96@cornell.edu>
+Date:   Sun May 13 10:04:11 2018 -0400
+
+    created get route, still working on get_paths (commented)
+
+commit 239010f817fcad446f6ea3d5c8797b57448dd838
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sun May 13 00:50:16 2018 -0400
+
+    Fix select_route test
+
+commit 208c920260314a9b1a1d4886419590e94677e7b4
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:47:56 2018 -0400
+
+    select_route now takes two arguments; this should work...
+
+commit 57e502b1a01183182fe0f9e9eed9db2152062e69
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:40:37 2018 -0400
+
+    BS compile
+
+commit d5862027fd3065da63c7c13be1f281b62179952e
+Merge: 774b6e7 22dc88c
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:37:24 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 774b6e74c5b2b5b6c123cf81c05fabd3519e0c2b
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:37:21 2018 -0400
+
+    Change the route colour to be that of the owning player
+
+commit 47541c9a4f7a9d39b54378005425a1314090fa50
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:36:42 2018 -0400
+
+    Increase player detail font size
+
+commit 8bcb20d632ae6dd84ea5c27916cb6253c6cadae1
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:36:04 2018 -0400
+
+    Make the player name take the same colour as the player colour
+
+commit efe1cbdec555085330938ac28621c772110a10a4
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:34:00 2018 -0400
+
+    Fix bug in game state reducer
+
+commit bb7f07ee61a676bf91d2d9a29784edad30850fdf
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 23:27:55 2018 -0400
+
+    Change the route colour to be that of the owning player
+
+commit 22dc88c93f666f3cd45b474d8e8e7944c3cee3a2
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 23:16:22 2018 -0400
+
+    Add some more state test cases
+
+commit 1ca78a6e48768aa261d03cf6b46fd8fe28c43b29
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 23:04:19 2018 -0400
+
+    Fix player.ml place_train bug
+
+commit 6c7c27a7d3dfc06f167b8445a5c421e4c577f4fc
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 22:30:29 2018 -0400
+
+    Switch select_route_grey to a more general select_route, and more test cases
+
+commit 5b620e6e9d186e7c1f60d492b791558987dcc909
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 21:38:27 2018 -0400
+
+    Make error empty message wherever necessary
+
+commit 54b2f6706a8684e6b3c6653996d2f02ed5fe2791
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 21:35:12 2018 -0400
+
+    Add command.ml back
+
+commit 579877e6afd5aa5f9642410234fb1c7060b5ccc9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 21:25:04 2018 -0400
+
+    Fix css issue with text colour for player details not behaving properly
+
+commit 036f54e6eaee2ffcfdd6bd10bd05ceb415fbf30d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 21:19:07 2018 -0400
+
+    Add error message that shows the user if the game encountered an error, if any
+
+commit 1054e8417bf15e5e1aa66c2f64e6c3702d77e7c8
+Merge: a9a71a6 868479f
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 21:00:33 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 868479f5a4b9b21347f01766a18b7fe1ad94fd79
+Author: tag96 <tag96@cornell.edu>
+Date:   Sat May 12 20:59:58 2018 -0400
+
+    fixing problems
+
+commit a9a71a60581b14abd2bdfae31331d542be4d44ca
+Merge: e28f152 ba4aa5b
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 20:59:04 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit e28f1525211410774f884fa95c39d6527951f3b2
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 20:58:52 2018 -0400
+
+    Update app title and favicon
+
+commit ba4aa5b80ab9e2dc8494aab1c91ef6640dc2170e
+Author: tag96 <tag96@cornell.edu>
+Date:   Sat May 12 20:56:16 2018 -0400
+
+    readding things
+
+commit 72b57652fd61ea3b612040ed2c76723ccb803d0e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 20:51:05 2018 -0400
+
+    Modify the game state reducer to consume the nextPlayer action
+
+commit 5e3257fde4b0def16bc08bd86ce247129b63338a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 20:47:42 2018 -0400
+
+    BS compile, accidentally deleted the four files :(
+
+commit e6f2db5abe08ab2e84a4d766063a0a8280ceed77
+Merge: e5e4af3 df1c209
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 20:44:23 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit e5e4af3eae91b26ebe5d8351599d199de69d5d33
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 20:34:56 2018 -0400
+
+    Add nextPlayer action and bind it to the relevant button
+
+commit 919a28b7754f8785ab572fcc335298ec36c6b4ab
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 20:24:41 2018 -0400
+
+    Update game state reducer to consume the select_route action
+
+commit df1c209b024aae359488db3ce27e403f529ce273
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 20:17:44 2018 -0400
+
+    Add select_route_grey function to state
+
+commit e6d5b1e8440c4f387b86c1d400220f5b70b207d8
+Merge: 264aa4f d46eb7c
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 19:42:58 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 264aa4f3f55e418b4d9d818403c4930cd0f66253
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 19:42:54 2018 -0400
+
+    Fix next_player bug
+
+commit d46eb7c3055e151a7fb47b7ff66ee8b6ce312b87
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 16:35:19 2018 -0400
+
+    Bind selectRoute action to each route rectangle, with appropriate payload
+
+commit e7bb1a742e5b3a260c6c6e1198cb2d841afe9867
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 16:15:00 2018 -0400
+
+    Bind deck pane opening to the relevant button
+
+commit 967d30665d34cf6909b19ac4b2d352a09cc4b621
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 16:11:18 2018 -0400
+
+    Add styling to player details and body
+
+commit b0d5936b94796642b06457f7d0853787bb4956d0
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:52:59 2018 -0400
+
+    BS compile
+
+commit 39451637e1b26a450e5aa02c103bf41962b52380
+Merge: ae7c24e afc627f
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:48:38 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit ae7c24edca69eeb8a401c8b1904a65a7b93e6554
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:48:31 2018 -0400
+
+    Space the player details divs evenly
+
+commit afc627f28f7c62536a558bffde05b32c5df35587
+Merge: 1f9f5cb 3b4eb01
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 15:43:27 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 1f9f5cb7850d84db3e2c996aa30752e6b5288c4d
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 15:42:57 2018 -0400
+
+    Add game end logic and some test cases
+
+commit 0bc932b2dacd7dbc8b410dcf7bc31cf9cb1ecd46
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:40:06 2018 -0400
+
+    Add styling to train card amount indicators
+
+commit 3b4eb01a3d5794f7d25bd311038aba52e7b487ae
+Merge: 73af681 6d6ceed
+Author: tag96 <tag96@cornell.edu>
+Date:   Sat May 12 15:32:25 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 73af681ff78f4988655d468ab4ff7ed7a73236bc
+Author: tag96 <tag96@cornell.edu>
+Date:   Sat May 12 15:32:03 2018 -0400
+
+    get_paths started, not working yet but soon
+
+commit 6d6ceedc24efd9c09cc4130c84ba4df8b71d2744
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:28:54 2018 -0400
+
+    Display the destination hand next to the train hand
+
+commit 312c53b3dce00d3afcb9a30322c9bc279d4e6f90
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:23:40 2018 -0400
+
+    Render destination tickets in the DestinationHand component
+
+commit 9048179a68f4fde778e0afd427a7c36f83f6524c
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:16:58 2018 -0400
+
+    Update gameState reducer to respond to the (now renamed) decidedRoutes action
+
+commit e0671527fb6683bbaab4e1b198bead84b74aa64d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 15:04:11 2018 -0400
+
+    Bind choose_destinations action to button in selection box
+
+commit 6645c8e08b1ddfe6e8e1c68f09cb9f1bcabe8671
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 14:54:17 2018 -0400
+
+    BS compile
+
+commit deb7f4df5c7a780dd170108c706acd421c1a755a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 14:54:06 2018 -0400
+
+    Explicitly set the panel width
+
+commit 8af67a19fd9ad93bdcb4d942dcfe20a7729eb2cf
+Merge: 7e29171 b070c1b
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 14:01:48 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit b070c1b13b0c4ef6374fc278218140954bf52c1e
+Merge: 80c2b96 fc17288
+Author: kc875 <kc875@cornell.edu>
+Date:   Sat May 12 13:59:25 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 80c2b96c1591722ad6045c2267e121939b462fc8
+Author: kc875 <kc875@cornell.edu>
+Date:   Sat May 12 13:59:05 2018 -0400
+
+    Remove redundant decided_routes_setup function
+
+commit fc1728877b2ae77c719d82cebeb1b98e18346208
+Author: tag96 <tag96@cornell.edu>
+Date:   Sat May 12 13:57:31 2018 -0400
+
+    fixed ai
+
+commit 7e29171040091f459b06b9d92786ea69e3643517
+Merge: 7f88ff4 26f023c
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 12 13:39:32 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 26f023cf8fc69e15a2c8b6d720902482f5314fab
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 13:21:08 2018 -0400
+
+    Tracy merge conflict
+
+commit d5c8a8e4ade418ac398b93aed49d64fd6a79f3e6
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 12:44:55 2018 -0400
+
+    Add first_turn and last_turn as fields to player
+
+commit 9c8f51d8556e3f73a39a7971d8db2feea07cb9ff
+Merge: 388edc6 7c36ea9
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 12:33:01 2018 -0400
+
+    Fix merge conflict and routes
+
+commit 388edc6aa4de960996dd6504bcc9481f0aa82b04
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sat May 12 11:39:51 2018 -0400
+
+    Change location neighbors to string list, no longer hard coded
+
+commit 7f88ff42a7aad95a43fd4fb5a797ea94998d4615
+Merge: 5beda7d 7c36ea9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 23:53:33 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 5beda7d509b7ba0fbbd60fc86865356727ca5e91
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 23:53:26 2018 -0400
+
+    Add selected marker to destination tickets in the choice panel
+
+commit 23a1ae7ea36e30e3a5fb82b4173b71def64e999e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 23:19:10 2018 -0400
+
+    Change destination selection to be a toggled boolean
+
+commit 3b4b35c04add55f8dbe48ba469fb346f2087d5c2
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 23:16:01 2018 -0400
+
+    Add button to ticket selection panel
+
+commit 7c36ea995e5001599e581db2637684346eda81e4
+Merge: af75000 2b7a0e5
+Author: tag96 <tag96@cornell.edu>
+Date:   Fri May 11 22:04:35 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 82982b65959090bde4bb8a7a94def8b44a829739
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 19:45:44 2018 -0400
+
+    Conditionally render destinations options only if there are some
+
+commit 9c4e63804b6089b6fbcf7ccc9d281aeda353bacd
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 19:45:23 2018 -0400
+
+    Add hover effect to decks
+
+commit 2b7a0e5e98959dfc435f536aad3b14697542dc72
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 19:24:38 2018 -0400
+
+    Oops
+
+commit 43ecc004e81c29844b44b162265d152b10cf2ab0
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 19:21:05 2018 -0400
+
+    Remove redundant imports
+
+commit 54b0fd5f5d0521b65ddda66b02f104ccca7820dd
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 19:18:44 2018 -0400
+
+    Remove redundant Ticket tag
+
+commit af75000ecbb2d7e860b21f7761cc3b64ecd1e167
+Author: tag96 <tag96@cornell.edu>
+Date:   Fri May 11 19:16:35 2018 -0400
+
+    completed completed
+
+commit 7459319aef565f6b9ef2aa858e73b496dd6972b2
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 18:48:26 2018 -0400
+
+    BS compile
+
+commit 5b2a3e17a79f5d199bf495e224263ae517b224e5
+Merge: 56bce69 15b9161
+Author: tag96 <tag96@cornell.edu>
+Date:   Fri May 11 18:33:08 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 56bce69f962b0327734e0b720117269ebe671b5f
+Author: tag96 <tag96@cornell.edu>
+Date:   Fri May 11 18:32:57 2018 -0400
+
+    attempted completed, not working yet
+
+commit 15b9161328268224e4f5861e55a2d8e8bce2b1af
+Merge: 0708dff 71813f8
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 18:26:03 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 0708dffe5fd678c35615cfde8b25aea608daf2b9
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 18:26:00 2018 -0400
+
+    Update locations - neighbor list
+
+commit 71813f8505364a2369b07ad990810fe9673a9c0b
+Merge: f968c7c 0b0b873
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 17:34:36 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit f968c7cc3f0e5180ea369638f458338c4e7c25b9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 17:34:27 2018 -0400
+
+    Extract `cursor: pointer` into a class
+
+commit 2d6256583dc818edac34fbca4c9b00e1070c80b8
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 17:29:51 2018 -0400
+
+    Add click handler to destination tickets in choice panel
+
+commit 0b0b8732ca55b221b660b13c5ebf4be6b93c6ae7
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 17:10:21 2018 -0400
+
+    Delete redundat turn_ended = false
+
+commit 8d8ae52f9202491b85cc0816ad5a48a7e447ade5
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 17:04:37 2018 -0400
+
+    Draw tickets from choose_destinations below the decks
+
+commit 3d42b107cc52e5ba726e7c28319dab9bd38389da
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 16:51:57 2018 -0400
+
+    BS compile
+
+commit 168108f148b4aae7ea917b76c6f8ad660ba5bcb5
+Author: kc875 <kc875@cornell.edu>
+Date:   Fri May 11 16:48:55 2018 -0400
+
+    Export draw_card_pile functionality with no error raising, to let it be called twice in setup_state
+
+commit 8ce8b32007a58542eb3300f5229fb5e58b3bee21
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 15:33:12 2018 -0400
+
+    Add route ticket deck with proper action binding (same background image for now)
+
+commit 19eceb9a6441c1576017b3d4867a41af1a2c7e70
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 15:31:42 2018 -0400
+
+    Extract TrainDeck to common Deck component
+
+commit a228a8fa33231d2f963c4ee9d502018142d90f47
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 14:56:32 2018 -0400
+
+    Add Decks container, and bind drawTrainCard action to the TrainDeck click handler
+
+commit 0ddecf4f94550ad01d905866c7561a8027284c0d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 14:55:33 2018 -0400
+
+    BS compile
+
+commit 3c66114420a9ced2669ae804372e148fbbc9da86
+Merge: 5062847 32d5767
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 14:47:33 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 50628471c3e1dcb53fe6dd5c4db2856dba50d693
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 14:47:25 2018 -0400
+
+    Add train deck to side pane
+
+commit 32d5767befaa11ab9572de075c1e9aab991f0c42
+Merge: 87bcb0d 6112852
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 14:31:19 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 87bcb0d75b556291e04377cfa3fa373b45eda1e6
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 14:31:15 2018 -0400
+
+    Change draw_card_facing_up to take in an int representing which card from the facing up list they want to take
+
+commit 61128526f03aaa7cf9aad350d9d5058d5afcb64e
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 14:28:12 2018 -0400
+
+    Add slide out pane for decks
+
+commit 8b5ac17cf65d9b37a9fa1ab628b849ecfd6d129d
+Merge: 7258371 5132e33
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 13:57:19 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 72583712bd18dd209472a0a87ec85151013bedf3
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 13:56:57 2018 -0400
+
+    Draw destination ticket card
+
+commit 5132e330e1a9eca4afbb9a19e76512660e235bd3
+Merge: e6a7e88 3bfaa61
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 13:50:41 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit e6a7e8831bc1fe338d7b5cd6a325174a4a218422
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 13:50:34 2018 -0400
+
+    Change decided_routes to take in int list instead of card list
+
+commit 3bfaa61146fb815e61e95b8a0948db348d381a89
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Fri May 11 13:30:01 2018 -0400
+
+    BS compile
+
+commit 55b9c5d58c7a563061950dcd4748239bc6b0dfa3
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 12:36:18 2018 -0400
+
+    Update destination tickets
+
+commit c883f071695861b08ca67564215a24d68fa4d49c
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 00:11:40 2018 -0400
+
+    Fix place_on_board in state.ml trains_remaining bug
+
+commit 3d3162279aadf705c3108dd0a2c1c527f368b820
+Merge: 4da40c7 c3e599e
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 00:03:59 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 4da40c70e2cd0258227a31e2a0c9ae52f39603aa
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Fri May 11 00:03:52 2018 -0400
+
+    Update locations and routes
+
+commit c3e599e9355e3f51bc53f91931d6bc073f351dfd
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 23:01:32 2018 -0400
+
+    Add skeleton code for player details in the top pane
+
+commit 020e68e87eeafecdede13f2979fb45c0f70d21d9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:21:24 2018 -0400
+
+    Change init state to the result of setup_state, giving the player some initial cards
+
+commit fc49bdf3a74c1b226568c8c87d7dd6dc7f1ff2a9
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:21:00 2018 -0400
+
+    Remove console.log
+
+commit 7ee9e35b1547f2e85e0b857291adb88dfd87c228
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:16:54 2018 -0400
+
+    Add some actions for the state (take route and draw card)
+
+commit ecc69603e9ed1cd2da9bcb8665eaed5cb08836a3
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:12:27 2018 -0400
+
+    BS compile
+
+commit 3d15c89dd42c90be39a2ab8724517626ce66be12
+Merge: 2086af7 3d10e60
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:09:10 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 2086af7156531ade78dc2bc937300e2ce49cc727
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:09:00 2018 -0400
+
+    BS compile
+
+commit 5bdfffca0fac7aeeffce510a6c1b460dd5d950aa
+Merge: 600f28b b39b07d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:05:41 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 600f28b0e1056a47ec4c0f3cb98ebc92050e8f49
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 22:05:37 2018 -0400
+
+    Add skeleton code for destination ticket hand
+
+commit 3d10e60f33d0734a0e34bc14c45a2b38646bb1f0
+Author: tag96 <tag96@cornell.edu>
+Date:   Thu May 10 21:50:45 2018 -0400
+
+    initializer of ai, minor spec changes
+
+commit b39b07dd482e588a554d2cb858016a49cb51c9cd
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Thu May 10 21:45:37 2018 -0400
+
+    Expose choose_destinations getter
+
+commit a28a395073af5885e12c12a61c6ae820a2c1b2e0
+Merge: 407161a b39b07d
+Author: tag96 <tag96@cornell.edu>
+Date:   Thu May 10 21:30:30 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 407161afa4e29d6e0ac299e7525e68e7e2e675e9
+Author: tag96 <tag96@cornell.edu>
+Date:   Thu May 10 21:30:18 2018 -0400
+
+    small changes
+
+commit ac5b16d3a504d13b930c6f923f02eb9d162c97f6
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 21:08:18 2018 -0400
+
+    Add element to display the player's card deck
+
+commit 21c58b2761a416d5e04ae2b38f29cebe2a27e818
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Thu May 10 20:59:31 2018 -0400
+
+    Expose decided_routes_setup
+
+commit 0858a6dc9aed1cdffa63605fc3044cf76ee82c58
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 19:13:14 2018 -0400
+
+    Add unique route identifiers to route rectangles
+
+commit e401f175411d054690f1cdf87eec820f9dac3a2a
+Merge: 4b907ce d0c17ed
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Thu May 10 18:18:16 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 4b907cead265564628c8ee49d045a75462dd15bc
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Thu May 10 18:18:05 2018 -0400
+
+    Finish state_setup and better specifications
+
+commit d0c17ed9d052ee7a803159f254002418b62aa4f9
+Author: tag96 <tag96@cornell.edu>
+Date:   Thu May 10 17:51:11 2018 -0400
+
+    ai stuff started
+
+commit b9fff09d033abf6db10d923004c259fc88b1bc96
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 14:07:55 2018 -0400
+
+    Remove temporary lines from the map
+
+commit be5b1ab5e13f6e2e736330c7f299649e926b4ab4
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 13:45:51 2018 -0400
+
+    Extract common route rectangle styles into CSS class
+
+commit 43ef4acfe0e6af3c4ef8641602703751903a873d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 13:40:52 2018 -0400
+
+    Make the route rectangles have dashed borders
+
+commit 14ed8de65e0d7d63b425e2edbcb68e343b3458b5
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 13:38:48 2018 -0400
+
+    Paint the route rectangles according to the train colour needed to fill them
+
+commit d5e1275befa4ba981173c5a51028814fe6be2a5b
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 13:27:56 2018 -0400
+
+    Rotate and orient the rectangles to face the direction of the route
+
+commit 29d184e536ff3693b5d0036b09863a80cd2fe448
+Merge: c938de9 a5ad7db
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 12:50:26 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit c938de9cc54c5a24642d68816e7892fd973deaf6
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Thu May 10 12:49:55 2018 -0400
+
+    Draw rectangles for each route, with no rotation and black fill
+
+commit a5ad7db38286138924fff547ec96a1dce6127330
+Author: tag96 <tag96@cornell.edu>
+Date:   Thu May 10 11:23:27 2018 -0400
+
+    added routes to player to keep track of what routes were placed down
+
+commit e7c84d5a7140007d42ff3e04f7037b1c409d0b37
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 23:29:22 2018 -0400
+
+    Draw routes as solid lines
+
+commit bd329f25ab243e6a681771829b33fa9417b2b88d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 23:09:54 2018 -0400
+
+    Convert state lists to arrays and vice versa
+
+commit 09e73e3cc8b17170aee0aa9ae5d2dbeb4a438bab
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 22:28:54 2018 -0400
+
+    Load game state into application state
+
+commit b11f001b8dc7c37ee66a0e01d75b7b283509cb37
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 22:17:47 2018 -0400
+
+    Fetch initial state from state.ml
+
+commit fe1c0f2af559e3b313b7c6d8fd59a42b5e7fab3a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 22:17:18 2018 -0400
+
+    Didn't I commit this earlier today
+
+commit df068f0f03ad798b9ab1330d2146085cb19709dd
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 22:11:53 2018 -0400
+
+    Add state to object conversion function, with inverse
+
+commit 17ba51918ac4d536cb8a0dd186f7ba0cf8fecda6
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 21:56:59 2018 -0400
+
+    Increase the map size
+
+commit 5f900fc6a57afc6bd912d9a9f1f0cf515052b60e
+Merge: 6aa160c a6d1c0f
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 21:45:24 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 6aa160c97e8e6eac3463b918cd478a9af3da64ae
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 21:41:08 2018 -0400
+
+    Add some basic styling
+
+commit 6f014248e654026eba37e43cc233fea14ff203e8
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 21:18:16 2018 -0400
+
+    Remove React boilerplate
+
+commit 25ac11566c93e336411c9068fa632770f1f3494a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 21:13:07 2018 -0400
+
+    Add background image to map element
+
+commit a6d1c0f0c68ff78d3c0e2965f28d727fdcef5ad4
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Wed May 9 19:57:32 2018 -0400
+
+    Fix main.ml route selection
+
+commit 1c00267c22a468a1438b9d584b16c26612a4a9f5
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 19:44:26 2018 -0400
+
+    Draw a black circle for every location
+
+commit 06bf8341f838be1e2f11a32f473b596302d77918
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 19:42:53 2018 -0400
+
+    Update reducer
+
+commit 5affaeef50f50ef3117f51fed2ba90bcb8971492
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 19:25:55 2018 -0400
+
+    Add locations array to Map props
+
+commit 40ffe5bbc8f640fe1295b555a414cdb981515f4a
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 19:22:55 2018 -0400
+
+    Rename reference to Map in App.js
+
+commit 23b13ba3e8c8b1017bb5b42fa80215ea85d72801
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 19:21:41 2018 -0400
+
+    Map is a container, so treat it like one
+
+commit 6d8892b5e4d144f7cfbd2aabcaeccd673c20e4d5
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 19:20:37 2018 -0400
+
+    Calculate dimensions properly
+
+commit 3216aa456e935c88de9e0e3c3466074bd39fd5ec
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 16:49:59 2018 -0400
+
+    Actually move the image this time
+
+commit e3c777c84d531549dffc301f4c7d21d82a6b3fba
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 16:40:52 2018 -0400
+
+    Add listToArray conversion function
+
+commit 1ed24dc82fb8c4041a0957ea225176621c5712a8
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 16:15:34 2018 -0400
+
+    BS compile
+
+commit fef7f7a20d3a48e2162b130ab80272ba702d58c8
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Wed May 9 16:09:17 2018 -0400
+
+    Move map image to images directory
+
+commit 472d873bd643963d97c6599391a4f5a0f7d512b4
+Author: tag96 <tag96@cornell.edu>
+Date:   Wed May 9 10:29:50 2018 -0400
+
+    just added some open statements
+
+commit e5a5fa877997cb17ae9c958ec3eaf0e209835c50
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Wed May 9 01:07:34 2018 -0400
+
+    locations coordinates and cornell map
+
+commit f266c900ec330e88429762f7ac024f47c0e38cf6
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 8 20:24:26 2018 -0400
+
+    location list
+
+commit 29c2e7363cf99858182ee890ce81233efe52d195
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 8 18:26:45 2018 -0400
+
+    Add blank map with width and height
+
+commit 53b17e99165c386cc5f83a581e5532e906adb800
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 8 17:43:45 2018 -0400
+
+    Fill out redux boilerplate
+
+commit 4e633c4f5fdc44b56a4cb8338c8f482edfbad780
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Tue May 8 17:29:39 2018 -0400
+
+    BS compile
+
+commit 13c5927427e767730f06d2854461400fc1b644ab
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 8 15:28:14 2018 -0400
+
+    state passes in routes
+
+commit 0b64c10f749facab6e30a138a913f2e3702d3301
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Tue May 8 15:24:24 2018 -0400
+
+    kirill numbers
+
+commit c14d4482a001ef0b3ac3539edb74bcb9c50d1231
+Author: tag96 <tag96@cornell.edu>
+Date:   Tue May 8 09:27:24 2018 -0400
+
+    added routes, moved routes to board
+
+commit a4f92e476f6897851034d4c61288068f7f97e76c
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 7 22:13:34 2018 -0400
+
+    finished destination deck test cases, almost done with player tcs
+
+commit a45055ae68fc5097f8a80de37194c2a3fc7dfdc6
+Author: tag96 <tag96@cornell.edu>
+Date:   Mon May 7 12:06:36 2018 -0400
+
+    added locations, started routes
+
+commit 4342e37b155ef3f1cd3327db8dd809605ff374c6
+Merge: 1fef05a f68d024
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sun May 6 22:28:26 2018 -0400
+
+    Merge branch 'master' of https://github.coecis.cornell.edu/kc875/ticket-to-cornell
+
+commit 1fef05ad7bf99ae37b2757e68e066c8278016368
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sun May 6 22:28:23 2018 -0400
+
+    turn_ended in state
+
+commit f68d0248bb9f4515c0d134043209633534f31a22
+Author: tag96 <tag96@cornell.edu>
+Date:   Sun May 6 21:09:00 2018 -0400
+
+    changed types of routes and locations
+
+commit 5186f72a1d47644617203ed0e32e574c20446c71
+Author: tag96 <tag96@cornell.edu>
+Date:   Sun May 6 19:05:01 2018 -0400
+
+    new test cases
+
+commit 91640f5c19271c3e831c261ab132eea7a5390ee4
+Author: Camila Pretiz <camilapretiz@gmail.com>
+Date:   Sun May 6 18:45:38 2018 -0400
+
+    kirill files
+
+commit 07457b274175b1ec4d0ad6dbf4e61c2b43427a78
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sun May 6 18:37:36 2018 -0400
+
+    Compile stuff to JS
+
+commit 2eb8a0da01b825b6d49f2f52b39c6c96852904dd
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 5 20:52:56 2018 -0400
+
+    File structure stuff
+
+commit 80085d3f78cdfe1273e4a22334246fff903b129d
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 5 20:50:23 2018 -0400
+
+    Change project structure
+
+commit e42148774ce0d8c1d981e5ca780b68d3da806fc4
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 5 20:36:01 2018 -0400
+
+    Add bucklescript stuff
+
+commit a49a3494166eebff24ce37eb9bcc48e2630f9200
+Author: Kyrylo Chernyshov <kc875@cornell.edu>
+Date:   Sat May 5 20:31:59 2018 -0400
+
+    Initial commit

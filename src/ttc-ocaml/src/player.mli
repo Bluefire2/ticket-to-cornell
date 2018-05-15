@@ -49,7 +49,12 @@ val last_turn : player -> bool
 val trains_remaining : player -> int
 
 (* [init_players i] returns a list of length [i] of the initialized players, all
- * with no destination tickets and no cards. Each one has a different color.  *)
+ * with no destination tickets and no cards. Each one has a different color, defined as:
+ * Player 1 -> PBlue,
+ * Player 2 -> PPRed,
+ * Player 3 -> PYellow,
+ * Player 4 -> PGreen,
+ * Player 5 -> PBlack *)
 val init_players : int -> bool -> int -> player list
 
 (* [draw_train_card p c] returns a new player which is [p] but with

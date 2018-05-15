@@ -82,7 +82,8 @@ let tthd (_,_,z) = z
 (* [fs triple] is the first and the second element of [triple]. *)
 let fs (x,y,_) = (x,y)
 
-(* [remove_n n lst]  *)
+(* [remove_n n lst] removes the nth element from a list.
+ * requires: [n] is a valid list index greater than or equal to 0. *)
 let rec remove_n n lst =
   if n > (List.length lst) then lst else
   match lst with
@@ -100,7 +101,8 @@ let random_int n =
   try Random.int (n) with
   | Invalid_argument _ -> 0
 
-(* [shuffler from to_list len] *)
+(* [shuffler from to_list len] takes the elements from [from] and randomly adds them to
+ * [to_list], causing a shuffling in the deck.*)
 let rec shuffler from to_list len =
   match len with
   | 0 -> to_list
