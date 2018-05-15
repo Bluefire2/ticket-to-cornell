@@ -53,7 +53,7 @@ let is_bot p = p.bot
 
 let trains_remaining p = p.trains_remaining
 
-(* TODO: let players choose their colors. For now:
+(* Player colors are defined as:
   P1 -> blue
   P2 -> red
   P3 -> yellow
