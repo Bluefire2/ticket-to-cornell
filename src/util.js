@@ -42,7 +42,11 @@ const stateToObjMap = [
     'train_trash',
     'taking_routes',
     'error',
-    'turn_ended'
+    'turn_ended',
+    'last_round',
+    'winner',
+    'cards_grabbed',
+    'success'
 ];
 
 const stateListFields = [
