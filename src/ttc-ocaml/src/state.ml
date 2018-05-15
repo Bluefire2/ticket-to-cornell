@@ -200,31 +200,6 @@ let stringify_clr = function
   | PGreen -> "green"
   | PBlack -> "black"
 
-let next_player st =
-  if (st.cards_grabbed = 1) then grabbing_cards_error st
-  else (
-  if (turn_ended st) then
-    if (game_ended st) then end_game st
-    else (
-      let next_player = ((st.player_index + 1) mod (List.length st.players)) in
-      let st' = {st with player_index = next_player;
-                         turn_ended = false;
-                         error = "";
-                         cards_grabbed = 0} in
-      let p_clr = (st' |> current_player |> Player.color |> stringify_clr) in
-      let st' = {st' with success = "Now " ^ p_clr ^ "'s turn."} in
-      (* let st' =
-        if (is_bot (current_player st')) then (Ai.ai_move st')
-        else st' in *)
-      if ((check_last_round st) || (last_round st))
-      then
-        let p' = set_last_turn (current_player st') in
-        {st' with last_round = true;
-                  players = update_players (st'.player_index) p' st'.players }
-      else st' )
-  else
-    { st with error = "Turn has not ended yet for the current player.";
-              success = ""} )
 
 let draw_card_facing_up st i =
   if (turn_ended st) then turn_ended_error st
@@ -381,3 +356,41 @@ let select_route st r clr wild =
                            success = ""}
       | Some clr' -> place_on_board st r clr' wild )
     | (_, _, _, clr, _, _, _) -> place_on_board st r clr wild ))
+
+let rec ai_move st =
+  let p = (current_player st) in
+  let routes = (routes st) in
+  let facing_up = (st.facing_up_trains) in
+  let st' = match (Ai.next_move routes facing_up p) with
+  | Take_DTicket -> failwith "unimplemented"
+  | Place_Train -> failwith "unimplemented"
+  | Take_Faceup ->
+    let i = Ai.ai_facing_up p facing_up in
+    ai_move (draw_card_facing_up st i)
+  | Take_Deck -> ai_move (draw_card_pile st) in
+  next_player (st')
+
+and next_player st =
+  if (st.cards_grabbed = 1) then grabbing_cards_error st
+  else (
+    if (turn_ended st) then
+      if (game_ended st) then end_game st
+      else (
+        let p_clr = (st |> current_player |> Player.color |> stringify_clr) in
+        let next_player = ((st.player_index + 1) mod (List.length st.players)) in
+        let st' = {st with player_index = next_player;
+                           turn_ended = false;
+                           error = "";
+                           cards_grabbed = 0;
+                           success = "Now " ^ p_clr ^ "'s turn."} in
+        let ai = (is_bot (current_player st')) in
+        if ((check_last_round st) || (last_round st))
+        then
+          let p' = set_last_turn (current_player st') in
+          let st' = {st' with last_round = true;
+                              players = update_players (st'.player_index) p' st'.players } in
+          if (ai) then ai_move st' else st'
+             else if (ai) then ai_move st' else st' )
+    else
+      { st with error = "Turn has not ended yet for the current player.";
+                success = ""} )

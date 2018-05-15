@@ -219,28 +219,6 @@ let routes =
       loop (acc @ [new_r]) t in
   loop [] route_connections
 
-let rec completed loc1 loc2 routes prev =
-    match routes with
-    | [] -> false
-    | h::t -> ( match h with
-        | ((Location (l1,_,_,_)),(Location (l2,_,_,_)),_,_,_,_,_) ->
-          if loc1 = l1 then
-            if loc2 = l2 then true else
-              completed l2 loc2 t (h::prev) || completed l2 loc2 prev [] || completed loc1 loc2 t (h::prev)
-          else
-          if loc1 = l2 then
-            if loc2 = l1 then true else
-              completed l1 loc2 t (h::prev) || completed l1 loc2 prev [] || completed loc1 loc2 t (h::prev)
-          else
-          if loc2 = l1 then
-            if loc1 = l2 then true else
-              completed loc1 l2 t (h::prev) || completed loc1 l2 prev [] || completed loc1 loc2 t (h::prev)
-          else
-          if loc2 = l2 then
-            if loc1 = l1 then true else
-              completed loc1 l1 t (h::prev) || completed loc1 l1 prev [] || completed loc1 loc2 t (h::prev)
-          else
-              completed loc1 loc2 t (h::prev) )
 
 (* locations = total list of locations. *)
 let rec get_location s locations =
@@ -256,8 +234,8 @@ let get_neighbors (Location (_,_,_,x)) = x
 let rec get_route s1 s2 routes =
   match routes with
   | [] -> failwith "impossible"
-  | (x,y,a,b,c,n,lr)::t -> if ((get_location s1 locations) = x && (get_location s2 locations) = y) ||
-  ((get_location s1 locations) = y && (get_location s2 locations) = x) then (x,y,a,b,c,n,lr) else
+  | (x,y,a,b,c,n,lr)::t -> if (s1 = get_string x) && (s2 = get_string y) ||
+  (s1 = get_string y) && (s2 = get_string x) then (x,y,a,b,c,n,lr) else
   get_route s1 s2 t
 
 let distance a b = match a with
@@ -292,3 +270,26 @@ let rec path_routes (rts:route list) paths = match paths with
   | [] -> []
   | h1::h2::t -> (get_route h1 h2 rts)::(path_routes rts (h2::t))
   | _::t -> []
+
+let rec completed loc1 loc2 routes prev =
+    match routes with
+    | [] -> false
+    | h::t -> ( match h with
+        | ((Location (l1,_,_,_)),(Location (l2,_,_,_)),_,_,_,_,_) ->
+          if loc1 = l1 then
+            if loc2 = l2 then true else
+              completed l2 loc2 t (h::prev) || completed l2 loc2 prev [] || completed loc1 loc2 t (h::prev)
+          else
+          if loc1 = l2 then
+            if loc2 = l1 then true else
+              completed l1 loc2 t (h::prev) || completed l1 loc2 prev [] || completed loc1 loc2 t (h::prev)
+          else
+          if loc2 = l1 then
+            if loc1 = l2 then true else
+              completed loc1 l2 t (h::prev) || completed loc1 l2 prev [] || completed loc1 loc2 t (h::prev)
+          else
+          if loc2 = l2 then
+            if loc1 = l1 then true else
+              completed loc1 l1 t (h::prev) || completed loc1 l1 prev [] || completed loc1 loc2 t (h::prev)
+          else
+              completed loc1 loc2 t (h::prev) )

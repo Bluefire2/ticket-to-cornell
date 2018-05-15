@@ -56,8 +56,9 @@ let print_routes st =
 
 let play num =
   let rec game_loop st i =
-    (if i < num then
-    (print_player st;
+    (if i < num then (
+    ANSITerminal.(print_string [blue] (State.success st));
+     (print_player st);
     ANSITerminal.(print_string [blue] ("Grab 4 train cards from deck\n"));
     let st = State.setup_state st in
     print_cards st;

@@ -63,6 +63,110 @@ let filtration = Location ("Filtration Plant", 1787., 858., [])
 let creek = Location ("Cascadilla Creek", 842., 1579., [])
 let becker = Location ("House Becker", 198.,994., [])
 
+let route_connections =
+  [
+    (ckb,appel,1,Grey,None, true, Some LeftRoute);
+    (ckb,appel,1,Grey,None, true, Some RightRoute);
+    (dairy_bar,riley_robb,1,Grey,None, true, Some LeftRoute);
+    (dairy_bar,riley_robb,1,Grey,None, true, Some RightRoute);
+    (rpcc,ckb,1,Grey,None, true, Some LeftRoute);
+    (rpcc,ckb,1,Grey,None, true, Some RightRoute);
+    (rpcc,appel,1,Grey,None, false, None);
+    (island,plantations,1,Grey,None, true, Some LeftRoute);
+    (island,plantations,1,Grey,None, true, Some RightRoute);
+    (ckb,risley,2,Blue,None, false, None);
+    (noyes,mcgraw,2,Grey,None, true, Some LeftRoute);
+    (noyes,mcgraw,2,Grey,None, true, Some RightRoute);
+    (creek,schoellkopf,2,Grey,None, true, Some LeftRoute);
+    (creek,schoellkopf,2,Grey,None, true, Some RightRoute);
+    (beebe,appel,2,Pink,None, false, None);
+    (engineering,barton,2,Grey,None, true, Some LeftRoute);
+    (engineering,barton,2,Grey,None, true, Some RightRoute);
+    (beebe,island,2,Black,None, true, Some LeftRoute);
+    (beebe,island,2,Orange,None, true, Some RightRoute);
+    (kennedy,mann,2,Grey,None, true, Some LeftRoute);
+    (kennedy,mann,2,Grey,None, true, Some RightRoute);
+    (undergrad,risley,2,Green,None, true, Some LeftRoute);
+    (undergrad,risley,2,White,None, true, Some RightRoute);
+    (dairy_bar,plantations,2,White,None, true, Some LeftRoute);
+    (dairy_bar,plantations,2,Green,None, true, Some RightRoute);
+    (mann,plantations,2,Grey,None, false, None);
+    (barton,schoellkopf,2,Yellow,None, true, Some LeftRoute);
+    (barton,schoellkopf,2,Red,None, true, Some RightRoute);
+    (undergrad,museum,2,Grey,None, false, None);
+    (psb,kennedy,2,Grey,None, true, Some LeftRoute);
+    (psb,kennedy,2,Grey,None, true, Some RightRoute);
+    (schoellkopf,bartels,2,Grey,None, true, Some LeftRoute);
+    (schoellkopf,bartels,2,Grey,None, true, Some RightRoute);
+    (engineering,schoellkopf,2,Grey,None, false, None);
+    (a_lot,rpcc,2,Grey,None, false, None);
+    (forest_home,filtration,2,Grey,None, false, None);
+    (museum,bridge,2,Grey,None, false, None);
+    (filtration,vet,2,Grey,None, false, None);
+    (becker,noyes,2,Grey,None, false, None);
+    (risley,beebe,2,Grey,None, false, None);
+    (kennedy,barton,2,Grey,None, false, None);
+    (mcgraw,engineering,2,Grey,None, false, None);
+    (becker,mcgraw,2,Grey,None, false, None);
+    (appel,island,2,Grey,None, false, None);
+    (kennedy,bartels,2,Grey,None, false, None);
+    (becker,museum,3,Yellow,None, true, Some LeftRoute);
+    (becker,museum,3,Pink,None, true, Some RightRoute);
+    (eddy,engineering,3,Grey,None, false, None);
+    (hasbrouck,golf,3,Green,None, false, None);
+    (museum,psb,3,Red,None, true, Some LeftRoute);
+    (museum,psb,3,Yellow,None, true, Some RightRoute);
+    (risley,psb,3,White,None, false, None);
+    (becker,bridge,3,Blue,None, false, None);
+    (commons,eddy,3,Black,None, false, None);
+    (creek,maplewood,3,Orange,None, true, Some LeftRoute);
+    (creek,maplewood,3,Black,None, true, Some RightRoute);
+    (riley_robb,farm_barn,3,Grey,None, false, None);
+    (bartels,dairy_bar,3,Orange,None, false, None);
+    (bridge,undergrad,3,Pink,None, false, None);
+    (mcgraw,psb,3,Grey,None, false, None);
+    (dairy_bar,vet,3,Grey,None, false, None);
+    (plantations,filtration,3,Blue,None, false, None);
+    (becker,psb,3,Red,None, false, None);
+    (filtration,arboretum,3,Grey,None, false, None);
+    (museum,risley,3,Grey,None, false, None);
+    (schoellkopf,farm_barn,4,Yellow,None, false, None);
+    (a_lot,hasbrouck,4,Grey,None, false, None);
+    (arboretum,forest_home,4,Grey,None, false, None);
+    (appel,hasbrouck,4,Green,None, false, None);
+    (eddy,noyes,4,Blue,None, false, None);
+    (mcgraw,kennedy,4,Pink,None, false, None);
+    (psb,island,4,Red,None, false, None);
+    (island,forest_home,4,Yellow,None, true, Some LeftRoute);
+    (island,forest_home,4,Orange,None, true, Some RightRoute);
+    (eco_house,rpcc,4,Red,None, false, None);
+    (rpcc,hasbrouck,4,Black,None, false, None);
+    (undergrad,rpcc,4,Blue,None, false, None);
+    (sigma_chi,undergrad,4,Pink,None, false, None);
+    (hasbrouck,forest_home,4,White,None, false, None);
+    (maplewood,farm_barn,4,Black,None, true, Some LeftRoute);
+    (maplewood,farm_barn,4,Orange,None, true, Some RightRoute);
+    (arboretum,vet,5,Red,None, false, None);
+    (vet,plantations,5,White,None, false, None);
+    (eddy,creek,5,Yellow,None, false, None);
+    (undergrad,eco_house,5,Green,None, false, None);
+    (schoellkopf,riley_robb,5,Orange,None, true, Some LeftRoute);
+    (schoellkopf,riley_robb,5,White,None, true, Some RightRoute);
+    (bridge,sigma_chi,5,Black,None, false, None);
+    (sigma_chi,eco_house,5,Green,None, false, None);
+    (sigma_chi,eco_house,5,Pink,None, false, None);
+    (riley_robb,vet,5,Blue,None, false, None);
+    (commons,becker,6,Blue,None, false, None);
+    (a_lot,golf,6,Yellow,None, false, None);
+    (golf,forest_home,6,Black,None, false, None);
+    (appel,forest_home,6,White,None, false, None);
+    (eco_house,a_lot,6,Green,None, false, None);
+    (commons,noyes,6,Orange,None, false, None);
+    (golf,arboretum,6,Grey,None, false, None);
+    (farm_barn,vet,6,Pink,None, false, None);
+    (kennedy,dairy_bar,6,Red,None, false, None);
+  ]
+
 
 let test_list1 =
 [ Red; Red; Red]
@@ -708,10 +812,33 @@ let state_tests =
   "state47" >:: (fun _ -> assert_equal 0 (st_end5 |> longest_route_player));
 ]
 
+let cpu =
+  {
+  color = PBlue;
+  destination_tickets = [];
+  train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
+                     (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
+  score = 0;
+  routes = [];
+  trains_remaining = 45;
+  first_turn = true;
+  last_turn = false ;
+  bot = true
+   }
+
+
 let ai_tests =
 [
-  (* init_ai *)
-
+ (*  (* init_ai *)
+  "ai1" >:: (fun _ -> assert_equal true (init_state 0 2 |> current_player |> is_bot));
+  "ai2" >:: (fun _ -> assert_equal true (init_state 0 2 |> ai_setup |> turn_ended));
+  "ai3" >:: (fun _ -> assert_equal false (init_state 0 2 |> ai_setup |> current_player |> first_turn));
+  "ai4" >:: (fun _ -> assert_equal false (init_state 0 2 |> ai_setup |> current_player |> last_turn));
+  "ai5" >:: (fun _ -> assert_equal 2 (init_state 0 2 |> ai_setup |> current_player |> destination_tickets |> List.length));
+  "ai6" >:: (fun _ -> assert_equal 4 ((diff_cards
+                (init_state 0 2 |> current_player |> train_cards)
+                (init_state 0 2 |> setup_state |> current_player |> train_cards))));
+  "ai7" >:: (fun _ -> assert_equal true (init_state 0 2 |> next_player |> current_player |> is_bot)); *)
 
 ]
 
