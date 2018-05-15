@@ -33,6 +33,9 @@ val score : player -> int
 (* [color p] is [p]'s color.  *)
 val color : player -> Components.player_color
 
+(* [is_bot p] is true if [p] is a bot, false otherwise.  *)
+val is_bot : player -> bool
+
 (* [routes p] is [p]'s completed routes.  *)
 val routes : player -> Board.route list
 
@@ -59,7 +62,7 @@ val draw_train_card : player -> Components.TrainDeck.card  -> player
  * Requires: [p] has the minimum number of train cards and trains to complete
  * this route and that the route has been taken by [p]'s color (and not another
  * player). *)
-val place_train : player -> Board.route -> player
+val place_train : player -> Board.route -> int -> player
 
 (* [set_last_turn p] is [p] but with the field last_turn as true. *)
 val set_last_turn : player -> player
