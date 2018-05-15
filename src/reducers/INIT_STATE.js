@@ -4,6 +4,10 @@ import {stateToObj} from '../util';
 const url = new URL(window.location.href);
 let nPlayers = url.searchParams.get("n_players");
 
-if(nPlayers === null) nPlayers = 2;
+if(nPlayers === null) {
+    nPlayers = 2;
+} else {
+    nPlayers = parseInt(nPlayers);
+}
 
 export default stateToObj(setup_state(init_state(nPlayers, 0)));

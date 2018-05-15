@@ -4,14 +4,13 @@ import Modal from 'react-modal';
 import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import './App.css';
+import Map from './containers/map';
 import Hands from './containers/hands';
 import Decks from './containers/decks';
 import PlayerDetails from './containers/player_details';
 import ErrorMsg from './components/error_msg';
 import SuccessMsg from './components/success_msg';
 import WinScreen from './containers/win_screen';
-
-import Map from './containers/map';
 
 class App extends Component {
     constructor(props) {

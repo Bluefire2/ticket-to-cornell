@@ -3,10 +3,8 @@
 
 var List = require("bs-platform/lib/js/list.js");
 var Board = require("./board.bs.js");
-var State = require("./state.bs.js");
 var Js_exn = require("bs-platform/lib/js/js_exn.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
-var Components = require("./components.bs.js");
 var Pervasives = require("bs-platform/lib/js/pervasives.js");
 var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
 
@@ -18,86 +16,86 @@ function min(a, b, c) {
   return Caml_obj.caml_min(c, Caml_obj.caml_min(a, b));
 }
 
-function ai_setup(st) {
-  var st$prime = State.setup_state(st);
-  var match = State.choose_destinations(st$prime);
-  var keep_tickets;
-  if (match) {
-    var match$1 = match[1];
-    if (match$1) {
-      var match$2 = match$1[1];
-      if (match$2 && !match$2[1]) {
-        var match$3 = match$1[0];
-        var d = match$3[/* loc2 */1];
-        var c = match$3[/* loc1 */0];
-        var match$4 = match[0];
-        var b = match$4[/* loc2 */1];
-        var a = match$4[/* loc1 */0];
+function ai_setup(_, dlist) {
+  if (dlist) {
+    var match = dlist[1];
+    if (match) {
+      var match$1 = match[1];
+      if (match$1 && !match$1[1]) {
+        var match$2 = match[0];
+        var d = match$2[/* loc2 */1];
+        var c = match$2[/* loc1 */0];
+        var match$3 = dlist[0];
+        var b = match$3[/* loc2 */1];
+        var a = match$3[/* loc1 */0];
         if (a === c || a === d || b === c || b === d) {
-          keep_tickets = /* :: */[
-            0,
-            /* :: */[
-              1,
-              /* [] */0
-            ]
-          ];
+          return /* :: */[
+                  0,
+                  /* :: */[
+                    1,
+                    /* [] */0
+                  ]
+                ];
         } else {
-          var match$5 = match$2[0];
-          var f = match$5[/* loc2 */1];
-          var e = match$5[/* loc1 */0];
+          var match$4 = match$1[0];
+          var f = match$4[/* loc2 */1];
+          var e = match$4[/* loc1 */0];
           if (a === e || a === f || b === e || b === f) {
-            keep_tickets = /* :: */[
-              0,
-              /* :: */[
-                2,
-                /* [] */0
-              ]
-            ];
-          } else if (c === e || c === f || d === e || d === f) {
-            keep_tickets = /* :: */[
-              1,
-              /* :: */[
-                2,
-                /* [] */0
-              ]
-            ];
-          } else {
-            var z = match$5[/* points */2];
-            var y = match$3[/* points */2];
-            var x = match$4[/* points */2];
-            keep_tickets = max(x, y, z) === x && min(x, y, z) === y ? /* :: */[
-                0,
-                /* :: */[
-                  1,
-                  /* [] */0
-                ]
-              ] : (
-                max(x, y, z) === x && min(x, y, z) === z ? /* :: */[
+            return /* :: */[
                     0,
                     /* :: */[
                       2,
                       /* [] */0
                     ]
-                  ] : /* :: */[
+                  ];
+          } else if (c === e || c === f || d === e || d === f) {
+            return /* :: */[
                     1,
                     /* :: */[
                       2,
                       /* [] */0
                     ]
-                  ]
-              );
+                  ];
+          } else {
+            var z = match$4[/* points */2];
+            var y = match$2[/* points */2];
+            var x = match$3[/* points */2];
+            if (max(x, y, z) === x && min(x, y, z) === y) {
+              return /* :: */[
+                      0,
+                      /* :: */[
+                        1,
+                        /* [] */0
+                      ]
+                    ];
+            } else if (max(x, y, z) === x && min(x, y, z) === z) {
+              return /* :: */[
+                      0,
+                      /* :: */[
+                        2,
+                        /* [] */0
+                      ]
+                    ];
+            } else {
+              return /* :: */[
+                      1,
+                      /* :: */[
+                        2,
+                        /* [] */0
+                      ]
+                    ];
+            }
           }
         }
       } else {
-        keep_tickets = Pervasives.failwith("not possible");
+        return Pervasives.failwith("not possible");
       }
     } else {
-      keep_tickets = Pervasives.failwith("not possible");
+      return Pervasives.failwith("not possible");
     }
   } else {
-    keep_tickets = Pervasives.failwith("not possible");
+    return Pervasives.failwith("not possible");
   }
-  return State.decided_routes(st$prime, keep_tickets);
 }
 
 function get_val(param) {
@@ -119,6 +117,22 @@ function contains(x, _param) {
         return true;
       } else {
         _param = param[1];
+        continue ;
+      }
+    } else {
+      return false;
+    }
+  };
+}
+
+function check_faceup(_clist, faceup) {
+  while(true) {
+    var clist = _clist;
+    if (clist) {
+      if (contains(clist[0], faceup)) {
+        return true;
+      } else {
+        _clist = clist[1];
         continue ;
       }
     } else {
@@ -150,6 +164,23 @@ function priorize_build(_count, _acc, _param) {
   };
 }
 
+function only_color(c, _param) {
+  while(true) {
+    var param = _param;
+    if (param) {
+      var match = param[0];
+      if (Caml_obj.caml_equal(c, match[0])) {
+        return match[1];
+      } else {
+        _param = param[1];
+        continue ;
+      }
+    } else {
+      return 0;
+    }
+  };
+}
+
 function extract_hand_colors(c, _acc, _param) {
   while(true) {
     var param = _param;
@@ -163,6 +194,31 @@ function extract_hand_colors(c, _acc, _param) {
         _acc = acc + match[1] | 0;
         continue ;
       } else {
+        continue ;
+      }
+    } else {
+      return acc;
+    }
+  };
+}
+
+function desired_colors(_goal_routes, p, _acc) {
+  while(true) {
+    var acc = _acc;
+    var goal_routes = _goal_routes;
+    if (goal_routes) {
+      var t = goal_routes[1];
+      var match = goal_routes[0];
+      var c = match[3];
+      if (match[4] === /* None */0 && (match[2] - extract_hand_colors(c, 0, p[/* train_cards */2]) | 0) > 0) {
+        _acc = /* :: */[
+          c,
+          acc
+        ];
+        _goal_routes = t;
+        continue ;
+      } else {
+        _goal_routes = t;
         continue ;
       }
     } else {
@@ -191,12 +247,14 @@ function extract_strings(rts) {
   }
 }
 
-function enough_cards(hand, n) {
+function enough_cards(_hand, n) {
   while(true) {
+    var hand = _hand;
     if (hand) {
       if (Caml_obj.caml_greaterequal(hand[0][1], n)) {
         return true;
       } else {
+        _hand = hand[1];
         continue ;
       }
     } else {
@@ -217,11 +275,11 @@ function best_paths(param) {
   }
 }
 
-function best_routes(st, param) {
+function best_routes(st_routes, param) {
   if (param) {
     return /* :: */[
-            Board.path_routes(st[/* routes */2], param[0]),
-            best_routes(st, param[1])
+            Board.path_routes(st_routes, param[0]),
+            best_routes(st_routes, param[1])
           ];
   } else {
     return /* [] */0;
@@ -237,7 +295,7 @@ function other_player(p, param) {
   }
 }
 
-function check_routes(p, st, _rts, _acc) {
+function check_routes(p, st_routes, _rts, _acc) {
   while(true) {
     var acc = _acc;
     var rts = _rts;
@@ -252,8 +310,8 @@ function check_routes(p, st, _rts, _acc) {
                     extract_strings(acc)
                   ], Board.get_neighbors(l1)));
           var new_path = Board.get_paths(new_l, goal, extract_strings(acc));
-          var reroute = Board.path_routes(st[/* routes */2], new_path);
-          return check_routes(p, st, reroute, /* [] */0);
+          var reroute = Board.path_routes(st_routes, new_path);
+          return check_routes(p, st_routes, reroute, /* [] */0);
         }
         catch (raw_exn){
           var exn = Js_exn.internalToOCamlException(raw_exn);
@@ -277,13 +335,13 @@ function check_routes(p, st, _rts, _acc) {
   };
 }
 
-function check_routes_list(p, st, _rtss, _acc) {
+function check_routes_list(p, st_routes, _rtss, _acc) {
   while(true) {
     var acc = _acc;
     var rtss = _rtss;
     if (rtss) {
       _acc = /* :: */[
-        check_routes(p, st, rtss[0], /* [] */0),
+        check_routes(p, st_routes, rtss[0], /* [] */0),
         acc
       ];
       _rtss = rtss[1];
@@ -312,7 +370,7 @@ function count_route(p, _rts) {
   };
 }
 
-function dest_ticket_helper(_clist, st, _acc, p, _n) {
+function dest_ticket_helper(_clist, st_routes, _acc, p, _n) {
   while(true) {
     var n = _n;
     var acc = _acc;
@@ -321,20 +379,22 @@ function dest_ticket_helper(_clist, st, _acc, p, _n) {
       var h = clist[0];
       var y = h[/* loc2 */1];
       var x = h[/* loc1 */0];
-      if (Board.completed(x, y, st[/* routes */2], /* [] */0)) {
+      var t = clist[1];
+      if (Board.completed(x, y, st_routes, /* [] */0)) {
         _n = n + 1 | 0;
         _acc = Pervasives.$at(acc, /* :: */[
               n,
               /* [] */0
             ]);
-        _clist = clist[1];
+        _clist = t;
         continue ;
       } else {
         var path = Board.get_paths(x, y, /* [] */0);
-        var pathroute = Board.path_routes(st[/* routes */2], path);
-        var confirmed = check_routes(p, st, pathroute, /* [] */0);
+        var pathroute = Board.path_routes(st_routes, path);
+        var confirmed = check_routes(p, st_routes, pathroute, /* [] */0);
         if (count_route(p, confirmed) > p[/* trains_remaining */5]) {
           _n = n + 1 | 0;
+          _clist = t;
           continue ;
         } else if (count_route(p, confirmed) >= 9) {
           _n = n + 1 | 0;
@@ -342,9 +402,11 @@ function dest_ticket_helper(_clist, st, _acc, p, _n) {
                 n,
                 /* [] */0
               ]);
+          _clist = t;
           continue ;
         } else {
           _n = n + 1 | 0;
+          _clist = t;
           continue ;
         }
       }
@@ -354,7 +416,7 @@ function dest_ticket_helper(_clist, st, _acc, p, _n) {
   };
 }
 
-function get_smallest_path(_clist, st, p, _count, _acc, _n) {
+function get_smallest_path(_clist, st_routes, p, _count, _acc, _n) {
   while(true) {
     var n = _n;
     var acc = _acc;
@@ -364,8 +426,8 @@ function get_smallest_path(_clist, st, p, _count, _acc, _n) {
       var h = clist[0];
       var t = clist[1];
       var path = Board.get_paths(h[/* loc1 */0], h[/* loc2 */1], /* [] */0);
-      var pathroute = Board.path_routes(st[/* routes */2], path);
-      var confirmed = check_routes(p, st, pathroute, /* [] */0);
+      var pathroute = Board.path_routes(st_routes, path);
+      var confirmed = check_routes(p, st_routes, pathroute, /* [] */0);
       var num = count_route(p, confirmed);
       _n = n + 1 | 0;
       if (num < count) {
@@ -383,90 +445,86 @@ function get_smallest_path(_clist, st, p, _count, _acc, _n) {
   };
 }
 
-function smallest_points(param) {
-  var exit = 0;
-  if (param) {
-    var match = param[1];
-    if (match) {
-      var match$1 = match[1];
-      if (match$1 && !match$1[1]) {
-        var z = match$1[0][/* points */2];
-        var y = match[0][/* points */2];
-        var x = param[0][/* points */2];
-        if (min(x, y, z) === x) {
-          return /* :: */[
-                  0,
-                  /* [] */0
-                ];
-        } else if (min(x, y, z) === y) {
-          return /* :: */[
-                  1,
-                  /* [] */0
-                ];
+function ai_take_dticket(p, rts, dest_choice) {
+  var keep = dest_ticket_helper(dest_choice, rts, /* [] */0, p, 0);
+  if (List.length(keep) === 0) {
+    var min_path = get_smallest_path(dest_choice, rts, p, 0, -1, 0);
+    if (min_path > p[/* trains_remaining */5]) {
+      var param = dest_choice;
+      var exit = 0;
+      if (param) {
+        var match = param[1];
+        if (match) {
+          var match$1 = match[1];
+          if (match$1 && !match$1[1]) {
+            var z = match$1[0][/* points */2];
+            var y = match[0][/* points */2];
+            var x = param[0][/* points */2];
+            if (min(x, y, z) === x) {
+              return /* :: */[
+                      0,
+                      /* [] */0
+                    ];
+            } else if (min(x, y, z) === y) {
+              return /* :: */[
+                      1,
+                      /* [] */0
+                    ];
+            } else {
+              return /* :: */[
+                      2,
+                      /* [] */0
+                    ];
+            }
+          } else {
+            exit = 1;
+          }
         } else {
-          return /* :: */[
-                  2,
-                  /* [] */0
-                ];
+          exit = 1;
         }
       } else {
         exit = 1;
       }
+      if (exit === 1) {
+        throw [
+              Caml_builtin_exceptions.match_failure,
+              [
+                "ai.ml",
+                130,
+                22
+              ]
+            ];
+      }
+      
     } else {
-      exit = 1;
+      return /* :: */[
+              min_path,
+              /* [] */0
+            ];
     }
   } else {
-    exit = 1;
+    return keep;
   }
-  if (exit === 1) {
-    throw [
-          Caml_builtin_exceptions.match_failure,
-          [
-            "ai.ml",
-            120,
-            22
-          ]
-        ];
-  }
-  
 }
 
-function get_index(_n, c, _param) {
+function place_on_grey(len, _hand) {
   while(true) {
-    var param = _param;
-    var n = _n;
-    if (param) {
-      if (Caml_obj.caml_equal(param[0], c)) {
-        return n;
+    var hand = _hand;
+    if (hand) {
+      var c = hand[0][0];
+      if (extract_hand_colors(c, 0, hand) >= len) {
+        return c;
       } else {
-        _param = param[1];
-        _n = n + 1 | 0;
+        _hand = hand[1];
         continue ;
       }
     } else {
-      return Pervasives.failwith("out of bounds");
+      return Pervasives.failwith("not possible");
     }
   };
 }
 
-function completed_dtickets(st, _dtickets) {
-  while(true) {
-    var dtickets = _dtickets;
-    if (dtickets) {
-      var match = dtickets[0];
-      if (Board.completed(match[/* loc1 */0], match[/* loc2 */1], st[/* routes */2], /* [] */0)) {
-        _dtickets = dtickets[1];
-        continue ;
-      } else {
-        return false;
-      }
-    } else {
-      return true;
-    }
-  };
-}
-
-function can_build(_goal_routes, st, p) {
+function can_build(_goal_routes, p) {
   while(true) {
     var goal_routes = _goal_routes;
     if (goal_routes) {
@@ -474,10 +532,10 @@ function can_build(_goal_routes, st, p) {
       var c = h[3];
       var l = h[2];
       var t = goal_routes[1];
-      if (h[4] === /* None */0 && (extract_hand_colors(c, 0, p[/* train_cards */2]) === l || c === /* Grey */9 && enough_cards(p[/* train_cards */2], l))) {
+      if (h[4] === /* None */0 && extract_hand_colors(c, 0, p[/* train_cards */2]) === l || c === /* Grey */9 && enough_cards(p[/* train_cards */2], l)) {
         return /* :: */[
                 h,
-                can_build(t, st, p)
+                can_build(t, p)
               ];
       } else {
         _goal_routes = t;
@@ -489,116 +547,150 @@ function can_build(_goal_routes, st, p) {
   };
 }
 
-function ai_move(st) {
-  var cpu = State.current_player(st);
-  if (completed_dtickets(st, cpu[/* destination_tickets */1]) && cpu[/* trains_remaining */5] > 5) {
-    var ddraw = Components.DestinationDeck[/* draw_card */4](st[/* destination_deck */3], st[/* destination_trash */4]);
-    var clist = ddraw[0];
-    var st$1 = /* record */[
-      /* player_index */st[/* player_index */0],
-      /* players */st[/* players */1],
-      /* routes */st[/* routes */2],
-      /* destination_deck */ddraw[1],
-      /* destination_trash */st[/* destination_trash */4],
-      /* choose_destinations */ddraw[0],
-      /* train_deck */st[/* train_deck */6],
-      /* facing_up_trains */st[/* facing_up_trains */7],
-      /* train_trash */st[/* train_trash */8],
-      /* taking_routes */st[/* taking_routes */9],
-      /* error */st[/* error */10],
-      /* turn_ended */st[/* turn_ended */11],
-      /* last_round */st[/* last_round */12],
-      /* winner */st[/* winner */13],
-      /* cards_grabbed */st[/* cards_grabbed */14],
-      /* success */st[/* success */15]
-    ];
-    var p = cpu;
-    var keep = dest_ticket_helper(clist, st$1, /* [] */0, p, 0);
-    if (List.length(keep) === 0) {
-      var min_path = get_smallest_path(clist, st$1, p, 0, -1, 0);
-      if (min_path > p[/* trains_remaining */5]) {
-        return State.decided_routes(st$1, smallest_points(clist));
-      } else {
-        return State.decided_routes(st$1, /* :: */[
-                    min_path,
-                    /* [] */0
-                  ]);
-      }
+function ai_place_train(cpu, rts) {
+  var goal_routes = best_routes(rts, best_paths(cpu[/* destination_tickets */1]));
+  var routes = check_routes_list(cpu, rts, goal_routes, /* [] */0);
+  var goal_routes$1 = List.flatten(routes);
+  var build_options = can_build(goal_routes$1, cpu);
+  var build = get_val(priorize_build(0, /* None */0, build_options));
+  var color = Board.get_color(build);
+  if (color === /* Grey */9) {
+    var choose_color = place_on_grey(Board.get_length(build), cpu[/* train_cards */2]);
+    if (only_color(choose_color, cpu[/* train_cards */2]) < Board.get_length(build)) {
+      return /* tuple */[
+              build,
+              choose_color,
+              Board.get_length(build) - only_color(choose_color, cpu[/* train_cards */2]) | 0
+            ];
     } else {
-      return State.decided_routes(st$1, keep);
+      return /* tuple */[
+              build,
+              choose_color,
+              0
+            ];
     }
+  } else if (only_color(color, cpu[/* train_cards */2]) < Board.get_length(build)) {
+    return /* tuple */[
+            build,
+            color,
+            Board.get_length(build) - only_color(color, cpu[/* train_cards */2]) | 0
+          ];
   } else {
-    var goal_routes = best_routes(st, best_paths(cpu[/* destination_tickets */1]));
-    var routes = check_routes_list(cpu, st, goal_routes, /* [] */0);
-    var goal_routes$1 = List.flatten(routes);
-    var build_options = can_build(goal_routes$1, st, cpu);
-    if (List.length(build_options) > 0) {
-      var st$2 = st;
-      var build_options$1 = build_options;
-      var build = get_val(priorize_build(0, /* None */0, build_options$1));
-      var color = Board.get_color(build);
-      return State.select_route(st$2, build, /* Some */[color], 0);
-    } else {
-      var st$3 = st;
-      var goals = goal_routes$1;
-      var match = priorize_build(0, /* None */0, goals);
-      if (match) {
-        var c = match[0][3];
-        if (contains(c, st$3[/* facing_up_trains */7])) {
-          var d1 = State.draw_card_facing_up(st$3, get_index(0, c, st$3[/* facing_up_trains */7]));
-          var match$1 = priorize_build(0, /* None */0, goals);
-          if (match$1) {
-            var c$1 = match$1[0][3];
-            if (contains(c$1, st$3[/* facing_up_trains */7])) {
-              return State.draw_card_facing_up(d1, get_index(0, c$1, d1[/* facing_up_trains */7]));
-            } else {
-              return State.draw_card_pile(d1);
-            }
+    return /* tuple */[
+            build,
+            color,
+            0
+          ];
+  }
+}
+
+function ai_facing_up(p, rts, faceup) {
+  var goal_routes = best_routes(rts, best_paths(p[/* destination_tickets */1]));
+  var routes = check_routes_list(p, rts, goal_routes, /* [] */0);
+  var goal_routes$1 = List.flatten(routes);
+  can_build(goal_routes$1, p);
+  var colors = desired_colors(goal_routes$1, p, /* [] */0);
+  var match = priorize_build(0, /* None */0, goal_routes$1);
+  if (match) {
+    var c = match[0][3];
+    if (contains(c, faceup)) {
+      var _n = 0;
+      var c$1 = c;
+      var _param = faceup;
+      while(true) {
+        var param = _param;
+        var n = _n;
+        if (param) {
+          if (Caml_obj.caml_equal(param[0], c$1)) {
+            return n;
           } else {
-            throw [
-                  Caml_builtin_exceptions.match_failure,
-                  [
-                    "ai.ml",
-                    158,
-                    8
-                  ]
-                ];
+            _param = param[1];
+            _n = n + 1 | 0;
+            continue ;
           }
         } else {
-          var d1$1 = State.draw_card_pile(st$3);
-          var match$2 = priorize_build(0, /* None */0, goals);
-          if (match$2) {
-            var c$2 = match$2[0][3];
-            if (contains(c$2, st$3[/* facing_up_trains */7])) {
-              return State.draw_card_facing_up(d1$1, get_index(0, c$2, d1$1[/* facing_up_trains */7]));
-            } else {
-              return State.draw_card_pile(d1$1);
-            }
-          } else {
-            throw [
-                  Caml_builtin_exceptions.match_failure,
-                  [
-                    "ai.ml",
-                    164,
-                    8
-                  ]
-                ];
-          }
+          return Pervasives.failwith("out of bounds");
         }
+      };
+    } else {
+      var _colors = colors;
+      var faceup$1 = faceup;
+      var _n$1 = 0;
+      while(true) {
+        var n$1 = _n$1;
+        var colors$1 = _colors;
+        if (colors$1 && !contains(colors$1[0], faceup$1)) {
+          _n$1 = n$1 + 1 | 0;
+          _colors = colors$1[1];
+          continue ;
+        } else {
+          return n$1;
+        }
+      };
+    }
+  } else {
+    throw [
+          Caml_builtin_exceptions.match_failure,
+          [
+            "ai.ml",
+            212,
+            6
+          ]
+        ];
+  }
+}
+
+function completed_dtickets(p, _dtickets) {
+  while(true) {
+    var dtickets = _dtickets;
+    if (dtickets) {
+      var match = dtickets[0];
+      if (Board.completed(match[/* loc1 */0], match[/* loc2 */1], p[/* routes */4], /* [] */0)) {
+        _dtickets = dtickets[1];
+        continue ;
       } else {
-        throw [
-              Caml_builtin_exceptions.match_failure,
-              [
-                "ai.ml",
-                154,
-                6
-              ]
-            ];
+        return false;
+      }
+    } else {
+      return true;
+    }
+  };
+}
+
+function next_move(rts, sec_draw, faceup, cpu) {
+  if (sec_draw) {
+    var goal_routes = best_routes(rts, best_paths(cpu[/* destination_tickets */1]));
+    var routes = check_routes_list(cpu, rts, goal_routes, /* [] */0);
+    var goal_routes$1 = List.flatten(routes);
+    var colors = desired_colors(goal_routes$1, cpu, /* [] */0);
+    if (check_faceup(colors, faceup)) {
+      return /* Take_Faceup */2;
+    } else {
+      return /* Take_Deck */3;
+    }
+  } else if (completed_dtickets(cpu, cpu[/* destination_tickets */1]) && cpu[/* trains_remaining */5] > 5) {
+    return /* Take_DTicket */0;
+  } else {
+    var goal_routes$2 = best_routes(rts, best_paths(cpu[/* destination_tickets */1]));
+    var routes$1 = check_routes_list(cpu, rts, goal_routes$2, /* [] */0);
+    var goal_routes$3 = List.flatten(routes$1);
+    var build_options = can_build(goal_routes$3, cpu);
+    if (List.length(build_options) > 0) {
+      return /* Place_Train */1;
+    } else {
+      var colors$1 = desired_colors(goal_routes$3, cpu, /* [] */0);
+      if (check_faceup(colors$1, faceup)) {
+        return /* Take_Faceup */2;
+      } else {
+        return /* Take_Deck */3;
       }
     }
   }
 }
 
-exports.ai_move = ai_move;
+exports.next_move = next_move;
+exports.ai_facing_up = ai_facing_up;
+exports.ai_take_dticket = ai_take_dticket;
+exports.ai_place_train = ai_place_train;
 exports.ai_setup = ai_setup;
 /* Board Not a pure module */
