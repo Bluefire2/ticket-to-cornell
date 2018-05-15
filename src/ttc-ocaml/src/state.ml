@@ -357,7 +357,7 @@ let select_route st r clr wild =
       | Some clr' -> place_on_board st r clr' wild )
     | (_, _, _, clr, _, _, _) -> place_on_board st r clr wild ))
 
-let rec ai_move st =
+let rec ai_move st second =
   let p = (current_player st) in
   if (first_turn p) then
     let st' = setup_state st in
@@ -367,7 +367,7 @@ let rec ai_move st =
   else
   let routes = (routes st) in
   let facing_up = (st.facing_up_trains) in
-  let st' = match (Ai.next_move routes facing_up p) with
+  let st' = match (Ai.next_move routes second facing_up p) with
     | Take_DTicket ->
       let st' = take_route st in
       let choose = (choose_destinations st') in
@@ -377,9 +377,12 @@ let rec ai_move st =
       let (r, clr, n) = Ai.ai_place_train p routes in
       select_route st r (Some clr) n
   | Take_Faceup ->
-    let i = Ai.ai_facing_up p routes facing_up in
-    ai_move (draw_card_facing_up st i)
-  | Take_Deck -> ai_move (draw_card_pile st) in
+      let i = Ai.ai_facing_up p routes facing_up in
+      let st' = draw_card_facing_up st i in
+      ai_move st' true
+  | Take_Deck ->
+      let st' = draw_card_pile st in
+      ai_move st' true in
   next_player (st')
 
 and next_player st =
@@ -401,8 +404,8 @@ and next_player st =
           let p' = set_last_turn (current_player st') in
           let st' = {st' with last_round = true;
                               players = update_players (st'.player_index) p' st'.players } in
-          if (ai) then ai_move st' else st'
-         else if (ai) then ai_move st' else st' )
+          if (ai) then ai_move st' false else st'
+         else if (ai) then ai_move st' false else st' )
     else
       { st with error = "Turn has not ended yet for the current player.";
                 success = ""} )

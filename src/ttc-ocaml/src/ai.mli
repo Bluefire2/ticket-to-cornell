@@ -5,7 +5,7 @@ type action = Take_DTicket | Place_Train | Take_Faceup | Take_Deck
 
 (* [next_move lst td p] is the next action the AI wants to do depending on the
  * current player [p], the facing up cards [td], and the routes [lst]. *)
-val next_move : Board.route list -> TrainDeck.t -> Player.player -> action
+val next_move : Board.route list -> bool -> TrainDeck.t -> Player.player -> action
 
 (* [ai_facing_up p td] is the facing up card index the AI wants to choose from
  * the facing up cards [td]. *)

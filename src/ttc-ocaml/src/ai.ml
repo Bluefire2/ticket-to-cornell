@@ -232,7 +232,14 @@ let rec completed_dtickets (p : player) dtickets =
                                            then incomplete_dticket st t (({loc1 = x; loc2 = y; points = z})::acc)
                                            else incomplete_dticket st t acc  *)
 
-let next_move rts faceup cpu =
+let next_move rts sec_draw faceup cpu =
+  if sec_draw then
+    let goal_routes = best_routes rts (best_paths cpu.destination_tickets) in
+    let routes = check_routes_list cpu rts (goal_routes) [] in
+    let goal_routes = List.flatten routes in
+    let colors = desired_colors goal_routes cpu [] in
+    if check_faceup colors faceup then Take_Faceup else Take_Deck
+  else
   if completed_dtickets cpu cpu.destination_tickets && cpu.trains_remaining > 5 then Take_DTicket else
   let goal_routes = best_routes rts (best_paths cpu.destination_tickets) in
   let routes = check_routes_list cpu rts (goal_routes) [] in
