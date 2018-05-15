@@ -60,7 +60,143 @@ function init_state(n, bots) {
   }
 }
 
-init_state(2, 0);
+var st = init_state(2, 0);
+
+var p3 = /* record */[
+  /* color : PBlue */0,
+  /* destination_tickets : [] */0,
+  /* train_cards : [] */0,
+  /* score */30,
+  /* routes : [] */0,
+  /* trains_remaining */2,
+  /* first_turn */false,
+  /* last_turn */false,
+  /* bot */false
+];
+
+var p4 = /* record */[
+  /* color : PRed */1,
+  /* destination_tickets : [] */0,
+  /* train_cards : [] */0,
+  /* score */2,
+  /* routes : [] */0,
+  /* trains_remaining */2,
+  /* first_turn */false,
+  /* last_turn */false,
+  /* bot */false
+];
+
+var end_state1_000 = /* player_index */st[/* player_index */0];
+
+var end_state1_001 = /* players : :: */[
+  p3,
+  /* :: */[
+    p4,
+    /* [] */0
+  ]
+];
+
+var end_state1_002 = /* routes */st[/* routes */2];
+
+var end_state1_003 = /* destination_deck */st[/* destination_deck */3];
+
+var end_state1_004 = /* destination_trash */st[/* destination_trash */4];
+
+var end_state1_005 = /* choose_destinations */st[/* choose_destinations */5];
+
+var end_state1_006 = /* train_deck */st[/* train_deck */6];
+
+var end_state1_007 = /* facing_up_trains */st[/* facing_up_trains */7];
+
+var end_state1_008 = /* train_trash */st[/* train_trash */8];
+
+var end_state1_009 = /* taking_routes */st[/* taking_routes */9];
+
+var end_state1_010 = /* error */st[/* error */10];
+
+var end_state1_011 = /* turn_ended */st[/* turn_ended */11];
+
+var end_state1_012 = /* last_round */st[/* last_round */12];
+
+var end_state1_013 = /* winner */st[/* winner */13];
+
+var end_state1_014 = /* cards_grabbed */st[/* cards_grabbed */14];
+
+var end_state1_015 = /* success */st[/* success */15];
+
+var end_state1 = /* record */[
+  end_state1_000,
+  end_state1_001,
+  end_state1_002,
+  end_state1_003,
+  end_state1_004,
+  end_state1_005,
+  end_state1_006,
+  end_state1_007,
+  end_state1_008,
+  end_state1_009,
+  end_state1_010,
+  end_state1_011,
+  end_state1_012,
+  end_state1_013,
+  end_state1_014,
+  end_state1_015
+];
+
+var end_state2_000 = end_state1_000;
+
+var end_state2_001 = /* players : :: */[
+  p3,
+  /* :: */[
+    p4,
+    /* [] */0
+  ]
+];
+
+var end_state2_002 = end_state1_002;
+
+var end_state2_003 = end_state1_003;
+
+var end_state2_004 = end_state1_004;
+
+var end_state2_005 = end_state1_005;
+
+var end_state2_006 = end_state1_006;
+
+var end_state2_007 = end_state1_007;
+
+var end_state2_008 = end_state1_008;
+
+var end_state2_009 = end_state1_009;
+
+var end_state2_010 = end_state1_010;
+
+var end_state2_011 = end_state1_011;
+
+var end_state2_013 = /* winner : Some */[p3];
+
+var end_state2_014 = end_state1_014;
+
+var end_state2_015 = end_state1_015;
+
+var end_state2 = /* record */[
+  end_state2_000,
+  end_state2_001,
+  end_state2_002,
+  end_state2_003,
+  end_state2_004,
+  end_state2_005,
+  end_state2_006,
+  end_state2_007,
+  end_state2_008,
+  end_state2_009,
+  end_state2_010,
+  end_state2_011,
+  /* last_round */true,
+  end_state2_013,
+  end_state2_014,
+  end_state2_015
+];
 
 function current_player(st) {
   return List.nth(st[/* players */1], st[/* player_index */0]);
@@ -988,6 +1124,8 @@ function next_player(st) {
 }
 
 exports.init_state = init_state;
+exports.end_state1 = end_state1;
+exports.end_state2 = end_state2;
 exports.current_player = current_player;
 exports.players = players;
 exports.routes = routes;
@@ -1008,4 +1146,4 @@ exports.draw_card_facing_up = draw_card_facing_up;
 exports.take_route = take_route;
 exports.decided_routes = decided_routes;
 exports.select_route = select_route;
-/*  Not a pure module */
+/* st Not a pure module */

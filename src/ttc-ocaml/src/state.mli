@@ -24,6 +24,9 @@ type state = { player_index : int;
  * After this state, call setup_state for each player. *)
 val init_state : int -> int -> state
 
+val end_state1: state
+val end_state2: state
+
 (* [current_player st] returns the current player whose turn it is in [st]. *)
 val current_player : state -> player
 
