@@ -513,7 +513,7 @@ let player_tests =
     ({p1 with train_cards = [(Red,1);(Blue,1);(Green,1);(Orange,1);(Yellow,1);(Pink,1);(Wild,1);(Black,1);(White,2)] })
   (Player.draw_train_card p1 White));
 
-  "place_train1" >:: (fun _ -> assert_equal p3' (place_train p3 r' 0));
+  "place_train1" >:: (fun _ -> assert_equal p3' (place_train p3 Green r' 0));
 ]
 
 let num_cards cards =
@@ -562,7 +562,8 @@ let st4 = { player_index = 0;
             turn_ended = false;
             last_round = false;
             winner = None;
-            cards_grabbed = 0; }
+            cards_grabbed = 0;
+            success = ""}
 
 let fill_in r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
 let r_select = select_route st4 r None 0
@@ -603,7 +604,8 @@ let st_end = { player_index = 0;
                turn_ended = true;
                last_round = false;
                winner = None;
-               cards_grabbed = 0}
+               cards_grabbed = 0;
+               success = ""}
 let st_end' = {st_end with players = [p_end; p_end3]}
 let st_end'' = {st_end with players = [p_end; p_end4]}
 let st_end_over st = st |> next_player |> draw_card_pile |> draw_card_pile |> next_player
@@ -612,6 +614,8 @@ let st_end2 = {st_end with players = [p_end5; p_end3]}
 let st_end3 = {st_end with players = [p_end; p_end3; p_end5]}
 let st_end4 = {st_end with players = [p_end6; p_end5]}
 let st_end5 = {st_end with players = [p_end7; p_end8]}
+
+let error3 = "You still need to grab another card from the pile or facing up cards."
 
 let state_tests =
 [
@@ -631,26 +635,29 @@ let state_tests =
   "state8" >:: (fun _ -> assert_equal true (st3 |> turn_ended));
   "state9" >:: (fun _ -> assert_equal true (st2 |> turn_ended));
   "state10" >:: (fun _ -> assert_equal false (st1 |> turn_ended));
-  "state11" >:: (fun _ -> assert_equal error (st1 |> message));
+  "state11" >:: (fun _ -> assert_equal error (st1 |> State.error));
   "state12" >:: (fun _ -> assert_equal false (st3 |> next_player |> turn_ended));
   "state13" >:: (fun _ -> assert_equal true (st3' |> turn_ended));
   "state14" >:: (fun _ -> assert_equal false (st3' |> current_player |> first_turn));
-  "state15" >:: (fun _ -> assert_equal error2 (st3'' |> setup_state |> message));
+  "state15" >:: (fun _ -> assert_equal error2 (st3'' |> setup_state |> State.error));
 
   (* draw_card_pile *)
   "state16" >:: (fun _ -> assert_equal false (st3'' |> draw_card_pile |> turn_ended));
   "state17" >:: (fun _ -> assert_equal true (st3'' |> draw_card_pile |> draw_card_pile |> turn_ended));
-  "state17" >:: (fun _ -> assert_equal "" (st3'' |> draw_card_pile |> message));
+  "state17" >:: (fun _ -> assert_equal "" (st3'' |> draw_card_pile |> State.error));
   "state18" >:: (fun _ -> assert_equal 1 (diff_cards
                 (st3'' |> current_player |> train_cards)
                 (st3'' |> draw_card_pile |> current_player |> train_cards)));
 
   (* draw_card_facing_up *)
   "state16" >:: (fun _ -> assert_equal false ((draw_card_facing_up st3'' 0) |> turn_ended));
+  "state17" >:: (fun _ -> assert_equal error3 ((draw_card_facing_up st3'' 0) |> next_player |> State.error));
+  "state17" >:: (fun _ -> assert_equal error3 ((draw_card_facing_up st3'' 0) |> take_route |> State.error));
   "state16" >:: (fun _ -> assert_equal true ((draw_card_facing_up st3'' 0) |> draw_card_pile |> turn_ended));
   "state18" >:: (fun _ -> assert_equal 2 (diff_cards
                 (st3'' |> current_player |> train_cards)
                 ((draw_card_facing_up (st3'' |> draw_card_pile) 1)|> current_player |> train_cards)));
+
   (* select_route *)
   "state19" >:: (fun _ -> assert_equal ~-2 (diff_cards
                 (st4 |> current_player |> train_cards)
@@ -661,7 +668,7 @@ let state_tests =
   "state21" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> score));
   "state22" >:: (fun _ -> assert_equal r' (List.nth (r_select |> State.routes) 21));
   "state23" >:: (fun _ -> assert_equal "Route already taken."
-                    ((select_route (r_select |> next_player) r'' None 0) |> message));
+                    ((select_route (r_select |> next_player) r'' None 0) |> State.error));
 
   (* end game *)
   "state24" >:: (fun _ -> assert_equal true (st_end |> next_player |> last_round));
@@ -670,9 +677,9 @@ let state_tests =
                                              |> draw_card_pile
                                              |> draw_card_pile
                                              |> next_player
-                                             |> message));
+                                             |> State.error));
   "state26" >:: (fun _ -> assert_equal "Game has ended." (st_end_over st_end
-                                                          |> message));
+                                                          |> State.error));
   "state27" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end |> players) 0))
                     (st_end_over st_end |> winner));
   "state28" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end' |> players) 1))
@@ -684,8 +691,8 @@ let state_tests =
   "state30" >:: (fun _ -> assert_equal false (st3'' |> take_route |> turn_ended));
   "state31" >:: (fun _ -> assert_equal 3 (List.length (st3'' |> take_route |> choose_destinations)));
   "state32" >:: (fun _ -> assert_equal "Player only chose 0 tickets, must take at least 1."
-                    ((decided_routes (st3'' |> take_route) []) |> message));
-  "state33" >:: (fun _ -> assert_equal "" ((decided_routes (st3'' |> take_route) [0;1;2]) |> message));
+                    ((decided_routes (st3'' |> take_route) []) |> State.error));
+  "state33" >:: (fun _ -> assert_equal "" ((decided_routes (st3'' |> take_route) [0;1;2]) |> State.error));
   "state34" >:: (fun _ -> assert_equal true ((decided_routes (st3'' |> take_route) [0;1;2]) |> turn_ended));
   "state35" >:: (fun _ -> assert_equal [] ((decided_routes (st3'' |> take_route) [0;1;2]) |> choose_destinations));
   "state36" >:: (fun _ -> assert_equal ((List.nth (st3'' |> take_route |> choose_destinations) 0)::(st3'' |> current_player |> destination_tickets))

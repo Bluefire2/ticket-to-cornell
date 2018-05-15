@@ -62,7 +62,7 @@ val draw_train_card : player -> Components.TrainDeck.card  -> player
  * Requires: [p] has the minimum number of train cards and trains to complete
  * this route and that the route has been taken by [p]'s color (and not another
  * player). *)
-val place_train : player -> Board.route -> int -> player
+val place_train : player -> Components.train_color -> Board.route -> int -> player
 
 (* [set_last_turn p] is [p] but with the field last_turn as true. *)
 val set_last_turn : player -> player

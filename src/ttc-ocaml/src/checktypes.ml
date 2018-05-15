@@ -13,14 +13,16 @@ type state = { player_index : int;
                turn_ended : bool;
                last_round : bool;
                winner : Player.player option;
-               cards_grabbed : int }
+               cards_grabbed : int;
+               success : string }
 val init_state : int -> int -> State.state
 val current_player : State.state -> Player.player
 val players : State.state -> Player.player list
 val routes : State.state -> Board.route list
 val destination_items : State.state -> (Components.DestinationDeck.t * Components.DestinationDeck.tr)
 val train_items : State.state -> (Components.TrainDeck.t * Components.TrainDeck.t * Components.TrainDeck.tr)
-val message : State.state -> string
+val error : State.state -> string
+val success : State.state -> string
 val turn_ended : State.state -> bool
 val last_round : State.state -> bool
 val choose_destinations : State.state -> Components.DestinationDeck.card list
@@ -114,7 +116,7 @@ module type PLAYER = sig
   val trains_remaining : player -> int
   val init_players : int -> bool -> player list
   val draw_train_card : player -> Components.TrainDeck.card  -> player
-  val place_train : player -> Board.route -> int -> player
+  val place_train : player -> Components.train_color -> Board.route -> int -> player
   val set_last_turn : player -> player
   val longest_route : player -> int
 end
