@@ -53,13 +53,6 @@ let is_bot p = p.bot
 
 let trains_remaining p = p.trains_remaining
 
-(* Player colors are defined as:
-  P1 -> blue
-  P2 -> red
-  P3 -> yellow
-  P4 -> green
-  P5 -> black
-*)
 (* [add_train_cards lst c acc] adds one card to [lst] that matches the color [c]. *)
 let rec add_train_cards lst c acc =
   match lst with
@@ -104,13 +97,9 @@ let place_train p clr r wild =
            routes = r::p.routes;
            trains_remaining = p.trains_remaining - Board.get_length r }
 
-let rec path = function
-  | [] -> []
-  | (x,y,_,_,_)::t -> ( match (x,y) with
-      | ( (x',_,_), (y',_,_) ) -> (x',y')::path t )
-
 let set_last_turn p =
   { p with last_turn = true }
+
 
 let rec between_before l acc = function
   | [] -> acc
@@ -128,6 +117,7 @@ let calculate_paths l1 l2 locations paths =
     (locations, loop [] paths)
   else (l1::locations, (l1, [], l2)::paths)
 
+(* [length acc] returns the cumulative length of all of the routes on a path. *)
 let rec length acc = function
   | [] -> acc
   | r::t -> length (acc + (Board.get_length r)) t
