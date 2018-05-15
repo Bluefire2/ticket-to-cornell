@@ -69,7 +69,7 @@ let rec add_train_cards lst c acc =
     else add_train_cards t c (acc @ [(a,b)])
 
 let rec init_players n bot i =
-  match (n+i) with
+  match (n) with
   | 0 -> []
   | _ -> let p = { color = color_of_int ((n+i)-1);
                   destination_tickets = [];

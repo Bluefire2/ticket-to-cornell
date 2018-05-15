@@ -78,7 +78,7 @@ let end_state2 =
   {end_state1 with players = [p3; p4];
                    last_round = true;
                    winner = Some p3 }
-(* 
+
 let p_end =
   {
     color= PRed;
@@ -98,15 +98,16 @@ let tick = {loc1 = "Undergraduate Admissions";
             points = 15}
 
 let r = List.nth (Board.routes) 21
-let r' = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
+let fill_in r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
+(* let r2 = List.nth (r_select |> State.routes) 9 *)
 
 let p_end2 = {p_end with color = PYellow;
                          destination_tickets = [tick];
-                         routes = [r']}
+                         routes = [(fill_in r)]}
 
 (* STATE FOR KIRILL:
- * Has one completed destination ticket ()*)
-let st_end = { player_index = 0;
+ * Player Yellow should have one completed ticket. *)
+let end_state3 = { player_index = 0;
                players = [p_end; p_end2];
                routes = Board.routes;
                destination_deck = DestinationDeck.init_deck ();
@@ -121,7 +122,7 @@ let st_end = { player_index = 0;
                last_round = false;
                winner = None;
                cards_grabbed = 0;
-               success = ""} *)
+               success = ""}
 
 (* END OF TESTING STUFF *)
 
