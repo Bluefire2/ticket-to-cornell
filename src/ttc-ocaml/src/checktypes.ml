@@ -36,6 +36,7 @@ val take_route : State.state -> State.state
 val decided_routes : State.state -> int list -> State.state
 val select_route : state -> Board.route -> Components.train_color option -> int -> state
 val longest_route_player : State.state -> int
+val completed_ticket : string -> string -> state -> bool
 end
 
 module type COMPONENTS = sig

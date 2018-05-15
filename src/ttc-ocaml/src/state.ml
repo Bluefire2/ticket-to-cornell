@@ -455,3 +455,8 @@ and next_player st =
     else
       { st with error = "Turn has not ended yet for the current player.";
                 success = ""} )
+
+let completed_ticket loc1 loc2 state =
+  let routes = (routes st) in
+  let prev = [] in
+  Board.completed loc1 loc2 routes prev
