@@ -66,7 +66,7 @@ let rec add_train_cards lst c acc =
     if c = a then acc @ ((a,b+1)::t)
     else add_train_cards t c (acc @ [(a,b)])
 
-let rec init_players n =
+let rec init_players n bot =
   match n with
   | 0 -> []
   | _ -> let p = { color = color_of_int (n-1);
@@ -78,8 +78,8 @@ let rec init_players n =
                   trains_remaining = 45;
                   first_turn = true;
                   last_turn = false;
-                  bot = false } in
-            p::(init_players (n-1))
+                  bot = bot } in
+            p::(init_players (n-1) bot)
 
 let draw_train_card p c =
   { p with train_cards = add_train_cards p.train_cards c []}

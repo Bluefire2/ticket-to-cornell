@@ -13,7 +13,7 @@ type state = { player_index : int;
                turn_ended : bool;
                last_round : bool;
                winner : Player.player option }
-val init_state : int -> State.state
+val init_state : int -> int -> State.state
 val current_player : State.state -> Player.player
 val players : State.state -> Player.player list
 val routes : State.state -> Board.route list
@@ -111,7 +111,7 @@ module type PLAYER = sig
   val color : player -> Components.player_color
   val routes : player -> Board.route list
   val trains_remaining : player -> int
-  val init_players : int -> player list
+  val init_players : int -> bool -> player list
   val draw_train_card : player -> Components.TrainDeck.card  -> player
   val place_train : player -> Board.route -> player
   val set_last_turn : player -> player

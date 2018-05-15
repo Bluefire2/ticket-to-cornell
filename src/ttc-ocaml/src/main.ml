@@ -72,7 +72,7 @@ let play num =
     let st = State.next_player st in
     game_loop st (i+1))
      else st ) in
-  let st = State.init_state num in
+  let st = State.init_state num 0 in
   let st = game_loop st 0 in
   ANSITerminal.(print_string [blue]
                   ("What do you want to do next?\nDRAW PILE or DRAW FACING UP to get train cards, TAKE destination ticket, or SELECT <color> route? \n"));
