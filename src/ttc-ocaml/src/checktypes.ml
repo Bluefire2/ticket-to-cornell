@@ -114,7 +114,7 @@ module type PLAYER = sig
   val color : player -> Components.player_color
   val routes : player -> Board.route list
   val trains_remaining : player -> int
-  val init_players : int -> bool -> player list
+  val init_players : int -> bool -> int -> player list
   val draw_train_card : player -> Components.TrainDeck.card  -> player
   val place_train : player -> Components.train_color -> Board.route -> int -> player
   val set_last_turn : player -> player

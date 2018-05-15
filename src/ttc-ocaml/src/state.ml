@@ -38,8 +38,8 @@ let init_state n bots =
                success = "" } in
   if ((n+bots) < 2 || (n+bots) > 5) then init
   else
-    let players = init_players n false in
-    let bots = init_players bots true in
+    let players = init_players n false 0 in
+    let bots = init_players bots true n in
     {init with players = (players @ bots);
                routes = Board.routes;
                error = "";
@@ -78,6 +78,50 @@ let end_state2 =
   {end_state1 with players = [p3; p4];
                    last_round = true;
                    winner = Some p3 }
+(* 
+let p_end =
+  {
+    color= PRed;
+    destination_tickets = [];
+    train_cards = [(Red,0);(Blue,0);(Green,0);(Yellow,0);
+                   (Black,0);(White,0);(Pink,0);(Wild,0);(Orange,0)];
+    score = 18;
+    routes = [];
+    trains_remaining = 2;
+    first_turn = false;
+    last_turn = false;
+    bot = false;
+  }
+
+let tick = {loc1 = "Undergraduate Admissions";
+            loc2  = "Risley";
+            points = 15}
+
+let r = List.nth (Board.routes) 21
+let r' = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
+
+let p_end2 = {p_end with color = PYellow;
+                         destination_tickets = [tick];
+                         routes = [r']}
+
+(* STATE FOR KIRILL:
+ * Has one completed destination ticket ()*)
+let st_end = { player_index = 0;
+               players = [p_end; p_end2];
+               routes = Board.routes;
+               destination_deck = DestinationDeck.init_deck ();
+               destination_trash = DestinationDeck.init_trash;
+               choose_destinations = [];
+               train_deck = TrainDeck.init_deck ();
+               facing_up_trains = TrainDeck.init_faceup ();
+               train_trash = TrainDeck.init_trash;
+               taking_routes = false;
+               error = "";
+               turn_ended = true;
+               last_round = false;
+               winner = None;
+               cards_grabbed = 0;
+               success = ""} *)
 
 (* END OF TESTING STUFF *)
 
@@ -391,13 +435,14 @@ and next_player st =
     if (turn_ended st) then
       if (game_ended st) then end_game st
       else (
-        let p_clr = (st |> current_player |> Player.color |> stringify_clr) in
         let next_player = ((st.player_index + 1) mod (List.length st.players)) in
         let st' = {st with player_index = next_player;
                            turn_ended = false;
                            error = "";
-                           cards_grabbed = 0;
-                           success = "Now " ^ p_clr ^ "'s turn."} in
+                           cards_grabbed = 0} in
+        let p_clr = (st' |> current_player |> Player.color |> stringify_clr) in
+        let st' = {st' with
+        success = "Now " ^ p_clr ^ "'s turn."} in
         let ai = (is_bot (current_player st')) in
         if ((check_last_round st) || (last_round st))
         then

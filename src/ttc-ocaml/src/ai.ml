@@ -42,6 +42,7 @@ let rec priorize_build (count : int)  (acc : route option) = function
   | [] -> acc
   | h::t -> ( match h with
     | (_,_,l,_,_,_,_) -> if (l > count) then priorize_build l (Some h) t else priorize_build count acc t)
+
 (* extracts only the color without wilds. *)
 let rec only_color c = function
   | [] -> 0
@@ -97,10 +98,10 @@ let rec check_routes p st_routes (rts : route list) acc =
               | Failure _ -> [] )
               else check_routes p st_routes t (rt::acc)
 
-let rec check_routes_list p st_routes rtss acc =
+let rec check_routes_list p st_routes rtss =
   match rtss with
-  | [] -> acc
-  | rts::t -> (check_routes_list p st_routes t ((check_routes p st_routes rts [])::acc))
+  | [] -> [[]]
+  | rts::t -> (check_routes p st_routes rts [])::(check_routes_list p st_routes t)
 
 let rec count_route p (rts : route list) = match rts with
   | [] -> 0
@@ -167,7 +168,7 @@ let rec can_build goal_routes p =
 let ai_place_train cpu (rts : route list)  =
   (* place at a long route, 5-6 prioritized.*)
   let goal_routes = best_routes rts (best_paths cpu.destination_tickets) in
-  let routes = check_routes_list cpu rts (goal_routes) [] in
+  let routes = check_routes_list cpu rts (goal_routes) in
   let goal_routes = List.flatten routes in
   let build_options = can_build goal_routes cpu in
   let build = get_val (priorize_build 0 None build_options) in
@@ -182,22 +183,6 @@ let ai_place_train cpu (rts : route list)  =
     (build,color, (Board.get_length build - only_color (color) (cpu.train_cards)))
   else (build,color, 0)
 
-(* let rec draw_action st p goals =
-  (* let colors = desired_colors goals p [] in *)
-  let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
-  if contains c st.facing_up_trains then
-    let d1 = draw_card_facing_up st (get_index 0 c st.facing_up_trains) in
-    (* let colors' = desired_colors goals p [] in *)
-    let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
-    if contains c st.facing_up_trains then draw_card_facing_up d1 (get_index 0 c d1.facing_up_trains)
-    else draw_card_pile d1
-  else
-  let d1 = draw_card_pile st in
-  (* let colors' = desired_colors goals p [] in *)
-    let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
-    if contains c st.facing_up_trains then draw_card_facing_up d1 (get_index 0 c d1.facing_up_trains)
-    else draw_card_pile d1 *)
-
 let rec get_faceup colors faceup n =
   match colors with
   | [] -> n
@@ -205,7 +190,7 @@ let rec get_faceup colors faceup n =
 
 let ai_facing_up p rts faceup =
   let goal_routes = best_routes rts (best_paths p.destination_tickets) in
-  let routes = check_routes_list p rts (goal_routes) [] in
+  let routes = check_routes_list p rts (goal_routes) in
   let goal_routes = List.flatten routes in
   let build_options = can_build goal_routes p in
   let colors = desired_colors goal_routes p [] in
@@ -235,37 +220,18 @@ let rec completed_dtickets (p : player) dtickets =
 let next_move rts sec_draw faceup cpu =
   if sec_draw then
     let goal_routes = best_routes rts (best_paths cpu.destination_tickets) in
-    let routes = check_routes_list cpu rts (goal_routes) [] in
+    let routes = check_routes_list cpu rts (goal_routes) in
     let goal_routes = List.flatten routes in
     let colors = desired_colors goal_routes cpu [] in
     if check_faceup colors faceup then Take_Faceup else Take_Deck
   else
   if completed_dtickets cpu cpu.destination_tickets && cpu.trains_remaining > 5 then Take_DTicket else
   let goal_routes = best_routes rts (best_paths cpu.destination_tickets) in
-  let routes = check_routes_list cpu rts (goal_routes) [] in
+  let routes = check_routes_list cpu rts (goal_routes) in
   let goal_routes = List.flatten routes in
   let build_options = can_build goal_routes cpu in
   if List.length (build_options) > 0 then Place_Train else
   let colors = desired_colors goal_routes cpu [] in
   if check_faceup colors faceup then Take_Faceup else Take_Deck
-
-
-let ai_move st =
-  (* let cpu = current_player st in
-  if completed_dtickets cpu cpu.destination_tickets && cpu.trains_remaining > 5 then
-  let ddraw = DestinationDeck.draw_card st.destination_deck st.destination_trash in
-  dest_ticket_action (fst ddraw) {st with
-                                  destination_deck = (snd ddraw);
-                                  choose_destinations = (fst ddraw)} cpu
-  else
-  let goal_routes = best_routes st (best_paths cpu.destination_tickets) in
-  let routes = check_routes_list cpu st (goal_routes) [] in
-  let goal_routes = List.flatten routes in
-  let build_options = can_build goal_routes st cpu in
-  if List.length (build_options) > 0 then place_action cpu st build_options
-  else
-  draw_action st cpu goal_routes *)
-  failwith "unimplemented"
-
 
   (* check routes needed for completion *)
