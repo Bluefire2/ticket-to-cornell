@@ -1,7 +1,6 @@
 open Components
 open Player
 open Board
-(* open State *)
 
 type action = Take_DTicket | Place_Train | Take_Faceup | Take_Deck
 
@@ -36,7 +35,7 @@ let rec contains x = function
 
 let rec check_faceup clist faceup = match clist with
   | [] -> false
-  | h::t -> if contains h faceup then true else check_faceup t faceup
+  | h::t -> if (contains h faceup || h=Grey) then true else check_faceup t faceup
 
 let rec priorize_build (count : int)  (acc : route option) = function
   | [] -> acc
@@ -129,6 +128,7 @@ let rec get_smallest_path clist st_routes p count acc n = match clist with
                                                   get_smallest_path t st_routes p count acc (n+1) )
 
 let smallest_points = function
+  | _ -> failwith "impossible"
   | {loc1 = a; loc2 = b; points = x}::{loc1 = c; loc2 = d; points = y}::{loc1 = e; loc2 = f; points = z}::[] ->
         if min x y z = x then [0] else
         if min x y z = y then [1] else [2]
@@ -184,15 +184,15 @@ let ai_place_train cpu (rts : route list)  =
   else (build,color, 0)
 
 let rec get_faceup colors faceup n =
-  match colors with
+  if contains Grey colors then Random.int 5 else
+  match faceup with
   | [] -> n
-  | h::t -> if contains h faceup then n else get_faceup t faceup (n+1)
+  | h::t -> if (contains h colors) then n else get_faceup t faceup (n+1)
 
 let ai_facing_up p rts faceup =
   let goal_routes = best_routes rts (best_paths p.destination_tickets) in
   let routes = check_routes_list p rts (goal_routes) in
   let goal_routes = List.flatten routes in
-  let build_options = can_build goal_routes p in
   let colors = desired_colors goal_routes p [] in
   let Some (_,_,_,c,_,_,_) = priorize_build 0 None goal_routes in
   if contains c faceup then (get_index 0 c faceup)

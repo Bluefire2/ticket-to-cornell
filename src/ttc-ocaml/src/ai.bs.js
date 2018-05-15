@@ -335,21 +335,18 @@ function check_routes(p, st_routes, _rts, _acc) {
   };
 }
 
-function check_routes_list(p, st_routes, _rtss, _acc) {
-  while(true) {
-    var acc = _acc;
-    var rtss = _rtss;
-    if (rtss) {
-      _acc = /* :: */[
-        check_routes(p, st_routes, rtss[0], /* [] */0),
-        acc
-      ];
-      _rtss = rtss[1];
-      continue ;
-    } else {
-      return acc;
-    }
-  };
+function check_routes_list(p, st_routes, rtss) {
+  if (rtss) {
+    return /* :: */[
+            check_routes(p, st_routes, rtss[0], /* [] */0),
+            check_routes_list(p, st_routes, rtss[1])
+          ];
+  } else {
+    return /* :: */[
+            /* [] */0,
+            /* [] */0
+          ];
+  }
 }
 
 function count_route(p, _rts) {
@@ -490,7 +487,7 @@ function ai_take_dticket(p, rts, dest_choice) {
               Caml_builtin_exceptions.match_failure,
               [
                 "ai.ml",
-                130,
+                131,
                 22
               ]
             ];
@@ -549,7 +546,7 @@ function can_build(_goal_routes, p) {
 
 function ai_place_train(cpu, rts) {
   var goal_routes = best_routes(rts, best_paths(cpu[/* destination_tickets */1]));
-  var routes = check_routes_list(cpu, rts, goal_routes, /* [] */0);
+  var routes = check_routes_list(cpu, rts, goal_routes);
   var goal_routes$1 = List.flatten(routes);
   var build_options = can_build(goal_routes$1, cpu);
   var build = get_val(priorize_build(0, /* None */0, build_options));
@@ -586,7 +583,7 @@ function ai_place_train(cpu, rts) {
 
 function ai_facing_up(p, rts, faceup) {
   var goal_routes = best_routes(rts, best_paths(p[/* destination_tickets */1]));
-  var routes = check_routes_list(p, rts, goal_routes, /* [] */0);
+  var routes = check_routes_list(p, rts, goal_routes);
   var goal_routes$1 = List.flatten(routes);
   can_build(goal_routes$1, p);
   var colors = desired_colors(goal_routes$1, p, /* [] */0);
@@ -633,7 +630,7 @@ function ai_facing_up(p, rts, faceup) {
           Caml_builtin_exceptions.match_failure,
           [
             "ai.ml",
-            212,
+            197,
             6
           ]
         ];
@@ -660,7 +657,7 @@ function completed_dtickets(p, _dtickets) {
 function next_move(rts, sec_draw, faceup, cpu) {
   if (sec_draw) {
     var goal_routes = best_routes(rts, best_paths(cpu[/* destination_tickets */1]));
-    var routes = check_routes_list(cpu, rts, goal_routes, /* [] */0);
+    var routes = check_routes_list(cpu, rts, goal_routes);
     var goal_routes$1 = List.flatten(routes);
     var colors = desired_colors(goal_routes$1, cpu, /* [] */0);
     if (check_faceup(colors, faceup)) {
@@ -672,7 +669,7 @@ function next_move(rts, sec_draw, faceup, cpu) {
     return /* Take_DTicket */0;
   } else {
     var goal_routes$2 = best_routes(rts, best_paths(cpu[/* destination_tickets */1]));
-    var routes$1 = check_routes_list(cpu, rts, goal_routes$2, /* [] */0);
+    var routes$1 = check_routes_list(cpu, rts, goal_routes$2);
     var goal_routes$3 = List.flatten(routes$1);
     var build_options = can_build(goal_routes$3, cpu);
     if (List.length(build_options) > 0) {
