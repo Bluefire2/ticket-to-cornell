@@ -75,10 +75,13 @@ let locations = [ eco_house; a_lot; golf; hasbrouck; rpcc; appel; mcgraw; risley
                   psb; mann; engineering; commons; maplewood; vet; riley_robb;
                   barton; farm_barn; plantations; arboretum; filtration; creek;
                   becker ]
-(* [lst l] returns the neighbors of a given location.*)
+
 let name l = match l with | Location (x, _, _, _) -> x
+
+(* [lst l] returns the neighbors of a given location.*)
 let lst l = match l with | Location (_, _, _, x) -> x
 
+(* Routes which are later filled in to become [routes] below. *)
 let route_connections =
   [
     (ckb,appel,1,Grey,None, true, Some LeftRoute);
@@ -183,6 +186,8 @@ let route_connections =
     (kennedy,dairy_bar,6,Red,None, false, None);
   ]
 
+(* [update_locations n nei locs] add [nei] to the locations with name [n] in
+ * [locs]. *)
 let update_locations n neighbor locations =
   let rec loop acc = ( function
       | [] -> acc
@@ -203,7 +208,9 @@ let locations =
       loop (update_locations n2 n1 loc) t ) in
   loop locations route_connections
 
-let find_location s locations =
+(* [get_location s locs] is the location with name [s] in [locs].
+ * raise: "not found" if [s] not in [locs]. *)
+let rec get_location s locations =
   let rec loop = ( function
       | [] -> failwith "not found"
       | (Location (s', x, y, lst))::t ->
@@ -217,16 +224,10 @@ let routes =
     | (l1, l2, pts, clr, ply, double, lr)::t ->
       let n1 = name l1 in
       let n2 = name l2 in
-      let new_r = ((find_location n1 locations), (find_location n2 locations),
+      let new_r = ((get_location n1 locations), (get_location n2 locations),
                    pts, clr, ply, double, lr) in
       loop (acc @ [new_r]) t in
   loop [] route_connections
-
-let rec get_location s locations =
-  match locations with
-  | [] -> failwith "not possible"
-  | h::t -> ( match h with
-            | Location (x,_,_,_) -> if s=x then h else get_location s t )
 
 let get_string (Location (s, _,_,_)) = s
 
