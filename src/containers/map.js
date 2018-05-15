@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import {withFauxDOM} from 'react-faux-dom';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import * as d3 from 'd3';
 import config from '../config.json';
-import {playerColorFromIndex, trainColorFromIndex, trainEnglishColorsToIndicesMap, trainIndexFromEnglishColor, getCategoryInput, equalCaseInsensitive} from "../util";
+import {playerColorFromIndex, trainColorFromIndex, trainEnglishColorsToIndicesMap, trainIndexFromEnglishColor, getCategoryInput, equalCaseInsensitive, mod} from "../util";
 import {selectRoute} from "../actions/index";
 import {get_color} from '../ttc-ocaml/src/board.bs';
+
+const url = new URL(window.location.href);
+let nPlayers = url.searchParams.get("n_players");
+if(nPlayers === null) nPlayers = 2;
 
 // The idea: transform each route datum into multiple rectangle data, and then draw them using D3
 const SCALE = config.scale,
@@ -22,10 +25,8 @@ const createRectangleDatum = (x, y, theta, width, height, trainColor, route, rou
         width,
         height,
         trainColor,
-        takenBy: (function() {
-            //console.log(Array.isArray(route[4]) ? route[4][0] : -1);
-            return Array.isArray(route[4]) ? route[4][0] : -1;
-        })(),
+        // TODO: figure out why this doesn't work properly and why it need to be adjusted
+        takenBy: Array.isArray(route[4]) ? mod(route[4][0] - 1, nPlayers) : -1,
         route,
         routeID
     }
@@ -111,7 +112,7 @@ class Map extends Component {
             .style('stroke', d => {
                 return playerColorFromIndex(d.takenBy)
             })
-            .attr('class', 'route-path-rect clickable')
+            .attr('class', d => `route-path-rect clickable ${d.takenBy > -1 ? 'route-path-rect-taken' : ''}`)
             .attr('route', d => `${d.routeID}`)
             .style('fill', d => d.trainColor)
             .attr('x', d => d.x)
@@ -189,4 +190,4 @@ const mapDispatchToProps = dispatch => {
     }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withFauxDOM(Map));
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

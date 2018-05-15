@@ -49,6 +49,8 @@ let last_turn p = p.last_turn
 
 let color p = p.color
 
+let is_bot p = p.bot
+
 let trains_remaining p = p.trains_remaining
 
 (* TODO: let players choose their colors. For now:

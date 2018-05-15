@@ -12,7 +12,8 @@ type state = { player_index : int;
                error : string;
                turn_ended : bool;
                last_round : bool;
-               winner : Player.player option }
+               winner : Player.player option;
+               cards_grabbed : int }
 val init_state : int -> int -> State.state
 val current_player : State.state -> Player.player
 val players : State.state -> Player.player list

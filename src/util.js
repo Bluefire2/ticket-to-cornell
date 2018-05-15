@@ -191,3 +191,8 @@ export const getCategoryInput = (promptText, values, equal = (a, b) => a === b, 
 };
 
 export const equalCaseInsensitive = (a, b) => a.toLowerCase() === b.toLowerCase();
+
+// Positive modulo operator
+export const mod = (a, b) => {
+    return ((a % b) + b) % b;
+};
