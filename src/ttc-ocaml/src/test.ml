@@ -362,6 +362,7 @@ let p3 =
   }
 
 let p4 = {p3 with
+          color = PRed;
           destination_tickets = [{loc1 = "A LOT"; loc2 = "Blair Farm Barn"; points = 20};
                                  {loc1 = "Stewart Ave Bridge"; loc2 = "Riley-Robb Hall"; points = 12};
                                  {loc1 = "Sigma Chi"; loc2 = "CKB Quad"; points = 6}];
@@ -577,10 +578,10 @@ let player_tests =
   "trains_remaining" >:: (fun _ -> assert_equal (45) (Player.trains_remaining p1));
   "color1" >:: (fun _ -> assert_equal (PBlue) (Player.color p1));
   "color2" >:: (fun _ -> assert_equal (PYellow) (Player.color p2));
-  "init 2 players" >:: (fun _ -> assert_equal ([default2;default1]) (Player.init_players 2 false));
-  "init 3 players" >:: (fun _ -> assert_equal ([default3;default2;default1]) (Player.init_players 3 false));
-  "init 4 players" >:: (fun _ -> assert_equal ([default4;default3;default2;default1]) (Player.init_players 4 false));
-  "init 5 players" >:: (fun _ -> assert_equal ([default5;default4;default3;default2;default1]) (Player.init_players 5 false));
+  "init 2 players" >:: (fun _ -> assert_equal ([default2;default1]) (Player.init_players 2 false 0));
+  "init 3 players" >:: (fun _ -> assert_equal ([default3;default2;default1]) (Player.init_players 3 false 0));
+  "init 4 players" >:: (fun _ -> assert_equal ([default4;default3;default2;default1]) (Player.init_players 4 false 0));
+  "init 5 players" >:: (fun _ -> assert_equal ([default5;default4;default3;default2;default1]) (Player.init_players 5 false 0));
   "draw card1" >:: (fun _ -> assert_equal
     ({p2 with train_cards = [(Red,1);(Blue,0);(Green,0);(Orange,0);(Yellow,0);(Pink,0);(Wild,0);(Black,0);(White,0)]})
     (Player.draw_train_card p2 Red));
@@ -648,6 +649,8 @@ let p_end =
     bot = false;
   }
 
+let p5 = {p3 with color = PBlack}
+
 let st1 = (decided_routes (init_state 2 0 |> setup_state) [0])
 let st2 = (decided_routes (init_state 2 0 |> setup_state) [0; 1])
 let st3 = (decided_routes (init_state 2 0 |> setup_state) [0; 1; 2])
@@ -669,8 +672,12 @@ let st4 = { player_index = 0;
             winner = None;
             cards_grabbed = 0;
             success = ""}
+let r8 = List.nth (Board.routes) 49
+let st5 = {st4 with players = [p5; p3; p4]}
 
 let fill_in r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PYellow, b, lr)
+let fill_in_blk r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PBlack, b, lr)
+let fill_in_red r = match r with | (s1, s2, n, clr', _, b, lr) -> (s1, s2, n, clr', Some PRed, b, lr)
 let r_select = select_route st4 r None 0
 let r'' = List.nth (r_select |> State.routes) 21
 let r2 = List.nth (r_select |> State.routes) 9
@@ -775,7 +782,15 @@ let state_tests =
   "state28" >:: (fun _ -> assert_equal r' (List.nth (r_select |> State.routes) 21));
   "state29" >:: (fun _ -> assert_equal "Route already taken."
                     ((select_route (r_select |> next_player) r'' None 0) |> State.error));
-
+  "state29" >:: (fun _ -> assert_equal true (same_lst
+               ((dairy_bar,plantations,2,Green,Some PBlack, false, None)::(st5 |> current_player |> routes))
+               (select_route st5 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> routes)));
+  (* "state29-2" >:: (fun _ -> assert_equal (fill_in r8) (List.nth ((select_route st5 (dairy_bar,plantations,2,Green,None, false, None) None 0) |> State.routes) 49)); *)
+  "statetrial" >:: (fun _ -> assert_equal "" ((select_route ((select_route st5 (dairy_bar,plantations,2,Green,None, false, None) None 0) |> next_player) r8 None 0) |> State.error));
+  "state31" >:: (fun _ -> assert_equal true (same_lst
+              ((fill_in r8)::((select_route st5 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> next_player) |> current_player |> routes))
+              ((select_route (select_route st5 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> next_player) r8 None 0) |> current_player |> routes)));
+  "state32" >:: (fun _ -> assert_equal (fill_in r8) (List.nth ((select_route ((select_route st5 (dairy_bar,plantations,2,Green,None, false, None) None 0) |> next_player) r8 None 0) |> State.routes) 49));
   (* end game *)
   "state30" >:: (fun _ -> assert_equal true (st_end |> next_player |> last_round));
   "state31" >:: (fun _ -> assert_equal "" (st_end
