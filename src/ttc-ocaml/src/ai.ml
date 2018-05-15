@@ -11,11 +11,6 @@ let max a b c =
 let min a b c =
   min c (min a b)
 
-let next_move st =
-  failwith "Unimplemem=nted"
-
-let ai_facing_up = failwith "bla"
-
 let ai_setup = failwith "bla"
 (* will call [state_setup], and be able to choose 2-3 destination tickets, and then call
  * decided routes *)
@@ -205,6 +200,21 @@ let ai_place_train cpu (rts : route list)  =
     let Some (_,_,_,c,_,_,_) = priorize_build 0 None goals in
     if contains c st.facing_up_trains then draw_card_facing_up d1 (get_index 0 c d1.facing_up_trains)
     else draw_card_pile d1 *)
+
+let rec get_faceup colors faceup n =
+  match colors with
+  | [] -> n
+  | h::t -> if contains h faceup then n else get_faceup t faceup (n+1)
+
+let ai_facing_up p rts faceup =
+  let goal_routes = best_routes rts (best_paths p.destination_tickets) in
+  let routes = check_routes_list p rts (goal_routes) [] in
+  let goal_routes = List.flatten routes in
+  let build_options = can_build goal_routes p in
+  let colors = desired_colors goal_routes p [] in
+  let Some (_,_,_,c,_,_,_) = priorize_build 0 None goal_routes in
+  if contains c faceup then (get_index 0 c faceup)
+  else get_faceup colors faceup 0
 
 
 
