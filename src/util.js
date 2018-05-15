@@ -101,7 +101,7 @@ export const trainColorFromIndex = i => {
         case 5:
             return '#f6882c'; // orange
         case 6:
-            return 'white';
+            return '#8148a9';
         case 7:
             return 'black';
         case 8:
@@ -140,7 +140,7 @@ export const trainColorCardFromIndex = i => {
         case 5:
             return 'linear-gradient(#f6882c, #f6882c) 1'; // orange
         case 6:
-            return 'linear-gradient(white, white) 1';
+            return 'linear-gradient(#8148a9, #8148a9) 1';
         case 7:
             return 'linear-gradient(black, black) 1';
         case 8:
