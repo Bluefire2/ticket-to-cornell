@@ -10,6 +10,8 @@ let get_length (_,_,x,_,_,_,_) = x
 
 let get_color (_,_,_,x,_,_,_) = x
 
+let get_player (_,_,_,_,x,_,_) = x
+
 let rec contains x = function
   | [] -> false
   | h::t -> if h=x then true else contains x t
