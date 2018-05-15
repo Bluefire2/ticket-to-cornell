@@ -651,60 +651,61 @@ let state_tests =
                 (st3'' |> draw_card_pile |> current_player |> train_cards)));
 
   (* draw_card_facing_up *)
-  "state16" >:: (fun _ -> assert_equal false ((draw_card_facing_up st3'' 0) |> turn_ended));
-  "state17" >:: (fun _ -> assert_equal error3 ((draw_card_facing_up st3'' 0) |> next_player |> State.error));
-  "state17" >:: (fun _ -> assert_equal error3 ((draw_card_facing_up st3'' 0) |> take_route |> State.error));
-  "state16" >:: (fun _ -> assert_equal true ((draw_card_facing_up st3'' 0) |> draw_card_pile |> turn_ended));
-  "state18" >:: (fun _ -> assert_equal 2 (diff_cards
+  "state19" >:: (fun _ -> assert_equal false ((draw_card_facing_up st3'' 0) |> turn_ended));
+  "state20" >:: (fun _ -> assert_equal error3 ((draw_card_facing_up st3'' 0) |> next_player |> State.error));
+  "state21" >:: (fun _ -> assert_equal error3 ((draw_card_facing_up st3'' 0) |> take_route |> State.error));
+  "state22" >:: (fun _ -> assert_equal true ((draw_card_facing_up st3'' 0) |> draw_card_pile |> turn_ended));
+  "state23" >:: (fun _ -> assert_equal 2 (diff_cards
                 (st3'' |> current_player |> train_cards)
                 ((draw_card_facing_up (st3'' |> draw_card_pile) 1)|> current_player |> train_cards)));
 
+  "state24" >:: (fun _ -> assert_equal true ((draw_card_facing_up (draw_card_facing_up st3'' 0) 1) |> turn_ended));
   (* select_route *)
-  "state19" >:: (fun _ -> assert_equal ~-2 (diff_cards
+  "state25" >:: (fun _ -> assert_equal ~-2 (diff_cards
                 (st4 |> current_player |> train_cards)
                 (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> train_cards)));
-  "state20" >:: (fun _ -> assert_equal true (same_lst
+  "state26" >:: (fun _ -> assert_equal true (same_lst
                ((dairy_bar,plantations,2,Green,Some PYellow, false, None)::(st4 |> current_player |> routes))
                (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> routes)));
-  "state21" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> score));
-  "state22" >:: (fun _ -> assert_equal r' (List.nth (r_select |> State.routes) 21));
-  "state23" >:: (fun _ -> assert_equal "Route already taken."
+  "state27" >:: (fun _ -> assert_equal 20 (select_route st4 (dairy_bar,plantations,2,Green,None, false, None) None 0 |> current_player |> score));
+  "state28" >:: (fun _ -> assert_equal r' (List.nth (r_select |> State.routes) 21));
+  "state29" >:: (fun _ -> assert_equal "Route already taken."
                     ((select_route (r_select |> next_player) r'' None 0) |> State.error));
 
   (* end game *)
-  "state24" >:: (fun _ -> assert_equal true (st_end |> next_player |> last_round));
-  "state25" >:: (fun _ -> assert_equal "" (st_end
+  "state30" >:: (fun _ -> assert_equal true (st_end |> next_player |> last_round));
+  "state31" >:: (fun _ -> assert_equal "" (st_end
                                              |> next_player
                                              |> draw_card_pile
                                              |> draw_card_pile
                                              |> next_player
                                              |> State.error));
-  "state26" >:: (fun _ -> assert_equal "Game has ended." (st_end_over st_end
+  "state32" >:: (fun _ -> assert_equal "Game has ended." (st_end_over st_end
                                                           |> State.error));
-  "state27" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end |> players) 0))
+  "state33" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end |> players) 0))
                     (st_end_over st_end |> winner));
-  "state28" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end' |> players) 1))
+  "state34" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end' |> players) 1))
                     (st_end_over st_end' |> winner));
-  "state29" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end'' |> players) 1))
+  "state35" >:: (fun _ -> assert_equal (Some (List.nth (st_end_over st_end'' |> players) 1))
                     (st_end_over st_end'' |> winner));
 
   (* take_route *)
-  "state30" >:: (fun _ -> assert_equal false (st3'' |> take_route |> turn_ended));
-  "state31" >:: (fun _ -> assert_equal 3 (List.length (st3'' |> take_route |> choose_destinations)));
-  "state32" >:: (fun _ -> assert_equal "Player only chose 0 tickets, must take at least 1."
+  "state36" >:: (fun _ -> assert_equal false (st3'' |> take_route |> turn_ended));
+  "state37" >:: (fun _ -> assert_equal 3 (List.length (st3'' |> take_route |> choose_destinations)));
+  "state38" >:: (fun _ -> assert_equal "Player only chose 0 tickets, must take at least 1."
                     ((decided_routes (st3'' |> take_route) []) |> State.error));
-  "state33" >:: (fun _ -> assert_equal "" ((decided_routes (st3'' |> take_route) [0;1;2]) |> State.error));
-  "state34" >:: (fun _ -> assert_equal true ((decided_routes (st3'' |> take_route) [0;1;2]) |> turn_ended));
-  "state35" >:: (fun _ -> assert_equal [] ((decided_routes (st3'' |> take_route) [0;1;2]) |> choose_destinations));
-  "state36" >:: (fun _ -> assert_equal ((List.nth (st3'' |> take_route |> choose_destinations) 0)::(st3'' |> current_player |> destination_tickets))
+  "state39" >:: (fun _ -> assert_equal "" ((decided_routes (st3'' |> take_route) [0;1;2]) |> State.error));
+  "state40" >:: (fun _ -> assert_equal true ((decided_routes (st3'' |> take_route) [0;1;2]) |> turn_ended));
+  "state41" >:: (fun _ -> assert_equal [] ((decided_routes (st3'' |> take_route) [0;1;2]) |> choose_destinations));
+  "state42" >:: (fun _ -> assert_equal ((List.nth (st3'' |> take_route |> choose_destinations) 0)::(st3'' |> current_player |> destination_tickets))
                     ((decided_routes (st3'' |> take_route) [0]) |> current_player |> destination_tickets));
 
   (* longest_route_player *)
-  "state37" >:: (fun _ -> assert_equal 1 (st_end' |> longest_route_player));
-  "state38" >:: (fun _ -> assert_equal 0 (st_end2 |> longest_route_player));
-  "state39" >:: (fun _ -> assert_equal 2 (st_end3 |> longest_route_player));
-  "state40" >:: (fun _ -> assert_equal 0 (st_end4 |> longest_route_player));
-  "state41" >:: (fun _ -> assert_equal 0 (st_end5 |> longest_route_player));
+  "state43" >:: (fun _ -> assert_equal 1 (st_end' |> longest_route_player));
+  "state44" >:: (fun _ -> assert_equal 0 (st_end2 |> longest_route_player));
+  "state45" >:: (fun _ -> assert_equal 2 (st_end3 |> longest_route_player));
+  "state46" >:: (fun _ -> assert_equal 0 (st_end4 |> longest_route_player));
+  "state47" >:: (fun _ -> assert_equal 0 (st_end5 |> longest_route_player));
 ]
 
 let ai_tests =
