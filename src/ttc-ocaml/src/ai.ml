@@ -38,20 +38,15 @@ let rec priorize_build (count : int)  (acc : route option) = function
   | h::t -> ( match h with
     | (_,_,l,_,_,_,_) -> if (l > count) then priorize_build l (Some h) t else priorize_build count acc t)
 
-let rec extract_hand_colors c = function
-  | [] -> 0
-  | (c',num)::t -> if c = c' then num else extract_hand_colors c t
+let rec extract_hand_colors c acc = function
+  | [] -> acc
+  | (c',num)::t -> if (c = c' || c' = Wild) then extract_hand_colors c (acc+num) t else extract_hand_colors c acc t
 
 let rec desired_colors goal_routes p acc =
   match goal_routes with
   | [] -> acc
-  | (_,_,l,c,o,_,_)::t -> if (o = None && (l - (extract_hand_colors c p.train_cards) > 0)) then desired_colors t p (c::acc)
+  | (_,_,l,c,o,_,_)::t -> if o = None && (l - (extract_hand_colors c 0 p.train_cards) > 0) then desired_colors t p (c::acc)
   else desired_colors t p acc
-
-let rec check_like_cards hand n =
-    match hand with
-    | [] -> None
-    | (c,num)::t -> if num >= n then Some c else check_like_cards hand n
 
 let extract_goal rts =
   let last_el = List.nth rts ((List.length rts) -1) in
@@ -192,7 +187,7 @@ let rec can_build goal_routes st p =
   match goal_routes with
   | [] -> []
   | h::t -> ( match h with
-      | (_,_,l,c,o,_,_) -> if o = None && (extract_hand_colors c p.train_cards = l || (c = Grey && enough_cards p.train_cards l)) then (h::(can_build t st p))
+      | (_,_,l,c,o,_,_) -> if o = None && (extract_hand_colors c 0 p.train_cards = l || (c = Grey && enough_cards p.train_cards l)) then (h::(can_build t st p))
                        else can_build t st p )
 
 let ai_move st =
